@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 public class ClientApiApplication {
     public static void main(String[] args) {
+        System.out.println("akmkansd");
         SpringApplication.run(ClientApiApplication.class, args);
     }
 
