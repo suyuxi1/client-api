@@ -2,31 +2,32 @@ spring:
   profiles:
     active: dev
 
-  # jacksonÅäÖÃ
+  # jacksonï¿½ï¿½ï¿½ï¿½
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-  # Êý¾ÝÔ´ÅäÖÃ
+  # ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test1?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+#    url: jdbc:mysql://localhost:3306/test1?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/smart?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
     hikari:
-      # ×îÐ¡Á¬½ÓÊý
+      # ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       minimum-idle: 1
-      # ×î´óÁ¬½ÓÊý
+      # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       maximum-pool-size: 20
-      # ×Ô¶¯Ìá½»
+      # ï¿½Ô¶ï¿½ï¿½á½»
       auto-commit: true
-      # Á¬½Ó³¬Ê±µÄ×î´óÊ±³¤£¨ºÁÃë£©£¬³¬Ê±Ôò±»ÊÍ·Å£¨retired£©£¬Ä¬ÈÏ:10·ÖÖÓ
+      # ï¿½ï¿½ï¿½Ó³ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£©ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Í·Å£ï¿½retiredï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½:10ï¿½ï¿½ï¿½ï¿½
       idle-timeout: 10000
-      # Á¬½ÓµÄÉúÃüÊ±³¤£¨ºÁÃë£©£¬³¬Ê±¶øÇÒÃ»±»Ê¹ÓÃÔò±»ÊÍ·Å£¨retired£©£¬Ä¬ÈÏ:30·ÖÖÓ 1800000ms
+      # ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£©ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Í·Å£ï¿½retiredï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½:30ï¿½ï¿½ï¿½ï¿½ 1800000ms
       max-lifetime: 1800000
-      # µÈ´ýÁ¬½Ó³Ø·ÖÅäÁ¬½ÓµÄ×î´óÊ±³¤£¨ºÁÃë£©
+      # ï¿½È´ï¿½ï¿½ï¿½ï¿½Ó³Ø·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£©
       connection-timeout: 30000
-      # Á¬½Ó²âÊÔ²éÑ¯Óï¾ä
+      # ï¿½ï¿½ï¿½Ó²ï¿½ï¿½Ô²ï¿½Ñ¯ï¿½ï¿½ï¿½
       connection-test-query: SELECT 1
   #      jpa
   jpa:
