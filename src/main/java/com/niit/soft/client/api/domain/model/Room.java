@@ -18,29 +18,29 @@ import java.sql.Timestamp;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false,columnDefinition = "主键")
+    @Column(nullable = false)
     private Long id;
 
-    @Column(name = "name",nullable = false,length = 10,columnDefinition = "房间名")
+    @Column(nullable = false,length = 10)
     private String name;
 
-    @Column(name = "tower_id",nullable = false,unique = true,columnDefinition = "楼栋id")
+    @Column(nullable = false,unique = true)
     private Long towerId;
 
-    @Column(name = "room_leader_job_number",nullable = false,length = 20,unique = true,columnDefinition = "寝室长学号")
+    @Column(nullable = false,length = 20,unique = true)
     private String roomLeaderJobNumber;
 
-    @Column(name = "room_member_job_number",nullable = false,unique = true,columnDefinition = "寝室成员学号（逗号隔开，用户学号）")
+    @Column(nullable = false,unique = true)
     private String roomMemberJobNumber;
 
-    @Column(name = "gmt_create",nullable = false,columnDefinition = "创建时间")
+    @Column(nullable = false)
     private Timestamp gmtCreate;
 
     @UpdateTimestamp
-    @Column(name = "gmt_modified",nullable = false,columnDefinition = "更新时间")
+    @Column(nullable = false)
     private Timestamp gmtModified;
 
-    @Column(name = "is_deleted",nullable = false,length = 4,columnDefinition = "删除标志（0 未删除， 1 已删除）")
+    @Column(nullable = false)
     private Boolean isDeleted;
 
 }

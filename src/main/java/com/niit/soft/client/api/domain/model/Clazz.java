@@ -20,28 +20,28 @@ import java.sql.Timestamp;
 public class Clazz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pk_clazz_id",nullable = false,columnDefinition = "主键")
+    @Column(name = "pk_clazz_id",nullable = false)
     private Long pkClazzId;
 
-    @Column(name = "name",nullable = false,length = 32,columnDefinition = "名称")
+    @Column(name = "name",nullable = false,length = 32)
     private String name;
 
-    @Column(name = "grade",nullable = false,length = 30,columnDefinition = "年级")
+    @Column(name = "grade",nullable = false,length = 30)
     private String grade;
 
-    @Column(name = "college_id",nullable = false,columnDefinition = "学院id")
+    @Column(name = "college_id",nullable = false)
     private Long collegeId;
 
-    @Column(name = "clazz_headmaster",nullable = false,length = 20,unique = true,columnDefinition = "班主任工号")
+    @Column(name = "clazz_headmaster",nullable = false,length = 20,unique = true)
     private String clazzHeadmaster;
 
     @UpdateTimestamp
-    @Column(name = "gmt_modified",nullable = false,columnDefinition = "修改时间")
+    @Column(name = "gmt_modified",nullable = false)
     private Timestamp gmtModified;
 
-    @Column(name = "gmt_create",nullable = false,columnDefinition = "创建时间")
+    @Column(name = "gmt_create",nullable = false)
     private Timestamp gmtCreate;
 
-    @Column(name = "is_deleted",nullable = false,length = 4,columnDefinition = "删除标志(0 未删除， 1 已删除)")
+    @Column(name = "is_deleted",nullable = false,length = 4)
     private Boolean isDeleted;
 }
