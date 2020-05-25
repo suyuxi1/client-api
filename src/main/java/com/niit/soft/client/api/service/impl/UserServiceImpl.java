@@ -1,8 +1,7 @@
 package com.niit.soft.client.api.service.impl;
 
-import com.niit.soft.client.api.domain.User;
+import com.niit.soft.client.api.domain.model.User;
 import com.niit.soft.client.api.service.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**

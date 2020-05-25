@@ -1,8 +1,6 @@
 package com.niit.soft.client.api.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.auth0.jwt.JWT;
-import com.niit.soft.client.api.domain.User;
+import com.niit.soft.client.api.domain.model.User;
 import com.niit.soft.client.api.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
 
 /**
  * @Description TODO
