@@ -1,4 +1,4 @@
-package com.niit.soft.client.api.domain;
+package com.niit.soft.client.api.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

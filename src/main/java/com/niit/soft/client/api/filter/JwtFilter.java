@@ -1,11 +1,8 @@
 package com.niit.soft.client.api.filter;
 
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.niit.soft.client.api.domain.JwtToken;
+import com.niit.soft.client.api.domain.vo.JwtToken;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
-import org.bouncycastle.asn1.ocsp.ResponseData;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;

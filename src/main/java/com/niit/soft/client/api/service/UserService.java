@@ -1,6 +1,6 @@
 package com.niit.soft.client.api.service;
 
-import com.niit.soft.client.api.domain.User;
+import com.niit.soft.client.api.domain.model.User;
 
 /**
  * @Description TODO

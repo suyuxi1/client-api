@@ -1,4 +1,4 @@
-package com.niit.soft.client.api.domain;
+package com.niit.soft.client.api.domain.vo;
 
 import org.apache.shiro.authc.AuthenticationToken;
 
