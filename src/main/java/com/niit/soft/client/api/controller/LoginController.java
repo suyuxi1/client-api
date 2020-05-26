@@ -28,7 +28,8 @@ import java.util.Map;
  * @Version 1.0
  **/
 @Slf4j
-@RestController("/user/")
+@RestController
+@RequestMapping(value = "/user/")
 public class LoginController {
     @Resource
     private LoginDtoService loginDtoService;

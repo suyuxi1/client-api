@@ -19,16 +19,15 @@ import java.util.concurrent.TimeUnit;
  * @Date 2020/5/21 10:31
  * @Version 1.0
  **/
+//@CrossOrigin  //跨域支持
 @RestController
-@CrossOrigin  //跨域支持
 @Slf4j
 public class SmsApiController {
     @Autowired
     private SendSmsService sendSmsService;
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
-
-    @RequestMapping(value = "/sendCode", method = RequestMethod.POST)
+    @PostMapping(value = "/sendCode")
     public ResponseResult code(@RequestParam("phoneNumber") String phoneNumber) {
         //调用发送方法
         System.out.println("接受的phoneNumber" + phoneNumber);
