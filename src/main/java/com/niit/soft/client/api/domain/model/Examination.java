@@ -57,44 +57,44 @@ public class Examination {
     /**
      * 开始时间
      */
-    @Column(nullable = false, unique = true )
+    @Column(nullable = false)
     private String startTime;
 
     /**
      * 地点
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String area;
 
     /**
      * 试卷分数
      */
-    @Column(nullable = false, unique = true ,length = 4)
+    @Column(nullable = false, length = 4)
     private Integer score;
 
     /**
      * 考试类型
      */
-    @Column(nullable = false, unique = true ,length = 32)
+    @Column(nullable = false ,length = 32)
     private String type;
 
     /**
      * 创建时间
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Timestamp gmtCreate;
 
     /**
      * 修改时间
      */
     @UpdateTimestamp
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Timestamp gmtModified;
 
     /**
      * 删除标志（0 逻辑删除， 1 未删除）
      */
-    @Column(nullable = false, unique = true,length = 4)
+    @Column(nullable = false,length = 4)
     private Boolean isDeleted;
 
 }

@@ -1,16 +1,8 @@
 package com.niit.soft.client.api.controller;
 
-import com.niit.soft.client.api.common.ResponseResult;
-import com.niit.soft.client.api.domain.dto.LoginDto;
-import com.niit.soft.client.api.domain.model.User;
-import com.niit.soft.client.api.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.UnsupportedEncodingException;
 
 /**
  * @Description TODO
@@ -27,15 +19,6 @@ public class LoginController {
 //        return "进入登录页面";
 //    }
 
-    @PostMapping("login")
-    public ResponseResult login(@RequestBody LoginDto loginDto) throws UnsupportedEncodingException {
-        //如果查到数据，返回用户数据
-
-        //如果没查到数据，返回错误信息
-        log.info(JwtUtil.sign(user.getUsername(), user.getPassword()));
-//        return ResponseResult
-        return null;
-    }
 
     @GetMapping("/index")
     public String index() {

@@ -39,37 +39,37 @@ public class Schedule {
     /**
      * 学期id
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Integer semesterId;
 
     /**
      * 第几周（第一周、第二周...）
      */
-    @Column(nullable = false, unique = true,length = 11)
+    @Column(nullable = false,length = 11)
     private Integer week;
 
     /**
      * 课表名称
      */
-    @Column(nullable = false, unique = true,length = 60)
+    @Column(nullable = false,length = 60)
     private String name;
 
     /**
      * 创建时间
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Timestamp gmtCreate;
 
     /**
      * 修改时间
      */
     @UpdateTimestamp
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Timestamp gmtModified;
 
     /**
      * 删除标志（0 逻辑删除， 1 未删除）
      */
-    @Column(nullable = false, unique = true,length = 4)
+    @Column(nullable = false,length = 4)
     private Boolean isDeleted;
 }

@@ -1,6 +1,6 @@
 package com.niit.soft.client.api.service.impl;
 
-import com.niit.soft.client.api.dao.SysUserRepository;
+import com.niit.soft.client.api.repository.SysUserRepository;
 import com.niit.soft.client.api.domain.dto.LoginDto;
 import com.niit.soft.client.api.service.LoginDtoService;
 import org.springframework.stereotype.Service;
@@ -20,9 +20,6 @@ public class LoginDtoImpl implements LoginDtoService {
 
     @Override
     public boolean isLogin(LoginDto loginDto) {
-
-        sysUserRepository.findOne();
         return false;
     }
-
 }

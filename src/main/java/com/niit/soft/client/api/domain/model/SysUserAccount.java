@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 /**
  * @author Yujie_Zhao
  * @ClassName SysUserAccount
- * @Description 学生考试分配实体类
+ * @Description 用户账号实体类
  * @Date 2020/5/25  21:56
  * @Version 1.0
  **/
@@ -100,19 +100,19 @@ public class SysUserAccount {
     /**
      * 创建时间
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Timestamp gmtCreate;
 
     /**
      * 修改时间
      */
     @UpdateTimestamp
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Timestamp gmtModified;
 
     /**
      * 删除标志（0 逻辑删除， 1 未删除）
      */
-    @Column(nullable = false, unique = true,length = 4)
+    @Column(nullable = false,length = 4)
     private Boolean isDeleted;
 }
