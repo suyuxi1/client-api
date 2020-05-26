@@ -1,16 +1,23 @@
 package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.LoginDto;
-import com.niit.soft.client.api.domain.model.User;
+import com.niit.soft.client.api.service.LoginDtoService;
+import com.niit.soft.client.api.service.SendSmsService;
+import com.niit.soft.client.api.service.UserAccountService;
 import com.niit.soft.client.api.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.map.HashedMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 /**
  * @Description TODO
@@ -21,20 +28,26 @@ import java.io.UnsupportedEncodingException;
 @Slf4j
 @RestController("/user/")
 public class LoginController {
-//    @PostMapping("/login")
-//    public String login(@RequestBody User user) throws UnsupportedEncodingException {
-//        log.info(JwtUtil.sign(user.getUsername(), user.getPassword()));
-//        return "进入登录页面";
-//    }
+    @Resource
+    private LoginDtoService loginDtoService;
+    @Resource
+    private UserAccountService userAccountService;
 
     @PostMapping("login")
     public ResponseResult login(@RequestBody LoginDto loginDto) throws UnsupportedEncodingException {
+        log.info("访问login接口");
+        log.info("loginDto{}", loginDto);
         //如果查到数据，返回用户数据
-
-        //如果没查到数据，返回错误信息
-        log.info(JwtUtil.sign(user.getUsername(), user.getPassword()));
-//        return ResponseResult
-        return null;
+        Long id = loginDtoService.getIdByInfo(loginDto.getUserAccount(), loginDto.getPassword());
+        if (id != 0) {
+            log.info("登录成功");
+            log.info(userAccountService.findUserAccountById(id).toString());
+            Map map = new HashedMap();
+            map.put("UserAccount", userAccountService.findUserAccountById(id));
+            map.put("token", JwtUtil.sign(loginDto.getUserAccount(), loginDto.getPassword()));
+            return ResponseResult.success(map);
+        }
+        return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
     }
 
     @GetMapping("/index")
