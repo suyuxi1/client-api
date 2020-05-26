@@ -1,7 +1,7 @@
 package com.niit.soft.client.api.config;
 
 import com.niit.soft.client.api.filter.JwtFilter;
-import com.niit.soft.client.api.service.Realm;
+import com.niit.soft.client.api.service.impl.Realm;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
@@ -36,8 +36,11 @@ public class ShiroConfig {
         //拦截器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         //配置不会被拦截的链接，顺序配置
-        filterChainDefinitionMap.put("/log  in", "anon");
-//        filterChainDefinitionMap.put("/index", "anon");
+        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/sendCode", "anon");
+        filterChainDefinitionMap.put("/verifyCode", "anon");
+        filterChainDefinitionMap.put("/code/login", "anon");
+        filterChainDefinitionMap.put("/user/password", "anon");
         //添加自己的过滤器并取名为jwt
         Map<String, Filter> filterMap = new HashedMap();
         filterMap.put("jwt", new JwtFilter());
