@@ -40,6 +40,7 @@ public enum ResultCode {
     DATA_IS_WRONG(50002, "数据有误"),
     DATA_ALREADY_EXISTED(50003, "数据已存在"),
     DATABASE_ERROR(50004, "数据库操作异常"),
+    Phone_ERROR(50005,"手机号码错误"),
 
 
     /* 服务器或系统错误：50001-599999 */

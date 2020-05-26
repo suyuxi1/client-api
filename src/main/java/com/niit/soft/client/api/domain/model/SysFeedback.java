@@ -1,6 +1,9 @@
 package com.niit.soft.client.api.domain.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -13,6 +16,9 @@ import java.sql.Timestamp;
  */
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class SysFeedback {
 
     /**
@@ -33,12 +39,6 @@ public class SysFeedback {
      */
     @Column(name = "content")
     private String content;
-
-    /**
-     * 用户id
-     */
-    @Column(name = "user_id")
-    private String userId;
 
     /**
      * 联系方式
