@@ -1,4 +1,4 @@
-package com.niit.soft.client.api.dao;
+package com.niit.soft.client.api.repository;
 
 import com.niit.soft.client.api.domain.model.SysUser;
 import org.springframework.data.jpa.repository.JpaRepository;

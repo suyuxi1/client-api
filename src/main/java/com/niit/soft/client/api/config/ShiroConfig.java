@@ -38,7 +38,9 @@ public class ShiroConfig {
         //配置不会被拦截的链接，顺序配置
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/sendCode", "anon");
-//        filterChainDefinitionMap.put("/index", "anon");
+        filterChainDefinitionMap.put("/verifyCode", "anon");
+        filterChainDefinitionMap.put("/code/login", "anon");
+        filterChainDefinitionMap.put("/user/password", "anon");
         //添加自己的过滤器并取名为jwt
         Map<String, Filter> filterMap = new HashedMap();
         filterMap.put("jwt", new JwtFilter());

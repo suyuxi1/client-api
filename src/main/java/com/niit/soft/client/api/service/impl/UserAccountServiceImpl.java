@@ -1,6 +1,6 @@
 package com.niit.soft.client.api.service.impl;
 
-import com.niit.soft.client.api.dao.UserAccountRepository;
+import com.niit.soft.client.api.repository.UserAccountRepository;
 import com.niit.soft.client.api.domain.model.UserAccount;
 import com.niit.soft.client.api.service.UserAccountService;
 import org.springframework.stereotype.Service;
@@ -20,5 +20,15 @@ public class UserAccountServiceImpl implements UserAccountService {
     @Override
     public UserAccount findUserAccountById(Long id) {
         return userAccountRepository.findUserAccountByPkUserAccountIdEquals(id);
+    }
+
+    @Override
+    public UserAccount findUserAccountByPhoneNumber(String phoneNumber) {
+        return userAccountRepository.findUserAccountByPhoneNumberEquals(phoneNumber);
+    }
+
+    @Override
+    public int updatePasswordByUserAccount(String userAccount, String password) {
+        return userAccountRepository.updatePasswordByUserAccount(userAccount, password);
     }
 }
