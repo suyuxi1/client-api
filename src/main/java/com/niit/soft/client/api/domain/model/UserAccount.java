@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 
 /**
  * @author Yujie_Zhao
- * @ClassName SysUserAccount
+ * @ClassName UserAccount
  * @Description 学生考试分配实体类
  * @Date 2020/5/25  21:56
  * @Version 1.0
@@ -21,8 +21,8 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "sys_user_account",indexes = {@Index(name = "user_nameIndex",columnList = "user_name")})
-public class SysUserAccount {
+@Table(name = "user_account",indexes = {@Index(name = "user_nameIndex",columnList = "user_name")})
+public class UserAccount {
     /**
      * 主键，策略为自增
      */
@@ -40,12 +40,12 @@ public class SysUserAccount {
     /**
      * 真实姓名
      */
-    @Column(name ="user_name",nullable = false, unique = true ,length = 32)
+    @Column(name ="user_name",nullable = false, length = 32)
     private String userName;
     /**
      * 昵称
      */
-    @Column(nullable = false, unique = true ,length = 50)
+    @Column(nullable = false,length = 50)
     private String nickname;
 
     /**
@@ -64,13 +64,13 @@ public class SysUserAccount {
     /**
      * 头像
      */
-    @Column(nullable = false, unique = true ,length = 255)
+    @Column(nullable = false ,length = 255)
     private String avatar;
 
     /**
      * 角色
      */
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(nullable = false, length = 50)
     private String role;
 
     /**
@@ -82,13 +82,13 @@ public class SysUserAccount {
     /**
      * 状态
      */
-    @Column(nullable = false, unique = true, length = 4)
+    @Column(nullable = false, length = 4)
     private Boolean status;
 
     /**
      * 所属班级id
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Integer clazzId;
 
     /**
@@ -100,19 +100,31 @@ public class SysUserAccount {
     /**
      * 创建时间
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Timestamp gmtCreate;
 
     /**
      * 修改时间
      */
     @UpdateTimestamp
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Timestamp gmtModified;
 
     /**
      * 删除标志（0 逻辑删除， 1 未删除）
      */
-    @Column(nullable = false, unique = true,length = 4)
+    @Column(nullable = false,length = 4)
     private Boolean isDeleted;
+
+    /**
+     * 性别
+     */
+    @Column(length = 10)
+    private String gender;
+
+    /**
+     * 地址
+     */
+    @Column()
+    private String path;
 }

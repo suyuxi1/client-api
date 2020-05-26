@@ -37,6 +37,10 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
   redis:
     database: 0
     password:

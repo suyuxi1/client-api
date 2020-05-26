@@ -12,8 +12,8 @@ import com.niit.soft.client.api.domain.model.SysUser;
 public interface LoginDtoService {
     /**
      * 登录
-     * @param loginDto
+     * @param
      * @return 返回用户信息
      */
-    boolean isLogin(LoginDto loginDto);
+    Long getIdByInfo(String userAccount,String password);
 }
