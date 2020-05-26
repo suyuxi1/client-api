@@ -4,6 +4,7 @@ import com.niit.soft.client.api.domain.model.SysUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+
 /**
  * @Description TODO
  * @Author 涛涛
@@ -12,7 +13,6 @@ import org.springframework.data.jpa.repository.Query;
  **/
 
 public interface SysUserRepository extends JpaRepository<SysUser, Long> {
-
 
     /**
      * 根据dto查询用户

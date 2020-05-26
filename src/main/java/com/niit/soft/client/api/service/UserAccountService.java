@@ -21,4 +21,21 @@ public interface UserAccountService {
      * @return
      */
     UserAccount findUserAccountById(Long id);
+
+    /**
+     * 根据手机号获取用户对象
+     *
+     * @param phoneNumber
+     * @return
+     */
+    UserAccount findUserAccountByPhoneNumber(String phoneNumber);
+
+    /**
+     * 根据userAccount或job_number修改密码
+     * @param userAccount
+     * @param password
+     * @return
+     */
+    int updatePasswordByUserAccount(String userAccount, String password);
+
 }
