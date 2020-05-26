@@ -19,4 +19,13 @@ public interface UserAccountRepository extends JpaRepository<UserAccount,Long> {
     UserAccount findSysUserAccountByPkUserAccountId(Long id);
 
 
+    /**
+     * 根据id 查询账户信息
+     * @param id
+     * @return
+     */
+    UserAccount findUserAccountByPkUserAccountIdEquals(Long id);
+
+
+
 }

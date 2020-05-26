@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 
 /**
  * @author Yujie_Zhao
- * @ClassName SysUserAccount
+ * @ClassName UserAccount
  * @Description 学生考试分配实体类
  * @Date 2020/5/25  21:56
  * @Version 1.0
@@ -21,7 +21,8 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "sys_user_account",indexes = {@Index(name = "user_nameIndex",columnList = "user_name")})
+
+@Table(name = "user_account",indexes = {@Index(name = "user_nameIndex",columnList = "user_name")})
 public class UserAccount {
     /**
      * 主键，策略为自增
@@ -117,8 +118,16 @@ public class UserAccount {
     private Boolean isDeleted;
 
     /**
-     * 删除标志（0 逻辑删除， 1 未删除）
+     * 性别
      */
     @Column(nullable = false, length = 2)
     private String gender;
+
+
+
+    /**
+     * 地址
+     */
+    @Column()
+    private String path;
 }

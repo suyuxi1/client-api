@@ -1,3 +1,4 @@
+
 package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.common.ResponseResult;
@@ -21,19 +22,24 @@ import javax.annotation.Resource;
 @Slf4j
 public class UserAccountServiceImpl implements UserAccountService {
     @Resource
-    private UserAccountRepository sysUserAccountRepository;
+    private UserAccountRepository userAccountRepository;
 
     @Override
     public ResponseResult updateUserInfo(UserAccount sysUserAccount) {
-        UserAccount updateSysUserAccount = sysUserAccountRepository.findSysUserAccountByPkUserAccountId(sysUserAccount.getPkUserAccountId());
+        UserAccount updateSysUserAccount = userAccountRepository.findSysUserAccountByPkUserAccountId(sysUserAccount.getPkUserAccountId());
         //判断帐号是否被禁用
         if (updateSysUserAccount.getStatus()) {
             updateSysUserAccount.setAvatar(sysUserAccount.getAvatar());
             updateSysUserAccount.setNickname(sysUserAccount.getNickname());
             updateSysUserAccount.setGender(sysUserAccount.getGender());
-            sysUserAccountRepository.saveAndFlush(updateSysUserAccount);
+            userAccountRepository.saveAndFlush(updateSysUserAccount);
             return ResponseResult.success(updateSysUserAccount);
         }
         return ResponseResult.failure(ResultCode.USER_ACCOUNT_FORBIDDEN);
+    }
+
+    @Override
+    public UserAccount findUserAccountById(Long id) {
+        return userAccountRepository.findUserAccountByPkUserAccountIdEquals(id);
     }
 }

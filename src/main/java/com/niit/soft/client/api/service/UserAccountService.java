@@ -1,3 +1,4 @@
+
 package com.niit.soft.client.api.service;
 
 import com.niit.soft.client.api.common.ResponseResult;
@@ -13,4 +14,11 @@ public interface UserAccountService {
      * @return
      */
     ResponseResult updateUserInfo(UserAccount sysUserAccount);
+
+    /**
+     * 根据主键查询用户信息
+     * @param id
+     * @return
+     */
+    UserAccount findUserAccountById(Long id);
 }
