@@ -7,12 +7,22 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
+ * @author Tao
+ * @version 1.0
+ * @ClassName SysUserAccountRepository
  * @Description TODO
- * @Author 涛涛
- * @Date 2020/5/26 10:20
- * @Version 1.0
+ * @date 2020-05-26 9:55
  **/
 public interface UserAccountRepository extends JpaRepository<UserAccount, Long> {
+    /**
+     * 根据id查询账户信息
+     *
+     * @param id
+     * @return
+     */
+    UserAccount findSysUserAccountByPkUserAccountId(Long id);
+
+
     /**
      * 根据id 查询账户信息
      *
@@ -20,6 +30,7 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, Long> 
      * @return
      */
     UserAccount findUserAccountByPkUserAccountIdEquals(Long id);
+
 
     /**
      * 根据手机号查询用户
@@ -31,6 +42,6 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, Long> 
 
     @Transactional
     @Modifying
-    @Query(value = "update user_account as u set u.password = ?2 where u.job_number=?1 or u.user_account=?1",nativeQuery = true)
+    @Query(value = "update user_account as u set u.password = ?2 where u.job_number=?1 or u.user_account=?1", nativeQuery = true)
     int updatePasswordByUserAccount(String userAccount, String password);
 }

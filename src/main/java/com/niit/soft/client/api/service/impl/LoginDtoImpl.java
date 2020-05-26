@@ -24,5 +24,6 @@ public class LoginDtoImpl implements LoginDtoService {
         log.info(userAccount + "*****" + password);
         log.info("查询id{}", sysUserRepository.findIdByLoginDto(userAccount, password));
         return sysUserRepository.findIdByLoginDto(userAccount, password);
+
     }
 }

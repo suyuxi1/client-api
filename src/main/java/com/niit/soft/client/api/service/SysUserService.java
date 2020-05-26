@@ -7,4 +7,5 @@ package com.niit.soft.client.api.service;
  * @Version 1.0
  **/
 public interface SysUserService {
+
 }

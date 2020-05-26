@@ -4,7 +4,6 @@ import com.niit.soft.client.api.domain.vo.JwtToken;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.naming.AuthenticationException;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Version 1.0
  **/
 @Slf4j
-@Component
+//@Component
 public class JwtFilter extends BasicHttpAuthenticationFilter implements Filter {
     /**
      * 执行登录

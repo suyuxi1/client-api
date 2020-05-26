@@ -1,14 +1,20 @@
+
 package com.niit.soft.client.api.service;
 
+import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.model.UserAccount;
 
 /**
- * @Description TODO
- * @Author 涛涛
- * @Date 2020/5/26 10:22
- * @Version 1.0
- **/
+ * @author Tao
+ */
 public interface UserAccountService {
+    /**
+     * 修改
+     * @param sysUserAccount
+     * @return
+     */
+    ResponseResult updateUserInfo(UserAccount sysUserAccount);
+
     /**
      * 根据主键查询用户信息
      * @param id

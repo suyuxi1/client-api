@@ -47,31 +47,31 @@ public class AddressBook {
     /**
      * 头像
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String avatar;
 
     /**
      * 备注
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String remark;
 
     /**
      * 创建时间
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Timestamp gmtCreate;
 
     /**
      * 修改时间
      */
     @UpdateTimestamp
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Timestamp gmtModified;
 
     /**
      * 删除标志（0 逻辑删除， 1 未删除）
      */
-    @Column(nullable = false, unique = true,length = 4)
+    @Column(nullable = false,length = 4)
     private Boolean isDeleted;
 }
