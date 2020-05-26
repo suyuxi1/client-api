@@ -2,7 +2,9 @@ package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.repository.SysUserRepository;
 import com.niit.soft.client.api.domain.dto.LoginDto;
+
 import com.niit.soft.client.api.service.LoginDtoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,12 +16,16 @@ import javax.annotation.Resource;
  * @Version 1.0
  **/
 @Service
+@Slf4j
 public class LoginDtoImpl implements LoginDtoService {
     @Resource
     private SysUserRepository sysUserRepository;
 
     @Override
-    public boolean isLogin(LoginDto loginDto) {
-        return false;
+    public Long getIdByInfo(String userAccount, String password) {
+        log.info(userAccount + "*****" + password);
+        log.info("查询id{}", sysUserRepository.findIdByLoginDto(userAccount, password));
+        return sysUserRepository.findIdByLoginDto(userAccount, password);
+
     }
 }

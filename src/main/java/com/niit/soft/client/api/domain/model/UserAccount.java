@@ -21,8 +21,9 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "sys_user_account",indexes = {@Index(name = "user_nameIndex",columnList = "user_name")})
-public class SysUserAccount {
+
+@Table(name = "user_account",indexes = {@Index(name = "user_nameIndex",columnList = "user_name")})
+public class UserAccount {
     /**
      * 主键，策略为自增
      */
@@ -40,12 +41,12 @@ public class SysUserAccount {
     /**
      * 真实姓名
      */
-    @Column(name ="user_name",nullable = false, unique = true ,length = 32)
+    @Column(name ="user_name",nullable = false, length = 32)
     private String userName;
     /**
      * 昵称
      */
-    @Column(nullable = false, unique = true ,length = 50)
+    @Column(nullable = false,length = 50)
     private String nickname;
 
     /**
@@ -64,13 +65,13 @@ public class SysUserAccount {
     /**
      * 头像
      */
-    @Column(nullable = false, unique = true ,length = 255)
+    @Column(nullable = false ,length = 255)
     private String avatar;
 
     /**
      * 角色
      */
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(nullable = false, length = 50)
     private String role;
 
     /**
@@ -82,13 +83,13 @@ public class SysUserAccount {
     /**
      * 状态
      */
-    @Column(nullable = false, unique = true, length = 4)
+    @Column(nullable = false, length = 4)
     private Boolean status;
 
     /**
      * 所属班级id
      */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Integer clazzId;
 
     /**
@@ -115,4 +116,18 @@ public class SysUserAccount {
      */
     @Column(nullable = false,length = 4)
     private Boolean isDeleted;
+
+    /**
+     * 性别
+     */
+    @Column(nullable = false, length = 2)
+    private String gender;
+
+
+
+    /**
+     * 地址
+     */
+    @Column()
+    private String path;
 }
