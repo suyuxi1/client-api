@@ -55,9 +55,16 @@ public class SysUserAccount {
     private String jobNumber;
 
     /**
+     * 密码
+     */
+    @Column(nullable = false,length = 32)
+    private String password;
+
+
+    /**
      * 头像
      */
-    @Column(nullable = false, unique = true ,length = 32)
+    @Column(nullable = false, unique = true ,length = 255)
     private String avatar;
 
     /**

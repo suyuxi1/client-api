@@ -1,7 +1,7 @@
 package com.niit.soft.client.api.config;
 
 import com.niit.soft.client.api.filter.JwtFilter;
-import com.niit.soft.client.api.service.Realm;
+import com.niit.soft.client.api.service.impl.Realm;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
