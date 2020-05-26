@@ -1,5 +1,7 @@
 package com.niit.soft.client.api.controller;
 
+import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.LoginDto;
 import com.niit.soft.client.api.domain.model.User;
 import com.niit.soft.client.api.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -17,12 +19,22 @@ import java.io.UnsupportedEncodingException;
  * @Version 1.0
  **/
 @Slf4j
-@RestController
+@RestController("/user/")
 public class LoginController {
-    @PostMapping("/login")
-    public String login(@RequestBody User user) throws UnsupportedEncodingException {
+//    @PostMapping("/login")
+//    public String login(@RequestBody User user) throws UnsupportedEncodingException {
+//        log.info(JwtUtil.sign(user.getUsername(), user.getPassword()));
+//        return "进入登录页面";
+//    }
+
+    @PostMapping("login")
+    public ResponseResult login(@RequestBody LoginDto loginDto) throws UnsupportedEncodingException {
+        //如果查到数据，返回用户数据
+
+        //如果没查到数据，返回错误信息
         log.info(JwtUtil.sign(user.getUsername(), user.getPassword()));
-        return "进入登录页面";
+//        return ResponseResult
+        return null;
     }
 
     @GetMapping("/index")

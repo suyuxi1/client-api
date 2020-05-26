@@ -1,7 +1,8 @@
-package com.niit.soft.client.api.service;
+package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.domain.model.User;
 import com.niit.soft.client.api.domain.vo.JwtToken;
+import com.niit.soft.client.api.service.UserService;
 import com.niit.soft.client.api.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
