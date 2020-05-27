@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -21,27 +21,62 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Builder
 public class SysCard {
+    /**
+     * 主键
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @Column(name = "pk_card_id",nullable = false)
     private Long pkCardId;
-    @Column(nullable = false)
+
+    /**
+     * 卡号
+     */
+    @Column(nullable = false,length = 32)
     private String cardNumber;
-    @Column(nullable = false)
+
+    /**
+     * 卡密
+     */
+    @Column(nullable = false,length = 32)
     private  String cardPassword;
-    @Column(nullable = false)
+
+    /**
+     * 绑定账号
+     */
+    @Column(nullable = false,length = 32)
     private  String jobNumber;
-    @Column(nullable = false,unique = true)
-    private  Double cardBalance;
+
+    /**
+     * 余额
+     */
     @Column(nullable = false)
-   private  Long status;
+    private  Double cardBalance;
+
+    /**
+     * 状态
+     */
+    @Column(nullable = false,length = 4)
+   private  Boolean status;
+
+    /**
+     * 创建时间
+     */
     @Column(nullable = false)
     private Timestamp gmtCreate;
+
+    /**
+     * 更新时间
+     */
     @Column(nullable = false)
-    @CreationTimestamp
+    @UpdateTimestamp
     private  Timestamp gmtModified;
-    @Column(nullable = false)
-    private  Long isDeleted;
+
+    /**
+     * 删除标志
+     */
+    @Column(nullable = false,length = 4)
+    private  Boolean isDeleted;
 
 
 }

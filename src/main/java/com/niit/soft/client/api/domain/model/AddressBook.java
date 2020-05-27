@@ -35,13 +35,13 @@ public class AddressBook {
     /**
      * 用户id
      */
-    @Column(nullable = false, unique = true,length = 32)
+    @Column(nullable = false,length = 32)
     private String userId;
 
     /**
      * 手机号
      */
-    @Column(name = "phone_number",nullable = false, unique = true,length = 32)
+    @Column(name = "phone_number",nullable = false, length = 32)
     private String phoneNumber;
 
     /**

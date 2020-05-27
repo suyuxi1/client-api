@@ -35,7 +35,7 @@ public class SmsApiController {
 
     @ApiOperation(value = "发送验证码",notes = "参数为 手机号")
     @PostMapping(value = "/sendCode")
-    public ResponseResult code(@RequestBody @Validated SmsPhoneDto smsPhoneDto) {
+    public ResponseResult code(@RequestBody SmsPhoneDto smsPhoneDto) {
         log.info("访问 /sendCode 接口");
         String phoneNumber = smsPhoneDto.getPhoneNumber();
         //调用发送方法

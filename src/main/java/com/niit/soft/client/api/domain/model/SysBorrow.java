@@ -21,26 +21,65 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Builder
 public class SysBorrow {
+    /**
+     * 主键
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long pkBorrowId;
-    @Column(nullable = false)
+
+    /**
+     * 借阅人姓名
+     */
+    @Column(nullable = false,length = 50)
     private  String borrowUserName;
-    @Column(nullable = false,unique = true)
+
+    /**
+     * 借阅人姓名
+     */
+    @Column(nullable = false,unique = true,length = 32)
     private  String borrowUserNumber;
-    @Column(nullable = false)
+
+    /**
+     * 借阅人手机号
+     */
+    @Column(nullable = false,length = 32)
     private  String borrowUserPhone;
-    @Column(nullable = false)
+
+    /**
+     * 借阅图书名称
+     */
+    @Column(nullable = false,length = 50)
     private String borrowBookName;
-    @Column(nullable = false)
+
+    /**
+     * 借阅图书编号
+     */
+    @Column(nullable = false,length = 50)
     private  String borrowBookId;
-    @Column(nullable = false)
-    private  Timestamp isReturned;
+
+    /**
+     * 归还状态  0 未归还， 1 已归还）
+     */
+    @Column(nullable = false,length = 4)
+    private  Boolean isReturned;
+
+    /**
+     * 创建时间
+     */
     @Column(nullable = false)
     private Timestamp gmtCreate;
+
+    /**
+     * 更新时间
+     */
     @Column(nullable = false)
     @CreationTimestamp
     private  Timestamp gmtModified;
-    @Column(nullable = false)
-    private  Long isDeleted;
+
+    /**
+     * 删除标志
+     */
+    @Column(nullable = false,length = 4)
+    private  Boolean isDeleted;
 }

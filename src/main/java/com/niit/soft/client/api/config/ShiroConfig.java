@@ -22,7 +22,7 @@ import java.util.Map;
  * @Date 2020/5/24 9:55
  * @Version 1.0
  **/
-@Configuration
+//@Configuration
 public class ShiroConfig {
 
     /**
@@ -42,6 +42,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/user/password", "anon");
         filterChainDefinitionMap.put("/sendCode", "anon");
         filterChainDefinitionMap.put("/verifyCode", "anon");
+        filterChainDefinitionMap.put("/doc.html", "anon");
         //添加自己的过滤器并取名为jwt
         Map<String, Filter> filterMap = new HashedMap();
         filterMap.put("jwt", new JwtFilter());
