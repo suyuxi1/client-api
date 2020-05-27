@@ -13,14 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
  * @Description TODO
  * @date 2020-05-26 9:55
  **/
-public interface UserAccountRepository extends JpaRepository<UserAccount, Long> {
+public interface UserAccountRepository extends JpaRepository<UserAccount, String> {
     /**
      * 根据id查询账户信息
      *
      * @param id
      * @return
      */
-    UserAccount findSysUserAccountByPkUserAccountId(Long id);
+    UserAccount findSysUserAccountByPkUserAccountId(String id);
 
 
     /**

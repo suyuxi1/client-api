@@ -20,25 +20,64 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Builder
 public class ReportLoss {
+    /**
+     * 主键
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pkReportLossId;
+
+    /**
+     * 挂失备注
+     */
     @Column
     private  String remark;
-    @Column(nullable = false)
+
+    /**
+     * 挂失卡密
+     */
+    @Column(nullable = false,length = 128)
     private  String password;
-    @Column(nullable = false)
-    private  Long lossStatus;
-    @Column(nullable = false,unique = true)
+
+    /**
+     * 挂失状态
+     */
+    @Column(nullable = false,length = 4)
+    private  Boolean lossStatus;
+
+    /**
+     * 手机号
+     */
+    @Column(nullable = false,unique = true,length = 32)
     private  String lossPhone;
-    @Column(nullable = false)
+
+    /**
+     * 挂失人
+     */
+    @Column(nullable = false,length = 32)
     private  String lossName;
-    @Column(nullable = false,unique = true)
+
+    /**
+     * 挂失卡号
+     */
+    @Column(nullable = false,unique = true,length = 32)
     private String  lossJobNumber;
+
+    /**
+     * 创建时间
+     */
     @Column(nullable = false)
     private Timestamp gmtCreate;
+
+    /**
+     * 更新时间
+     */
     @Column(nullable = false)
     private  Timestamp gmtModified;
-    @Column(nullable = false)
-    private  Long isDeleted;
+
+    /**
+     * 删除标志
+     */
+    @Column(nullable = false,length = 4)
+    private  Boolean isDeleted;
 }

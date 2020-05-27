@@ -29,7 +29,7 @@ public class UserAccount {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pkUserAccountId;
+    private String pkUserAccountId;
 
     /**
      * 账号

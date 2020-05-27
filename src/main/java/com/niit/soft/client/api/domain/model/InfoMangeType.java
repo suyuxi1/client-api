@@ -1,6 +1,9 @@
 package com.niit.soft.client.api.domain.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -13,6 +16,9 @@ import java.sql.Timestamp;
  */
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "info_manage_type", indexes = {@Index(name = "type_idIndex", columnList = "type_id")})
 public class InfoMangeType {
 
@@ -24,10 +30,16 @@ public class InfoMangeType {
     private Long pkInfoManageTypeId;
 
     /**
-     * 资讯类型id
+     * 分类id
      */
     @Column(name = "type_id")
     private Long typeId;
+
+    /**
+     * 资讯类型id
+     */
+    @Column(name = "info_id")
+    private Long infoId;
 
     /**
      * 创建时间

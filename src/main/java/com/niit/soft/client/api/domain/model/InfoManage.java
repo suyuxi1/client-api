@@ -31,7 +31,7 @@ public class InfoManage {
     /**
      * 标题
      */
-    @Column(name = "title")
+    @Column(name = "title", length = 32)
     private String title;
 
     /**

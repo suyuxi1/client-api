@@ -34,31 +34,31 @@ public class Examination {
      * 学期
      * nullable = false为非空约束，unique = true是唯一约束
      */
-    @Column(nullable = false, unique = true,length = 60)
+    @Column(nullable = false, length = 60)
     private String semester;
 
     /**
      * 科目id
      */
-    @Column(nullable = false, unique = true ,length = 60)
+    @Column(nullable = false, length = 60)
     private String subjectId;
     /**
      * 班级id
      */
-    @Column(name = "clazz_id",nullable = false, unique = true ,length = 11)
+    @Column(name = "clazz_id",nullable = false, length = 11)
     private Integer clazzId;
 
     /**
      * 监考老师
      */
-    @Column(nullable = false, unique = true ,length = 32)
+    @Column(nullable = false, length = 32)
     private String teacherName;
 
     /**
      * 开始时间
      */
     @Column(nullable = false)
-    private String startTime;
+    private Timestamp startTime;
 
     /**
      * 地点

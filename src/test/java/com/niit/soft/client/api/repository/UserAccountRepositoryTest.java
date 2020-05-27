@@ -16,14 +16,9 @@ class UserAccountRepositoryTest {
      */
     @Test
     void findSysUserAccountByPkUserAccountId() {
-        UserAccount sysUserAccount = sysUserAccountRepository.findSysUserAccountByPkUserAccountId(Long.valueOf(1));
+        UserAccount sysUserAccount = sysUserAccountRepository.findSysUserAccountByPkUserAccountId("1");
         System.out.println(sysUserAccount);
     }
 
-    @Test
-    void TestSaveAndFlush() {
-        UserAccount sysUserAccount = sysUserAccountRepository.findSysUserAccountByPkUserAccountId(Long.valueOf(1));
-        sysUserAccount.setAvatar("2.jpg");
-        sysUserAccountRepository.saveAndFlush(sysUserAccount);
-    }
+
 }
