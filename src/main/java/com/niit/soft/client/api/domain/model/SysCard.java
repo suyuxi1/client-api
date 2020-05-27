@@ -23,7 +23,6 @@ import java.sql.Timestamp;
 public class SysCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long pkCardId;
     @Column(nullable = false)
     private String cardNumber;
@@ -34,14 +33,14 @@ public class SysCard {
     @Column(nullable = false,unique = true)
     private  Double cardBalance;
     @Column(nullable = false)
-   private  Long status;
+   private  Boolean status;
     @Column(nullable = false)
     private Timestamp gmtCreate;
     @Column(nullable = false)
     @CreationTimestamp
     private  Timestamp gmtModified;
     @Column(nullable = false)
-    private  Long isDeleted;
+    private  Boolean isDeleted;
 
 
 }
