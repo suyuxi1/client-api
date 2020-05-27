@@ -13,4 +13,12 @@ public interface MessageService {
      * @return
      */
     ResponseResult findAllByPage(PageDto pageDto);
+
+    /**
+     * 根据pkMessageId修改读取状态
+     * @param pkMessageId
+     * @return
+     */
+    ResponseResult updateIsReaded(Long pkMessageId);
+
 }

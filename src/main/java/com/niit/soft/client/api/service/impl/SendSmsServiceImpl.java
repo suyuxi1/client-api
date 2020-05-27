@@ -9,6 +9,8 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.niit.soft.client.api.service.SendSmsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -21,12 +23,14 @@ import java.util.Map;
  **/
 @Service
 public class SendSmsServiceImpl implements SendSmsService {
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
     @Override
     public boolean send(String phoneNum, String templateCode, Map<String, Object> code) {
 
         //连接阿里云
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4G3rkARQwiGGkprRZwGm",  "Okx5ZZrlOveWo6WzQR3tHtCrDx5Mdq");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4G3rkARQwiGGkprRZwGm", "Okx5ZZrlOveWo6WzQR3tHtCrDx5Mdq");
         IAcsClient client = new DefaultAcsClient(profile);
         //构建请求
         CommonRequest request = new CommonRequest();
@@ -47,10 +51,15 @@ public class SendSmsServiceImpl implements SendSmsService {
             e.printStackTrace();
         }
         return false;
-}
+    }
 
     @Override
     public boolean verify(String phoneNum, String code) {
-        return false;
+//        如果传来的验证码存在，通过验证
+        if (code.equals(redisTemplate.opsForValue().get(phoneNum))) {
+            return true;
+        }else {
+            return false;
+        }
     }
 }

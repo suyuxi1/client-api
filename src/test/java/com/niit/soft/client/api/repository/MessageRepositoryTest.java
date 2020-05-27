@@ -50,4 +50,10 @@ class MessageRepositoryTest {
         Page<Message> messagePage = messageRepository.findAll(pageable);
         System.out.println(messagePage.getContent());
     }
+
+    @Test
+    void updateIsReaded() {
+        int a = messageRepository.updateIsReaded(Long.valueOf(1));
+        System.out.println(a);
+    }
 }

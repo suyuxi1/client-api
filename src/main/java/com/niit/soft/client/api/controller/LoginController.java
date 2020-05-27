@@ -3,12 +3,15 @@ package com.niit.soft.client.api.controller;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.LoginDto;
+import com.niit.soft.client.api.domain.model.UserAccount;
 import com.niit.soft.client.api.service.LoginDtoService;
+import com.niit.soft.client.api.service.SendSmsService;
 import com.niit.soft.client.api.service.UserAccountService;
 import com.niit.soft.client.api.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.map.HashedMap;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,13 +28,15 @@ import java.util.Map;
  * @Version 1.0
  **/
 @Slf4j
-@RestController("/user/")
+@RestController
+@RequestMapping(value = "/user/")
 public class LoginController {
     @Resource
     private LoginDtoService loginDtoService;
     @Resource
     private UserAccountService userAccountService;
-
+    @Autowired
+    private SendSmsService sendSmsService;
     @PostMapping("login")
     public ResponseResult login(@RequestBody LoginDto loginDto) throws UnsupportedEncodingException {
         log.info("访问login接口");
@@ -43,20 +48,37 @@ public class LoginController {
             log.info(userAccountService.findUserAccountById(id).toString());
             Map map = new HashedMap();
             map.put("UserAccount", userAccountService.findUserAccountById(id));
-            map.put("token", JwtUtil.sign(loginDto.getUserAccount(), loginDto.getPassword()));
+                map.put("token", JwtUtil.sign(loginDto.getUserAccount(), loginDto.getPassword()));
             return ResponseResult.success(map);
         }
         return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
     }
 
-    @GetMapping("/index")
-    public String index() {
-        return "进入首页";
+
+
+    @PostMapping("code/login")
+    public ResponseResult loginByPhone(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("verifyCode") String verifyCode) throws UnsupportedEncodingException {
+        log.info("访问code/login接口");
+        //如果查到数据，返回用户数据
+        if (sendSmsService.verify(phoneNumber, verifyCode)) {
+            log.info("登录成功");
+            UserAccount userAccount = userAccountService.findUserAccountByPhoneNumber(phoneNumber);
+            log.info(userAccount.toString());
+            Map map = new HashedMap();
+            map.put("UserAccount",userAccount);
+            map.put("token", JwtUtil.sign(userAccount.getUserAccount(), userAccount.getPassword()));
+            return ResponseResult.success(map);
+        }
+        return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
     }
 
-    @GetMapping("/other")
-    public String other() {
-        return "进入功能页";
+
+    @PutMapping("user/password")
+    public ResponseResult changePassword(@RequestParam("userAccount") String userAccount, @RequestParam("password") String password) throws UnsupportedEncodingException {
+        log.info("访问user/password接口");
+        //如果查到数据，返回用户数据
+        return ResponseResult.success(userAccountService.updatePasswordByUserAccount(userAccount, password));
     }
+
 
 }

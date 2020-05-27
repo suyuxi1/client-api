@@ -22,4 +22,10 @@ class MessageServiceTest {
         ResponseResult result = messageService.findAllByPage(pageDto);
         System.out.println(result);
     }
+
+    @Test
+    void updateIsReaded() {
+       ResponseResult result = messageService.updateIsReaded(Long.valueOf(2));
+        System.out.println(result);
+    }
 }

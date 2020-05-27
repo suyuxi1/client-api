@@ -1,8 +1,6 @@
 package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.repository.SysUserRepository;
-import com.niit.soft.client.api.domain.dto.LoginDto;
-
 import com.niit.soft.client.api.service.LoginDtoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -38,4 +38,10 @@ public class MessageServiceImpl implements MessageService {
         Page<Message> messagePage = messageRepository.findAll(pageable);
         return ResponseResult.success(messagePage.getContent());
     }
+
+    @Override
+    public ResponseResult updateIsReaded(Long pkMessageId) {
+        messageRepository.updateIsReaded(pkMessageId);
+        return ResponseResult.success();
+    }
 }
