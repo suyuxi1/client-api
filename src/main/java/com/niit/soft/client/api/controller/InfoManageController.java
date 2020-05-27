@@ -1,16 +1,16 @@
 package com.niit.soft.client.api.controller;
 
-import com.niit.soft.client.api.domain.model.InfoManage;
-import com.niit.soft.client.api.domain.model.InfoType;
+import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.service.InfoManageService;
 import com.niit.soft.client.api.service.InfoTypeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author Yujie_Zhao
@@ -23,6 +23,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping(value = "/info")
+@Api(value = "InfoManageController",tags = {"资讯接口"})
 public class InfoManageController {
     @Resource
     private InfoManageService infoManageService;
@@ -34,8 +35,9 @@ public class InfoManageController {
      * 查找所有资讯
      * @return List<InfoManage>
      */
+    @ApiOperation(value = "查找所有资讯",notes = "")
     @GetMapping(value = "/all")
-    public List<InfoManage> getAllInfo(){
+    public ResponseResult getAllInfo(){
         return infoManageService.getAllInfo();
     }
 
@@ -43,8 +45,9 @@ public class InfoManageController {
      * 查询置顶资讯
      * @return  List<InfoManage>
      */
+    @ApiOperation(value = "查询置顶资讯",notes = "")
     @GetMapping(value = "/isTap")
-    public List<InfoManage> getIsTopInfo(){
+    public ResponseResult getIsTopInfo(){
         return infoManageService.getIsTopInfo();
     }
 
@@ -53,8 +56,9 @@ public class InfoManageController {
      * @param id
      * @return InfoType
      */
+    @ApiOperation(value = "查询资讯分类",notes = "")
     @GetMapping(value = "/type")
-    public InfoType getInfoByType(Long id){
+    public ResponseResult getInfoByType(Long id){
         return infoTypeService.getInfoByType(id);
     }
 }

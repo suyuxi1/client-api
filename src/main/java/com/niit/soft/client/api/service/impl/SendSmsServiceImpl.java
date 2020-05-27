@@ -8,6 +8,7 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.niit.soft.client.api.domain.dto.VerifyPhoneDto;
 import com.niit.soft.client.api.service.SendSmsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -54,12 +55,8 @@ public class SendSmsServiceImpl implements SendSmsService {
     }
 
     @Override
-    public boolean verify(String phoneNum, String code) {
+    public boolean verify(VerifyPhoneDto verifyPhone) {
 //        如果传来的验证码存在，通过验证
-        if (code.equals(redisTemplate.opsForValue().get(phoneNum))) {
-            return true;
-        }else {
-            return false;
-        }
+        return verifyPhone.getVerifyCode().equals(redisTemplate.opsForValue().get(verifyPhone.getPhoneNumber()));
     }
 }

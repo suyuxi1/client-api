@@ -13,14 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
  * @Description TODO
  * @date 2020-05-26 9:55
  **/
-public interface UserAccountRepository extends JpaRepository<UserAccount, Long> {
+public interface UserAccountRepository extends JpaRepository<UserAccount, String> {
     /**
      * 根据id查询账户信息
      *
      * @param id
      * @return
      */
-    UserAccount findSysUserAccountByPkUserAccountId(Long id);
+    UserAccount findSysUserAccountByPkUserAccountId(String id);
 
 
     /**
@@ -42,6 +42,6 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, Long> 
 
     @Transactional
     @Modifying
-    @Query(value = "update user_account as u set u.password = ?2 where u.job_number=?1 or u.user_account=?1", nativeQuery = true)
+    @Query(value = "update user_account as u set u.password = ?2 where u.job_number=?1 or u.user_account=?1 or u.phone_number=?1", nativeQuery = true)
     int updatePasswordByUserAccount(String userAccount, String password);
 }

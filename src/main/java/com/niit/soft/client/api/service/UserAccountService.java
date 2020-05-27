@@ -31,7 +31,7 @@ public interface UserAccountService {
     UserAccount findUserAccountByPhoneNumber(String phoneNumber);
 
     /**
-     * 根据userAccount或job_number修改密码
+     * 根据userAccount或job_number或phoneNumber修改密码
      * @param userAccount
      * @param password
      * @return

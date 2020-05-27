@@ -43,7 +43,7 @@ public class SysRole {
     //排序字段
     @NotNull(message = "sort不能为空")
     @Column(length = 4, nullable = false)
-    private int sort;
+    private Integer sort;
 
 
     //创建时间
@@ -59,6 +59,6 @@ public class SysRole {
     //是否删除（1 逻辑删除， 0 未删除）
     @NotNull(message = "isDeleted不能为空")
     @Column(length = 4, nullable = false)
-    private boolean isDeleted;
+    private Boolean isDeleted;
 
 }

@@ -1,6 +1,6 @@
 package com.niit.soft.client.api.service;
 
-import com.niit.soft.client.api.domain.model.InfoType;
+import com.niit.soft.client.api.common.ResponseResult;
 
 /**
  * @author Yujie_Zhao
@@ -15,5 +15,5 @@ public interface InfoTypeService {
      * @param id
      * @return
      */
-    InfoType getInfoByType(Long id);
+    ResponseResult getInfoByType(Long id);
 }

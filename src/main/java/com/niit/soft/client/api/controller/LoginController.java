@@ -3,6 +3,7 @@ package com.niit.soft.client.api.controller;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.LoginDto;
+import com.niit.soft.client.api.domain.dto.VerifyPhoneDto;
 import com.niit.soft.client.api.domain.model.UserAccount;
 import com.niit.soft.client.api.service.LoginDtoService;
 import com.niit.soft.client.api.service.SendSmsService;
@@ -57,12 +58,12 @@ public class LoginController {
 
 
     @PostMapping("code/login")
-    public ResponseResult loginByPhone(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("verifyCode") String verifyCode) throws UnsupportedEncodingException {
+    public ResponseResult loginByPhone(@RequestBody VerifyPhoneDto verifyPhone) throws UnsupportedEncodingException {
         log.info("访问code/login接口");
         //如果查到数据，返回用户数据
-        if (sendSmsService.verify(phoneNumber, verifyCode)) {
+        if (sendSmsService.verify(verifyPhone)) {
             log.info("登录成功");
-            UserAccount userAccount = userAccountService.findUserAccountByPhoneNumber(phoneNumber);
+            UserAccount userAccount = userAccountService.findUserAccountByPhoneNumber(verifyPhone.getPhoneNumber());
             log.info(userAccount.toString());
             Map map = new HashedMap();
             map.put("UserAccount",userAccount);
@@ -73,12 +74,11 @@ public class LoginController {
     }
 
 
-    @PutMapping("user/password")
-    public ResponseResult changePassword(@RequestParam("userAccount") String userAccount, @RequestParam("password") String password) throws UnsupportedEncodingException {
+    @PutMapping("password")
+    public ResponseResult changePassword(@RequestBody LoginDto loginDto) throws UnsupportedEncodingException {
         log.info("访问user/password接口");
         //如果查到数据，返回用户数据
-        return ResponseResult.success(userAccountService.updatePasswordByUserAccount(userAccount, password));
+        return ResponseResult.success(userAccountService.updatePasswordByUserAccount(loginDto.getUserAccount(), loginDto.getPassword()));
     }
-
 
 }
