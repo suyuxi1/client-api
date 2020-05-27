@@ -38,7 +38,8 @@ public class InfoMangeType {
     /**
      * 资讯类型id
      */
-    @Column(name = "info_id")
+
+    @Column(name = "info_id" ,length = 32)
     private Long infoId;
 
     /**

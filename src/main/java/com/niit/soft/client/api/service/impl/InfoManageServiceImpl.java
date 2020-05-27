@@ -1,12 +1,11 @@
 package com.niit.soft.client.api.service.impl;
 
+import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.repository.InfoManageRepository;
-import com.niit.soft.client.api.domain.model.InfoManage;
 import com.niit.soft.client.api.service.InfoManageService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author Yujie_Zhao
@@ -26,8 +25,8 @@ public class InfoManageServiceImpl implements InfoManageService {
      * @return List<InfoManage>
      */
     @Override
-    public List<InfoManage> getAllInfo() {
-        return infoManageRepository.findAll();
+    public ResponseResult getAllInfo() {
+        return ResponseResult.success(infoManageRepository.findAll());
     }
 
     /**
@@ -35,7 +34,7 @@ public class InfoManageServiceImpl implements InfoManageService {
      * @return List<InfoManage>
      */
     @Override
-    public List<InfoManage> getIsTopInfo() {
-        return infoManageRepository.getIsTopInfo();
+    public ResponseResult getIsTopInfo() {
+        return ResponseResult.success(infoManageRepository.getIsTopInfo());
     }
 }

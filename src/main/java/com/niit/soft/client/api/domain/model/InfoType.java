@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Description TODO
@@ -57,4 +59,13 @@ public class InfoType {
      */
     @Column(name = "is_deleted")
     private Boolean isDeleted;
+
+
+    /**
+     * 资讯消息
+     */
+//    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "")
+    private List<InfoManage> infoManageList = new ArrayList<>();
 }

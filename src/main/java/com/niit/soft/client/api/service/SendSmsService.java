@@ -1,5 +1,7 @@
 package com.niit.soft.client.api.service;
 
+import com.niit.soft.client.api.domain.dto.VerifyPhoneDto;
+
 import java.util.Map;
 
 /**
@@ -11,6 +13,7 @@ import java.util.Map;
 public interface SendSmsService {
     //发送验证码
      boolean send(String phoneNum, String templateCode, Map<String, Object> code);
+
     //校验验证码
-     boolean verify(String phoneNum, String code);
+    boolean verify(VerifyPhoneDto verifyPhone);
 }
