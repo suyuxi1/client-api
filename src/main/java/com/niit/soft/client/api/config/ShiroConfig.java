@@ -10,6 +10,7 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
@@ -21,7 +22,7 @@ import java.util.Map;
  * @Date 2020/5/24 9:55
  * @Version 1.0
  **/
-//@Configuration
+@Configuration
 public class ShiroConfig {
 
     /**
@@ -36,12 +37,11 @@ public class ShiroConfig {
         //拦截器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         //配置不会被拦截的链接，顺序配置
-        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/user/login", "anon");
+        filterChainDefinitionMap.put("/user/code/login", "anon");
+        filterChainDefinitionMap.put("/user/password", "anon");
         filterChainDefinitionMap.put("/sendCode", "anon");
         filterChainDefinitionMap.put("/verifyCode", "anon");
-        filterChainDefinitionMap.put("/code/login", "anon");
-        filterChainDefinitionMap.put("/user/password", "anon");
-        filterChainDefinitionMap.put("/user/*", "anon");
         //添加自己的过滤器并取名为jwt
         Map<String, Filter> filterMap = new HashedMap();
         filterMap.put("jwt", new JwtFilter());

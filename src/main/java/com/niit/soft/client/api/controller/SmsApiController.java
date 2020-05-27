@@ -5,10 +5,13 @@ import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.SmsPhoneDto;
 import com.niit.soft.client.api.domain.dto.VerifyPhoneDto;
 import com.niit.soft.client.api.service.SendSmsService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -21,17 +24,18 @@ import java.util.concurrent.TimeUnit;
  * @Date 2020/5/21 10:31
  * @Version 1.0
  **/
-//@CrossOrigin  //跨域支持
 @RestController
 @Slf4j
+@Api(value = "SmsApiController",tags = {"短信服务接口"})
 public class SmsApiController {
     @Autowired
     private SendSmsService sendSmsService;
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
+    @ApiOperation(value = "发送验证码",notes = "参数为 手机号")
     @PostMapping(value = "/sendCode")
-    public ResponseResult code(@RequestBody SmsPhoneDto smsPhoneDto) {
+    public ResponseResult code(@RequestBody @Validated SmsPhoneDto smsPhoneDto) {
         log.info("访问 /sendCode 接口");
         String phoneNumber = smsPhoneDto.getPhoneNumber();
         //调用发送方法
@@ -54,27 +58,8 @@ public class SmsApiController {
         }
     }
 
-//    @RequestMapping(value = "/sendCode", method = RequestMethod.POST)
-//    public ResponseResult code(@RequestParam("phoneNumber") String phoneNumber) {
-//        System.out.println("****************");
-//        System.out.println("接受的phoneNumber" + phoneNumber);
-//        //从redis中获取数据
-//        String code = redisTemplate.opsForValue().get(phoneNumber);
-//        System.out.println("code"+code);
-//        if (!StringUtils.isEmpty(code)) {
-//            //数据已存在
-//            return ResponseResult.failure(ResultCode.DATA_ALREADY_EXISTED, phoneNumber + ":" + code + "已存在，还没有过期");
-//        }
-//        //生成验证码并存储到redis中
-//        code = UUID.randomUUID().toString().substring(0, 4);
-//        redisTemplate.opsForValue().set(phoneNumber, code, 5, TimeUnit.MINUTES);
-//
-//        System.out.println("****************"+ redisTemplate.opsForValue().get(phoneNumber));
-//        return ResponseResult.success(code);
-//    }
-
-
     //校验验证码
+    @ApiOperation(value = "校验验证码",tags = {"参数为手机号和接收的验证码"})
     @PostMapping(value = "/verifyCode")
     public ResponseResult code(@RequestBody VerifyPhoneDto verifyPhone) {
         if (sendSmsService.verify(verifyPhone)) {

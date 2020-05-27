@@ -16,14 +16,22 @@ class UserAccountRepositoryTest {
      */
     @Test
     void findSysUserAccountByPkUserAccountId() {
-        UserAccount sysUserAccount = sysUserAccountRepository.findSysUserAccountByPkUserAccountId(Long.valueOf(1));
-        System.out.println(sysUserAccount);
+//        UserAccount sysUserAccount = sysUserAccountRepository.findSysUserAccountByPkUserAccountId(Long.valueOf(1));
+//        System.out.println(sysUserAccount);
+        System.out.println(".......................");
+        System.out.println(sysUserAccountRepository.findUserAccountByInfo("1"));
+        System.out.println(".......................");
+        System.out.println(".......................");
+        System.out.println(sysUserAccountRepository.findUserAccountByInfo("1914866205"));
+        System.out.println(".......................");
+        System.out.println(".......................");
+        System.out.println(sysUserAccountRepository.findUserAccountByInfo("1802343210"));
+        System.out.println(".......................");
+        System.out.println(".......................");
+        System.out.println(sysUserAccountRepository.findUserAccountByInfo("18851855106"));
+        System.out.println(".......................");
+
+
     }
 
-    @Test
-    void TestSaveAndFlush() {
-        UserAccount sysUserAccount = sysUserAccountRepository.findSysUserAccountByPkUserAccountId(Long.valueOf(1));
-        sysUserAccount.setAvatar("2.jpg");
-        sysUserAccountRepository.saveAndFlush(sysUserAccount);
-    }
 }

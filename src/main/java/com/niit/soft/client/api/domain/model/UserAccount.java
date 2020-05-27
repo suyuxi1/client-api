@@ -128,5 +128,5 @@ public class UserAccount {
      * 地址
      */
     @Column()
-    private String path;
+    private String Address;
 }
