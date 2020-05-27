@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.service.impl;
 
+import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.model.InfoManage;
 import com.niit.soft.client.api.domain.model.InfoMangeType;
 import com.niit.soft.client.api.domain.model.InfoType;
@@ -36,7 +37,7 @@ public class InfoTypeServiceImpl implements InfoTypeService {
      * @return InfoType
      */
     @Override
-    public InfoType getInfoByType(Long id) {
+    public ResponseResult getInfoByType(Long id) {
         InfoType infoType = infoTypeRepository.findByPkInfoTypeId(id);
         List<InfoMangeType> infoMangeTypes = infoMangeTypeRepository.findAll();
         //循环所有的资讯分类关联信息，根据分类id找到对应资讯，放入资讯分类中
@@ -46,6 +47,6 @@ public class InfoTypeServiceImpl implements InfoTypeService {
                 infoType.setInfoManageList(mapList);
             }
         });
-        return infoType;
+        return ResponseResult.success(infoType);
     }
 }

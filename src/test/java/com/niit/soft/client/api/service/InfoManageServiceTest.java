@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.service;
 
+import com.niit.soft.client.api.common.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,11 +16,14 @@ class InfoManageServiceTest {
     @Test
     void getAllInfo() {
 //        log.info(String.valueOf(infoManageService.getAll().size()));
-        infoManageService.getAllInfo().forEach(System.out::println);
+        ResponseResult result = infoManageService.getAllInfo();
+        System.out.println(result);
     }
 
     @Test
     void getIsTopInfo() {
-        infoManageService.getIsTopInfo().forEach(System.out::println);
+        ResponseResult result = infoManageService.getIsTopInfo();
+        System.out.println(result);
+
     }
 }
