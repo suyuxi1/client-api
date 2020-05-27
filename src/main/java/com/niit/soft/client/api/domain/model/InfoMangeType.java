@@ -30,6 +30,12 @@ public class InfoMangeType {
     private Long typeId;
 
     /**
+     * 资讯类型id
+     */
+    @Column(name = "info_id" ,length = 32)
+    private Long infoId;
+
+    /**
      * 创建时间
      */
     @Column(name = "gmt_create")

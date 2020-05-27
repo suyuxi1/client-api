@@ -54,4 +54,13 @@ class InfoManageRepositoryTest {
         infoManages.forEach(System.out::println);
 //        log.info(String.valueOf(infoManages.size()));
     }
+
+    @Test
+    void getInfoByType() {
+//        System.out.println("得到："+infoMangeTypeRepository.getInfoByType(1L).toString());
+        List<InfoManage> mapList =infoManageRepository.getInfoByType(1L);
+        mapList.forEach(map->{
+            System.out.println(map);
+        });
+    }
 }
