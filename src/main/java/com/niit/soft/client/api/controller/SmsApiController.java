@@ -2,6 +2,8 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
+import com.niit.soft.client.api.domain.dto.SmsPhoneDto;
+import com.niit.soft.client.api.domain.dto.VerifyPhoneDto;
 import com.niit.soft.client.api.service.SendSmsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +29,11 @@ public class SmsApiController {
     private SendSmsService sendSmsService;
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+
     @PostMapping(value = "/sendCode")
-    public ResponseResult code(@RequestParam("phoneNumber") String phoneNumber) {
+    public ResponseResult code(@RequestBody SmsPhoneDto smsPhoneDto) {
+        log.info("访问 /sendCode 接口");
+        String phoneNumber = smsPhoneDto.getPhoneNumber();
         //调用发送方法
         System.out.println("接受的phoneNumber" + phoneNumber);
         String code = redisTemplate.opsForValue().get(phoneNumber);
@@ -70,9 +75,9 @@ public class SmsApiController {
 
 
     //校验验证码
-    @RequestMapping(value = "/verifyCode", method = RequestMethod.POST)
-    public ResponseResult code(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("verifyCode") String verifyCode) {
-        if (sendSmsService.verify(phoneNumber, verifyCode)) {
+    @PostMapping(value = "/verifyCode")
+    public ResponseResult code(@RequestBody VerifyPhoneDto verifyPhone) {
+        if (sendSmsService.verify(verifyPhone)) {
             log.info("验证码通过");
             return ResponseResult.success(true);
         } else {
