@@ -27,8 +27,8 @@ public class UserAccount {
      * 主键，策略为自增
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pkUserAccountId;
+    @Column(length = 32)
+    private String pkUserAccountId;
 
     /**
      * 账号

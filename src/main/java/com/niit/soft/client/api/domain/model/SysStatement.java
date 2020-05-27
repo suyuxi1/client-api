@@ -1,6 +1,9 @@
 package com.niit.soft.client.api.domain.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -13,6 +16,9 @@ import java.sql.Timestamp;
  */
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SysStatement {
 
     /**
@@ -31,13 +37,13 @@ public class SysStatement {
     /**
      * 内容
      */
-    @Column(name = "statement_title")
+    @Column(name = "statement_title", length = 32)
     private String statementTitle;
 
     /**
      * 用户id
      */
-    @Column(name = "statement_content")
+    @Column(name = "statement_content", length = 32)
     private String statementContent;
 
     /**

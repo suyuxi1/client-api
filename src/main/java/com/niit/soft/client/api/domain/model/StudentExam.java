@@ -33,13 +33,13 @@ public class StudentExam {
     /**
      * 考务id
      */
-    @Column(nullable = false, unique = true)
-    private Integer examinationId;
+    @Column(nullable = false)
+    private Long examinationId;
 
     /**
      * 真实姓名
      */
-    @Column(name ="user_job_number",nullable = false, unique = true ,length = 20)
+    @Column(name ="user_job_number",nullable = false, length = 20)
     private String userJobNumber;
 
 
