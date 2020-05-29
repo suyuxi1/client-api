@@ -1,6 +1,5 @@
 package com.niit.soft.client.api.controller;
 
-import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.LoginDto;
@@ -53,7 +52,6 @@ public class LoginController {
      */
     @ApiOperation(value = "登录", notes = "可以通过账号或学号或手机号加密码登录")
     @PostMapping("login")
-    @ControllerWebLog(name = "login",isSaved = true)
     public ResponseResult login(@RequestBody LoginDto loginDto) throws UnsupportedEncodingException {
         log.info("访问login接口");
         log.info("loginDto{}", loginDto);
@@ -71,7 +69,7 @@ public class LoginController {
         }
         return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
     }
-    @ControllerWebLog(name = "loginByPhone",isSaved = true)
+
     @ApiOperation(value = "手机验证码登录",notes = "请求参数为手机号 和  手机验证码 phoneNumber   verifyCode   ")
     @PostMapping("code/login")
     public ResponseResult loginByPhone(@RequestBody VerifyPhoneDto verifyPhone) throws UnsupportedEncodingException {
@@ -89,7 +87,7 @@ public class LoginController {
         }
         return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
     }
-    @ControllerWebLog(name = "changePassword",isSaved = true)
+
     @ApiOperation(value = "修改密码",notes="参数  手机号/学号/账号+新密码")
     @PutMapping("password")
     public ResponseResult changePassword(@RequestBody LoginDto loginDto)  {
@@ -103,7 +101,6 @@ public class LoginController {
      * 2.解析数据
      * 3.返回用户信息
      */
-    @ControllerWebLog(name = "flushUserAccount",isSaved = true)
     @ApiOperation(value = "刷新用户信息", notes = "无参数，通过token解析")
     @PostMapping("flush")
     public ResponseResult flushUserAccount(@RequestBody SmsPhoneDto smsPhoneDto) {
