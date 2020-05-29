@@ -25,4 +25,7 @@ class UserAccountServiceTest {
         userAccountRepository.updatePasswordByUserAccount("1914866205", "1234");
         System.out.println(userAccountService.findUserAccountById(1L));
     }
+
+
+
 }

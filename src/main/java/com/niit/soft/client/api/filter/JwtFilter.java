@@ -4,6 +4,7 @@ import com.niit.soft.client.api.domain.vo.JwtToken;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.naming.AuthenticationException;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Version 1.0
  **/
 @Slf4j
-//@Component
+@Component
 public class JwtFilter extends BasicHttpAuthenticationFilter implements Filter {
     /**
      * 执行登录
@@ -36,9 +37,9 @@ public class JwtFilter extends BasicHttpAuthenticationFilter implements Filter {
         String token = httpServletRequest.getHeader("Token");
         JwtToken jwtToken = new JwtToken(token);
         //提交给realm进行登入，如果错误它会抛出异常并被捕获
-            getSubject(request, response).login(jwtToken);
-            // 如果没有抛出异常则代表登入成功，返回true
-            return true;
+        getSubject(request, response).login(jwtToken);
+        // 如果没有抛出异常则代表登入成功，返回true
+        return true;
     }
 
     /**

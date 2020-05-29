@@ -1,6 +1,9 @@
 package com.niit.soft.client.api.domain.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -13,6 +16,9 @@ import java.sql.Timestamp;
  */
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class AppVersion {
 
     /**
@@ -25,19 +31,19 @@ public class AppVersion {
     /**
      * 当前的版本号
      */
-    @Column(name = "current_version")
+    @Column(name = "current_version", length = 32)
     private String currentVersion;
 
     /**
      * 最高版本号
      */
-    @Column(name = "max_version")
+    @Column(name = "max_version", length = 32)
     private String maxVersion;
 
     /**
      * 最低版本号
      */
-    @Column(name = "min_version")
+    @Column(name = "min_version", length = 32)
     private String minVersion;
 
     /**

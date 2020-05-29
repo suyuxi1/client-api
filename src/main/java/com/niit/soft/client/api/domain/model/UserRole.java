@@ -49,5 +49,5 @@ public class UserRole {
     //是否删除（1 逻辑删除， 0 未删除）
     @NotNull(message = "isDeleted不能为空")
     @Column(length = 4, nullable = false)
-    private boolean isDeleted;
+    private Boolean isDeleted;
 }

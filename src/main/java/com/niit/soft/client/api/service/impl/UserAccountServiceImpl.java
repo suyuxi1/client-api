@@ -21,12 +21,12 @@ public class UserAccountServiceImpl implements UserAccountService {
     private UserAccountRepository userAccountRepository;
     @Override
     public UserAccount findUserAccountById(Long id) {
-        return userAccountRepository.findUserAccountByPkUserAccountIdEquals(id);
+        return userAccountRepository.findUserAccountByInfo(id.toString());
     }
 
     @Override
-    public UserAccount findUserAccountByPhoneNumber(String phoneNumber) {
-        return userAccountRepository.findUserAccountByPhoneNumberEquals(phoneNumber);
+    public UserAccount findUserAccountByInfo(String info) {
+        return userAccountRepository.findUserAccountByInfo(info);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public ResponseResult updateUserInfo(UserAccount sysUserAccount) {
-        UserAccount updateSysUserAccount = userAccountRepository.findSysUserAccountByPkUserAccountId(sysUserAccount.getPkUserAccountId());
+        UserAccount updateSysUserAccount = userAccountRepository.findUserAccountByInfo(sysUserAccount.getPkUserAccountId().toString());
         //判断帐号是否被禁用
         if (updateSysUserAccount.getStatus()) {
             updateSysUserAccount.setAvatar(sysUserAccount.getAvatar());
@@ -47,5 +47,7 @@ public class UserAccountServiceImpl implements UserAccountService {
         }
         return ResponseResult.failure(ResultCode.USER_ACCOUNT_FORBIDDEN);
     }
+
+
 
 }

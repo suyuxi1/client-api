@@ -34,31 +34,31 @@ public class SysCourse {
      * 课表id
      * nullable = false为非空约束，unique = true是唯一约束
      */
-    @Column(name ="timetable_id",nullable = false, unique = true)
-    private Integer timetableId;
+    @Column(name ="timetable_id",nullable = false)
+    private Long timetableId;
 
     /**
      * 科目id
      */
-    @Column(nullable = false, unique = true)
-    private Integer subjectId;
+    @Column(nullable = false)
+    private Long subjectId;
 
     /**
      * 教师工号
      */
-    @Column(nullable = false, unique = true,length = 20)
+    @Column(nullable = false, length = 20)
     private String userJobNumber;
 
     /**
      * 房间id
      */
-    @Column(nullable = false, unique = true,length = 11)
+    @Column(nullable = false, length = 11)
     private Integer roomId;
 
     /**
      * 周几
      */
-    @Column(nullable = false, unique = true,length = 4)
+    @Column(nullable = false, length = 4)
     private Integer weekDay;
 
     /**
@@ -70,7 +70,7 @@ public class SysCourse {
      *
      * ）
      */
-    @Column(nullable = false, unique = true,length = 4)
+    @Column(nullable = false, length = 4)
     private Integer time;
 
     /**

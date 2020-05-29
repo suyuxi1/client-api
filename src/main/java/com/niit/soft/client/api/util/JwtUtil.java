@@ -27,17 +27,17 @@ public class JwtUtil {
      * 校验token是否正确
      *
      * @param token    秘钥
-     * @param username 用户名
+     * @param userAccount 用户名
      * @param password   密码
      * @return
      */
-    public static boolean verify(String token, String username, String password) {
+    public static boolean verify(String token, String userAccount, String password) {
         try {
 
             //根据密码生成JWT校验器
             Algorithm algorithm = Algorithm.HMAC256(password);
             JWTVerifier verifier = JWT.require(algorithm)
-                    .withClaim("username", username)
+                    .withClaim("userAccount", userAccount)
                     .build();
             //校验Token
             DecodedJWT jwt = verifier.verify(token);
@@ -54,22 +54,22 @@ public class JwtUtil {
      * @param token
      * @return
      */
-    public static String getUsername(String token) {
+    public static String getUserAccount(String token) {
         DecodedJWT jwt = JWT.decode(token);
-        return jwt.getClaim("username").asString();
+        return jwt.getClaim("userAccount").asString();
     }
     /**
      * 生成token签名EXPIRE_TIME 分钟后过期
-     * @param username 用户名
+     * @param userAccount 用户名
      * @param password 用户密码
      * @return 加密的token
      * @throws UnsupportedEncodingException
      */
-    public static String sign(String username, String password) throws UnsupportedEncodingException {
+    public static String sign(String userAccount, String password) throws UnsupportedEncodingException {
         Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
         Algorithm algorithm = Algorithm.HMAC256(password);
-        //附带username信息
-        return JWT.create().withClaim("username", username)
+        //附带userAccount信息
+        return JWT.create().withClaim("userAccount", userAccount)
                 .withExpiresAt(date)
                 .sign(algorithm);
     }

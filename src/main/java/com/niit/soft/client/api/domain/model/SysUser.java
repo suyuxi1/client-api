@@ -61,7 +61,7 @@ public class SysUser {
     //账户状态 ： 0 禁用   1 ：启用
     @NotNull(message = "isEnabled不能为空")
     @Column(length = 4)
-    private boolean isEnabled;
+    private Boolean isEnabled;
 
     //创建时间
     @NotNull(message = "gmtCreate不能为空")
@@ -76,7 +76,7 @@ public class SysUser {
     //是否删除（1 逻辑删除， 0 未删除）
     @NotNull(message = "isDeleted不能为空")
     @Column(length = 4, nullable = false)
-    private boolean isDeleted;
+    private Boolean isDeleted;
 
 
 }

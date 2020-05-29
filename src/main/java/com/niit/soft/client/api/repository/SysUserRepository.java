@@ -14,13 +14,4 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface SysUserRepository extends JpaRepository<SysUser, Long> {
 
-    /**
-     * 根据dto查询用户
-     * @param userAccount
-     * @param password
-     * @return
-     */
-    @Query(value = "select s.pk_user_account_id from user_account s where s.job_number=?1 or s.user_account=?1 and s.password=?2",nativeQuery = true)
-    Long findIdByLoginDto(String userAccount,String password);
-
 }
