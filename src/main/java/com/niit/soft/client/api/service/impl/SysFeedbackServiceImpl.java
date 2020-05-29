@@ -30,8 +30,8 @@ public class SysFeedbackServiceImpl implements SysFeedbackService {
     public ResponseResult insertSysFeedback(SysFeedback sysFeedback) {
         boolean title = sysFeedback.getTitle() != null;
         boolean content = sysFeedback.getContent() != null;
-        boolean phone = sysFeedback.getContactWay() != null;
-        System.out.println(title+","+content+","+phone);
+        boolean phone = sysFeedback.getContactWay().length() > 0;
+        System.out.println(title + "," + content + "," + phone);
         // 若此用户没有匿名 先判断是否有数据
         if (title && content && phone) {
             //数 据均存在 判断手机号码是否正确
