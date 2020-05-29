@@ -1,6 +1,5 @@
 package com.niit.soft.client.api.controller;
 
-import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.service.MessageService;
@@ -30,7 +29,6 @@ public class MessageController {
      * @param pageDto
      * @return
      */
-    @ControllerWebLog(name = "findAllByPage",isSaved = true)
     @ApiOperation(value = "查询所有",notes = "请求参数为当前页和页面条数")
     @PostMapping("/all")
     ResponseResult findAllByPage(@RequestBody PageDto pageDto){
@@ -42,7 +40,6 @@ public class MessageController {
      * @param pkMessageId
      * @return
      */
-    @ControllerWebLog(name = "updateIsReaded",isSaved = true)
     @ApiOperation(value = "修改读取状态",notes = "请求参数为消息id")
     @PutMapping("/update")
     ResponseResult updateIsReaded(@Param("pkMessageId") Long pkMessageId){
