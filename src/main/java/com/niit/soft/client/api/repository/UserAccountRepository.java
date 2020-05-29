@@ -24,24 +24,27 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
 
 
     /**
-     * 根据id 查询账户信息
+     * 根据部分用户信息查询用户id
      *
-     * @param id
+     * @param userAccount, password
      * @return
      */
-    UserAccount findUserAccountByPkUserAccountIdEquals(Long id);
+    @Query(value = "select pk_user_account_id from user_account as u where u.job_number=?1 or u.user_account=?1 or u.phone_number=?1 and u.password=?2", nativeQuery = true)
+    Long findIdByLoginDto(String userAccount, String password);
 
 
     /**
-     * 根据手机号查询用户
+     * 根据部分用户信息查询用户
      *
-     * @param PhoneNumber
+     * @param info
      * @return
      */
-    UserAccount findUserAccountByPhoneNumberEquals(String PhoneNumber);
+    @Query(value = "select * from user_account as u where u.job_number=?1 or u.user_account=?1 or u.phone_number=?1 or u.pk_user_account_id=?1", nativeQuery = true)
+    UserAccount findUserAccountByInfo(String info);
 
     @Transactional
     @Modifying
     @Query(value = "update user_account as u set u.password = ?2 where u.job_number=?1 or u.user_account=?1 or u.phone_number=?1", nativeQuery = true)
     int updatePasswordByUserAccount(String userAccount, String password);
+
 }

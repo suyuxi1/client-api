@@ -23,12 +23,12 @@ public interface UserAccountService {
     UserAccount findUserAccountById(Long id);
 
     /**
-     * 根据手机号获取用户对象
+     * 根据用户唯一信息获取用户对象
      *
-     * @param phoneNumber
+     * @param info
      * @return
      */
-    UserAccount findUserAccountByPhoneNumber(String phoneNumber);
+    UserAccount findUserAccountByInfo(String info);
 
     /**
      * 根据userAccount或job_number或phoneNumber修改密码

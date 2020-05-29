@@ -27,7 +27,7 @@ public class UserAccount {
      * 主键，策略为自增
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(length = 32)
     private String pkUserAccountId;
 
     /**
@@ -128,5 +128,5 @@ public class UserAccount {
      * 地址
      */
     @Column()
-    private String path;
+    private String Address;
 }
