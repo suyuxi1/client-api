@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.controller;
 
+import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.model.SysFeedback;
 import com.niit.soft.client.api.domain.model.UserAccount;
@@ -33,6 +34,7 @@ public class UserAccountController {
      * @param userAccount
      * @return
      */
+    @ControllerWebLog(name = "updateInfo",isSaved = true)
     @ApiOperation(value = "修改个人信息数据",notes = "请求参数为头像、昵称、性别")
     @PutMapping("/update/info")
     ResponseResult updateInfo(@RequestBody UserAccount userAccount){
@@ -42,6 +44,7 @@ public class UserAccountController {
     /**
      * 匿名反馈
      */
+    @ControllerWebLog(name = "insertSysFeedback",isSaved = true)
     @ApiOperation(value = "匿名反馈接口",notes = "请求参数为主题、内容、联系方式（选填）")
     @PostMapping(value = "/feedback")
     ResponseResult insertSysFeedback(@RequestBody SysFeedback sysFeedback){

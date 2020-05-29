@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.controller;
 
+import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.SmsPhoneDto;
@@ -32,7 +33,7 @@ public class SmsApiController {
     private SendSmsService sendSmsService;
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
-
+    @ControllerWebLog(name = "code",isSaved = true)
     @ApiOperation(value = "发送验证码",notes = "参数为 手机号")
     @PostMapping(value = "/sendCode")
     public ResponseResult code(@RequestBody SmsPhoneDto smsPhoneDto) {
@@ -59,9 +60,10 @@ public class SmsApiController {
     }
 
     //校验验证码
+    @ControllerWebLog(name = "code",isSaved = true)
     @ApiOperation(value = "校验验证码",tags = {"参数为手机号和接收的验证码"})
     @PostMapping(value = "/verifyCode")
-    public ResponseResult code(@RequestBody VerifyPhoneDto verifyPhone) {
+    public ResponseResult verifyCode(@RequestBody VerifyPhoneDto verifyPhone) {
         if (sendSmsService.verify(verifyPhone)) {
             log.info("验证码通过");
             return ResponseResult.success(true);
