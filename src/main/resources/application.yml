@@ -8,9 +8,9 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test2?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://rm-m5ee476bu350735gjeo.mysql.rds.aliyuncs.com:3306/first_smart_campus?useUnide=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true
     username: root
-    password: root
+    password: XuNiit_#
     hikari:
       minimum-idle: 1
       maximum-pool-size: 20
