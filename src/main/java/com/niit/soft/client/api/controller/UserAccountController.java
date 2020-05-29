@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @author Tao
  * @version 1.0
  * @ClassName SysUserAccountController
- * @Description TODO
+ * @Description 用户控制器
  * @date 2020-05-26 11:08
  **/
 @RestController

@@ -55,7 +55,7 @@ public class WebLogAspect {
     @Before(value = "webLog() && @annotation(controllerWebLog)")
     public void doBefore(JoinPoint joinPoint, ControllerWebLog controllerWebLog) {
         log.info("-----进入请求-----"+"**1**");
-        //接收请求
+        //接收请求*
         RequestAttributes at = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) at;
         //通过以下连接点和注解获取到相关信息

@@ -33,7 +33,7 @@ public class InfoManageController {
     private InfoTypeService infoTypeService;
 
     /**
-     * 查找所有资讯
+     * 查找所有资讯1
      * @return List<InfoManage>
      */
     @ApiOperation(value = "查找所有资讯",notes = "")

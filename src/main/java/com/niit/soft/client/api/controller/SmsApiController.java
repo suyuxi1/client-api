@@ -20,7 +20,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Description TODO
+ * @Description 短信服务控制器
  * @Author 涛涛
  * @Date 2020/5/21 10:31
  * @Version 1.0

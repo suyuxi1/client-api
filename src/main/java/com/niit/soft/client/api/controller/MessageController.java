@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * @author Tao
  * @version 1.0
  * @ClassName MessageController
- * @Description TODO
+ * @Description 消息控制器
  * @date 2020-05-26 16:03
  **/
 @RestController
