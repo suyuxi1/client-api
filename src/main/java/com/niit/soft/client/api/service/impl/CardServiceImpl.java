@@ -42,4 +42,17 @@ public class CardServiceImpl implements CardService {
         List<SysCard> sysCardList=new ArrayList<>();
         return ResponseResult.success(sysCardList);
     }
+
+    @Override
+    public ResponseResult selectCardBalance(String jobNumber) {
+        Double cardBalance=cardRepository.findCardBalanceByJobNumber(jobNumber);
+        return ResponseResult.success(cardBalance);
+    }
+
+    @Override
+    public ResponseResult insertCardBalance(String cardNumber, Double money) {
+//        Double cardBalance=cardRepository.findCardBalanceByJobNumber(cardNumber);
+        int a=cardRepository.insertCardBalance(cardNumber,money);
+        return ResponseResult.success(a);
+    }
 }

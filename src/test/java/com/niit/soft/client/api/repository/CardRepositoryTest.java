@@ -34,7 +34,7 @@ class CardRepositoryTest {
     @Test
     void  insertMore(){
         List<SysCard> sysCards = new ArrayList<>();
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 3; i++) {
             SysCard sysCard = SysCard.builder().cardNumber("18023433"+i)
                     .jobNumber("18023433"+i)
                     .cardPassword("123456")
@@ -45,5 +45,17 @@ class CardRepositoryTest {
             sysCards.add(sysCard);
         }
         cardRepository.saveAll(sysCards);
+    }
+
+    @Test
+    void findCardBalanceByJobNumber() {
+        Double card_balance=cardRepository.findCardBalanceByJobNumber("180234331");
+        System.out.println(card_balance);
+    }
+
+    @Test
+    void updateCardBalanceCardNumber() {
+        int a=cardRepository.insertCardBalance("1802343315",190.5);
+        System.out.println(a);
     }
 }

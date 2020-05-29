@@ -26,4 +26,19 @@ public interface CardService {
      * @param sysCards
      */
     ResponseResult insertAll(List<SysCard> sysCards);
+
+    /**
+     * 查询一卡通余额
+     * @param jobNumber
+     * @return
+     */
+    ResponseResult selectCardBalance(String jobNumber);
+
+    /**
+     * 校园卡充值
+     * @param cardNumber
+     * @param money
+     * @return
+     */
+    ResponseResult insertCardBalance(String cardNumber,Double money);
 }
