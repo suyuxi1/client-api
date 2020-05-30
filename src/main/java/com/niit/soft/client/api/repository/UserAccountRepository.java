@@ -44,7 +44,8 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
 
     @Transactional
     @Modifying
-    @Query(value = "update user_account as u set u.password = ?2 where u.job_number=?1 or u.user_account=?1 or u.phone_number=?1", nativeQuery = true)
+    @Query(value = "update user_account as u set u.password = ?2 where u.job_number=?1 or u.user_account=?1 or u" +
+            ".phone_number=?2", nativeQuery = true)
     int updatePasswordByUserAccount(String userAccount, String password);
 
 }
