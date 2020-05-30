@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.controller;
 
+import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.SmsPhoneDto;
@@ -35,6 +36,7 @@ public class SmsApiController {
 
     @ApiOperation(value = "发送验证码",notes = "参数为 手机号")
     @PostMapping(value = "/sendCode")
+    @ControllerWebLog(name = "code", isSaved = true)
     public ResponseResult code(@RequestBody SmsPhoneDto smsPhoneDto) {
         log.info("访问 /sendCode 接口");
         String phoneNumber = smsPhoneDto.getPhoneNumber();
@@ -59,9 +61,10 @@ public class SmsApiController {
     }
 
     //校验验证码
+    @ControllerWebLog(name = "verifyCode", isSaved = true)
     @ApiOperation(value = "校验验证码",tags = {"参数为手机号和接收的验证码"})
     @PostMapping(value = "/verifyCode")
-    public ResponseResult code(@RequestBody VerifyPhoneDto verifyPhone) {
+    public ResponseResult verifyCode(@RequestBody VerifyPhoneDto verifyPhone) {
         if (sendSmsService.verify(verifyPhone)) {
             log.info("验证码通过");
             return ResponseResult.success(true);
