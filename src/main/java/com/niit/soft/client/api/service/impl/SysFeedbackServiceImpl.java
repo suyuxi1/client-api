@@ -28,10 +28,12 @@ public class SysFeedbackServiceImpl implements SysFeedbackService {
 
     @Override
     public ResponseResult insertSysFeedback(SysFeedback sysFeedback) {
+        boolean title = sysFeedback.getTitle() != null;
+        boolean content = sysFeedback.getContent() != null;
+        boolean phone = sysFeedback.getContactWay().length() > 0;
+        System.out.println(title + "," + content + "," + phone);
         // 若此用户没有匿名 先判断是否有数据
-        if ((sysFeedback.getContactWay() != null)
-                && (sysFeedback.getTitle() != null)
-                && (sysFeedback.getContent() != null)) {
+        if (title && content && phone) {
             //数 据均存在 判断手机号码是否正确
             if (StringUtil.isMobile(sysFeedback.getContactWay())) {
                 // 存入手机号 标题 内容数据
@@ -52,9 +54,7 @@ public class SysFeedbackServiceImpl implements SysFeedbackService {
                 return ResponseResult.failure(ResultCode.Phone_ERROR);
             }
 
-        } else if ((sysFeedback.getContactWay() == null)
-                && (sysFeedback.getTitle() != null)
-                && (sysFeedback.getContent() != null)) {
+        } else if (!phone && content && title) {
             // 存入手机号 标题 内容数据
             SysFeedback sysFeedback1 = SysFeedback.builder()
                     .title(sysFeedback.getTitle())

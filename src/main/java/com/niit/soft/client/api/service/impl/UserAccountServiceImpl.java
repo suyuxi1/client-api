@@ -42,6 +42,7 @@ public class UserAccountServiceImpl implements UserAccountService {
             updateSysUserAccount.setAvatar(sysUserAccount.getAvatar());
             updateSysUserAccount.setNickname(sysUserAccount.getNickname());
             updateSysUserAccount.setGender(sysUserAccount.getGender());
+            updateSysUserAccount.setAddress(sysUserAccount.getAddress());
             userAccountRepository.saveAndFlush(updateSysUserAccount);
             return ResponseResult.success(updateSysUserAccount);
         }
