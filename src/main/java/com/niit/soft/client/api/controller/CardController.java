@@ -26,14 +26,16 @@ public class CardController {
 
     /**
      * 查询余额
+     *
      * @param jobNumber
      * @return
      */
-    @ApiOperation(value = "查询余额",notes = "请求参数为当学号")
+    @ApiOperation(value = "查询余额", notes = "请求参数为当学号")
     @GetMapping("/card/balance")
     @ControllerWebLog(name = "findcardBalanceByJobNumber", isSaved = true)
-    ResponseResult findcardBalanceByJobNumber(@RequestParam("job_number") String jobNumber){
-        return  service.selectCardBalance(jobNumber);
+    ResponseResult findcardBalanceByJobNumber(@RequestParam("job_number") String jobNumber) {
+        log.info("-----/card/balance-----请求参数：" + jobNumber+"**1**");
+        return service.selectCardBalance(jobNumber);
     }
 
     /**
@@ -45,6 +47,7 @@ public class CardController {
     @ApiOperation(value = "校园卡充值", notes = "请求参数为校园卡号码，充值金额")
     @PutMapping("/card/deposit")
     ResponseResult insertCardBalance(@RequestBody CardBalance cardBalance) {
+        log.info("-----/card/deposit-----请求参数：" + cardBalance+"**1**");
         return service.insertCardBalance(cardBalance.getCardNumber(), cardBalance.getMoney());
     }
 

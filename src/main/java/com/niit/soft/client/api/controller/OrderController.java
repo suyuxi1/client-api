@@ -24,13 +24,15 @@ public class OrderController {
 
     /**
      * 查询清单明细
+     *
      * @param jobNumber
      * @return
      */
-      @PostMapping("/card/consume")
-      @ApiOperation(value = "查询清单明细",notes = "请求参数为学号")
-      @ControllerWebLog(name = "findAllByJobNumber", isSaved = true)
-      ResponseResult findAllByJobNumber(@RequestBody JobNumberDto jobNumber){
-          return orderService.findALLByJobNumer(jobNumber.getJobNumber());
-      }
+    @PostMapping("/card/consume")
+    @ApiOperation(value = "查询清单明细", notes = "请求参数为学号")
+    @ControllerWebLog(name = "findAllByJobNumber", isSaved = true)
+    ResponseResult findAllByJobNumber(@RequestBody JobNumberDto jobNumber) {
+        log.info("-----/card/consume-----请求参数：" + jobNumber+"**1**");
+        return orderService.findALLByJobNumer(jobNumber.getJobNumber());
+    }
 }

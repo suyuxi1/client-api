@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author Tao
  * @version 1.0
@@ -31,6 +34,7 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
      */
     @Query(value = "select pk_user_account_id from user_account as u where u.job_number=?1 or u.user_account=?1 or u.phone_number=?1 and u.password=?2", nativeQuery = true)
     Long findIdByLoginDto(String userAccount, String password);
+
 
 
     /**
