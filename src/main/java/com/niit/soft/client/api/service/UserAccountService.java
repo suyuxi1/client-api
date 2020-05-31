@@ -16,6 +16,14 @@ public interface UserAccountService {
     ResponseResult updateUserInfo(UserAccount sysUserAccount);
 
     /**
+     * 修改手机号码
+     * @param userAccount
+     * @return
+     */
+    ResponseResult updateUserPhoneNumber(UserAccount userAccount);
+
+
+    /**
      * 根据主键查询用户信息
      * @param id
      * @return

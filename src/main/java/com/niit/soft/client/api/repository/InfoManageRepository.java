@@ -16,14 +16,16 @@ import java.util.List;
 public interface InfoManageRepository extends JpaRepository<InfoManage, Long> {
 
     /**
-     *  查询置顶咨讯
+     * 查询置顶咨讯
+     *
      * @return
      */
-    @Query(value = "select * from first_smart_campus.info_manage where is_top = 1",nativeQuery = true)
+    @Query(value = "select * from first_smart_campus.info_manage where is_top = 1", nativeQuery = true)
     List<InfoManage> getIsTopInfo();
 
     /**
      * 更具资讯分类id查询资讯
+     *
      * @param id
      * @return InfoManage
      */
@@ -31,5 +33,5 @@ public interface InfoManageRepository extends JpaRepository<InfoManage, Long> {
             "where MT.infoId = M.pkInfoManageId " +
             "and MT.typeId = T.pkInfoTypeId " +
             "and MT.typeId = ?1")
-    List<InfoManage>getInfoByType(Long id);
+    List<InfoManage> getInfoByType(Long id);
 }

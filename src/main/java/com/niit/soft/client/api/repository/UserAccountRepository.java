@@ -47,4 +47,11 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
     @Query(value = "update user_account as u set u.password = ?2 where u.job_number=?1 or u.user_account=?1 or u.phone_number=?1", nativeQuery = true)
     int updatePasswordByUserAccount(String userAccount, String password);
 
+    /**
+     * 根据教工号查询教师真实姓名
+     * @param jobNumber
+     * @return
+     */
+    @Query(value = "select user_name from first_smart_campus.user_account as u where u.job_number=?1",nativeQuery = true)
+    String findUserNameByUserJobNumber(String jobNumber);
 }
