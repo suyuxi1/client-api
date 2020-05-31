@@ -39,6 +39,7 @@ public class SmsApiController {
     @ControllerWebLog(name = "code", isSaved = true)
     public ResponseResult code(@RequestBody SmsPhoneDto smsPhoneDto) {
         log.info("访问 /sendCode 接口");
+        log.info("-----/sendCode-----请求参数：" + smsPhoneDto+"**1**");
         String phoneNumber = smsPhoneDto.getPhoneNumber();
         //调用发送方法
         System.out.println("接受的phoneNumber" + phoneNumber);
@@ -62,9 +63,10 @@ public class SmsApiController {
 
     //校验验证码
     @ControllerWebLog(name = "verifyCode", isSaved = true)
-    @ApiOperation(value = "校验验证码",tags = {"参数为手机号和接收的验证码"})
+    @ApiOperation(value = "校验验证码", tags = {"参数为手机号和接收的验证码"})
     @PostMapping(value = "/verifyCode")
     public ResponseResult verifyCode(@RequestBody VerifyPhoneDto verifyPhone) {
+        log.info("-----/verifyCode-----请求参数：" + verifyPhone+"**1**");
         if (sendSmsService.verify(verifyPhone)) {
             log.info("验证码通过");
             return ResponseResult.success(true);
