@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.controller;
 
+import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.service.InfoManageService;
 import com.niit.soft.client.api.service.InfoTypeService;
@@ -32,9 +33,10 @@ public class InfoManageController {
     private InfoTypeService infoTypeService;
 
     /**
-     * 查找所有资讯
+     * 查找所有资讯1
      * @return List<InfoManage>
      */
+    @ControllerWebLog(name = "getAllInfo", isSaved = true)
     @ApiOperation(value = "查找所有资讯",notes = "")
     @GetMapping(value = "/all")
     public ResponseResult getAllInfo(){
@@ -45,6 +47,7 @@ public class InfoManageController {
      * 查询置顶资讯
      * @return  List<InfoManage>
      */
+    @ControllerWebLog(name = "getIsTopInfo", isSaved = true)
     @ApiOperation(value = "查询置顶资讯",notes = "")
     @GetMapping(value = "/isTap")
     public ResponseResult getIsTopInfo(){
@@ -56,9 +59,11 @@ public class InfoManageController {
      * @param id
      * @return InfoType
      */
+    @ControllerWebLog(name = "getInfoByType", isSaved = true)
     @ApiOperation(value = "查询资讯分类",notes = "")
     @GetMapping(value = "/type")
     public ResponseResult getInfoByType(Long id){
+        log.info("-----/type-----请求参数：" + id+"**1**");
         return infoTypeService.getInfoByType(id);
     }
 }

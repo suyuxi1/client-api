@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author Tao
  * @version 1.0
@@ -33,6 +36,7 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
     Long findIdByLoginDto(String userAccount, String password);
 
 
+
     /**
      * 根据部分用户信息查询用户
      *
@@ -44,7 +48,8 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
 
     @Transactional
     @Modifying
-    @Query(value = "update user_account as u set u.password = ?2 where u.job_number=?1 or u.user_account=?1 or u.phone_number=?1", nativeQuery = true)
+    @Query(value = "update user_account as u set u.password = ?2 where u.job_number=?1 or u.user_account=?1 or u" +
+            ".phone_number=?2", nativeQuery = true)
     int updatePasswordByUserAccount(String userAccount, String password);
 
     /**
