@@ -33,14 +33,16 @@ public interface InfoManageRepository extends JpaRepository<InfoManage, Long> {
     InfoManage getInfoManageByPkInfoManageId(Long id);
 
     /**
-     *  查询置顶咨讯
+     * 查询置顶咨讯
+     *
      * @return
      */
-    @Query(value = "select * from first_smart_campus.info_manage where is_top = 1",nativeQuery = true)
+    @Query(value = "select * from first_smart_campus.info_manage where is_top = 1", nativeQuery = true)
     List<InfoManage> getIsTopInfo();
 
     /**
      * 更具资讯分类id查询资讯
+     *
      * @param id
      * @return InfoManage
      */

@@ -84,6 +84,7 @@ public class InfoManageController {
     @ApiOperation(value = "查询资讯分类",notes = "更具资讯分类id获取分类信息")
     @GetMapping(value = "/type")
     public ResponseResult getInfoByType(Long id){
+        log.info("-----/type-----请求参数：" + id+"**1**");
         return infoTypeService.getInfoByType(id);
     }
 }
