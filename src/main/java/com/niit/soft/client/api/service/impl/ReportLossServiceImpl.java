@@ -2,9 +2,9 @@ package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.PageDto;
-import com.niit.soft.client.api.domain.model.SysOrder;
-import com.niit.soft.client.api.repository.OrderRepository;
-import com.niit.soft.client.api.service.OrderService;
+import com.niit.soft.client.api.domain.model.ReportLoss;
+import com.niit.soft.client.api.repository.ReportLossRepository;
+import com.niit.soft.client.api.service.ReportLossService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -12,26 +12,23 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
- * @ClassName OrderServiceImpl
+ * @ClassName ReportServiceImpl
  * @Description TODO
  * @Author 田震
- * @Date 2020/5/29
+ * @Date 2020/6/1
  **/
 @Service
-public class OrderServiceImpl implements OrderService {
+public class ReportLossServiceImpl implements ReportLossService {
     @Resource
-    private OrderRepository orderRepository;
+    private ReportLossRepository reportLossRepository;
 
-    @Override
-    public ResponseResult findALLByJobNumer(String jobNumber) {
-        List<SysOrder> sysOrderList=orderRepository.findAllByJobNumber(jobNumber);
-
-        return ResponseResult.success(sysOrderList);
-    }
-
+    /**
+     * 分页查询所有信息
+     * @param pageDto
+     * @return
+     */
     @Override
     public ResponseResult findAllByPage(PageDto pageDto) {
         Pageable pageable = PageRequest.of(
@@ -39,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
                 pageDto.getPageSize(),
                 Sort.Direction.ASC,
                 "pkCardId");
-        Page<SysOrder> sysOrders = orderRepository.findAll(pageable);
-        return ResponseResult.success(sysOrders.getContent());
+        Page<ReportLoss> reportLosses = reportLossRepository.findAll(pageable);
+        return ResponseResult.success(reportLosses.getContent());
     }
 }
