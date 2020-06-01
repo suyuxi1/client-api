@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  * @author Tao
  * @version 1.0
  * @ClassName Tower
- * @Description 科目实体类
+ * @Description 楼栋类
  * @date 2020-05-25 21:59
  **/
 @Data

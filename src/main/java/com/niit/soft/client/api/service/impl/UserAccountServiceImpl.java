@@ -42,12 +42,22 @@ public class UserAccountServiceImpl implements UserAccountService {
             updateSysUserAccount.setAvatar(sysUserAccount.getAvatar());
             updateSysUserAccount.setNickname(sysUserAccount.getNickname());
             updateSysUserAccount.setGender(sysUserAccount.getGender());
+            updateSysUserAccount.setAddress(sysUserAccount.getAddress());
             userAccountRepository.saveAndFlush(updateSysUserAccount);
             return ResponseResult.success(updateSysUserAccount);
         }
         return ResponseResult.failure(ResultCode.USER_ACCOUNT_FORBIDDEN);
     }
 
-
+    @Override
+    public ResponseResult updateUserPhoneNumber(UserAccount userAccount) {
+        UserAccount updateSysUserAccount = userAccountRepository.findUserAccountByInfo(userAccount.getPkUserAccountId().toString());
+        if (updateSysUserAccount.getStatus()) {
+            updateSysUserAccount.setPhoneNumber(userAccount.getPhoneNumber());
+            userAccountRepository.saveAndFlush(updateSysUserAccount);
+            return ResponseResult.success(updateSysUserAccount);
+        }
+        return ResponseResult.failure(ResultCode.USER_ACCOUNT_FORBIDDEN);
+    }
 
 }
