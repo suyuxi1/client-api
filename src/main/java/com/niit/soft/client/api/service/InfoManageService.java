@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.service;
 
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.PageDto;
 
 /**
  * @author Yujie_Zhao
@@ -15,6 +16,13 @@ public interface InfoManageService {
      * @return
      */
     ResponseResult getAllInfo();
+
+    /**
+     *分页查询所有咨询
+     * @return PageDto pageDto
+     */
+    ResponseResult findAllInfoByPage(PageDto pageDto);
+
 
     /**
      *  查询置顶资讯

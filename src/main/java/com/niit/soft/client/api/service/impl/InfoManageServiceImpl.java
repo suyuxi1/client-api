@@ -1,8 +1,14 @@
 package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.model.InfoManage;
 import com.niit.soft.client.api.repository.InfoManageRepository;
 import com.niit.soft.client.api.service.InfoManageService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,6 +36,22 @@ public class InfoManageServiceImpl implements InfoManageService {
     }
 
     /**
+     * 分页查询全部资讯
+     * @param pageDto
+     * @return
+     */
+    @Override
+    public ResponseResult findAllInfoByPage(PageDto pageDto) {
+        Pageable pageable = PageRequest.of(
+                pageDto.getCurrentPage(),
+                pageDto.getPageSize(),
+                Sort.Direction.ASC,
+                "pkInfoManageId");
+        Page<InfoManage> infoManagePage = infoManageRepository.getAllManage(pageable);
+        return ResponseResult.success(infoManagePage.getContent());
+    }
+
+    /**
      * 查询置顶资讯
      * @return List<InfoManage>
      */
@@ -37,4 +59,5 @@ public class InfoManageServiceImpl implements InfoManageService {
     public ResponseResult getIsTopInfo() {
         return ResponseResult.success(infoManageRepository.getIsTopInfo());
     }
+
 }

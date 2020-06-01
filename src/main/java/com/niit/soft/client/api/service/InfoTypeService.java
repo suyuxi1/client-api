@@ -10,10 +10,24 @@ import com.niit.soft.client.api.common.ResponseResult;
  * @Version 1.0
  **/
 public interface InfoTypeService {
+
+    /**
+     * 查询所有的资讯分类
+     * @return
+     */
+    ResponseResult getAllType();
+
     /**
      * 更具资讯分类id查询资讯
      * @param id
      * @return
      */
     ResponseResult getInfoByType(Long id);
+
+    /**
+     * 更具资讯分类id查询资讯(测试优化方法)
+     * @param id
+     * @return
+     */
+    ResponseResult getInfoByPkInfoTypeId(Long id);
 }

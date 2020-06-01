@@ -63,4 +63,9 @@ class InfoManageRepositoryTest {
             System.out.println(map);
         });
     }
+
+    @Test
+    void getInfoManageByPkInfoManageId() {
+        System.out.println(infoManageRepository.getInfoManageByPkInfoManageId(2L));
+    }
 }
