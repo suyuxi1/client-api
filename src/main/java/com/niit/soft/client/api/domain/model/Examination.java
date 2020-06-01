@@ -40,13 +40,13 @@ public class Examination {
     /**
      * 科目id
      */
-    @Column(nullable = false, length = 60)
-    private String subjectId;
+    @Column(nullable = false)
+    private Long subjectId;
     /**
      * 班级id
      */
-    @Column(name = "clazz_id",nullable = false, length = 11)
-    private Integer clazzId;
+    @Column(name = "clazz_id",nullable = false)
+    private Long clazzId;
 
     /**
      * 监考老师

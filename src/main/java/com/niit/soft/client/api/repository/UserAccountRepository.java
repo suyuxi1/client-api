@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author Tao
  * @version 1.0
@@ -33,6 +36,7 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
     Long findIdByLoginDto(String userAccount, String password);
 
 
+
     /**
      * 根据部分用户信息查询用户
      *
@@ -48,4 +52,11 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
             ".phone_number=?2", nativeQuery = true)
     int updatePasswordByUserAccount(String userAccount, String password);
 
+    /**
+     * 根据教工号查询教师真实姓名
+     * @param jobNumber
+     * @return
+     */
+    @Query(value = "select user_name from first_smart_campus.user_account as u where u.job_number=?1",nativeQuery = true)
+    String findUserNameByUserJobNumber(String jobNumber);
 }

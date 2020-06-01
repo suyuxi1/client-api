@@ -14,6 +14,7 @@ public class StringUtil {
 
     /**
      * 正则判断手机号码
+     *
      * @param str
      * @return
      */
@@ -26,10 +27,5 @@ public class StringUtil {
         b = m.matches();
         return b;
     }
-
-    public static void main(String[] args) {
-        System.out.println(isMobile(""));
-    }
-
 
 }
