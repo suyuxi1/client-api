@@ -46,7 +46,7 @@ public class InfoManageServiceImpl implements InfoManageService {
                 pageDto.getCurrentPage(),
                 pageDto.getPageSize(),
                 Sort.Direction.ASC,
-                "pkInfoManageId");
+                "pk_info_manage_id");
         Page<InfoManage> infoManagePage = infoManageRepository.getAllManage(pageable);
         return ResponseResult.success(infoManagePage.getContent());
     }
