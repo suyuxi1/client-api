@@ -52,12 +52,18 @@ public class InfoManageServiceImpl implements InfoManageService {
     }
 
     /**
-     * 查询置顶资讯
+     * 分页查询置顶资讯
      * @return List<InfoManage>
      */
     @Override
-    public ResponseResult getIsTopInfo() {
-        return ResponseResult.success(infoManageRepository.getIsTopInfo());
+    public ResponseResult getIsTopInfo(PageDto pageDto) {
+        Pageable pageable = PageRequest.of(
+                pageDto.getCurrentPage(),
+                pageDto.getPageSize(),
+                Sort.Direction.ASC,
+                "pk_info_manage_id");
+        Page<InfoManage> infoManagePage = infoManageRepository.getAllManage(pageable);
+        return ResponseResult.success(infoManagePage.getContent());
     }
 
 }

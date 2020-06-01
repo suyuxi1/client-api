@@ -20,6 +20,7 @@ public interface InfoManageRepository extends JpaRepository<InfoManage, Long> {
 
     /**
      * 查询所有咨询（不置顶的咨询）
+     * @param pageable
      * @return List<InfoManage>
      */
     @Query(value = "select * from first_smart_campus.info_manage where is_top = 0",nativeQuery = true)
@@ -34,11 +35,11 @@ public interface InfoManageRepository extends JpaRepository<InfoManage, Long> {
 
     /**
      * 查询置顶咨讯
-     *
+     * @param pageable
      * @return
      */
     @Query(value = "select * from first_smart_campus.info_manage where is_top = 1", nativeQuery = true)
-    List<InfoManage> getIsTopInfo();
+    Page<InfoManage> getIsTopInfo(Pageable pageable);
 
     /**
      * 更具资讯分类id查询资讯

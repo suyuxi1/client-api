@@ -23,7 +23,11 @@ class InfoManageServiceTest {
 
     @Test
     void getIsTopInfo() {
-        ResponseResult result = infoManageService.getIsTopInfo();
+        PageDto pageDto = PageDto.builder()
+                .currentPage(1)
+                .pageSize(2)
+                .build();
+        ResponseResult result = infoManageService.getIsTopInfo(pageDto);
         System.out.println(result);
 
     }

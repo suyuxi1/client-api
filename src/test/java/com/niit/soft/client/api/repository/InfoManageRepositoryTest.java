@@ -55,7 +55,16 @@ class InfoManageRepositoryTest {
     }
     @Test
     void getIsTopInfo() {
-        List<InfoManage> infoManages = infoManageRepository.getIsTopInfo();
+        PageDto pageDto = PageDto.builder()
+                .currentPage(1)
+                .pageSize(2)
+                .build();
+        Pageable pageable = PageRequest.of(
+                pageDto.getCurrentPage(),
+                pageDto.getPageSize(),
+                Sort.Direction.ASC,
+                "pk_info_manage_id");
+        Page<InfoManage> infoManages = infoManageRepository.getIsTopInfo(pageable);
         infoManages.forEach(System.out::println);
 //        log.info(String.valueOf(infoManages.size()));
     }

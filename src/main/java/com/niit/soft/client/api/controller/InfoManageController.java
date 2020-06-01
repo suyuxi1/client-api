@@ -58,10 +58,10 @@ public class InfoManageController {
      * @return  List<InfoManage>
      */
     @ControllerWebLog(name = "getIsTopInfo", isSaved = true)
-    @ApiOperation(value = "查询置顶资讯",notes = "")
-    @GetMapping(value = "/isTap")
-    public ResponseResult getIsTopInfo(){
-        return infoManageService.getIsTopInfo();
+    @ApiOperation(value = "查询置顶资讯",notes = "请求参数为当前页和页面条数,")
+    @PostMapping(value = "/isTap")
+    public ResponseResult getIsTopInfo(@RequestBody PageDto pageDto){
+        return infoManageService.getIsTopInfo(pageDto);
     }
 
     /**
