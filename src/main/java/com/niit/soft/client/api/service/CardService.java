@@ -41,4 +41,13 @@ public interface CardService {
      * @return
      */
     ResponseResult insertCardBalance(String cardNumber,Double money);
+
+    /**
+     * 电费充值
+     * @param id
+     * @param money
+     * @return
+     */
+
+    ResponseResult insertelectricityBalance(Long id,Double money);
 }
