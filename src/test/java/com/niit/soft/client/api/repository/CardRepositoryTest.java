@@ -1,6 +1,9 @@
 package com.niit.soft.client.api.repository;
 
+import cn.hutool.core.util.RandomUtil;
+import com.niit.soft.client.api.domain.model.Room;
 import com.niit.soft.client.api.domain.model.SysCard;
+import com.niit.soft.client.api.domain.model.SysOrder;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +21,8 @@ import java.util.Random;
 class CardRepositoryTest {
     @Resource
     private  CardRepository cardRepository;
+    @Resource
+    private  OrderRepository orderRepository;
 
     @Test
     void TestFindAll() {
@@ -56,6 +61,17 @@ class CardRepositoryTest {
     @Test
     void updateCardBalanceCardNumber() {
         int a=cardRepository.insertCardBalance("1802343315",190.5);
+        System.out.println(a);
+    }
+
+    @Test
+    void insertelectricityBalance() {
+        Room room=null;
+        int a =cardRepository.insertelectricityBalance((long) 2,50.0);
+        SysOrder sysOrder=
+                SysOrder.builder().description("电费充值").orderMoney(80.0).orderNumber(
+                        "10"+RandomUtil.randomInt(800,10000)).isDeleted(false).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).orderType("充值").payMethod("校园卡消费").status(true).build();
+        orderRepository.save(sysOrder);
         System.out.println(a);
     }
 }

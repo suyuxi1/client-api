@@ -33,7 +33,7 @@ public class UserAccount implements Serializable {
 
     /**
      * 账号
-     * nullable = false为非空约束，unique = true是唯一约束
+     * nullable = false为非空约束，unique = true是唯一约束.
      */
     @Column(nullable = false, unique = true)
     private String userAccount;

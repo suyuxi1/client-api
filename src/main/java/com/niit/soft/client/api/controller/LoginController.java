@@ -82,6 +82,7 @@ public class LoginController {
     @PostMapping("code/login")
     public ResponseResult loginByPhone(@RequestBody VerifyPhoneDto verifyPhone) throws UnsupportedEncodingException {
         log.info("访问code/login接口");
+        log.info("-----code/login-----请求参数：" + verifyPhone+"**1**");
         //如果查到数据，返回用户数据
         if (sendSmsService.verify(verifyPhone)) {
             log.info("登录成功");
