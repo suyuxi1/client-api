@@ -51,7 +51,6 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public ResponseResult insertCardBalance(String cardNumber, Double money) {
-//        Double cardBalance=cardRepository.findCardBalanceByJobNumber(cardNumber);
         int a=cardRepository.insertCardBalance(cardNumber,money);
         return ResponseResult.success(a);
     }
