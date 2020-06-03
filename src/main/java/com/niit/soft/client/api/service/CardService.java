@@ -44,10 +44,10 @@ public interface CardService {
 
     /**
      * 电费充值
-     * @param id
+     * @param name
      * @param money
      * @return
      */
 
-    ResponseResult insertelectricityBalance(Long id,Double money);
+    ResponseResult insertelectricityBalance(String name,Double money);
 }

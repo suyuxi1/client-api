@@ -15,4 +15,10 @@ class RoomRepositoryTest {
         String towerName = roomRepository.findTowerNameById((long)1);
         System.out.println(towerName);
     }
+
+    @Test
+    void findLeaderNumberByName() {
+        String jobNumber=roomRepository.findLeaderNumberByName("雪松苑-A4-113");
+        System.out.println(jobNumber);
+    }
 }

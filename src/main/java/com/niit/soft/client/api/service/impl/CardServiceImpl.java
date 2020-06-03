@@ -69,11 +69,11 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public ResponseResult insertelectricityBalance(Long id, Double money) {
-       String jobNumber= roomRepository.findLeaderNumberById(id);
-        int a=cardRepository.insertelectricityBalance(id,money);
+    public ResponseResult insertelectricityBalance(String name, Double money) {
+       String jobNumber= roomRepository.findLeaderNumberByName(name);
+        int a=cardRepository.insertelectricityBalance(name,money);
         SysOrder sysOrder=
-                SysOrder.builder().description("电费充值").jobNumber(jobNumber).orderMoney(money).orderNumber("10"+RandomUtil.randomInt(80000,1000000)).isDeleted(false).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).orderType("充值").payMethod("持卡人消费").status(true).build();
+                SysOrder.builder().description(name+"电费充值").jobNumber(jobNumber).orderMoney(money).orderNumber("10"+RandomUtil.randomInt(80000,1000000)).isDeleted(false).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).orderType("充值").payMethod("持卡人消费").status(true).build();
         orderRepository.save(sysOrder);
         return ResponseResult.success(a);
     }

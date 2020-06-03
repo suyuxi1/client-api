@@ -46,15 +46,15 @@ public interface CardRepository extends JpaRepository<SysCard, Long> {
 
     /**
      * 电费充值
-     * @param id
+     * @param name
      * @param money
      * @return
      */
     @Transactional
     @Modifying
-    @Query(value = "update room as u set  u.electricity_balance = u.electricity_balance + ?2 where u.id=?1",
+    @Query(value = "update room as u set  u.electricity_balance = u.electricity_balance + ?2 where u.name=?1",
             nativeQuery = true)
-    int insertelectricityBalance(Long id, Double money);
+    int insertelectricityBalance(String name, Double money);
 
 
 
