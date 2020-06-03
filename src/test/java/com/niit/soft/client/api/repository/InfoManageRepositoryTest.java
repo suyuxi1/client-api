@@ -35,15 +35,15 @@ class InfoManageRepositoryTest {
 
         List<InfoManage> infoManages = new ArrayList<>();
         for (int i = 1; i <= 20; i++) {
-            InfoManage test = InfoManage.builder()
-                    .title("测试"+i)
-                    .cover(i+".jpg")
-                    .isTop(false)
-                    .text("测试内容"+i)
-                    .gmtCreate(Timestamp.valueOf(LocalDateTime.now()))
-                    .isDeleted(true)
-                    .build();
-            infoManages.add(test);
+                InfoManage test = InfoManage.builder()
+                        .title("测试"+i)
+                        .cover(i+".jpg")
+                        .isTop(false)
+                        .text("测试内容"+i)
+                        .gmtCreate(Timestamp.valueOf(LocalDateTime.now()))
+                        .isDeleted(true)
+                        .build();
+                infoManages.add(test);
         }
         infoManageRepository.saveAll(infoManages);
     }

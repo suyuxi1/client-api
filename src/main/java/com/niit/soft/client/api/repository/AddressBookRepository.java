@@ -2,7 +2,10 @@ package com.niit.soft.client.api.repository;
 
 import com.niit.soft.client.api.domain.model.AddressBook;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +24,15 @@ public interface AddressBookRepository extends JpaRepository<AddressBook, Long> 
      * @return
      */
     @Query("SELECT u FROM AddressBook u " +
-            "WHERE u.userId=?1 ")
+            "WHERE u.userId=?1 AND u.isDeleted= false ")
     List<AddressBook> getAddressBookByUserId(String userId);
+
+    /**
+     * 根据id修改联系人信息
+     * @param addressBook
+     */
+    @Modifying
+    @Transactional
+    @Query("UPDATE AddressBook SET remark=:#{#addressBook.remark} WHERE pkAddressBookId=:#{#addressBook.pkAddressBookId}")
+    void updateAddressBookById(@Param("addressBook") AddressBook addressBook);
 }

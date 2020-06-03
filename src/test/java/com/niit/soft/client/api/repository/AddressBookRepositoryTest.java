@@ -33,7 +33,7 @@ class AddressBookRepositoryTest {
 
     @Test
     void getAddressBookByPhoneNumber() {
-
+        System.out.println(addressBookRepository.getAddressBookByUserId(String.valueOf(1)));
     }
 
     @Test
@@ -78,5 +78,18 @@ class AddressBookRepositoryTest {
         }
         addressBookRepository.saveAll(list);
         //userAccountRepository.saveAll(userAccounts);
+    }
+
+    @Test
+    void getAddressBookByUserId() {
+    }
+
+    @Test
+    void updateAddressBookById() {
+        AddressBook addressBook = AddressBook.builder()
+                .pkAddressBookId((long)1)
+                .remark("涛涛")
+                .build();
+        addressBookRepository.updateAddressBookById(addressBook);
     }
 }

@@ -17,4 +17,10 @@ class InfoTypeServiceTest {
         ResponseResult result = infoTypeService.getInfoByPkInfoTypeId(1L);
         System.out.println(result);
     }
+
+    @Test
+    void getInfoByType() {
+        ResponseResult result = infoTypeService.getInfoByType("教务处");
+        System.out.println(result);
+    }
 }
