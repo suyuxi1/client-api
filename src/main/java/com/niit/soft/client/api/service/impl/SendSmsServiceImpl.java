@@ -10,6 +10,7 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.niit.soft.client.api.domain.dto.VerifyPhoneDto;
 import com.niit.soft.client.api.service.SendSmsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import java.util.Map;
  * @Date 2020/5/21 10:26
  * @Version 1.0
  **/
+@Slf4j
 @Service
 public class SendSmsServiceImpl implements SendSmsService {
     @Autowired
@@ -57,6 +59,8 @@ public class SendSmsServiceImpl implements SendSmsService {
     @Override
     public boolean verify(VerifyPhoneDto verifyPhone) {
 //        如果传来的验证码存在，通过验证
+        log.info("传来的数据,verifyPhone,{}",verifyPhone+"**1**");
+        log.info("缓存的验证码,verifyCode,{}",redisTemplate.opsForValue().get(verifyPhone.getPhoneNumber())+"**1**");
         return verifyPhone.getVerifyCode().equals(redisTemplate.opsForValue().get(verifyPhone.getPhoneNumber()));
     }
 }

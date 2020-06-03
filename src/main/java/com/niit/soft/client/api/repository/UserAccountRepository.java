@@ -32,7 +32,7 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
      * @param userAccount, password
      * @return
      */
-    @Query(value = "select pk_user_account_id from user_account as u where u.job_number=?1 or u.user_account=?1 or u.phone_number=?1 and u.password=?2", nativeQuery = true)
+    @Query(value = "select pk_user_account_id from user_account as u where u.job_number=?1 and u.password=?2 or u.user_account=?1 and u.password=?2 or u.phone_number=?1 and u.password=?2", nativeQuery = true)
     Long findIdByLoginDto(String userAccount, String password);
 
 
