@@ -34,12 +34,12 @@ public class SaveLog {
         System.out.println("-----开始保存日志------");
         BufferedReader bufferedReader = null;
         FileWriter fw = null;
-        File file = new File("D:\\logs");
+        File file = new File("\\usr\\local\\logs");
         String[] fileList = file.list();
         String tempLine = null;
         assert fileList != null;
         for (int i = 0; i < fileList.length; i++) {
-            File readFile = new File("D:\\logs" + "\\" + fileList[i]);
+            File readFile = new File("\\usr\\local\\logs" + "\\" + fileList[i]);
             bufferedReader = new BufferedReader(new FileReader(readFile));
             if (readFile.getName().startsWith("info")) {
                 System.out.println("-----开始保存info日志------");
