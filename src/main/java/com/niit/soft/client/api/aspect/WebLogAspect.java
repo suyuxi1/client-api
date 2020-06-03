@@ -31,7 +31,7 @@ import java.util.Map;
  */
 
 @Aspect
-@Component
+//@Component
 @Order(100)
 @Slf4j
 public class WebLogAspect {

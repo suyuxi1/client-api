@@ -74,4 +74,8 @@ public class AddressBook {
      */
     @Column(nullable = false,length = 4)
     private Boolean isDeleted;
+
+    /*@OneToOne(targetEntity = UserAccount.class)
+    @JoinColumn(name = "userPhone", referencedColumnName="phoneNumber")
+    private UserAccount userAccount;*/
 }

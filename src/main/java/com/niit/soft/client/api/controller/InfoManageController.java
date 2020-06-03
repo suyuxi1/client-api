@@ -2,21 +2,20 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.service.InfoManageService;
 import com.niit.soft.client.api.service.InfoTypeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 /**
  * @author Yujie_Zhao
  * @ClassName InfoManageController
- * @Description 资讯Controller层
+ * @Description 资讯模块Controller层
  * @Date 2020/5/26  11:52
  * @Version 1.0
  **/
@@ -33,7 +32,7 @@ public class InfoManageController {
     private InfoTypeService infoTypeService;
 
     /**
-     * 查找所有资讯1
+     * 查找所有资讯
      * @return List<InfoManage>
      */
     @ControllerWebLog(name = "getAllInfo", isSaved = true)
@@ -44,26 +43,48 @@ public class InfoManageController {
     }
 
     /**
+     * 分页查找所有资讯
+     * @return List<InfoManage>
+     */
+    @ControllerWebLog(name = "findAllInfoByPage", isSaved = true)
+    @ApiOperation(value = "分页查找所有资讯",notes = "请求参数为当前页和页面条数，不包含置顶咨询，从第0页开始")
+    @PostMapping(value = "/allInfo")
+    public ResponseResult findAllInfoByPage(@RequestBody PageDto pageDto){
+        return infoManageService.findAllInfoByPage(pageDto);
+    }
+
+    /**
      * 查询置顶资讯
      * @return  List<InfoManage>
      */
     @ControllerWebLog(name = "getIsTopInfo", isSaved = true)
-    @ApiOperation(value = "查询置顶资讯",notes = "")
-    @GetMapping(value = "/isTap")
-    public ResponseResult getIsTopInfo(){
-        return infoManageService.getIsTopInfo();
+    @ApiOperation(value = "分页查询置顶资讯",notes = "请求参数为当前页和页面条数，从第0页开始,")
+    @PostMapping(value = "/isTap")
+    public ResponseResult getIsTopInfo(@RequestBody PageDto pageDto){
+        return infoManageService.getIsTopInfo(pageDto);
+    }
+
+    /**
+     * 资讯所有分类查询
+     * @return InfoType
+     */
+    @ControllerWebLog(name = "getInfoAllType", isSaved = true)
+    @ApiOperation(value = "查询所有分类",notes = "")
+    @GetMapping(value = "/type/all")
+    public ResponseResult getInfoAllType(){
+        return infoTypeService.getAllType();
     }
 
     /**
      * 资讯分类查询
-     * @param id
+     * @param name
      * @return InfoType
      */
     @ControllerWebLog(name = "getInfoByType", isSaved = true)
-    @ApiOperation(value = "查询资讯分类",notes = "")
+    @ApiOperation(value = "查询资讯分类",notes = "更具资讯分类名称获取分类信息")
     @GetMapping(value = "/type")
-    public ResponseResult getInfoByType(Long id){
-        log.info("-----/type-----请求参数：" + id+"**1**");
-        return infoTypeService.getInfoByType(id);
+    public ResponseResult getInfoByType(String name){
+        log.info("-----/type-----请求参数：" + name+"**1**");
+        return infoTypeService.getInfoByType(name);
     }
 }

@@ -37,7 +37,7 @@ public class SysBorrow {
     /**
      * 借阅人姓名
      */
-    @Column(nullable = false,unique = true,length = 32)
+    @Column(nullable = false,length = 32)
     private  String borrowUserNumber;
 
     /**
@@ -69,6 +69,12 @@ public class SysBorrow {
      */
     @Column(nullable = false)
     private Timestamp gmtCreate;
+
+    /**
+     * 归还时间
+     */
+    @Column(nullable = false)
+    private Timestamp gmtReturn;
 
     /**
      * 更新时间

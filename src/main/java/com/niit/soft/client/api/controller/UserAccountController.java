@@ -46,6 +46,17 @@ public class UserAccountController {
     }
 
     /**
+     * 修改个人资料
+     * @param userAccount
+     * @return
+     */
+    @ApiOperation(value = "修改手机号码",notes = "请求参数为手机号码")
+    @PutMapping("/update/phone")
+    ResponseResult updatePhoneNumber(@RequestBody UserAccount userAccount){
+        return userAccountService.updateUserPhoneNumber(userAccount);
+    }
+
+    /**
      * 匿名反馈
      */
     @ApiOperation(value = "匿名反馈接口", notes = "请求参数为主题、内容、联系方式（选填）")
@@ -55,5 +66,6 @@ public class UserAccountController {
         log.info("-----/feedback-----请求参数：" + sysFeedback+"**1**");
         return sysFeedbackService.insertSysFeedback(sysFeedback);
     }
+
 
 }

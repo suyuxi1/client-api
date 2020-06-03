@@ -52,4 +52,11 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
             ".phone_number=?2", nativeQuery = true)
     int updatePasswordByUserAccount(String userAccount, String password);
 
+    /**
+     * 根据教工号查询教师真实姓名
+     * @param jobNumber
+     * @return
+     */
+    @Query(value = "select user_name from first_smart_campus.user_account as u where u.job_number=?1",nativeQuery = true)
+    String findUserNameByUserJobNumber(String jobNumber);
 }
