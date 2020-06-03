@@ -22,10 +22,10 @@ public class AliPayController {
   private AliPayService aliPayService;
 
     @ApiOperation("支付接口")
-    @RequestMapping(value = "alipay/toPay/{amount}", method = RequestMethod.GET)
+    @RequestMapping(value = "alipay/toPay/{amount}/{jobNumber}", method = RequestMethod.GET)
     @ControllerWebLog(name = "AliPay", isSaved = true)
-    public String AliPay(@PathVariable("amount") Double amount) throws AlipayApiException {
-        return aliPayService.AliPay(amount);
+    public String AliPay(@PathVariable("amount") Double amount,@PathVariable("jobNumber") String jobNumber) throws AlipayApiException {
+        return aliPayService.AliPay(amount,jobNumber);
     }
     @ApiOperation("支付异步通知接口")
     @GetMapping("alipay/notify_url")

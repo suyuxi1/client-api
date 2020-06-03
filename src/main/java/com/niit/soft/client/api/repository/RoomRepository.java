@@ -18,10 +18,10 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     String findTowerNameById(Long roomId);
 
     /**
-     * 根据房间id来获取宿舍长的学号
-     * @param id
+     * 根据房间name来获取宿舍长的学号
+     * @param name
      * @return
      */
-    @Query(value = "select room_leader_job_number from room as r where r.id=?1",nativeQuery = true)
-    String findLeaderNumberById(Long id);
+    @Query(value = "select room_leader_job_number from room as r where r.name=?1",nativeQuery = true)
+    String findLeaderNumberByName(String name);
 }
