@@ -36,4 +36,9 @@ class InfoTypeRepositoryTest {
         System.out.println(JSON.toJSON(mapList));
 
     }
+
+    @Test
+    void findByName() {
+        System.out.println(infoTypeRepository.findByName("教务处"));
+    }
 }

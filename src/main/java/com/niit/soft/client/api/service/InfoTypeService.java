@@ -19,10 +19,12 @@ public interface InfoTypeService {
 
     /**
      * 更具资讯分类id查询资讯
-     * @param id
+     * @param name
      * @return
      */
-    ResponseResult getInfoByType(Long id);
+    ResponseResult getInfoByType(String name);
+
+
 
     /**
      * 更具资讯分类id查询资讯(测试优化方法)

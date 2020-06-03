@@ -42,17 +42,17 @@ public class InfoTypeServiceImpl implements InfoTypeService {
 
     /**
      * 根据资讯分类id查找对应所有资讯
-     * @param id
+     * @param name
      * @return InfoType
      */
     @Override
-    public ResponseResult getInfoByType(Long id) {
-        InfoType infoType = infoTypeRepository.findByPkInfoTypeId(id);
+    public ResponseResult getInfoByType(String name) {
+        InfoType infoType = infoTypeRepository.findByName(name);
         List<InfoMangeType> infoMangeTypes = infoMangeTypeRepository.findAll();
         //循环所有的资讯分类关联信息，根据分类id找到对应资讯，放入资讯分类中
         List<InfoManage> mapList = new ArrayList<>();
         infoMangeTypes.forEach(infoType1 -> {
-            if (infoType1.getTypeId().equals(id)){
+            if (infoType1.getTypeId().equals(infoType.getPkInfoTypeId())){
                 mapList.add(infoManageRepository.getInfoManageByPkInfoManageId(infoType1.getInfoId()));
                 infoType.setInfoManageList(mapList);
             }
