@@ -14,4 +14,10 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface SysUserRepository extends JpaRepository<SysUser, Long> {
 
+    /**
+     * 根据id查询用户信息
+     * @param userId
+     * @return
+     */
+    SysUser getSysUserByPkUserId(String userId);
 }

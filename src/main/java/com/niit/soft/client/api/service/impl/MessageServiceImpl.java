@@ -33,7 +33,7 @@ public class MessageServiceImpl implements MessageService {
         Pageable pageable = PageRequest.of(
                 pageDto.getCurrentPage(),
                 pageDto.getPageSize(),
-                Sort.Direction.ASC,
+                Sort.Direction.DESC,
                 "pkMessageId");
         Page<Message> messagePage = messageRepository.findAll(pageable);
         return ResponseResult.success(messagePage.getContent());

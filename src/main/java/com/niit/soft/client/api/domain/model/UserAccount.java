@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -22,7 +23,7 @@ import java.sql.Timestamp;
 @Builder
 @Entity
 @Table(name = "user_account",indexes = {@Index(name = "user_nameIndex",columnList = "user_name")})
-public class UserAccount {
+public class UserAccount implements Serializable {
     /**
      * 主键，策略为自增
      */
@@ -76,6 +77,7 @@ public class UserAccount {
     /**
      * 手机号
      */
+    @PrimaryKeyJoinColumn
     @Column(nullable = false, unique = true, length = 11)
     private String phoneNumber;
 
@@ -121,8 +123,6 @@ public class UserAccount {
      */
     @Column(nullable = false, length = 2)
     private String gender;
-
-
 
     /**
      * 地址

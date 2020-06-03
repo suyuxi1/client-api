@@ -46,6 +46,7 @@ public class SysFeedback {
     @Column(name = "contact_way")
     private String contactWay;
 
+
     /**
      * 处理状态（0 未处理， 1 已处理）
      */
