@@ -53,6 +53,17 @@ public class CardController {
                                      @RequestParam("money") double money){
         return service.insertCardBalance(cardNumber,money);
     }
-
+    /**
+     * 电费充值0
+     * @param id
+     * @param money
+     * @return
+     */
+    @ApiOperation(value = "电费充值",notes = "请求参数为房间id，充值金额")
+    @PutMapping("/electricity/deposit")
+    ResponseResult insertEleBalance(@RequestParam("id") Long id,
+                                     @RequestParam("money") double money){
+        return service.insertelectricityBalance(id,money);
+    }
 
 }
