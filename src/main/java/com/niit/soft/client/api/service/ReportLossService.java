@@ -16,4 +16,11 @@ public interface ReportLossService {
      * @return
      */
     ResponseResult findAllByPage(PageDto pageDto);
+    /**
+     * 校园卡挂失
+     * @param pkReportLossId
+     * @param lossStatus
+     * @return
+     */
+    ResponseResult updateLossStatus(Long pkReportLossId,Boolean lossStatus);
 }

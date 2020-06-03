@@ -77,4 +77,10 @@ public class CardServiceImpl implements CardService {
         orderRepository.save(sysOrder);
         return ResponseResult.success(a);
     }
+
+    @Override
+    public ResponseResult updateStatus(Long pkCardId, Boolean Status) {
+        return ResponseResult.success(cardRepository.updateStatus(pkCardId,Status));
+
+    }
 }
