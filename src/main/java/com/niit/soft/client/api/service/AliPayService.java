@@ -10,6 +10,6 @@ import com.alipay.api.AlipayApiException;
  **/
 public interface AliPayService {
 
-  String  AliPay(Double amount) throws  AlipayApiException;
+  String  AliPay(Double amount,String jobNumber) throws  AlipayApiException;
 
 }

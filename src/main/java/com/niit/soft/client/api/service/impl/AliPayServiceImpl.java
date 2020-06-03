@@ -1,17 +1,22 @@
 package com.niit.soft.client.api.service.impl;
 
+import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.niit.soft.client.api.config.AliPayConfig;
+import com.niit.soft.client.api.domain.model.SysOrder;
 import com.niit.soft.client.api.domain.vo.AlipayVo;
+import com.niit.soft.client.api.repository.OrderRepository;
 import com.niit.soft.client.api.service.AliPayService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,8 +31,10 @@ import java.util.Map;
 public class AliPayServiceImpl implements AliPayService {
     @Resource
    private AlipayVo staticVo;
+    @Resource
+    private OrderRepository orderRepository;
     @Override
-    public String AliPay(Double amount) throws AlipayApiException {
+    public String AliPay(Double amount,String jobNumber) throws AlipayApiException {
 
         // 构建支付数据信息
         Map<String, String> data = new HashMap<>();
@@ -64,6 +71,9 @@ public class AliPayServiceImpl implements AliPayService {
         request.setNotifyUrl(AliPayConfig.notify_url);
         request.setReturnUrl(AliPayConfig.return_url);
         request.setBizContent(JSON.toJSONString(data));
+        SysOrder sysOrder=
+                SysOrder.builder().description("校园卡充值").jobNumber(jobNumber).orderMoney(amount).orderNumber("10"+ RandomUtil.randomInt(80000,1000000)).isDeleted(false).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).orderType("支出").payMethod("支付宝扫码").status(true).build();
+        orderRepository.save(sysOrder);
         String response = alipayClient.pageExecute(request).getBody();
         return response;
     }
