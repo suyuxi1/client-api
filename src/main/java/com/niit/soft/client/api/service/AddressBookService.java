@@ -19,4 +19,22 @@ public interface AddressBookService {
      * @return
      */
     List<AddressBook> getAddressBookByUserId(String userId);
+
+    /**
+     * 新增联系人
+     * @param addressBook
+     */
+    void insertAddressBook(AddressBook addressBook);
+
+    /**
+     * 根据id删除通讯录信息
+     * @param id
+     */
+    void deleteAddressBookById(long id);
+
+    /**
+     * 根据id更新通讯录信息
+     * @param addressBook
+     */
+    void updateAddressBookById(AddressBook addressBook);
 }
