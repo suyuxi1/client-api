@@ -16,6 +16,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class JobNumberDto {
-    //学号
-    private String JobNumber;
+
+    /**
+     * 学号
+     */
+    private String jobNumber;
 }
