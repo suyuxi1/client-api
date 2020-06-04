@@ -97,4 +97,10 @@ public class Examination {
     @Column(nullable = false,length = 4)
     private Boolean isDeleted;
 
+    /**
+     * 考试结束时间
+     */
+    @Column(nullable = false)
+    private Timestamp finishTime;
+
 }
