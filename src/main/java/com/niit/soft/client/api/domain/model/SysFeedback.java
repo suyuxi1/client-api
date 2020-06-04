@@ -35,6 +35,12 @@ public class SysFeedback {
     private String title;
 
     /**
+     * 图片内容
+     */
+    @Column(name = "pic_info")
+    private String picInfo;
+
+    /**
      * 内容
      */
     @Column(name = "content")
