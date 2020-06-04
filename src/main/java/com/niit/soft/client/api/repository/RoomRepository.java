@@ -9,19 +9,9 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
-//    /**
-//     * 根据房间名查询name
-//     * @param roomId
-//     * @return
-//     */
-//    @Query(value = "select name from room as r where r.id=?1",nativeQuery = true)
-//    String findTowerNameById(Long roomId);
 
-    /**
-     * 根据房间id来获取宿舍长的学号
-     * @param id
-     * @return
-     */
+
+
     @Query(value = "select room_leader_job_number from room as r where r.id=?1",nativeQuery = true)
     String findLeaderNumberById(Long id);
 
@@ -44,5 +34,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
             "WHERE R.tower_id = T.pk_tower_id " +
             "AND R.id = ?1",nativeQuery = true)
     String findTowerNameById(Long roomId);
+
+    @Query(value = "select room_leader_job_number from room as r where r.name=?1",nativeQuery = true)
+    String findLeaderNumberByName(String name);
 
 }

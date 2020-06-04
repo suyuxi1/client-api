@@ -24,6 +24,13 @@ public interface InfoTypeRepository extends JpaRepository<InfoType,Long> , JpaSp
     InfoType findByPkInfoTypeId(Long id);
 
     /**
+     * 更具分离名称查找分类
+     * @param name
+     * @return
+     */
+    InfoType findByName(String name);
+
+    /**
      * @param id
      * @return
      */

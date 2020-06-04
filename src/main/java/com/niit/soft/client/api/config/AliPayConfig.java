@@ -29,12 +29,12 @@ public class AliPayConfig {
 //    public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm3Cg3HokqGcs10frQtP85WXrFemBxVYogz9Jc1a5NraVNsmP/s56vDNunUUv9kx7ilHmgu2hklF8wKA4H78IqkKeqsaP9J2Cv21ZwtbnLwZMm/TJytAwg0n65jKHRsBeFn4xAy/Q71Ox02oCA+ao63YGc+iyEJVBa5u3nEtYUsEsW58evtRDuFYoXpmsxjiuJQgUNeoVYzyH6xxMM0fVVt82148PIRxxt0Nuha8Gi9N5eGRvAugrsd5DKfnThorUARTMC46/hjc8Q8gK7E/oeyzYKzAr39mUOKZR5Ynajzos5TT+HKawdsnHJn9gplc7ZeS2VUICODmD878dNiDVWQIDAQAB";
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhu7JSXRWduq1wNfq4vZDCXlQIYOss6BYttQC3Dx/8xcyirr22r5dpGHILJv2uiZ+uDkAPXxKwUXIfqb7XVPZMLR8Z+jM9xIrGu9PYZKDTDoT1Usja9277HiKpj/y1lYNuIL0NOUjXWE8YdQ4nbEaNoRQBz7W/TDMad7wKL9Zoq2/jDzTaKgtruvCP/Ub2LgRpDYPEr6xaUrmY88NLC3mlgLl7/UhQxQYEj9YmxdJMdQ9E/coL7J7eLBdK4smTIhku5vg8tbJy42wXu8wV8yfXOjovb51Harul0JA2IqHhUJgnKS88CD/ZqO9C7ys3QPIcwAtOHhqD/YRHlcF08N8cwIDAQAB";
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，其实就是你的一个支付完成后返回的页面URL
-    public static String notify_url = "https://element.eleme.cn/#/zh-CN/component/form";
+        public static String notify_url = "https://element.eleme.cn/#/zh-CN/component/form";
 
-    // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，其实就是你的一个支付完成后返回的页面URL
-    public static String return_url = "https://element.eleme.cn/#/zh-CN/component/form";
+        // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，其实就是你的一个支付完成后返回的页面URL
+        public static String return_url = "https://element.eleme.cn/#/zh-CN/component/form";
 
-    // 签名方式
+    //    // 签名方式
     public static String sign_type = "RSA2";
 
     // 字符编码格式

@@ -11,6 +11,6 @@ class AliPayServiceTest {
 private  AliPayService aliPayService;
     @Test
     void aliPay() throws AlipayApiException {
-        System.out.println(aliPayService.AliPay(0.01));
+        System.out.println(aliPayService.AliPay(0.05, "180234336"));
     }
 }

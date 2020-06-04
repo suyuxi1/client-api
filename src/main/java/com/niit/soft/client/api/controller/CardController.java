@@ -3,6 +3,7 @@ package com.niit.soft.client.api.controller;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.service.CardService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -55,15 +56,25 @@ public class CardController {
     }
     /**
      * 电费充值0
-     * @param id
+     * @param name
      * @param money
      * @return
      */
-    @ApiOperation(value = "电费充值",notes = "请求参数为房间id，充值金额")
+    @ApiOperation(value = "电费充值",notes = "请求参数为房间名字，充值金额")
     @PutMapping("/electricity/deposit")
-    ResponseResult insertEleBalance(@RequestParam("id") Long id,
-                                     @RequestParam("money") double money){
-        return service.insertelectricityBalance(id,money);
+    ResponseResult insertEleBalance(@RequestParam("name") String name,
+                                    @RequestParam("money") double money){
+        return service.insertelectricityBalance(name,money);
     }
-
+    /**
+     * 一卡通激活
+     * @param pkCardId
+     * @param Status
+     * @return
+     */
+    @PostMapping("card/statuschange")
+    ResponseResult updateStatus(@RequestParam("pk_card_id")Long pkCardId,
+                                @RequestParam("status") Boolean Status){
+        return service.updateStatus(pkCardId, Status);
+    }
 }

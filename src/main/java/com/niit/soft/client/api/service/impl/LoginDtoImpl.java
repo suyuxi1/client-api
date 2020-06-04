@@ -21,7 +21,7 @@ public class LoginDtoImpl implements LoginDtoService {
     private UserAccountRepository userAccountRepository;
 
     @Override
-    public Long getIdByInfo(String userAccount, String password) {
+    public Long findIdByLoginDto(String userAccount, String password) {
         log.info(userAccount + "*****" + password);
         log.info("查询id{}", userAccountRepository.findIdByLoginDto(userAccount, password));
         return userAccountRepository.findIdByLoginDto(userAccount, password);
