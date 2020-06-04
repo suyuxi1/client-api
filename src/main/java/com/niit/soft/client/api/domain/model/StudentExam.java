@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 /**
  * @author Yujie_Zhao
  * @ClassName StudentExam
- * @Description 学生考试分配实体类
+ * @Description 学生考务关联表
  * @Date 2020/5/25  22:54
  * @Version 1.0
  **/
@@ -61,4 +61,16 @@ public class StudentExam {
      */
     @Column(nullable = false,length = 4)
     private Boolean isDeleted;
+
+    /**
+     * 考试结束时间
+     */
+    @Column(nullable = false)
+    private Timestamp finishTime;
+
+    /**
+     * 成绩
+     */
+    @Column(precision = 5,scale = 2)
+    private Double performance;
 }
