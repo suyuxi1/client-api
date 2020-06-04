@@ -50,4 +50,12 @@ public interface CardService {
      */
 
     ResponseResult insertelectricityBalance(String name,Double money);
+    /**
+     * 校园卡激活
+     * @param pkCardId
+     * @param Status
+     * @return
+     */
+    ResponseResult updateStatus(Long pkCardId,Boolean Status);
+
 }

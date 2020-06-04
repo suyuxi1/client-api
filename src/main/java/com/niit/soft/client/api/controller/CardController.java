@@ -66,4 +66,15 @@ public class CardController {
                                     @RequestParam("money") double money){
         return service.insertelectricityBalance(name,money);
     }
+    /**
+     * 一卡通激活
+     * @param pkCardId
+     * @param Status
+     * @return
+     */
+    @PostMapping("card/statuschange")
+    ResponseResult updateStatus(@RequestParam("pk_card_id")Long pkCardId,
+                                @RequestParam("status") Boolean Status){
+        return service.updateStatus(pkCardId, Status);
+    }
 }

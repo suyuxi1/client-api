@@ -39,4 +39,9 @@ public class ReportLossServiceImpl implements ReportLossService {
         Page<ReportLoss> reportLosses = reportLossRepository.findAll(pageable);
         return ResponseResult.success(reportLosses.getContent());
     }
+
+    @Override
+    public ResponseResult updateLossStatus(Long pkReportLossId, Boolean lossStatus) {
+        return ResponseResult.success(reportLossRepository.updateLossStatus(pkReportLossId, lossStatus));
+    }
 }
