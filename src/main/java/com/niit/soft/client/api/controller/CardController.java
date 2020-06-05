@@ -18,6 +18,7 @@ import javax.annotation.Resource;
  **/
 @Slf4j
 @RestController
+@Api(tags = "一卡通接口")
 public class CardController {
     @Resource
     private CardService service;

@@ -2,6 +2,7 @@ package com.niit.soft.client.api.controller;
 
 import com.alipay.api.AlipayApiException;
 import com.niit.soft.client.api.annotation.ControllerWebLog;
+import com.niit.soft.client.api.domain.dto.AlipayDto;
 import com.niit.soft.client.api.service.AliPayService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,10 +23,10 @@ public class AliPayController {
   private AliPayService aliPayService;
 
     @ApiOperation("支付接口")
-    @RequestMapping(value = "alipay/toPay/{amount}/{jobNumber}", method = RequestMethod.GET)
+    @RequestMapping(value = "alipay/toPay", method = RequestMethod.POST)
     @ControllerWebLog(name = "AliPay", isSaved = true)
-    public String AliPay(@PathVariable("amount") Double amount,@PathVariable("jobNumber") String jobNumber) throws AlipayApiException {
-        return aliPayService.AliPay(amount,jobNumber);
+    public String AliPay(@RequestBody AlipayDto alipayDto) throws AlipayApiException {
+        return aliPayService.AliPay(alipayDto);
     }
     @ApiOperation("支付异步通知接口")
     @GetMapping("alipay/notify_url")
