@@ -72,8 +72,8 @@ public class AliPayServiceImpl implements AliPayService {
             return response;
         }else if (alipayDto.getRegexId() == 2){
             AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();// 网页支付
-            request.setNotifyUrl(AliPayConfig.notify_url);
-            request.setReturnUrl(AliPayConfig.return_url);
+            request.setNotifyUrl(AliPayConfig.notify_url1);
+            request.setReturnUrl(AliPayConfig.return_url1);
             request.setBizContent(JSON.toJSONString(data));
             SysOrder sysOrder =
                     SysOrder.builder().description(alipayDto.getRechargeType()).jobNumber(alipayDto.getJobNumber()).orderMoney(alipayDto.getAmount()).orderNumber(
@@ -83,8 +83,8 @@ public class AliPayServiceImpl implements AliPayService {
             return response;
         }else {
             AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();  //移动h5
-            request.setNotifyUrl(AliPayConfig.notify_url);
-            request.setReturnUrl(AliPayConfig.return_url);
+            request.setNotifyUrl(AliPayConfig.notify_url2);
+            request.setReturnUrl(AliPayConfig.return_url2);
             request.setBizContent(JSON.toJSONString(data));
             SysOrder sysOrder =
                     SysOrder.builder().description(alipayDto.getRechargeType()).jobNumber(alipayDto.getJobNumber()).orderMoney(alipayDto.getAmount()).orderNumber("10" + RandomUtil.randomInt(80000, 1000000)).isDeleted(false).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).orderType("支出").payMethod("支付宝扫码").status(true).build();
