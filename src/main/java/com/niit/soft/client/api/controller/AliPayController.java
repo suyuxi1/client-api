@@ -22,18 +22,34 @@ public class AliPayController {
     @Resource
   private AliPayService aliPayService;
 
+    /**
+     * 支付接口
+     * @param alipayDto
+     * @return
+     * @throws AlipayApiException
+     */
     @ApiOperation("支付接口")
     @RequestMapping(value = "alipay/toPay", method = RequestMethod.POST)
     @ControllerWebLog(name = "AliPay", isSaved = true)
     public String AliPay(@RequestBody AlipayDto alipayDto) throws AlipayApiException {
         return aliPayService.AliPay(alipayDto);
     }
+
+    /**
+     * 异步通知
+     * @return
+     */
     @ApiOperation("支付异步通知接口")
     @GetMapping("alipay/notify_url")
     @ControllerWebLog(name = "notifyAliPay", isSaved = true)
     public String notifyAliPay() {
         return " a li pay notify ";
     }
+
+    /**
+     * 回调接口
+     * @return
+     */
     @ApiOperation("支付完成以后的回调接口")
     @GetMapping("alipay/return_url")
     @ControllerWebLog(name = "returnAliPay", isSaved = true)
