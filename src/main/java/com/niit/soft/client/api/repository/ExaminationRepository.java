@@ -37,4 +37,7 @@ public interface ExaminationRepository extends JpaRepository<Examination, Long> 
             "\tWHERE se.user_job_number = ?1\n" +
             ")", nativeQuery = true)
     List<Object> selectAll(String jobNumber);
+
+
+
 }

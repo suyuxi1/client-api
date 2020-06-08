@@ -81,6 +81,19 @@ public class AddressBookController {
         addressBookService.deleteAddressBookById(id);
         return ResponseResult.success();
     }
+    /**
+     * 查询所有好友
+     * @param pageDto
+     * @return
+     */
+    @ApiOperation(value = "查询所有",notes = "请求参数为当前页和页面条数")
+    @ControllerWebLog(name = "findAllByPage", isSaved = true)
+    @PostMapping("/all")
+    ResponseResult findAllByPage(@RequestBody PageDto pageDto){
+        log.info("访问AddressBook/all 查询所有");
+        log.info("进入AddressBook/all 查询所有："+pageDto + "**1**");
+        return  ResponseResult.success(addressBookService.findAllByPage(pageDto));
+    }
 
 
 }
