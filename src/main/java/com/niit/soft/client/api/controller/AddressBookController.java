@@ -35,6 +35,22 @@ public class AddressBookController {
         log.info("进入/list/userId接口："+pageDto + "**1**");
         return addressBookService.getAddressBookByUserId(pageDto.getField().toString());
     }
+    @PostMapping(value = "/list/phoneNumber")
+    @ControllerWebLog(name = "getAddressByUserId", isSaved = true)
+    @ApiOperation(value = "根据手机号查询所有的通讯录好友", notes = "")
+    public List<AddressBook> findAddressBookByPhoneNumber(@RequestBody PageDto pageDto) {
+        log.info("访问/list/phoneNumber接口");
+        log.info("进入/list/phoneNumber接口："+pageDto + "**1**");
+        return addressBookService.findAddressBookByPhoneNumber(pageDto.getField().toString());
+    }
+    @PostMapping(value = "/list/remark")
+    @ControllerWebLog(name = "getAddressByUserId", isSaved = true)
+    @ApiOperation(value = "根据remark模糊通讯录好友", notes = "")
+    public List<AddressBook> findAddressBookByRemark(@RequestBody PageDto pageDto) {
+        log.info("访问/list/remark接口");
+        log.info("进入/list/remark接口："+pageDto + "**1**");
+        return addressBookService.findAddressBookByRemarkContaning(pageDto.getField().toString());
+    }
 
     @PostMapping
     @ControllerWebLog(name = "insertAddressBook", isSaved = true)
@@ -65,4 +81,6 @@ public class AddressBookController {
         addressBookService.deleteAddressBookById(id);
         return ResponseResult.success();
     }
+
+
 }
