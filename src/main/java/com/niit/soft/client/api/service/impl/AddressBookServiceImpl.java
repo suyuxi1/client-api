@@ -1,15 +1,12 @@
 package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.domain.model.AddressBook;
-import com.niit.soft.client.api.domain.model.SysUser;
 import com.niit.soft.client.api.domain.model.UserAccount;
 import com.niit.soft.client.api.repository.AddressBookRepository;
-import com.niit.soft.client.api.repository.SysUserRepository;
 import com.niit.soft.client.api.repository.UserAccountRepository;
 import com.niit.soft.client.api.service.AddressBookService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
@@ -36,6 +33,11 @@ public class AddressBookServiceImpl implements AddressBookService {
     }
 
     @Override
+    public List<AddressBook> findAddressBookByPhoneNumber(String phoneNumber) {
+        return addressBookRepository.findAddressBookByPhoneNumber(phoneNumber);
+    }
+
+    @Override
     public void insertAddressBook(AddressBook addressBook) {
         UserAccount user = userAccountRepository.findSysUserAccountByPkUserAccountId(addressBook.getUserId());
         System.out.println(user);
@@ -55,5 +57,10 @@ public class AddressBookServiceImpl implements AddressBookService {
     @Override
     public void updateAddressBookById(AddressBook addressBook) {
         addressBookRepository.updateAddressBookById(addressBook);
+    }
+
+    @Override
+    public List<AddressBook> findAddressBookByRemarkContaning(String keywords) {
+        return addressBookRepository.findAddressBookByRemarkContaining(keywords);
     }
 }

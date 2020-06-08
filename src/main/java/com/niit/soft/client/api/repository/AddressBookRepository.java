@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Description TODO
@@ -19,13 +18,21 @@ import java.util.Map;
 public interface AddressBookRepository extends JpaRepository<AddressBook, Long> {
 
     /**
-     * 根据phoneNumber查询通讯录
+     * 根据userId查询通讯录
      * @param userId
      * @return
      */
     @Query("SELECT u FROM AddressBook u " +
             "WHERE u.userId=?1 AND u.isDeleted= false ")
     List<AddressBook> getAddressBookByUserId(String userId);
+
+    /***
+     * 根据手机号查询通讯录
+     * @param phoneNumber
+     * @return
+     */
+    @Query("SELECT u FROM AddressBook u WHERE u.phoneNumber=?1 AND u.isDeleted= false ")
+    List<AddressBook> findAddressBookByPhoneNumber(String phoneNumber);
 
     /**
      * 根据id修改联系人信息
@@ -35,4 +42,13 @@ public interface AddressBookRepository extends JpaRepository<AddressBook, Long> 
     @Transactional
     @Query("UPDATE AddressBook SET remark=:#{#addressBook.remark} WHERE pkAddressBookId=:#{#addressBook.pkAddressBookId}")
     void updateAddressBookById(@Param("addressBook") AddressBook addressBook);
+
+    /**
+     * 根据备注模糊查询
+     * @return
+     */
+
+    List<AddressBook> findAddressBookByRemarkContaining(String keywords);
+
+
 }
