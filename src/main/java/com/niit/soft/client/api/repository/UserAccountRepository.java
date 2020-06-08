@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.repository;
 
+import com.jhlabs.math.VLNoise;
 import com.niit.soft.client.api.domain.model.UserAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -35,7 +36,14 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
     @Query(value = "select pk_user_account_id from user_account as u where u.job_number=?1 and u.password=?2 or u.user_account=?1 and u.password=?2 or u.phone_number=?1 and u.password=?2", nativeQuery = true)
     Long findIdByLoginDto(String userAccount, String password);
 
-
+//    /**
+//     * 根据手机号码或者学号或者帐号和密码进行登录 查询用户数据
+//     * @param userAccount
+//     * @param password
+//     * @return
+//     */
+//    @Query(value = "select * from user_account as ua where ua.job_number=?1 and ua.password=?2 or ua.user_account=?1 and ua.password=?2 or ua.phone_number=?1 and ua.password=?2",nativeQuery = true)
+//    UserAccount findUserAccountByLoginDto(String userAccount,String password);
 
     /**
      * 根据部分用户信息查询用户

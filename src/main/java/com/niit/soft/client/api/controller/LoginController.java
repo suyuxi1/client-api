@@ -7,6 +7,7 @@ import com.niit.soft.client.api.domain.dto.LoginDto;
 import com.niit.soft.client.api.domain.dto.SmsPhoneDto;
 import com.niit.soft.client.api.domain.dto.VerifyPhoneDto;
 import com.niit.soft.client.api.domain.model.UserAccount;
+import com.niit.soft.client.api.repository.UserAccountRepository;
 import com.niit.soft.client.api.service.LoginDtoService;
 import com.niit.soft.client.api.service.SendSmsService;
 import com.niit.soft.client.api.service.UserAccountService;
@@ -44,6 +45,8 @@ public class LoginController {
     private UserAccountService userAccountService;
     @Resource
     private SendSmsService sendSmsService;
+    @Resource
+    private UserAccountRepository userAccountRepository;
 
 
     /**
@@ -71,7 +74,7 @@ public class LoginController {
             log.info("生成的token{}", map.get("token"));
             return ResponseResult.success(map);
         }
-        return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
+        return ResponseResult.failure(ResultCode.USER_ACCOUNT_PASSWORD_ERROR);
     }
 
     @ControllerWebLog(name = "loginByPhone", isSaved = true)
