@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.soft.client.api.mapper.CommentMapper">
+
+    <resultMap id="CommentVo" type="com.niit.soft.client.api.domain.vo.CommentVo">
+        <association property="comment" javaType="com.niit.soft.client.api.domain.model.Comment">
+            <id property="pkCommentId" column="pk_comment_id" javaType="java.lang.Long"/>
+            <result property="dynamicId" column="dynamic_id"/>
+            <result property="userId" column="user_id"/>
+            <result property="content" column="content"/>
+            <result property="isDeleted" column="is_deleted"/>
+            <result property="gmtCreate" column="gmt_create"/>
+        </association>
+
+        <collection property="replyComments" ofType="com.niit.soft.client.api.domain.model.ReplyComment">
+            <id property="pkReplyCommentId" column="pk_reply_comment_id" javaType="java.lang.Long"/>
+            <result property="commentId" column="comment_id"/>
+            <result property="userId" column="user_id"/>
+            <result property="content" column="content"/>
+            <result property="isDeleted" column="is_deleted"/>
+            <result property="gmtCreate" column="gmt_create"/>
+        </collection>
+
+    </resultMap>
+
+    <select id="findCommentVoById" resultMap="CommentVo">
+        SELECT c.pk_comment_id, c.dynamic_id, c.user_id, c.content, c.is_deleted, c.gmt_create,
+               r.pk_reply_comment_id, r.comment_id, r.user_id, r.content, r.is_deleted, c.gmt_create
+        FROM comment c
+                 LEFT JOIN reply_comment r ON c.pk_comment_id = r.comment_id
+        WHERE r.pk_reply_comment_id = #{id}
+    </select>
+
+
+</mapper>
