@@ -26,14 +26,6 @@ public class InfoManageServiceImpl implements InfoManageService {
     @Resource
     private InfoManageRepository infoManageRepository;
 
-    /**
-     * 查询全部资讯
-     * @return List<InfoManage>
-     */
-    @Override
-    public ResponseResult getAllInfo() {
-        return ResponseResult.success(infoManageRepository.findAll());
-    }
 
     /**
      * 分页查询全部资讯
