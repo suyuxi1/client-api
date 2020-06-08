@@ -11,11 +11,6 @@ import com.niit.soft.client.api.domain.dto.PageDto;
  * @Version 1.0
  **/
 public interface InfoManageService {
-    /**
-     * 查询所有咨讯
-     * @return
-     */
-    ResponseResult getAllInfo();
 
     /**
      *分页查询所有咨询
@@ -32,4 +27,8 @@ public interface InfoManageService {
      * @return
      */
     ResponseResult getIsTopInfo(PageDto pageDto);
+
+
+
+
 }
