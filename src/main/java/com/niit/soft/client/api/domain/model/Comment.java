@@ -1,7 +1,7 @@
 package com.niit.soft.client.api.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -41,27 +41,32 @@ public class Comment {
     /**
      * 评论内容
      */
+    @CreatedDate
     @Column(name = "content", nullable = false)
     private String content = "";
+
     /**
      * 创建时间
      */
-    //@JsonIgnore
-    @Column(nullable = false)
+    @Column(name = "gmt_create")
     private Timestamp gmtCreate;
 
     /**
      * 修改时间
      */
-    @JsonIgnore
-    @UpdateTimestamp
-    @Column(nullable = false)
+    @LastModifiedDate
+    @Column(name = "gmt_modified")
     private Timestamp gmtModified;
 
     /**
-     * 删除标志（0 逻辑删除， 1 未删除）
+     * 删除标志（0 未删除， 1 逻辑删除）
      */
-//    @JsonIgnore
-    @Column(nullable = false, length = 4)
+    @Column(name = "is_deleted")
     private Boolean isDeleted;
+
+    /**
+     * 评论的评论
+     */
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    private List<ReplyComment> replyCommentList = new ArrayList<>();
 }

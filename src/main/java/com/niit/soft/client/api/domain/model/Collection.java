@@ -53,7 +53,6 @@ public class Collection {
     /**
      * 删除标志（0 逻辑删除， 1 未删除）
      */
-//    @JsonIgnore
     @Column(nullable = false, length = 4)
     private Boolean isDeleted;
 

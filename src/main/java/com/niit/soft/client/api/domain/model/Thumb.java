@@ -1,7 +1,13 @@
 package com.niit.soft.client.api.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.UpdateTimestamp;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -13,8 +19,13 @@ import java.sql.Timestamp;
  * @Date 2020/6/8  14:01
  * @Version 1.0
  **/
+
 @Entity
-@Table(name = "Thumb")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Thumb {
     /**
      * 主键，策略为自增
@@ -39,22 +50,21 @@ public class Thumb {
     /**
      * 创建时间
      */
-    //@JsonIgnore
-    @Column(nullable = false)
+    @CreatedDate
+    @Column(name = "gmt_create")
     private Timestamp gmtCreate;
 
     /**
      * 修改时间
      */
     @JsonIgnore
-    @UpdateTimestamp
-    @Column(nullable = false)
+    @LastModifiedDate
+    @Column(name = "gmt_modified")
     private Timestamp gmtModified;
 
     /**
      * 删除标志（0 逻辑删除， 1 未删除）
      */
-//    @JsonIgnore
-    @Column(nullable = false, length = 4)
+    @Column(name = "is_deleted")
     private Boolean isDeleted;
 }
