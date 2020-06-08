@@ -1,6 +1,8 @@
 package com.niit.soft.client.api.repository;
 
 import com.niit.soft.client.api.domain.model.AddressBook;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -47,8 +49,24 @@ public interface AddressBookRepository extends JpaRepository<AddressBook, Long> 
      * 根据备注模糊查询
      * @return
      */
-
     List<AddressBook> findAddressBookByRemarkContaining(String keywords);
 
+    /**
+     * 逻辑删除
+     * @param id
+     */
+    @Modifying
+    @Transactional(timeout = 10,rollbackFor = RuntimeException.class)
+    @Query("update AddressBook v set v.isDeleted = true where v.pkAddressBookId in ?1")
+    void  deleteAddressBookById(Long id);
+
+    /**
+     * 自定义分页查询
+     *
+     * @param pageable
+     * @return
+     */
+    @Query("select u from AddressBook u")
+    Page<AddressBook> getAll(Pageable pageable);
 
 }

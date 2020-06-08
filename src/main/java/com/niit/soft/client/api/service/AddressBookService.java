@@ -1,6 +1,8 @@
 package com.niit.soft.client.api.service;
 
 
+import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.AddressBook;
 
 import java.util.List;
@@ -50,4 +52,11 @@ public interface AddressBookService {
      * @return
      */
     List<AddressBook> findAddressBookByRemarkContaning(String keywords);
+
+    /**
+     * 分页查询通讯里所有好友
+     * @param pageDto
+     * @return
+     */
+    ResponseResult findAllByPage(PageDto pageDto);
 }

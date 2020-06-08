@@ -1,6 +1,5 @@
 package com.niit.soft.client.api.repository;
 
-import com.niit.soft.client.api.domain.model.Schedule;
 import com.niit.soft.client.api.domain.model.SysBorrow;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -32,6 +31,7 @@ public interface SysBorrowRepository extends JpaRepository<SysBorrow, Long> {
      * @param userNumber
      * @return
      */
+
     int countByBorrowUserNumber(String userNumber);
 
 

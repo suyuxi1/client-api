@@ -1,10 +1,16 @@
 package com.niit.soft.client.api.service.impl;
 
+import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.AddressBook;
 import com.niit.soft.client.api.domain.model.UserAccount;
 import com.niit.soft.client.api.repository.AddressBookRepository;
 import com.niit.soft.client.api.repository.UserAccountRepository;
 import com.niit.soft.client.api.service.AddressBookService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,7 +57,7 @@ public class AddressBookServiceImpl implements AddressBookService {
 
     @Override
     public void deleteAddressBookById(long id) {
-        addressBookRepository.deleteById(id);
+        addressBookRepository.deleteAddressBookById(id);
     }
 
     @Override
@@ -62,5 +68,16 @@ public class AddressBookServiceImpl implements AddressBookService {
     @Override
     public List<AddressBook> findAddressBookByRemarkContaning(String keywords) {
         return addressBookRepository.findAddressBookByRemarkContaining(keywords);
+    }
+
+    @Override
+    public ResponseResult findAllByPage(PageDto pageDto) {
+        Pageable pageable = PageRequest.of(
+                pageDto.getCurrentPage(),
+                pageDto.getPageSize(),
+                Sort.Direction.ASC,
+                "pkAddressBookId");
+        Page<AddressBook> addressBooks = addressBookRepository.getAll(pageable);
+        return ResponseResult.success(addressBooks.getContent());
     }
 }

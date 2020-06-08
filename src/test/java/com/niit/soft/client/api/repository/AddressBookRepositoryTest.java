@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class AddressBookRepositoryTest {
     @Resource
@@ -20,5 +18,10 @@ class AddressBookRepositoryTest {
     @Test
     void findAddressBookByRealNameLikeAndRemarkLike() {
         System.out.println(addressBookRepository.findAddressBookByRemarkContaining("孙"));
+    }
+
+    @Test
+    void getAll() {
+//        System.out.println(addressBookRepository.getAll());
     }
 }
