@@ -8,14 +8,21 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.common.ResultCode;
+import com.niit.soft.client.api.domain.dto.SmsPhoneDto;
 import com.niit.soft.client.api.domain.dto.VerifyPhoneDto;
 import com.niit.soft.client.api.service.SendSmsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Description TODO
@@ -59,8 +66,31 @@ public class SendSmsServiceImpl implements SendSmsService {
     @Override
     public boolean verify(VerifyPhoneDto verifyPhone) {
 //        如果传来的验证码存在，通过验证
-        log.info("传来的数据,verifyPhone,{}",verifyPhone+"**1**");
-        log.info("缓存的验证码,verifyCode,{}",redisTemplate.opsForValue().get(verifyPhone.getPhoneNumber())+"**1**");
+        log.info("传来的数据,verifyPhone,{}", verifyPhone + "**1**");
+        log.info("缓存的验证码,verifyCode,{}", redisTemplate.opsForValue().get(verifyPhone.getPhoneNumber()) + "**1**");
         return verifyPhone.getVerifyCode().equals(redisTemplate.opsForValue().get(verifyPhone.getPhoneNumber()));
+    }
+
+    @Override
+    public ResponseResult code(SmsPhoneDto smsPhoneDto) {
+        String phoneNumber = smsPhoneDto.getPhoneNumber();
+        //调用发送方法
+        System.out.println("接受的phoneNumber" + phoneNumber);
+        String code = redisTemplate.opsForValue().get(phoneNumber);
+        if (!StringUtils.isEmpty(code)) {
+            //数据已存在
+            return ResponseResult.failure(ResultCode.DATA_ALREADY_EXISTED, phoneNumber + ":" + code + "已存在，还没有过期");
+        }
+        //生成验证码并存储到redis中
+        code = UUID.randomUUID().toString().substring(0, 4);
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("code", code);
+        boolean sms = send(phoneNumber, "SMS_190277609", param);
+        if (sms) {
+            redisTemplate.opsForValue().set(phoneNumber, code, 5, TimeUnit.MINUTES);
+            return ResponseResult.success(code);
+        } else {
+            return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
+        }
     }
 }
