@@ -33,7 +33,7 @@ public class Room {
     /**
      * 房间名
      */
-    @Column(nullable = false,length = 10)
+    @Column(nullable = false)
     private String name;
 
     /**

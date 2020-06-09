@@ -37,6 +37,16 @@ public class AddressBook {
      */
     @Column(nullable = false,length = 32)
     private String userId;
+    /**
+     * 性别
+     */
+    @Column(nullable = false,length = 32)
+    private String gender;
+    /**
+     * 真实名字
+     */
+    @Column(nullable = false)
+    private  String realName;
 
     /**
      * 手机号

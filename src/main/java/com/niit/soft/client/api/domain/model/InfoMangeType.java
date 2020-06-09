@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * @Description TODO
+ * @Description 资讯分类关联表
  * @Author wf
  * @Date 2020/5/25
  * @Version 1.0

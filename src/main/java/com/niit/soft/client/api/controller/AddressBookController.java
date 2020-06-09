@@ -35,6 +35,22 @@ public class AddressBookController {
         log.info("进入/list/userId接口："+pageDto + "**1**");
         return addressBookService.getAddressBookByUserId(pageDto.getField().toString());
     }
+    @PostMapping(value = "/list/phoneNumber")
+    @ControllerWebLog(name = "getAddressByUserId", isSaved = true)
+    @ApiOperation(value = "根据手机号查询所有的通讯录好友", notes = "")
+    public List<AddressBook> findAddressBookByPhoneNumber(@RequestBody PageDto pageDto) {
+        log.info("访问/list/phoneNumber接口");
+        log.info("进入/list/phoneNumber接口："+pageDto + "**1**");
+        return addressBookService.findAddressBookByPhoneNumber(pageDto.getField().toString());
+    }
+    @PostMapping(value = "/list/remark")
+    @ControllerWebLog(name = "getAddressByUserId", isSaved = true)
+    @ApiOperation(value = "根据remark模糊通讯录好友", notes = "")
+    public List<AddressBook> findAddressBookByRemark(@RequestBody PageDto pageDto) {
+        log.info("访问/list/remark接口");
+        log.info("进入/list/remark接口："+pageDto + "**1**");
+        return addressBookService.findAddressBookByRemarkContaning(pageDto.getField().toString());
+    }
 
     @PostMapping
     @ControllerWebLog(name = "insertAddressBook", isSaved = true)
@@ -65,4 +81,19 @@ public class AddressBookController {
         addressBookService.deleteAddressBookById(id);
         return ResponseResult.success();
     }
+    /**
+     * 查询所有好友
+     * @param pageDto
+     * @return
+     */
+    @ApiOperation(value = "查询所有",notes = "请求参数为当前页和页面条数")
+    @ControllerWebLog(name = "findAllByPage", isSaved = true)
+    @PostMapping("/all")
+    ResponseResult findAllByPage(@RequestBody PageDto pageDto){
+        log.info("访问AddressBook/all 查询所有");
+        log.info("进入AddressBook/all 查询所有："+pageDto + "**1**");
+        return  ResponseResult.success(addressBookService.findAllByPage(pageDto));
+    }
+
+
 }
