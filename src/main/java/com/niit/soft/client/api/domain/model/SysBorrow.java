@@ -70,11 +70,6 @@ public class SysBorrow {
     @Column(nullable = false)
     private Timestamp gmtCreate;
 
-    /**
-     * 归还时间
-     */
-    @Column(nullable = false)
-    private Timestamp gmtReturn;
 
     /**
      * 更新时间
