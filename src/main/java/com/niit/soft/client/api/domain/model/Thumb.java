@@ -1,6 +1,9 @@
 package com.niit.soft.client.api.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -15,6 +18,9 @@ import java.sql.Timestamp;
  **/
 @Entity
 @Table(name = "Thumb")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Thumb {
     /**
      * 主键，策略为自增
@@ -57,4 +63,5 @@ public class Thumb {
 //    @JsonIgnore
     @Column(nullable = false, length = 4)
     private Boolean isDeleted;
+
 }

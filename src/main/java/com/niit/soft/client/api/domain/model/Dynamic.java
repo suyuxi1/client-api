@@ -1,6 +1,12 @@
 package com.niit.soft.client.api.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -15,6 +21,12 @@ import java.sql.Timestamp;
  **/
 @Table(name = "dynamic", indexes = {@Index(name = "titleIndex", columnList = "title")})
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@DynamicInsert
+@DynamicUpdate
 public class Dynamic {
 
     /**
@@ -59,6 +71,7 @@ public class Dynamic {
      */
     //@JsonIgnore
     @Column(nullable = false)
+    @UpdateTimestamp
     private Timestamp gmtCreate;
 
     /**
@@ -68,4 +81,11 @@ public class Dynamic {
     @UpdateTimestamp
     @Column(nullable = false)
     private Timestamp gmtModified;
+
+    /**
+     * 删除标志（0 逻辑删除， 1 未删除）
+     */
+//    @JsonIgnore
+    @Column(nullable = false, length = 4)
+    private Boolean isDeleted;
 }

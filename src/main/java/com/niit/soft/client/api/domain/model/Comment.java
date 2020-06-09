@@ -1,6 +1,9 @@
 package com.niit.soft.client.api.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -15,6 +18,9 @@ import java.sql.Timestamp;
  **/
 @Entity
 @Table(name = "comment")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Comment {
 
     /**
