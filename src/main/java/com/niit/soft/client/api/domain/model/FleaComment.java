@@ -7,7 +7,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-
+/**
+ * @author 倪涛涛
+ * @version 1.0.0
+ * @ClassName a.java
+ * @Description TODO
+ * @createTime 2020年06月09日 11:26:00
+ */
 @Entity
 @Data
 @Builder
