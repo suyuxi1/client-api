@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -27,13 +29,13 @@ import java.sql.Timestamp;
 @Builder
 @DynamicInsert
 @DynamicUpdate
+@EntityListeners(AuditingEntityListener.class)
 public class Dynamic {
 
     /**
      * 主键，策略为自增
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pkDynamicId;
 
     /**
@@ -71,15 +73,15 @@ public class Dynamic {
      */
     //@JsonIgnore
     @Column(nullable = false)
-    @UpdateTimestamp
+    @CreatedDate
     private Timestamp gmtCreate;
 
     /**
      * 修改时间
      */
     @JsonIgnore
-    @UpdateTimestamp
     @Column(nullable = false)
+    @LastModifiedDate
     private Timestamp gmtModified;
 
     /**
@@ -87,5 +89,5 @@ public class Dynamic {
      */
 //    @JsonIgnore
     @Column(nullable = false, length = 4)
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 }

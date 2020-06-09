@@ -2,9 +2,9 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
-import com.niit.soft.client.api.common.ResultCode;
+import com.niit.soft.client.api.domain.dto.DynamicDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
-import com.niit.soft.client.api.domain.model.Dynamic;
+import com.niit.soft.client.api.domain.dto.ThumbDto;
 import com.niit.soft.client.api.service.DynamicService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 @Slf4j
 @RestController
 @RequestMapping("/dynamic")
-@Api(tags = "好友动态资讯接口")
+@Api(tags = "校友圈的接口")
 public class DynamicController {
     @Resource
     private DynamicService dynamicService;
@@ -32,8 +32,16 @@ public class DynamicController {
     @ControllerWebLog(name = "findDynamicVoById", isSaved = true)
     @ApiOperation(value = "好友圈根据id查找动态资讯", notes = "请求参数为动态id")
     ResponseResult findDynamicVoById(@PathVariable int id) {
-        return ResponseResult.success(dynamicService.findDynamicVoById((long) id));
+        return ResponseResult.success(dynamicService.findDynamicVoById(id));
     }
+
+    @PostMapping("/thumbsup")
+    @ControllerWebLog(name = "thumbsUp", isSaved = true)
+    @ApiOperation(value = "点赞", notes = "请求参数为thumbDto 再次点击为取消点赞")
+    ResponseResult thumbsUp(@RequestBody ThumbDto thumbDto) {
+        return dynamicService.thumbsUp(thumbDto);
+    }
+
 
     @PostMapping
     @ControllerWebLog(name = "findDynamic", isSaved = true)
@@ -44,13 +52,9 @@ public class DynamicController {
 
     @PostMapping("/new")
     @ControllerWebLog(name = "findDynamic", isSaved = true)
-    @ApiOperation(value = "查找所有动态资讯", notes = "请求参数为传递分页参数")
-    ResponseResult addOne(@RequestBody Dynamic dynamic) {
-        int i = dynamicService.addOne(dynamic);
-        if (i == 1) {
-            return ResponseResult.success();
-        }
-        return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
+    @ApiOperation(value = "发表动态资讯", notes = "请求参数为具体动态内容")
+    ResponseResult addOne(@RequestBody DynamicDto dynamicDto) {
+        return ResponseResult.success(dynamicService.addOne(dynamicDto));
     }
 
     @PostMapping("/comment/{id}")
