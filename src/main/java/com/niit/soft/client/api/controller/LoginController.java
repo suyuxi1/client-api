@@ -7,8 +7,7 @@ import com.niit.soft.client.api.domain.dto.LoginDto;
 import com.niit.soft.client.api.domain.dto.SmsPhoneDto;
 import com.niit.soft.client.api.domain.dto.VerifyPhoneDto;
 import com.niit.soft.client.api.domain.model.UserAccount;
-import com.niit.soft.client.api.repository.UserAccountRepository;
-import com.niit.soft.client.api.service.LoginDtoService;
+import com.niit.soft.client.api.service.LoginService;
 import com.niit.soft.client.api.service.SendSmsService;
 import com.niit.soft.client.api.service.UserAccountService;
 import com.niit.soft.client.api.util.JwtUtil;
@@ -16,14 +15,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.map.HashedMap;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
@@ -40,13 +37,11 @@ import java.util.Map;
 @Api(value = "LoginController", tags = {"登录接口"})
 public class LoginController {
     @Resource
-    private LoginDtoService loginDtoService;
+    private LoginService loginDtoService;
     @Resource
     private UserAccountService userAccountService;
     @Resource
     private SendSmsService sendSmsService;
-    @Resource
-    private UserAccountRepository userAccountRepository;
 
 
     /**
@@ -75,6 +70,13 @@ public class LoginController {
             return ResponseResult.success(map);
         }
         return ResponseResult.failure(ResultCode.USER_ACCOUNT_PASSWORD_ERROR);
+//        return loginDtoService.findIdByLoginDto(loginDto.getUserAccount(), loginDto.getPassword()) != 0 ? ResponseResult.success(new HashedMap() {
+//            {
+//                put("UserAccount", userAccountService.findUserAccountById(loginDtoService.findIdByLoginDto(loginDto.getUserAccount(), loginDto.getPassword())));
+//                put("token", JwtUtil.sign(loginDto.getUserAccount(), loginDto.getPassword()));
+//            }
+//        }):ResponseResult.failure(ResultCode.USER_ACCOUNT_PASSWORD_ERROR);
+
     }
 
     @ControllerWebLog(name = "loginByPhone", isSaved = true)
@@ -82,7 +84,7 @@ public class LoginController {
     @PostMapping("code/login")
     public ResponseResult loginByPhone(@RequestBody VerifyPhoneDto verifyPhone) throws UnsupportedEncodingException {
         log.info("访问code/login接口");
-        log.info("-----code/login-----请求参数：" + verifyPhone+"**1**");
+        log.info("-----code/login-----请求参数：" + verifyPhone + "**1**");
         //如果查到数据，返回用户数据
         if (sendSmsService.verify(verifyPhone)) {
             log.info("登录成功");

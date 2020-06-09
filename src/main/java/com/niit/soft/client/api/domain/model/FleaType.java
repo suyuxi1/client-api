@@ -52,7 +52,11 @@ public class FleaType {
     private String typeUrl;
 
 
-
+    /**
+     * 删除标志
+     */
+    @Column(nullable = false,length = 4)
+    private Boolean isDeleted;
 
 
 

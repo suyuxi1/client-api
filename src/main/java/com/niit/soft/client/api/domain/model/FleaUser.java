@@ -66,7 +66,11 @@ public class FleaUser {
     private String jobNumber;
 
 
-
+    /**
+     * 删除标志
+     */
+    @Column(nullable = false,length = 4)
+    private Boolean isDeleted;
 
 
 

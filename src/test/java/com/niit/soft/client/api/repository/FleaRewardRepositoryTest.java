@@ -13,6 +13,6 @@ class FleaRewardRepositoryTest {
 
     @Test
     void findAll(){
-        System.out.println(fleaRewardRepository.findAll());
+        System.out.println(fleaRewardRepository.findFleaRewardsByDescriptionLikeOrTitleLike("%牙%", "%牙%"));
     }
 }

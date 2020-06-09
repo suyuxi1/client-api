@@ -59,4 +59,9 @@ public class FleaReward {
      */
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
     private FleaUser fleaUser;
+    /**
+     * 删除标志
+     */
+    @Column(nullable = false,length = 4)
+    private Boolean isDeleted;
 }
