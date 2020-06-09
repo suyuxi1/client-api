@@ -20,6 +20,4 @@ public interface DynamicMapper extends BaseMapper<Dynamic> {
      */
     DynamicVo findDynamicVoById(Long id);
 
-
-
 }

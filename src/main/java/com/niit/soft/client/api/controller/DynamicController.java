@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+
 /**
  * @ClassName DynamicController
  * @Description 好友圈模块动态资讯

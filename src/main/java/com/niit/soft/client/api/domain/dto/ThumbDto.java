@@ -22,3 +22,4 @@ public class ThumbDto {
     private String userId;
     private String dynamicId;
 }
+

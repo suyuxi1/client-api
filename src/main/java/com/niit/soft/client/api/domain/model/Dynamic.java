@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+
 /**
  * @author Yujie_Zhao
  * @ClassName Dynamic
@@ -24,9 +25,9 @@ import java.sql.Timestamp;
 @Table(name = "dynamic", indexes = {@Index(name = "titleIndex", columnList = "title")})
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @DynamicInsert
 @DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)

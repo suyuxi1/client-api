@@ -32,6 +32,7 @@ import java.util.TreeMap;
 public class FleaTypeServiceImpl implements FleaTypeService {
     @Resource
     private FleaTypeRepository fleaTypeRepository;
+
     @Override
     public Map<String, Object> findAllType() {
         Map<String, Object> map = new TreeMap<>();
@@ -52,12 +53,13 @@ public class FleaTypeServiceImpl implements FleaTypeService {
         map.put("types", trees);
         return map;
     }
+
     @Override
     public ResponseResult getGoodsByType(PageDto pageDto, Long typeId) {
-        Pageable pageable = PageRequest.of(pageDto.getCurrentPage(),pageDto.getPageSize(), Sort.Direction.DESC,"goodsCreateTime");
-        if (fleaTypeRepository.getGoodsByTypeId(pageable,typeId).size() == 0){
+        Pageable pageable = PageRequest.of(pageDto.getCurrentPage(), pageDto.getPageSize(), Sort.Direction.DESC, "goodsCreateTime");
+        if (fleaTypeRepository.getGoodsByTypeId(pageable, typeId).size() == 0) {
             return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
         }
-        return ResponseResult.success(fleaTypeRepository.getGoodsByTypeId(pageable,typeId));
+        return ResponseResult.success(fleaTypeRepository.getGoodsByTypeId(pageable, typeId));
     }
 }

@@ -15,9 +15,10 @@ import java.util.List;
  * @Description TODO
  * @createTime 2020年06月09日 13:55:00
  */
-public interface FleaTypeRepository extends JpaRepository<FleaType,Long>  {
+public interface FleaTypeRepository extends JpaRepository<FleaType, Long> {
     /**
      * 根据分类ID查询商品
+     *
      * @param typeId
      * @return
      */
@@ -25,5 +26,5 @@ public interface FleaTypeRepository extends JpaRepository<FleaType,Long>  {
             "from FleaGoods g " +
             "left join g.fleaType t " +
             "left join g.fleaUser u where t.pkFleaTypeId = ?1")
-    List<GoodsVo> getGoodsByTypeId(Pageable pageable,Long typeId);
+    List<GoodsVo> getGoodsByTypeId(Pageable pageable, Long typeId);
 }

@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CommentDto {
-    private Long dynamicId ;
+    private Long dynamicId;
     private Long userId;
     private String content;
 

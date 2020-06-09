@@ -1,14 +1,9 @@
 package com.niit.soft.client.api.service.impl;
 
-import com.niit.soft.client.api.domain.dto.FleaSearchDto;
-import com.niit.soft.client.api.domain.model.FleaGoods;
-import com.niit.soft.client.api.repository.FleaGoodsRepository;
-import com.niit.soft.client.api.service.FleaGoodsService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.*;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.FleaGoodsDto;
+import com.niit.soft.client.api.domain.dto.FleaSearchDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.FleaGoods;
 import com.niit.soft.client.api.domain.model.FleaType;
@@ -18,9 +13,7 @@ import com.niit.soft.client.api.repository.FleaTypeRepository;
 import com.niit.soft.client.api.repository.FleaUserRepository;
 import com.niit.soft.client.api.service.FleaGoodsService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -49,7 +42,7 @@ public class FleaGoodsServiceImpl implements FleaGoodsService {
         //创建分页构建器   按照时间降序排序
         Pageable pageable = PageRequest.of(fleaSearchDto.getCurrentPage(), fleaSearchDto.getPageSize(), Sort.Direction.DESC, "goodsCreateTime");
         //根据内容模糊搜索
-        List<FleaGoods> result = fleaGoodsRepository.findFleaGoodsByGoodsNameLikeOrGoodsDescriptionLike("%"+fleaSearchDto.getContent()+"%", "%"+fleaSearchDto.getContent()+"%");
+        List<FleaGoods> result = fleaGoodsRepository.findFleaGoodsByGoodsNameLikeOrGoodsDescriptionLike("%" + fleaSearchDto.getContent() + "%", "%" + fleaSearchDto.getContent() + "%");
         Page<FleaGoods> fleaGoodsInfo = new PageImpl<FleaGoods>(result, pageable, result.size());
         return fleaGoodsInfo;
     }
@@ -57,8 +50,8 @@ public class FleaGoodsServiceImpl implements FleaGoodsService {
 
     @Override
     public ResponseResult getGoodsByTime(PageDto pageDto) {
-        Pageable pageable = PageRequest.of(pageDto.getCurrentPage(),pageDto.getPageSize(), Sort.Direction.DESC,"goodsCreateTime");
-        if (fleaGoodsRepository.getAllGoodsByTime(pageable).size() == 0){
+        Pageable pageable = PageRequest.of(pageDto.getCurrentPage(), pageDto.getPageSize(), Sort.Direction.DESC, "goodsCreateTime");
+        if (fleaGoodsRepository.getAllGoodsByTime(pageable).size() == 0) {
             return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
         }
         return ResponseResult.success(fleaGoodsRepository.getAllGoodsByTime(pageable));
