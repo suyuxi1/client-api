@@ -1,6 +1,9 @@
 package com.niit.soft.client.api.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -19,6 +22,9 @@ import java.sql.Timestamp;
 @Table(name = "reply_comment")
 @DynamicInsert
 @DynamicUpdate
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ReplyComment {
     /**
      * 主键，策略为自增

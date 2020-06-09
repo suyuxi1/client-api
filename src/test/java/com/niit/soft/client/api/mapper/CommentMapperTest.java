@@ -1,4 +1,4 @@
-package com.niit.soft.client.api.repository;
+package com.niit.soft.client.api.mapper;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,13 +8,12 @@ import javax.annotation.Resource;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class InfoManageRepositoryTest {
-
+class CommentMapperTest {
     @Resource
-    private InfoManageRepository infoManageRepository;
+    private CommentMapper commentMapper;
 
     @Test
-    void getAllManage() {
-
+    void findCommentVoById() {
+        System.out.println(commentMapper.findCommentVoById(1L));
     }
 }
