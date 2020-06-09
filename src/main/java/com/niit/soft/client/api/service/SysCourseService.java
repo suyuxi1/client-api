@@ -13,4 +13,10 @@ public interface SysCourseService {
      * @return
      */
     ResponseResult findWeekCourseTableByScheduleDto(ScheduleDto scheduleDto);
+
+    /**
+     * 获取今日课程数据信息
+     * @return
+     */
+    ResponseResult findTodayCourseTable(Long classId);
 }

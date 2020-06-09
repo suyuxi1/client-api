@@ -40,6 +40,12 @@ public class SysSemester {
     private Integer weekCount;
 
     /**
+     * 开学时间
+     */
+    @Column(name = "open_school_time" ,nullable = false)
+    private Timestamp openSchoolTime;
+
+    /**
      * 创建时间
      */
     @Column(name = "gmt_create" ,nullable = false)
