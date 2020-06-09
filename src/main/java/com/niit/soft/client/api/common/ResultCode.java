@@ -30,6 +30,7 @@ public enum ResultCode {
     USER_NOT_FOUND(20009, "用户不存在"),
     USER_TOKEN_EXPIRES(20010, "token已失效"),
     USER_NO_AUTH(20019, "用户权限不足"),
+    USER_ACCOUNT_PASSWORD_ERROR(20020,"账号或者密码错误"),
 
     /* 业务错误：30001-39999 */
     SMS_ERROR(30001, "短信业务出现问题"),

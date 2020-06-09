@@ -5,8 +5,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class CommentRepositoryTest {
 
@@ -14,6 +12,6 @@ class CommentRepositoryTest {
     private CommentRepository commentRepository;
     @Test
     void findCommentByDynamicId() {
-
+        commentRepository.deleteById(3L);
     }
 }

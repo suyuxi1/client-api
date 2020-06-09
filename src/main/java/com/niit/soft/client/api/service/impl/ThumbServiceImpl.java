@@ -8,8 +8,6 @@ import com.niit.soft.client.api.service.ThumbService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 /**
  * @author Yujie_Zhao
@@ -26,8 +24,6 @@ public class ThumbServiceImpl implements ThumbService {
     @Override
     public ResponseResult insertThumb(ThumbDto thumbDto) {
         Thumb thumb = new Thumb();
-        thumb.setGmtCreate(Timestamp.valueOf(LocalDateTime.now()));
-        thumb.setGmtModified(Timestamp.valueOf(LocalDateTime.now()));
         thumb.setIsDeleted(true);
         thumb.setDynamicId(thumbDto.getDynamicId());
         thumb.setUserId(thumbDto.getUserId());

@@ -1,7 +1,9 @@
 package com.niit.soft.client.api.domain.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Tao
@@ -12,8 +14,15 @@ import lombok.Data;
  **/
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PageDto {
     private Object field;
     private int currentPage;
     private int pageSize;
+
+    public PageDto(int currentPage, int pageSize) {
+        this.currentPage = currentPage;
+        this.pageSize = pageSize;
+    }
 }

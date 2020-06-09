@@ -1,8 +1,10 @@
 package com.niit.soft.client.api;
 
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
@@ -14,6 +16,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 //开启定时
 @EnableScheduling
 @SpringBootApplication
+@MapperScan("com.niit.soft.client.api.mapper")
+@EnableJpaAuditing
 public class ClientApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(ClientApiApplication.class, args);

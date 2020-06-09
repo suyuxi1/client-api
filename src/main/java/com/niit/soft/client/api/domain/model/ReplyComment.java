@@ -1,7 +1,10 @@
 package com.niit.soft.client.api.domain.model;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -17,9 +20,10 @@ import java.sql.Timestamp;
  * @Version 1.0
  **/
 @Entity
-@Table(name = "reply_comment")
-@DynamicInsert
-@DynamicUpdate
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class ReplyComment {
     /**
@@ -58,13 +62,15 @@ public class ReplyComment {
     /**
      * 修改时间
      */
+    @JsonIgnore
     @LastModifiedDate
-    @Column(name = "gmt_modified")
+    @Column(name = "gmt_modified",nullable = false)
     private Timestamp gmtModified;
 
     /**
      * 删除标志（0 逻辑删除， 1 未删除）
      */
-    @Column(name = "is_deleted")
+    //@JsonIgnore
+    @Column(name = "is_deleted",nullable = false, length = 4)
     private Boolean isDeleted;
 }

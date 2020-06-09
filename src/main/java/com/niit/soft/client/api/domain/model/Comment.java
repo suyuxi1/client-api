@@ -1,7 +1,12 @@
 package com.niit.soft.client.api.domain.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -14,6 +19,11 @@ import java.sql.Timestamp;
  * @Version 1.0
  **/
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "comment")
 public class Comment {
 
@@ -41,13 +51,13 @@ public class Comment {
     /**
      * 评论内容
      */
-    @CreatedDate
     @Column(name = "content", nullable = false)
     private String content = "";
 
     /**
      * 创建时间
      */
+    @CreatedDate
     @Column(name = "gmt_create")
     private Timestamp gmtCreate;
 
@@ -55,18 +65,12 @@ public class Comment {
      * 修改时间
      */
     @LastModifiedDate
-    @Column(name = "gmt_modified")
+    @Column(name = "gmt_modified",nullable = false)
     private Timestamp gmtModified;
 
     /**
      * 删除标志（0 未删除， 1 逻辑删除）
      */
-    @Column(name = "is_deleted")
+    @Column(name = "is_deleted",nullable = false, length = 4)
     private Boolean isDeleted;
-
-    /**
-     * 评论的评论
-     */
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    private List<ReplyComment> replyCommentList = new ArrayList<>();
 }

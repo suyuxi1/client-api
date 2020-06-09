@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author Yujie_Zhao
  * @ClassName ThumbRepository
- * @Description TODO
+ * @Description 点赞
  * @Date 2020/6/8  14:07
  * @Version 1.0
  **/

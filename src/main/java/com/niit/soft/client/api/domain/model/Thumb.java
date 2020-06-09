@@ -57,7 +57,6 @@ public class Thumb {
     /**
      * 修改时间
      */
-    @JsonIgnore
     @LastModifiedDate
     @Column(name = "gmt_modified")
     private Timestamp gmtModified;

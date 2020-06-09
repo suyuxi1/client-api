@@ -34,11 +34,12 @@ public class CardController {
     }
 
     /**
-     * 查询余额
+     * 查询校园卡余额
      * @param jobNumber
      * @return
      */
-    @GetMapping("/card/balance")
+    @ApiOperation(value = "查询校园卡余额",notes = "请求参数为学号")
+    @PostMapping("/card/balance")
     ResponseResult findcardBalanceByJobNumber(@RequestParam("job_number") String jobNumber){
         return  service.selectCardBalance(jobNumber);
     }
@@ -56,7 +57,7 @@ public class CardController {
         return service.insertCardBalance(cardNumber,money);
     }
     /**
-     * 电费充值0
+     * 电费充值
      * @param name
      * @param money
      * @return
@@ -73,7 +74,8 @@ public class CardController {
      * @param Status
      * @return
      */
-    @PostMapping("card/statuschange")
+    @PostMapping("card/statusChange")
+    @ApiOperation(value = "一卡通激活",notes = "请求参数为id，状态")
     ResponseResult updateStatus(@RequestParam("pk_card_id")Long pkCardId,
                                 @RequestParam("status") Boolean Status){
         return service.updateStatus(pkCardId, Status);
