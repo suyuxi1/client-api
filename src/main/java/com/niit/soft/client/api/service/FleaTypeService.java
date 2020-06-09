@@ -2,6 +2,9 @@ package com.niit.soft.client.api.service;
 
 
 import java.util.Map;
+import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.PageDto;
+import org.springframework.data.domain.Pageable;
 
 /**
  * @author 倪涛涛
@@ -18,4 +21,9 @@ public interface FleaTypeService {
     Map<String,Object>  findAllType();
 
 
+    /** 根据分类id查询商品
+     * @param typeId
+     * @return
+     */
+    ResponseResult getGoodsByType(PageDto pageDto, Long typeId);
 }

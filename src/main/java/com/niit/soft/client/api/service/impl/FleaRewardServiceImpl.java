@@ -1,9 +1,12 @@
 package com.niit.soft.client.api.service.impl;
 
+import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.FleaSearchDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.FleaGoods;
 import com.niit.soft.client.api.domain.model.FleaReward;
+import com.niit.soft.client.api.domain.vo.RewardVo;
 import com.niit.soft.client.api.repository.FleaRewardRepository;
 import com.niit.soft.client.api.service.FleaGoodsService;
 import com.niit.soft.client.api.service.FleaRewardService;
@@ -26,12 +29,13 @@ import java.util.List;
 public class FleaRewardServiceImpl implements FleaRewardService {
     @Resource
     private FleaRewardRepository fleaRewardRepository;
+
     @Override
     public Page<FleaReward> findFleaRewardByContent(FleaSearchDto fleaSearchDto) {
         //创建分页构建器   按照时间降序排序
         Pageable pageable = PageRequest.of(fleaSearchDto.getCurrentPage(), fleaSearchDto.getPageSize(), Sort.Direction.DESC, "goodsCreateTime");
         //根据内容模糊搜索
-        List<FleaReward> result = fleaRewardRepository.findFleaRewardsByDescriptionLikeOrTitleLike("%"+fleaSearchDto.getContent()+"%", "%"+fleaSearchDto.getContent()+"%");
+        List<FleaReward> result = fleaRewardRepository.findFleaRewardsByDescriptionLikeOrTitleLike("%" + fleaSearchDto.getContent() + "%", "%" + fleaSearchDto.getContent() + "%");
         Page<FleaReward> fleaGoodsInfo = new PageImpl<FleaReward>(result, pageable, result.size());
         return fleaGoodsInfo;
     }
@@ -41,5 +45,15 @@ public class FleaRewardServiceImpl implements FleaRewardService {
         //创建分页构建器   按照时间降序排序
         Pageable pageable = PageRequest.of(pageDto.getCurrentPage(), pageDto.getPageSize(), Sort.Direction.DESC, "createTime");
         return fleaRewardRepository.findAll(pageable);
+    }
+
+    @Override
+    public ResponseResult getRewardTopTwo() {
+        Pageable pageable = PageRequest.of(0, 2, Sort.Direction.DESC, "createTime");
+        List<RewardVo> rewardVoList = fleaRewardRepository.getTopReward(pageable);
+        if (rewardVoList.size() == 0) {
+            return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
+        }
+        return ResponseResult.success(rewardVoList);
     }
 }
