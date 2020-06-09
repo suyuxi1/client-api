@@ -62,7 +62,7 @@ public class AddressBookController {
         return ResponseResult.success();
     }
 
-    @PutMapping(value = "/id")
+    @PostMapping(value = "/id")
     @ControllerWebLog(name = "updateAddressBook", isSaved = true)
     @ApiOperation(value = "修改通讯录好友信息", notes = "")
     public ResponseResult updateAddressBook(@RequestBody AddressBook addressBook) {
@@ -72,7 +72,7 @@ public class AddressBookController {
         return ResponseResult.success();
     }
 
-    @DeleteMapping(value = "/id/{id}")
+    @PostMapping(value = "/id/{id}")
     @ControllerWebLog(name = "deleteAddressBookById", isSaved = true)
     @ApiOperation(value = "根据id删除通讯录好友信息", notes = "")
     public ResponseResult deleteAddressBookById(@PathVariable int id) {
