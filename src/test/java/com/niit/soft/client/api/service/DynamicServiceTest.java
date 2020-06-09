@@ -23,9 +23,4 @@ class DynamicServiceTest {
         System.out.println(dynamicService.findDynamicByPage(new PageDto(1, 1)));
     }
 
-    @Test
-    void deleteThumb() {
-
-    }
-
 }

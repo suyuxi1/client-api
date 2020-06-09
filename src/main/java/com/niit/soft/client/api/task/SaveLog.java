@@ -20,9 +20,9 @@ import java.time.LocalDateTime;
 //注：如果这个类不加@EnableScheduling 注解，就需要在启动主类加上
 @Component
 public class SaveLog {
+    Loginfo log = null;
     @Resource
     private LogInfoRepository logInfoRepository;
-    Loginfo log = null;
 
     /**
      * 这个类先不要动

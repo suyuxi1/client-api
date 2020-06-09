@@ -72,7 +72,7 @@ public class DynamicServiceImpl implements DynamicService {
     public ResponseResult thumbsUp(ThumbDto thumbDto) {
         Map<Object, Object> map = redisUtil.hmget(thumbDto.getDynamicId());
         Boolean flag = false;
-        if (redisUtil.hHasKey(thumbDto.getDynamicId(), thumbDto.getPkThumbId())) {
+        if (redisUtil.hasKey(thumbDto.getDynamicId())) {
             for (Entry<Object, Object> entry : map.entrySet()) {
                 System.out.println("foreachEntry : key :" + entry.getKey() + "---> value :" + entry.getValue());
                 if (entry.getKey().equals(thumbDto.getPkThumbId()) || entry.getValue().equals(thumbDto.getUserId())) {
@@ -109,7 +109,11 @@ public class DynamicServiceImpl implements DynamicService {
                 .pkDynamicId(new SnowFlake(1, 3).nextId())
                 .title(dynamicDto.getTitle())
                 .content(dynamicDto.getContent())
-                .type(dynamicDto.getType()).build());
+                .type(dynamicDto.getType())
+                .comments(0)
+                .thumbs(0)
+                .userId(dynamicDto.getUserId())
+                .isDeleted(false).build());
     }
 
     @Override
@@ -123,6 +127,4 @@ public class DynamicServiceImpl implements DynamicService {
         wrapper.set("is_deleted", 0);
         return dynamicMapper.update(dynamic, wrapper);
     }
-
-
 }

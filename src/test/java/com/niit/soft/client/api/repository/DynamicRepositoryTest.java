@@ -19,4 +19,9 @@ class DynamicRepositoryTest {
                 .title("今天也是美好一天").content("开开心心").comments(0).thumbs(0).type("心情")
                 .build());
     }
+
+    @Test
+    void select() {
+        dynamicRepository.findAll().forEach(System.out::println);
+    }
 }
