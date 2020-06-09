@@ -1,6 +1,8 @@
 package com.niit.soft.client.api.service;
 
 
+import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.AddressBook;
 
 import java.util.List;
@@ -19,6 +21,12 @@ public interface AddressBookService {
      * @return
      */
     List<AddressBook> getAddressBookByUserId(String userId);
+    /**
+     * 根据用户手机号获取通讯录信息
+     * @param phoneNumber
+     * @return
+     */
+    List<AddressBook> findAddressBookByPhoneNumber(String phoneNumber);
 
     /**
      * 新增联系人
@@ -37,4 +45,18 @@ public interface AddressBookService {
      * @param addressBook
      */
     void updateAddressBookById(AddressBook addressBook);
+
+    /**
+     * 根据备注关键字查询
+     * @param keywords
+     * @return
+     */
+    List<AddressBook> findAddressBookByRemarkContaning(String keywords);
+
+    /**
+     * 分页查询通讯里所有好友
+     * @param pageDto
+     * @return
+     */
+    ResponseResult findAllByPage(PageDto pageDto);
 }

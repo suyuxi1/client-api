@@ -7,6 +7,7 @@ import com.niit.soft.client.api.domain.dto.LoginDto;
 import com.niit.soft.client.api.domain.dto.SmsPhoneDto;
 import com.niit.soft.client.api.domain.dto.VerifyPhoneDto;
 import com.niit.soft.client.api.domain.model.UserAccount;
+import com.niit.soft.client.api.repository.UserAccountRepository;
 import com.niit.soft.client.api.service.LoginDtoService;
 import com.niit.soft.client.api.service.SendSmsService;
 import com.niit.soft.client.api.service.UserAccountService;
@@ -42,12 +43,11 @@ public class LoginController {
     private LoginDtoService loginDtoService;
     @Resource
     private UserAccountService userAccountService;
+    @Resource
     private SendSmsService sendSmsService;
+    @Resource
+    private UserAccountRepository userAccountRepository;
 
-    @Autowired
-    public SendSmsService getSendSmsService() {
-        return sendSmsService;
-    }
 
     /**
      * 可以通过账号或学号或手机号 加 密码登录
@@ -63,7 +63,7 @@ public class LoginController {
         log.info("访问login接口");
         log.info("loginDto{}", loginDto);
         //如果查到数据，返回用户数据
-        Long id = loginDtoService.getIdByInfo(loginDto.getUserAccount(), loginDto.getPassword());
+        Long id = loginDtoService.findIdByLoginDto(loginDto.getUserAccount(), loginDto.getPassword());
         if (id != 0) {
             log.info("登录成功");
             log.info(userAccountService.findUserAccountById(id).toString());
@@ -74,7 +74,7 @@ public class LoginController {
             log.info("生成的token{}", map.get("token"));
             return ResponseResult.success(map);
         }
-        return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
+        return ResponseResult.failure(ResultCode.USER_ACCOUNT_PASSWORD_ERROR);
     }
 
     @ControllerWebLog(name = "loginByPhone", isSaved = true)

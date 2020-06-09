@@ -1,39 +1,55 @@
 package com.niit.soft.client.api.repository;
 
 import com.alibaba.fastjson.JSON;
-import com.niit.soft.client.api.domain.model.InfoType;
-import lombok.extern.slf4j.Slf4j;
+import com.niit.soft.client.api.domain.model.InfoManage;
+import com.niit.soft.client.api.util.DataTypeChange;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import javax.annotation.Resource;
+import javax.xml.transform.Source;
+
+
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
-@Slf4j
 class InfoTypeRepositoryTest {
 
     @Resource
     private InfoTypeRepository infoTypeRepository;
+    @Resource
+    private InfoManageRepository infoManageRepository;
+
+//    @Test
+//    void findInfoMangeByTypeId() {
+//        Pageable pageable =  PageRequest.of(0,2);
+////        Page<InfoManage> infoManages = infoManageRepository.findAll(pageable);
+//        Page<Map> infoManages = infoTypeRepository.findInfoMangeByTypeId((long)1,pageable);
+//        System.out.println(infoManages.getContent());
+//    }
 
 
+    /**
+     * 分页查询
+     */
     @Test
-    void getAllTyp() {
-        List<InfoType> infoTypes = infoTypeRepository.findAll();
-        System.out.println(infoTypes);
+    void testFindInfoMangeByTypeId() {
+        List<InfoManage> infoManages = infoTypeRepository.findInfoMangeByTypeId((long) 1, 1, 2);
+        System.out.println(infoManages);
     }
 
-    @Test
-    void getTopById(){
-        System.out.println(infoTypeRepository.getTopById(1L));
-    }
 
     @Test
-    void findInfoTypeByPkInfoTypeId() {
-        List<Map<String,Object>> mapList = infoTypeRepository.findInfoByPkInfoTypeId(1L);
-        System.out.println(mapList.get(0).get("pk_info_manage_id"));
-        System.out.println(JSON.toJSON(mapList));
-
+    void findInfoMangeByPage() {
+        Pageable pageable = PageRequest.of(0,2,Sort.Direction.ASC,"pkInfoManageId");
+        Page<InfoManage> infoManages = infoTypeRepository.findInfoMangeByPage((long)1,pageable);
+        System.out.println(infoManages.getContent());
     }
 }

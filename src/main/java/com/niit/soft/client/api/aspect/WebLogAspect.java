@@ -56,7 +56,7 @@ public class WebLogAspect {
     @Before(value = "webLog() && @annotation(controllerWebLog)")
     public void doBefore(JoinPoint joinPoint, ControllerWebLog controllerWebLog) {
         log.info("-----进入请求-----" + "**1**");
-        //接收请求*
+        //接收请求
         RequestAttributes at = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) at;
         //通过以下连接点和注解获取到相关信息
@@ -130,7 +130,7 @@ public class WebLogAspect {
     //这个webLog()是上面的方法    在方法调用的前后执行自定义的增强行为
     // 符合这个条件并且这个方法还要带@ControllerWebLog注解
     @Around(value = "webLog()")
-    public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable ,NullPointerException{
         log.info("-----请求执行时间-----" + "**1**");
         //得到开始时间
         long startTime = System.currentTimeMillis();

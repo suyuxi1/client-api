@@ -49,4 +49,4 @@ mybatis-plus:
       # 字段策略
       field-strategy: not_empty
       # 开启驼峰式
-      table-underline: true
+

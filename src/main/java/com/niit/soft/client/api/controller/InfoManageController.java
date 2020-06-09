@@ -31,23 +31,13 @@ public class InfoManageController {
     @Resource
     private InfoTypeService infoTypeService;
 
-    /**
-     * 查找所有资讯
-     * @return List<InfoManage>
-     */
-    @ControllerWebLog(name = "getAllInfo", isSaved = true)
-    @ApiOperation(value = "查找所有资讯",notes = "")
-    @GetMapping(value = "/all")
-    public ResponseResult getAllInfo(){
-        return infoManageService.getAllInfo();
-    }
 
     /**
      * 分页查找所有资讯
      * @return List<InfoManage>
      */
     @ControllerWebLog(name = "findAllInfoByPage", isSaved = true)
-    @ApiOperation(value = "分页查找所有资讯",notes = "请求参数为当前页和页面条数，不包含置顶咨询")
+    @ApiOperation(value = "分页查找所有资讯",notes = "请求参数为当前页和页面条数，不包含置顶咨询，从第0页开始")
     @PostMapping(value = "/allInfo")
     public ResponseResult findAllInfoByPage(@RequestBody PageDto pageDto){
         return infoManageService.findAllInfoByPage(pageDto);
@@ -58,33 +48,30 @@ public class InfoManageController {
      * @return  List<InfoManage>
      */
     @ControllerWebLog(name = "getIsTopInfo", isSaved = true)
-    @ApiOperation(value = "查询置顶资讯",notes = "请求参数为当前页和页面条数,")
+    @ApiOperation(value = "分页查询置顶资讯",notes = "请求参数为当前页和页面条数，从第0页开始,")
     @PostMapping(value = "/isTap")
     public ResponseResult getIsTopInfo(@RequestBody PageDto pageDto){
         return infoManageService.getIsTopInfo(pageDto);
     }
 
     /**
-     * 资讯所有分类查询
+     * 查询所有的资讯分类
      * @return InfoType
      */
     @ControllerWebLog(name = "getInfoAllType", isSaved = true)
-    @ApiOperation(value = "查询所有分类",notes = "")
-    @GetMapping(value = "/type/all")
+    @ApiOperation(value = "查询所有的资讯分类",notes = "")
+    @PostMapping(value = "/type/all")
     public ResponseResult getInfoAllType(){
         return infoTypeService.getAllType();
     }
 
-    /**
-     * 资讯分类查询
-     * @param id
-     * @return InfoType
-     */
-    @ControllerWebLog(name = "getInfoByType", isSaved = true)
-    @ApiOperation(value = "查询资讯分类",notes = "更具资讯分类id获取分类信息")
-    @GetMapping(value = "/type")
-    public ResponseResult getInfoByType(Long id){
-        log.info("-----/type-----请求参数：" + id+"**1**");
-        return infoTypeService.getInfoByType(id);
+
+
+    @ControllerWebLog(name = "findInfoByTypeId", isSaved = true)
+    @ApiOperation(value = "通过资讯分类id查询相对应的资讯数据",notes = "请求参数为资讯的分类id,当前页，每页条数")
+    @PostMapping(value = "/type/page")
+    public ResponseResult findInfoByTypeId(@RequestBody PageDto pageDto){
+        log.info("-----/typeId-----请求参数：" + pageDto+"**1**");
+        return infoTypeService.findInfoByTypeId(pageDto);
     }
 }

@@ -15,39 +15,39 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class SysSemesterRepositoryTest {
+
     @Resource
     private SysSemesterRepository sysSemesterRepository;
 
-    /**
-     * 生成一些学期的数据
-     */
     @Test
-    void insertSysSemester() {
-        List<SysSemester> sysSemesters = new ArrayList<>();
-        for (int i = 1 ;i<10;i++){
-            SysSemester sysSemester = SysSemester.builder()
-                    .name((2010+i)+"-"+(2011+i)+"学年第二学期")
-                    .weekCount(16)
-                    .isDeleted(false)
-                    .gmtCreate(Timestamp.valueOf(LocalDateTime.now()))
-                    .gmtModified(Timestamp.valueOf(LocalDateTime.now()))
-                    .build();
-            sysSemesters.add(sysSemester);
-            SysSemester sysSemester1 = SysSemester.builder()
-                    .name((2010+i)+"-"+(2011+i)+"学年第一学期")
-                    .weekCount(15)
-                    .isDeleted(false)
-                    .gmtCreate(Timestamp.valueOf(LocalDateTime.now()))
-                    .gmtModified(Timestamp.valueOf(LocalDateTime.now()))
-                    .build();
-            sysSemesters.add(sysSemester1);
-        }
-        sysSemesterRepository.saveAll(sysSemesters);
+    void findSysSemesterByName() {
+        SysSemester sysSemester = sysSemesterRepository.findSysSemesterByName("2011-2012学年第一学期");
+        System.out.println(sysSemester);
     }
 
     @Test
-    void findAllSysSemester() {
-        List<SysSemester> sysSemesters = sysSemesterRepository.findAllSysSemester();
-        System.out.println(sysSemesters);
+    void insertSysSemester() {
+        List<SysSemester> sysSemesterList = new ArrayList<>();
+        for (int i= 0;i<=15;i++){
+            SysSemester sysSemester1 = SysSemester.builder()
+                    .gmtModified(Timestamp.valueOf(LocalDateTime.now()))
+                    .gmtCreate(Timestamp.valueOf(LocalDateTime.now()))
+                    .isDeleted(false)
+                    .weekCount(15)
+                    .openSchoolTime(Timestamp.valueOf((2012+i)+"-02-24 08:11:18"))
+                    .name((2011+i)+"-"+(2012+i)+"学年第二学期")
+                    .build();
+            sysSemesterList.add(sysSemester1);
+            SysSemester sysSemester2 = SysSemester.builder()
+                    .gmtModified(Timestamp.valueOf(LocalDateTime.now()))
+                    .gmtCreate(Timestamp.valueOf(LocalDateTime.now()))
+                    .isDeleted(false)
+                    .weekCount(16)
+                    .openSchoolTime(Timestamp.valueOf((2011+i)+"-09-01 08:11:18"))
+                    .name((2011+i)+"-"+(2012+i)+"学年第一学期")
+                    .build();
+            sysSemesterList.add(sysSemester2);
+        }
+        sysSemesterRepository.saveAll(sysSemesterList);
     }
 }

@@ -9,11 +9,12 @@ import com.niit.soft.client.api.repository.SysSubjectRepository;
 import com.niit.soft.client.api.service.ExaminationService;
 import com.niit.soft.client.api.util.TimeUtils;
 import org.apache.commons.collections.map.HashedMap;
+import com.niit.soft.client.api.domain.vo.ExaminationVo;
+import com.niit.soft.client.api.repository.ExaminationRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 

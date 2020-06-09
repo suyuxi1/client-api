@@ -15,5 +15,5 @@ public interface LoginDtoService {
      * @param
      * @return 返回用户信息
      */
-    Long getIdByInfo(String userAccount,String password);
+    Long findIdByLoginDto(String userAccount,String password);
 }

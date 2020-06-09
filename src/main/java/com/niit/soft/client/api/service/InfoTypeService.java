@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.service;
 
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.PageDto;
 
 /**
  * @author Yujie_Zhao
@@ -17,17 +18,15 @@ public interface InfoTypeService {
      */
     ResponseResult getAllType();
 
-    /**
-     * 更具资讯分类id查询资讯
-     * @param id
-     * @return
-     */
-    ResponseResult getInfoByType(Long id);
+
+
+
+
 
     /**
-     * 更具资讯分类id查询资讯(测试优化方法)
-     * @param id
+     * 根据分类id查询相对应的数据
+     * @param pageDto
      * @return
      */
-    ResponseResult getInfoByPkInfoTypeId(Long id);
+    ResponseResult findInfoByTypeId(PageDto pageDto);
 }

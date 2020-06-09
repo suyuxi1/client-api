@@ -35,6 +35,12 @@ public class SysFeedback {
     private String title;
 
     /**
+     * 图片内容
+     */
+    @Column(name = "pic_info")
+    private String picInfo;
+
+    /**
      * 内容
      */
     @Column(name = "content")
@@ -45,6 +51,7 @@ public class SysFeedback {
      */
     @Column(name = "contact_way")
     private String contactWay;
+
 
     /**
      * 处理状态（0 未处理， 1 已处理）
