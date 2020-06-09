@@ -4,12 +4,18 @@ import com.niit.soft.client.api.domain.model.Dynamic;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
+ * @author Yujie_Zhao
  * @ClassName DynamicRepository
- * @Description TODO
- * @Author xiaobinggan
- * @Date 2020/6/9 8:41 上午
+ * @Description 动态
+ * @Date 2020/6/9  9:08
  * @Version 1.0
  **/
 public interface DynamicRepository extends JpaRepository<Dynamic, Long> {
-
+    /**
+     * 根据id查找
+     *
+     * @param id
+     * @return Dynamic
+     */
+    Dynamic findDynamicByPkDynamicId(Long id);
 }

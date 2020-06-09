@@ -5,9 +5,12 @@ import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.ScheduleDto;
 import com.niit.soft.client.api.domain.model.Schedule;
 import com.niit.soft.client.api.domain.model.SysCourse;
+import com.niit.soft.client.api.domain.model.SysSemester;
 import com.niit.soft.client.api.domain.vo.CourseVo;
+import com.niit.soft.client.api.domain.vo.TodayCourseVo;
 import com.niit.soft.client.api.repository.*;
 import com.niit.soft.client.api.service.SysCourseService;
+import com.niit.soft.client.api.util.DateTest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +37,7 @@ public class SysCourseServiceImpl implements SysCourseService {
     private ScheduleRepository scheduleRepository;
 
     @Resource
-    private ClazzRepository clazzRepository;
+    private SysSemesterRepository sysSemesterRepository;
 
     @Resource
     private SysSubjectRepository sysSubjectRepository;
@@ -46,6 +49,11 @@ public class SysCourseServiceImpl implements SysCourseService {
     private UserAccountRepository userAccountRepository;
 
 
+    /**
+     * 根据学期id、周次、班级id进行课表数据的查询
+     * @param scheduleDto
+     * @return
+     */
     @Override
     public ResponseResult findWeekCourseTableByScheduleDto(ScheduleDto scheduleDto) {
 
@@ -57,6 +65,28 @@ public class SysCourseServiceImpl implements SysCourseService {
         return ResponseResult.success(createVo(sysCourseList));
     }
 
+    /**
+     * 获取今日课表数据
+     * @param classId
+     * @return
+     */
+    @Override
+    public ResponseResult findTodayCourseTable(Long classId) {
+        SysSemester sysSemester = sysSemesterRepository.findSysSemesterByName(DateTest.getSemester());
+        //通过clazzId、semesterId、weekId查询出符合Schedule的数据
+        Schedule schedule = scheduleRepository.findScheduleByClazzIdAndSemesterIdAndWeek(
+                classId, sysSemester.getPkSemesterId(), DateTest.getWeek(String.valueOf(sysSemester.getOpenSchoolTime())));
+        //通过课表id查询出课表数据
+        List<SysCourse> sysCourseList = sysCourseRepository.getSysCourseByScheduleId(schedule.getPkSchoolTimetableId());
+        return ResponseResult.success(createTodayVo(sysCourseList));
+    }
+
+
+    /**
+     * 获取此周的课程数据
+     * @param sysCourseList
+     * @return
+     */
     private List<CourseVo> createVo(List<SysCourse> sysCourseList) {
         List<CourseVo> list = new ArrayList<>(10);
         //根据科目id、房间id、教工号id 取出需要的数据
@@ -86,5 +116,30 @@ public class SysCourseServiceImpl implements SysCourseService {
         });
         return list;
     }
+
+    private List<TodayCourseVo> createTodayVo(List<SysCourse> sysCourseList) {
+        List<TodayCourseVo> list = new ArrayList<>(10);
+        //根据科目id、房间id、教工号id 取出需要的数据
+        sysCourseList.forEach((item) -> {
+            if (item.getWeekDay()==DateTest.getCurrentWeek()){
+                TodayCourseVo course = new TodayCourseVo();
+                //获取科目名称、科目图片、科目背景色
+                List<Tuple> subjectTuple = sysSubjectRepository.selectSysSubjectById(item.getSubjectId());
+                //设置科目名称
+                course.setSubjectName(subjectTuple.get(0).get(0, String.class));
+                //设置科目背景
+                course.setBackgroundColor(subjectTuple.get(0).get(2, String.class));
+                //设置房间名
+                course.setTowerName(roomRepository.findTowerNameById(Long.valueOf(item.getRoomId())));
+                //获取房间名称
+                course.setRoomName(roomRepository.findNameById(Long.valueOf(item.getRoomId())));
+                //获取课程的上课时间段
+                course.setTime(item.getTime());
+                list.add(course);
+            }
+        });
+        return list;
+    }
+
 
 }

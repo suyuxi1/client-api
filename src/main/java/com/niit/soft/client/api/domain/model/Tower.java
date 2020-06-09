@@ -32,7 +32,7 @@ public class Tower {
     private Long pkTowerId;
 
     /**
-     * 娄冬梅
+     * 楼栋名
      */
     @Column(name = "name",nullable = false,length = 20)
     private String name	;

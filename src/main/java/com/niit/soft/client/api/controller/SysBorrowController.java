@@ -27,19 +27,13 @@ public class SysBorrowController {
     @Resource
     private SysBorrowService sysBorrowService;
 
+
     @ApiOperation(value = "查询所有借阅图片接口",notes = "")
-    @PostMapping(value = "/record")
-    @ControllerWebLog(name = "findAllSysSemester", isSaved = true)
-    public ResponseResult findAllSysSemester(@RequestBody JobNumberDto jobNumberDto){
-        log.info("-----/record-----请求参数：" + jobNumberDto+"**1**");
-        return sysBorrowService.findSysBorrowsByBorrowUserNumber(jobNumberDto.getJobNumber());
+    @PostMapping(value = "/borrow")
+    @ControllerWebLog(name = "findBorrowMessage", isSaved = true)
+    public ResponseResult findBorrowMessage(@RequestBody JobNumberDto jobNumberDto){
+        log.info("-----/borrow-----请求参数：" + jobNumberDto+"**1**");
+        return sysBorrowService.findBorrowMessage(jobNumberDto.getJobNumber());
     }
 
-    @ApiOperation(value = "查询用户借阅书本量",notes = "")
-    @ControllerWebLog(name = "countByBorrowUserNumber", isSaved = true)
-    @PostMapping(value = "/number")
-    public ResponseResult countByBorrowUserNumber(@RequestBody JobNumberDto jobNumberDto){
-        log.info("-----/number-----请求参数：" + jobNumberDto+"**1**");
-        return sysBorrowService.countByBooks(jobNumberDto.getJobNumber());
-    }
 }
