@@ -1,5 +1,8 @@
 package com.niit.soft.client.api.service;
 
+import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.PageDto;
+
 import java.util.List;
 
 /**
@@ -14,4 +17,10 @@ public interface FleaGoodsService {
      * 模糊查询所有商品
      */
     List<FleaGoodsService> findFileGoodsByContent(String content);
+
+    /**
+     * 根据时间分页查询商品
+     * @return
+     */
+    ResponseResult getGoodsByTime(PageDto pageDto);
 }
