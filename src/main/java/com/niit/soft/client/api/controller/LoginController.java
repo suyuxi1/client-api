@@ -40,9 +40,6 @@ public class LoginController {
     private LoginService loginDtoService;
     @Resource
     private UserAccountService userAccountService;
-    @Resource
-    private SendSmsService sendSmsService;
-
 
     /**
      * 可以通过账号或学号或手机号 加 密码登录
@@ -57,26 +54,7 @@ public class LoginController {
     public ResponseResult login(@RequestBody LoginDto loginDto) throws UnsupportedEncodingException {
         log.info("访问login接口");
         log.info("loginDto{}", loginDto);
-        //如果查到数据，返回用户数据
-        Long id = loginDtoService.findIdByLoginDto(loginDto.getUserAccount(), loginDto.getPassword());
-        if (id != 0) {
-            log.info("登录成功");
-            log.info(userAccountService.findUserAccountById(id).toString());
-            //创建返回的数据
-            Map map = new HashedMap();
-            map.put("UserAccount", userAccountService.findUserAccountById(id));
-            map.put("token", JwtUtil.sign(loginDto.getUserAccount(), loginDto.getPassword()));
-            log.info("生成的token{}", map.get("token"));
-            return ResponseResult.success(map);
-        }
-        return ResponseResult.failure(ResultCode.USER_ACCOUNT_PASSWORD_ERROR);
-//        return loginDtoService.findIdByLoginDto(loginDto.getUserAccount(), loginDto.getPassword()) != 0 ? ResponseResult.success(new HashedMap() {
-//            {
-//                put("UserAccount", userAccountService.findUserAccountById(loginDtoService.findIdByLoginDto(loginDto.getUserAccount(), loginDto.getPassword())));
-//                put("token", JwtUtil.sign(loginDto.getUserAccount(), loginDto.getPassword()));
-//            }
-//        }):ResponseResult.failure(ResultCode.USER_ACCOUNT_PASSWORD_ERROR);
-
+        return loginDtoService.login(loginDto);
     }
 
     @ControllerWebLog(name = "loginByPhone", isSaved = true)
@@ -85,18 +63,8 @@ public class LoginController {
     public ResponseResult loginByPhone(@RequestBody VerifyPhoneDto verifyPhone) throws UnsupportedEncodingException {
         log.info("访问code/login接口");
         log.info("-----code/login-----请求参数：" + verifyPhone + "**1**");
-        //如果查到数据，返回用户数据
-        if (sendSmsService.verify(verifyPhone)) {
-            log.info("登录成功");
-            UserAccount userAccount = userAccountService.findUserAccountByInfo(verifyPhone.getPhoneNumber());
-            log.info(userAccount.toString());
-            Map map = new HashedMap();
-            map.put("UserAccount", userAccount);
-            map.put("token", JwtUtil.sign(userAccount.getUserAccount(), userAccount.getPassword()));
-            log.info("生成的token{}", map.get("token"));
-            return ResponseResult.success(map);
-        }
-        return ResponseResult.failure(ResultCode.DATA_IS_WRONG);
+        return loginDtoService.loginByPhone(verifyPhone);
+
     }
 
     @ControllerWebLog(name = "changePassword", isSaved = true)
@@ -118,11 +86,7 @@ public class LoginController {
     @PostMapping("flush")
     public ResponseResult flushUserAccount(@RequestBody SmsPhoneDto smsPhoneDto) {
         log.info("访问 /user/flush 刷新数据");
-        UserAccount userAccount = userAccountService.findUserAccountByInfo(smsPhoneDto.getPhoneNumber());
-        log.info(userAccount.toString());
-        Map map = new HashedMap();
-        map.put("UserAccount", userAccount);
-        return ResponseResult.success(map);
+        return loginDtoService.flushUserAccount(smsPhoneDto);
     }
 
 
