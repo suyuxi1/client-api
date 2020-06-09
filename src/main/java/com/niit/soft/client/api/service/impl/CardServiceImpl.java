@@ -79,6 +79,11 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    public ResponseResult insertBalance(String jobNumber, Double money) {
+        return null;
+    }
+
+    @Override
     public ResponseResult updateStatus(Long pkCardId, Boolean Status) {
         return ResponseResult.success(cardRepository.updateStatus(pkCardId,Status));
 
