@@ -73,4 +73,9 @@ public class FleaGoods {
      */
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
     private FleaType fleaType;
+    /**
+     * 删除标志
+     */
+    @Column(nullable = false,length = 4)
+    private Boolean isDeleted;
 }

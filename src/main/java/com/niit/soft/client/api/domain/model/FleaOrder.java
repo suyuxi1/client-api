@@ -49,6 +49,12 @@ public class FleaOrder {
     @Column(nullable = false)
     private Timestamp createTime;
 
+    /**
+     * 删除标志
+     */
+    @Column(nullable = false,length = 4)
+    private Boolean isDeleted;
+
 
 
 }

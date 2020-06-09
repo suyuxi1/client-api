@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.service;
 
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.FleaGoodsDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 
 import java.util.List;
@@ -23,4 +24,29 @@ public interface FleaGoodsService {
      * @return
      */
     ResponseResult getGoodsByTime(PageDto pageDto);
+
+    /**
+     * 根据商品id查询指定商品信息；
+     *
+     * @param id Long
+     * @return ResponseResult
+     */
+    ResponseResult findGoodById(Long id);
+
+    /**
+     * 修改商品
+     *
+     * @param fleaGoodsDto FleaGoodsDto
+     * @return ResponseResult
+     */
+    ResponseResult updateGood(FleaGoodsDto fleaGoodsDto);
+
+    /**
+     * 下架商品
+     *
+     * @param goodId Long
+     * @param isDeleted Boolean
+     * @return ResponseResult
+     */
+    ResponseResult soldOutGood(Boolean isDeleted, Long goodId);
 }

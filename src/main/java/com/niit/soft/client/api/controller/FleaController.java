@@ -2,6 +2,7 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.FleaGoodsDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.repository.FleaTypeRepository;
 import com.niit.soft.client.api.service.FleaGoodsService;
@@ -55,5 +56,32 @@ public class FleaController {
     public ResponseResult getGoodsByType(@RequestBody PageDto pageDto, @RequestParam("typeId") Long typeId){
         log.info("进入根据类型查询商品接口，传来的参数为：pageDtp,typeId",pageDto,typeId+"**1**");
         return fleaTypeService.getGoodsByType(pageDto,typeId);
+    }
+
+    @ControllerWebLog(name = "findGoodById", isSaved = true)
+    @ApiOperation(value = "根据商品id查询指定商品的详细信息", notes = "请求参数为商品id----goodId   ")
+    @PostMapping(value = "goods/id")
+    public ResponseResult findGoodById(@RequestParam Long goodId) {
+        log.info("访问goods/id接口");
+        log.info("-----goods/id-----请求参数：" + goodId + "**1**");
+        return fleaGoodsService.findGoodById(goodId);
+    }
+
+    @ControllerWebLog(name = "updateGoodMessage", isSaved = true)
+    @ApiOperation(value = "修改商品信息", notes = "请求参数为商品类、发布人id、类型id----fleaGoods、userId、typeId  ")
+    @PutMapping(value = "goods/set")
+    public ResponseResult updateGoodMessage(@RequestBody FleaGoodsDto fleaGoodsDto) {
+        log.info("访问goods/set接口");
+        log.info("-----goods/set-----请求参数：" + fleaGoodsDto + "**1**");
+        return fleaGoodsService.updateGood(fleaGoodsDto);
+    }
+
+    @ControllerWebLog(name = "updateGoodMessage", isSaved = true)
+    @ApiOperation(value = "下架商品", notes = "请求参数为删除标志、商品id----isDeleted、goodId  ")
+    @PutMapping(value = "goods/delete")
+    public ResponseResult soldOutGood(@RequestParam Boolean isDeleted, @RequestParam Long goodId) {
+        log.info("访问goods/delete接口");
+        log.info("-----goods/delete-----请求参数：" + isDeleted + "-----" + goodId + "**1**");
+        return fleaGoodsService.soldOutGood(isDeleted, goodId);
     }
 }
