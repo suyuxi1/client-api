@@ -51,6 +51,14 @@ public interface CardService {
 
     ResponseResult insertelectricityBalance(String name,Double money);
     /**
+     * 网费充值
+     * @param jobNumber
+     * @param money
+     * @return
+     */
+
+    ResponseResult insertBalance(String jobNumber,Double money);
+    /**
      * 校园卡激活
      * @param pkCardId
      * @param Status

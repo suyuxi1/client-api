@@ -20,4 +20,21 @@ public class AlipayDto {
     private   String jobNumber;
     private  String rechargeType;
     private  Integer regexId ;
+
+    /**
+     * @author 倪涛涛
+     * @version 1.0
+     * @ClassName Admin
+     * @Description TODO
+     * @date 2020-06-09 14:19
+     **/
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class FleaSearchDto {
+        private String content;
+        private int currentPage;
+        private int pageSize;
+    }
 }

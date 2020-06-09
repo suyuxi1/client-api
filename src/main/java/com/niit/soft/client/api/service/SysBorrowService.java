@@ -6,17 +6,13 @@ import com.niit.soft.client.api.common.ResponseResult;
  * @author Tao
  */
 public interface SysBorrowService {
-    /**
-     * 查询所有图书信息
-     * @param borrowUserNumber
-     * @return
-     */
-    ResponseResult findSysBorrowsByBorrowUserNumber(String borrowUserNumber);
+
+
 
     /**
-     * 计数
+     * 查询借阅图书的情况
      * @param borrowUserNumber
      * @return
      */
-    ResponseResult countByBooks(String borrowUserNumber);
+    ResponseResult findBorrowMessage(String borrowUserNumber);
 }

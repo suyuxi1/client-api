@@ -57,6 +57,17 @@ public interface CardRepository extends JpaRepository<SysCard, Long> {
             nativeQuery = true)
     int insertelectricityBalance(String name, Double money);
     /**
+     * 网费充值
+     * @param jobNumber
+     * @param money
+     * @return
+     */
+    @Transactional
+    @Modifying
+    @Query(value = "update room as u set  u.electricity_balance = u.electricity_balance + ?2 where u.jobNumber=?1",
+            nativeQuery = true)
+    int insertBalance(String jobNumber, Double money);
+    /**
      * 状态激活
      * @param pkCardId
      * @param Status
