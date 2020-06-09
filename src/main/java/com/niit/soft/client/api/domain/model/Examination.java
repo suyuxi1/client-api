@@ -21,7 +21,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "examination",indexes = {@Index(name = "clazz_idIndex",columnList = "clazz_id")})
+@Table(name = "examination",indexes = {@Index(name = "job_numberId",columnList = "job_number")})
 public class Examination {
     /**
      * 主键，策略为自增
@@ -45,8 +45,8 @@ public class Examination {
     /**
      * 班级id
      */
-    @Column(name = "clazz_id",nullable = false)
-    private Long clazzId;
+    @Column(name = "job_number",nullable = false)
+    private String jobNumber;
 
     /**
      * 监考老师
@@ -96,5 +96,11 @@ public class Examination {
      */
     @Column(nullable = false,length = 4)
     private Boolean isDeleted;
+
+    /**
+     * 考试结束时间
+     */
+    @Column(nullable = false)
+    private Timestamp finishTime;
 
 }
