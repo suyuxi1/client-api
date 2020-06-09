@@ -69,6 +69,18 @@ public class CardController {
         return service.insertelectricityBalance(name,money);
     }
     /**
+     * 网费充值
+     * @param jobNumber
+     * @param money
+     * @return
+     */
+    @ApiOperation(value = "网费充值",notes = "请求参数为学号，充值金额")
+    @PutMapping("/net/deposit")
+    ResponseResult insertBalance(@RequestParam("job_number") String jobNumber,
+                                    @RequestParam("money") double money){
+        return service.insertBalance(jobNumber,money);
+    }
+    /**
      * 一卡通激活
      * @param pkCardId
      * @param Status

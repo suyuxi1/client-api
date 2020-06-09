@@ -16,6 +16,11 @@ class ExaminationRepositoryTest {
 
     @Test
     void selectAll() {
-        examinationRepository.selectAll("1914866205").forEach(System.out::println);
+//        examinationRepository.selectAll("1914866205").forEach(System.out::println);
+        System.out.println(examinationRepository.selectAll("1914866205"));
+    }
+
+    @Test
+    void testSelectAll() {
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 /**
- * @author xunmi
+ * @author 田震
  * @ClassName ExaminationRepository
  * @Description 考务模块 Repository 相关操作
  * @Date 2020/6/4
@@ -37,6 +37,8 @@ public interface ExaminationRepository extends JpaRepository<Examination, Long> 
             "\tWHERE se.user_job_number = ?1\n" +
             ")", nativeQuery = true)
     List<Object> selectAll(String jobNumber);
+
+
 
 
 
