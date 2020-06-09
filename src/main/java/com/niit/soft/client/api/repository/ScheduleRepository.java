@@ -16,4 +16,6 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
      */
     Schedule findScheduleByClazzIdAndSemesterIdAndWeek(Long clazzId,Long semesterId,Integer week);
 
+
+
 }

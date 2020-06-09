@@ -7,10 +7,7 @@ import com.niit.soft.client.api.service.SysCourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -35,5 +32,13 @@ public class SysCourseController {
     public ResponseResult findWeekCourseTableByScheduleDto(@RequestBody ScheduleDto scheduleDto){
         log.info("-----/schedule-----请求参数：" + scheduleDto+"**1**");
         return sysCourseService.findWeekCourseTableByScheduleDto(scheduleDto);
+    }
+
+    @ApiOperation(value = "根据班级id获取今日课程数据",notes = "请求参数为班级id")
+    @PostMapping(value = "/today")
+    @ControllerWebLog(name = "findTodayCourseTable", isSaved = true)
+    public ResponseResult findTodayCourseTable(@RequestParam("class_id")Long classId){
+        log.info("-----/today-----请求参数：" + classId+"**1**");
+        return sysCourseService.findTodayCourseTable(classId);
     }
 }
