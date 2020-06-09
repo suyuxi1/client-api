@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 class ReplyCommentRepositoryTest {
@@ -14,7 +14,16 @@ class ReplyCommentRepositoryTest {
 
     @Test
     void deleteByPkReplyCommentId() {
-        replyCommentRepository.deleteByCommentId(2L);
-
+//        replyCommentRepository.deleteByCommentId(2L);
+        System.out.println(replyCommentRepository.selectAllCommentId(1L));
     }
+    @Test
+    void update(){
+        List<Long> ids = new ArrayList<>();
+        ids.add((long)4);
+        ids.add((long)8);
+        int a = replyCommentRepository.updateIsDelete(ids);
+        System.out.println(a);
+    }
+
 }

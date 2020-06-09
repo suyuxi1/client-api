@@ -3,10 +3,10 @@ package com.niit.soft.client.api.controller;
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
+import com.niit.soft.client.api.domain.dto.CommentDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
-import com.niit.soft.client.api.domain.model.Comment;
+import com.niit.soft.client.api.domain.dto.ReplyCommentDto;
 import com.niit.soft.client.api.domain.model.Dynamic;
-import com.niit.soft.client.api.domain.model.ReplyComment;
 import com.niit.soft.client.api.service.CommentService;
 import com.niit.soft.client.api.service.DynamicService;
 import com.niit.soft.client.api.service.ReplyCommentService;
@@ -76,13 +76,13 @@ public class DynamicController {
 
     /**
      * 添加校友圈动态评论
-     * @param comment
+     * @param commentDto
      * @return
      */
     @ApiOperation(value = "添加校友评论",notes = "")
     @PostMapping(value = "/comment/insert")
-    public ResponseResult insertComment(@RequestBody Comment comment){
-        return commentService.insertComment(comment);
+    public ResponseResult insertComment(@RequestBody CommentDto commentDto){
+        return commentService.insertComment(commentDto);
     }
 
     /**
@@ -91,20 +91,20 @@ public class DynamicController {
      * @return
      */
     @ApiOperation(value = "删除校友评论",notes = "")
-    @DeleteMapping(value = "/comment/deletion/{id}")
+    @PostMapping(value = "/comment/deletion/{id}")
     public ResponseResult deleteComment(@PathVariable Long id){
         return commentService.deleteComment(id);
     }
 
     /**
      * 添加校友圈动态评论
-     * @param replyComment
+     * @param replyCommentDto
      * @return
      */
     @ApiOperation(value = "添加校友评论的评论",notes = "")
     @PostMapping(value = "/replyComment/insert")
-    public ResponseResult insertReplyComment(@RequestBody ReplyComment replyComment){
-        return replyCommentService.insertReplyComment(replyComment);
+    public ResponseResult insertReplyComment(@RequestBody ReplyCommentDto replyCommentDto){
+        return replyCommentService.insertReplyComment(replyCommentDto);
     }
 
     /**
@@ -113,7 +113,7 @@ public class DynamicController {
      * @return
      */
     @ApiOperation(value = "删除校友评论的评论",notes = "")
-    @DeleteMapping(value = "/replyComment/deletion/{id}")
+    @PostMapping(value = "/replyComment/deletion/{id}")
     public ResponseResult deleteReplyComment(@PathVariable Long id){
         return replyCommentService.deleteReplyComment(id);
     }

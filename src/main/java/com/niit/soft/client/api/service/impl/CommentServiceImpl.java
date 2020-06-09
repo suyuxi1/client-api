@@ -1,8 +1,10 @@
 package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.CommentDto;
 import com.niit.soft.client.api.domain.model.Comment;
 import com.niit.soft.client.api.domain.model.Dynamic;
+import com.niit.soft.client.api.domain.model.ReplyComment;
 import com.niit.soft.client.api.repository.CommentRepository;
 import com.niit.soft.client.api.repository.DynamicRepository;
 import com.niit.soft.client.api.repository.ReplyCommentRepository;
@@ -32,9 +34,14 @@ public class CommentServiceImpl implements CommentService {
     private ReplyCommentRepository replyCommentRepository;
 
     @Override
-    public ResponseResult insertComment(Comment comment) {
+    public ResponseResult insertComment(CommentDto commentDto) {
+        Comment comment = new Comment();
+        comment.setIsDeleted(false);
+        comment.setContent(commentDto.getContent());
+        comment.setDynamicId(commentDto.getDynamicId());
+        comment.setUserId(commentDto.getUserId());
         commentRepository.save(comment);
-        List<Comment> commentList = commentRepository.findCommentByDynamicId(comment.getDynamicId());
+        List<Comment> commentList = commentRepository.findCommentByDynamicId(commentDto.getDynamicId());
         Dynamic dynamic = dynamicRepository.findDynamicByPkDynamicId(comment.getDynamicId());
         dynamic.setComments(commentList.size());
         dynamicRepository.saveAndFlush(dynamic);
@@ -43,9 +50,17 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public ResponseResult deleteComment(Long commentId) {
-
-        replyCommentRepository.deleteByCommentId(commentId);
-        commentRepository.deleteById(commentId);
+        Comment comment = commentRepository.findCommentByPkCommentId(commentId);
+        comment.setIsDeleted(true);
+        commentRepository.saveAndFlush(comment);
+        List<ReplyComment> replyCommentList = replyCommentRepository.findByCommentId(commentId);
+        replyCommentList.forEach(replyComment -> {
+            ReplyComment replyComment1 = replyCommentRepository.findReplyCommentByPkReplyCommentId(replyComment.getPkReplyCommentId());
+            replyComment1.setIsDeleted(true);
+            replyCommentRepository.saveAndFlush(replyComment1);
+        });
+//        List<Long> ids = replyCommentRepository.selectAllCommentId(commentId);
+//        replyCommentRepository.updateIsDelete(ids);
         return ResponseResult.success("删除成功");
     }
 

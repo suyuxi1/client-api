@@ -12,6 +12,9 @@ class CommentRepositoryTest {
     private CommentRepository commentRepository;
     @Test
     void findCommentByDynamicId() {
-        commentRepository.deleteById(3L);
+//        commentRepository.deleteById(3L);
+//        System.out.println(commentRepository.findCommentByDynamicId(1L));
+
     }
+
 }

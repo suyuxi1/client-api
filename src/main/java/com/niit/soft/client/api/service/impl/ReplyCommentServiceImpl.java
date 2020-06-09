@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.ReplyCommentDto;
 import com.niit.soft.client.api.domain.model.Dynamic;
 import com.niit.soft.client.api.domain.model.ReplyComment;
 import com.niit.soft.client.api.repository.CommentRepository;
@@ -30,7 +31,12 @@ public class ReplyCommentServiceImpl implements ReplyCommentService {
     private DynamicRepository dynamicRepository;
 
     @Override
-    public ResponseResult insertReplyComment(ReplyComment replyComment) {
+    public ResponseResult insertReplyComment(ReplyCommentDto replyCommentDto) {
+        ReplyComment replyComment = new ReplyComment();
+        replyComment.setCommentId(replyCommentDto.getCommentId());
+        replyComment.setContent(replyCommentDto.getContent());
+        replyComment.setUserId(replyCommentDto.getUserId());
+        replyComment.setIsDeleted(false);
         //添加评论
         replyCommentRepository.save(replyComment);
         //更具评论的找到对应动态
@@ -44,7 +50,9 @@ public class ReplyCommentServiceImpl implements ReplyCommentService {
 
     @Override
     public ResponseResult deleteReplyComment(Long id) {
-        replyCommentRepository.deleteById(id);
+        ReplyComment replyComment = replyCommentRepository.findReplyCommentByPkReplyCommentId(id);
+        replyComment.setIsDeleted(true);
+        replyCommentRepository.saveAndFlush(replyComment);
         return ResponseResult.success("删除评论的评论成功");
     }
 }

@@ -5,16 +5,15 @@ import lombok.Data;
 
 /**
  * @author Yujie_Zhao
- * @ClassName CommentDto
- * @Description 评论
- * @Date 2020/6/8  16:52
+ * @ClassName ReplyCommentDto
+ * @Description TODO
+ * @Date 2020/6/9  16:51
  * @Version 1.0
  **/
 @Data
 @Builder
-public class CommentDto {
-    private Long dynamicId ;
+public class ReplyCommentDto {
+    private Long commentId ;
     private Long userId;
     private String content;
-
 }

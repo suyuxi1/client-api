@@ -1,6 +1,6 @@
 package com.niit.soft.client.api.service;
 
-import com.niit.soft.client.api.domain.model.Comment;
+import com.niit.soft.client.api.domain.dto.CommentDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -13,17 +13,16 @@ class CommentServiceTest {
 
     @Test
     void insertComment() {
-        Comment comment = Comment.builder()
+        CommentDto commentDto = CommentDto.builder()
                 .dynamicId(1L)
                 .userId(1L)
                 .content("你好")
-                .isDeleted(true)
                 .build();
-        commentService.insertComment(comment);
+        commentService.insertComment(commentDto);
     }
 
     @Test
     void deleteComment() {
-        commentService.deleteComment(7L);
+        commentService.deleteComment(1L);
     }
 }

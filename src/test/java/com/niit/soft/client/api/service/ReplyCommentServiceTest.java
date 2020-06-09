@@ -1,6 +1,6 @@
 package com.niit.soft.client.api.service;
 
-import com.niit.soft.client.api.domain.model.ReplyComment;
+import com.niit.soft.client.api.domain.dto.ReplyCommentDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -14,9 +14,8 @@ class ReplyCommentServiceTest {
 
     @Test
     void insertReplyComment() {
-        ReplyComment replyComment = ReplyComment.builder()
+        ReplyCommentDto replyComment = ReplyCommentDto.builder()
                 .commentId(1L)
-                .isDeleted(false)
                 .content("Hello")
                 .userId(1L)
                 .build();
@@ -25,6 +24,6 @@ class ReplyCommentServiceTest {
 
     @Test
     void deleteReplyComment() {
-        replyCommentService.deleteReplyComment(2L);
+        replyCommentService.deleteReplyComment(4L);
     }
 }

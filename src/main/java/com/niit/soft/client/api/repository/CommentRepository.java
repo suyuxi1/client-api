@@ -18,6 +18,12 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment,Long> {
 
     /**
+     *
+     * @param id
+     * @return
+     */
+    Comment findCommentByPkCommentId(Long id);
+    /**
      * 根据动态id查询评论
      * @param dynamicId
      * @return
@@ -30,6 +36,7 @@ public interface CommentRepository extends JpaRepository<Comment,Long> {
      */
     @Query(value = "select dynamic_id from first_smart_campus.comment c where c.pk_comment_id=?1", nativeQuery = true)
     Long findDynamicIdByPkCommentId(Long id);
+
     /**
      * 更具用户id，评论id删除
      * @param commentId
@@ -39,6 +46,7 @@ public interface CommentRepository extends JpaRepository<Comment,Long> {
     @Modifying
     @Query("delete from Comment where pkCommentId = ?1 and userId = ?2 ")
     void deleteByDynamicIdAndDynamicId(Long commentId,Long userId);
+
 
 
 }
