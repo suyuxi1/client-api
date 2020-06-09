@@ -31,6 +31,9 @@ public class FleaRewardServiceImpl implements FleaRewardService {
 
     @Override
     public ResponseResult getRewardTopTwo() {
+        /**
+         * 根据创建时间排序，查询两条数据
+         */
         Pageable pageable = PageRequest.of(0,2, Sort.Direction.DESC,"createTime");
         List<RewardVo> rewardVoList = rewardRepository.getTopReward(pageable);
         if (rewardVoList.size() == 0){
