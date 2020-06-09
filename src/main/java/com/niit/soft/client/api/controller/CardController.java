@@ -51,7 +51,7 @@ public class CardController {
      * @return
      */
     @ApiOperation(value = "校园卡充值",notes = "请求参数为校园卡号码，充值金额")
-    @PutMapping("/card/deposit")
+    @PostMapping("/card/deposit")
     ResponseResult insertCardBalance(@RequestParam("card_number") String cardNumber,
                                      @RequestParam("money") double money){
         return service.insertCardBalance(cardNumber,money);
@@ -63,10 +63,22 @@ public class CardController {
      * @return
      */
     @ApiOperation(value = "电费充值",notes = "请求参数为房间名字，充值金额")
-    @PutMapping("/electricity/deposit")
+    @PostMapping("/electricity/deposit")
     ResponseResult insertEleBalance(@RequestParam("name") String name,
                                     @RequestParam("money") double money){
         return service.insertelectricityBalance(name,money);
+    }
+    /**
+     * 网费充值
+     * @param jobNumber
+     * @param money
+     * @return
+     */
+    @ApiOperation(value = "网费充值",notes = "请求参数为学号，充值金额")
+    @PostMapping("/net/deposit")
+    ResponseResult insertBalance(@RequestParam("job_number") String jobNumber,
+                                    @RequestParam("money") double money){
+        return service.insertBalance(jobNumber,money);
     }
     /**
      * 一卡通激活

@@ -12,6 +12,7 @@ import java.util.List;
 public interface SysBorrowRepository extends JpaRepository<SysBorrow, Long> {
     /**
      * 根据学号查询借阅的图书的数据
+     *
      * @param borrowUserNumber
      * @return
      */
@@ -20,21 +21,13 @@ public interface SysBorrowRepository extends JpaRepository<SysBorrow, Long> {
 
     /**
      * 查询归还的借阅记录
+     *
      * @param borrowUserNumber
      * @return
      */
-    @Query(value = "select * from sys_borrow as b where b.borrow_user_number=?1 and is_returned = true",nativeQuery = true)
+    @Query(value = "select * from sys_borrow as b where b.borrow_user_number=?1 and is_returned = true", nativeQuery = true)
     List<SysBorrow> findReturnSysBorrows(String borrowUserNumber);
 
-    /**
-     * 计数（用户借阅量）
-     * @param userNumber
-     * @return
-     */
-
-    int countByBorrowUserNumber(String userNumber);
-
-
-
-
+    @Query(value = "select * from sys_borrow as b where b.borrow_user_number=?1 and is_returned = false", nativeQuery = true)
+    List<SysBorrow> findNoReturnSysBorrows(String borrowUserNumber);
 }

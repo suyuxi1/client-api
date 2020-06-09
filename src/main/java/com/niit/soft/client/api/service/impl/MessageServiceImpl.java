@@ -39,9 +39,4 @@ public class MessageServiceImpl implements MessageService {
         return ResponseResult.success(messagePage.getContent());
     }
 
-    @Override
-    public ResponseResult updateIsReaded(Long pkMessageId) {
-        messageRepository.updateIsReaded(pkMessageId);
-        return ResponseResult.success();
-    }
 }

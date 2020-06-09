@@ -1,40 +1,32 @@
 package com.niit.soft.client.api.controller;
 
-import com.niit.soft.client.api.domain.dto.JobNumberDto;
-import com.niit.soft.client.api.domain.vo.ExaminationVo;
+import com.niit.soft.client.api.domain.dto.SingleFieldDto;
+import com.niit.soft.client.api.domain.model.Examination;
 import com.niit.soft.client.api.service.ExaminationService;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
- * @author xunmi
- * @ClassName ExaminationController
- * @Description 考务管理控制器
- * @Date 2020/6/4
+ * @Description TODO
+ * @Author wf
+ * @Date 2020/6/9
  * @Version 1.0
- **/
+ */
 @RestController
-@RequestMapping("/examination")
-@Api(tags = "考务接口")
+@RequestMapping(value = "examination")
+@Api(tags = "考务管理")
 public class ExaminationController {
-
     @Resource
     private ExaminationService examinationService;
 
-    /**
-     * 根据jobNumber查询考务信息
-     * @param jobNumberDto
-     * @return
-     */
-    @PostMapping("/jobNumber")
-    public List<ExaminationVo> selectAll(@RequestBody JobNumberDto jobNumberDto) {
-        return examinationService.selectAll(jobNumberDto.getJobNumber());
+    @ApiOperation("根据学期分类查询所有接口")
+    @PostMapping(value = "list/semester")
+    public List<Map<String, Object>> getExaminationBySemester(@RequestBody SingleFieldDto singleFieldDto) {
+        return examinationService.getExaminationBySemester(singleFieldDto.getField().toString());
     }
-
 }

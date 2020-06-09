@@ -42,6 +42,11 @@ public class Room {
     @Column(nullable = false,unique = true)
     private Long towerId;
     /**
+     * 单元名
+     */
+    @Column(name = "unit_id",nullable = false)
+    private Long unitId;
+    /**
      * 电费余额
      */
     private  Double electricityBalance;
