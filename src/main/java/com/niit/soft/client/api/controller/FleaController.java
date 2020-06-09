@@ -132,5 +132,6 @@ public class FleaController {
         log.info("访问goods/delete接口");
         log.info("-----goods/delete-----请求参数：" + isDeleted + "-----" + goodId + "**1**");
         return fleaGoodsService.soldOutGood(isDeleted, goodId);
+
     }
 }
