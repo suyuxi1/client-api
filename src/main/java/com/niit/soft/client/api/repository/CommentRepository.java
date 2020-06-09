@@ -29,6 +29,12 @@ public interface CommentRepository extends JpaRepository<Comment,Long> {
      * @return
      */
     List<Comment> findCommentByDynamicId(Long dynamicId);
+
+    /**
+     * 根据动态id查找存在的评论
+     * @return
+     */
+    List<Comment> findCommentByIsDeletedAndDynamicId(Boolean isDel,Long dynamicId);
     /**
      * 查找动态id
      * @param id

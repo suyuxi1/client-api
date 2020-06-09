@@ -41,9 +41,11 @@ public class CommentServiceImpl implements CommentService {
         comment.setDynamicId(commentDto.getDynamicId());
         comment.setUserId(commentDto.getUserId());
         commentRepository.save(comment);
-        List<Comment> commentList = commentRepository.findCommentByDynamicId(commentDto.getDynamicId());
+        //获取获取一动态的评论数量
+        List<Comment> commentList = commentRepository.findCommentByIsDeletedAndDynamicId(false,commentDto.getDynamicId());
         Dynamic dynamic = dynamicRepository.findDynamicByPkDynamicId(comment.getDynamicId());
         dynamic.setComments(commentList.size());
+        //修改动态评论数量
         dynamicRepository.saveAndFlush(dynamic);
         return ResponseResult.success("添加成功");
     }
@@ -59,6 +61,12 @@ public class CommentServiceImpl implements CommentService {
             replyComment1.setIsDeleted(true);
             replyCommentRepository.saveAndFlush(replyComment1);
         });
+        //获取获取一动态的评论数量
+        List<Comment> commentList = commentRepository.findCommentByIsDeletedAndDynamicId(false,comment.getDynamicId());
+        Dynamic dynamic = dynamicRepository.findDynamicByPkDynamicId(comment.getDynamicId());
+        dynamic.setComments(commentList.size());
+        //修改动态评论数量
+        dynamicRepository.saveAndFlush(dynamic);
 //        List<Long> ids = replyCommentRepository.selectAllCommentId(commentId);
 //        replyCommentRepository.updateIsDelete(ids);
         return ResponseResult.success("删除成功");
