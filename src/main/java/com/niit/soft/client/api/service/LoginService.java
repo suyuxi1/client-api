@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.service;
 
+import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.LoginDto;
 import com.niit.soft.client.api.domain.model.SysUser;
 
@@ -9,11 +10,13 @@ import com.niit.soft.client.api.domain.model.SysUser;
  * @Date 2020/5/26 8:34
  * @Version 1.0
  **/
-public interface LoginDtoService {
+public interface LoginService {
     /**
      * 登录
      * @param
      * @return 返回用户信息
      */
     Long findIdByLoginDto(String userAccount,String password);
+
+
 }

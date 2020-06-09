@@ -1,8 +1,7 @@
 package com.niit.soft.client.api.service.impl;
 
-import com.niit.soft.client.api.repository.SysUserRepository;
 import com.niit.soft.client.api.repository.UserAccountRepository;
-import com.niit.soft.client.api.service.LoginDtoService;
+import com.niit.soft.client.api.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,7 @@ import javax.annotation.Resource;
  **/
 @Service
 @Slf4j
-public class LoginDtoImpl implements LoginDtoService {
+public class LoginServiceImpl implements LoginService {
     @Resource
     private UserAccountRepository userAccountRepository;
 
