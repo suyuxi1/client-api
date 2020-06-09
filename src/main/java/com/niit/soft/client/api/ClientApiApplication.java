@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 //@ComponentScan(basePackages = {"com.niit.soft.client.api"})
 //@EnableAsync  //作用于启动类，放置在启动类上开启异步任务注解
 //开启定时
-@EnableScheduling
+//@EnableScheduling
 @SpringBootApplication
 @MapperScan("com.niit.soft.client.api.mapper")
 public class ClientApiApplication {
