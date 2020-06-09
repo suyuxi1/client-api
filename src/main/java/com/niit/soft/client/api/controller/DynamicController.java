@@ -3,9 +3,14 @@ package com.niit.soft.client.api.controller;
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
+import com.niit.soft.client.api.domain.dto.CommentDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.dto.ReplyCommentDto;
 import com.niit.soft.client.api.domain.model.Dynamic;
+import com.niit.soft.client.api.service.CommentService;
 import com.niit.soft.client.api.service.DynamicService;
+import com.niit.soft.client.api.service.ReplyCommentService;
+import com.niit.soft.client.api.service.ThumbService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +32,15 @@ import javax.annotation.Resource;
 public class DynamicController {
     @Resource
     private DynamicService dynamicService;
+
+    @Resource
+    private ThumbService thumbService;
+
+    @Resource
+    private CommentService commentService;
+
+    @Resource
+    private ReplyCommentService replyCommentService;
 
     @PostMapping("/{id}")
     @ControllerWebLog(name = "findDynamicVoById", isSaved = true)
@@ -60,4 +74,47 @@ public class DynamicController {
         return ResponseResult.success(dynamicService.findCommentVoById((long) id));
     }
 
+    /**
+     * 添加校友圈动态评论
+     * @param commentDto
+     * @return
+     */
+    @ApiOperation(value = "添加校友评论",notes = "")
+    @PostMapping(value = "/comment/insert")
+    public ResponseResult insertComment(@RequestBody CommentDto commentDto){
+        return commentService.insertComment(commentDto);
+    }
+
+    /**
+     * 删除校友评论
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "删除校友评论",notes = "")
+    @PostMapping(value = "/comment/deletion/{id}")
+    public ResponseResult deleteComment(@PathVariable Long id){
+        return commentService.deleteComment(id);
+    }
+
+    /**
+     * 添加校友圈动态评论
+     * @param replyCommentDto
+     * @return
+     */
+    @ApiOperation(value = "添加校友评论的评论",notes = "")
+    @PostMapping(value = "/replyComment/insert")
+    public ResponseResult insertReplyComment(@RequestBody ReplyCommentDto replyCommentDto){
+        return replyCommentService.insertReplyComment(replyCommentDto);
+    }
+
+    /**
+     * 删除校友评论
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "删除校友评论的评论",notes = "")
+    @PostMapping(value = "/replyComment/deletion/{id}")
+    public ResponseResult deleteReplyComment(@PathVariable Long id){
+        return replyCommentService.deleteReplyComment(id);
+    }
 }

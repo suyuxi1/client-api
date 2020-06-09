@@ -40,25 +40,7 @@ public class SmsApiController {
     public ResponseResult code(@RequestBody SmsPhoneDto smsPhoneDto) {
         log.info("访问 /sendCode 接口");
         log.info("-----/sendCode-----请求参数：" + smsPhoneDto+"**1**");
-        String phoneNumber = smsPhoneDto.getPhoneNumber();
-        //调用发送方法
-        System.out.println("接受的phoneNumber" + phoneNumber);
-        String code = redisTemplate.opsForValue().get(phoneNumber);
-        if (!StringUtils.isEmpty(code)) {
-            //数据已存在
-            return ResponseResult.failure(ResultCode.DATA_ALREADY_EXISTED, phoneNumber + ":" + code + "已存在，还没有过期");
-        }
-        //生成验证码并存储到redis中
-        code = UUID.randomUUID().toString().substring(0, 4);
-        HashMap<String, Object> param = new HashMap<>();
-        param.put("code", code);
-        boolean sms = sendSmsService.send(phoneNumber, "SMS_190277609", param);
-        if (sms) {
-            redisTemplate.opsForValue().set(phoneNumber, code, 5, TimeUnit.MINUTES);
-            return ResponseResult.success(code);
-        } else {
-            return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
-        }
+        return sendSmsService.code(smsPhoneDto);
     }
 
     //校验验证码

@@ -1,8 +1,6 @@
 package com.niit.soft.client.api.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.niit.soft.client.api.domain.model.Dynamic;
 import com.niit.soft.client.api.domain.vo.DynamicVo;
 
@@ -23,5 +21,7 @@ public interface DynamicMapper extends BaseMapper<Dynamic> {
      * @return
      */
     List<DynamicVo> findDynamicVoById(Long id);
+
+
 
 }
