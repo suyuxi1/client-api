@@ -40,7 +40,7 @@ public class AliPayController {
      * @return
      */
     @ApiOperation("支付异步通知接口")
-    @GetMapping("alipay/notify_url")
+    @PostMapping("alipay/notify_url")
     @ControllerWebLog(name = "notifyAliPay", isSaved = true)
     public String notifyAliPay() {
         return " a li pay notify ";
@@ -51,7 +51,7 @@ public class AliPayController {
      * @return
      */
     @ApiOperation("支付完成以后的回调接口")
-    @GetMapping("alipay/return_url")
+    @PostMapping("alipay/return_url")
     @ControllerWebLog(name = "returnAliPay", isSaved = true)
     public String returnAliPay() {
         return " a li pay return ";

@@ -39,17 +39,5 @@ public class MessageController {
         return messageService.findAllByPage(pageDto);
     }
 
-    /**
-     * 根据id修改读取状态
-     *
-     * @param pkMessageId
-     * @return
-     */
-    @ControllerWebLog(name = "updateIsReaded", isSaved = true)
-    @ApiOperation(value = "修改读取状态", notes = "请求参数为消息id")
-    @PutMapping("/update")
-    ResponseResult updateIsReaded(@Param("pkMessageId") Long pkMessageId) {
-        log.info("-----/update-----请求参数：" + pkMessageId+"**1**");
-        return messageService.updateIsReaded(pkMessageId);
-    }
+
 }

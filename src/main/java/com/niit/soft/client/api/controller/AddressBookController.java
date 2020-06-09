@@ -1,9 +1,11 @@
 package com.niit.soft.client.api.controller;
 
+import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.AddressBook;
 import com.niit.soft.client.api.service.AddressBookService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -32,13 +34,18 @@ public class AddressBookController {
         return ResponseResult.success();
     }
 
-    @PutMapping(value = "/id")
+
+    @PostMapping(value = "/id")
+    @ControllerWebLog(name = "updateAddressBook", isSaved = true)
+    @ApiOperation(value = "修改通讯录好友信息", notes = "")
     public ResponseResult updateAddressBook(@RequestBody AddressBook addressBook) {
         addressBookService.updateAddressBookById(addressBook);
         return ResponseResult.success();
     }
 
-    @DeleteMapping(value = "/id/{id}")
+    @PostMapping(value = "/id/{id}")
+    @ControllerWebLog(name = "deleteAddressBookById", isSaved = true)
+    @ApiOperation(value = "根据id删除通讯录好友信息", notes = "")
     public ResponseResult deleteAddressBookById(@PathVariable int id) {
         addressBookService.deleteAddressBookById(id);
         return ResponseResult.success();
