@@ -3,6 +3,7 @@ package com.niit.soft.client.api.service.impl;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.dto.TypeDto;
 import com.niit.soft.client.api.domain.model.FleaType;
 import com.niit.soft.client.api.repository.FleaTypeRepository;
 import com.niit.soft.client.api.service.FleaTypeService;
@@ -55,11 +56,11 @@ public class FleaTypeServiceImpl implements FleaTypeService {
     }
 
     @Override
-    public ResponseResult getGoodsByType(PageDto pageDto, Long typeId) {
-        Pageable pageable = PageRequest.of(pageDto.getCurrentPage(), pageDto.getPageSize(), Sort.Direction.DESC, "goodsCreateTime");
-        if (fleaTypeRepository.getGoodsByTypeId(pageable, typeId).size() == 0) {
+    public ResponseResult getGoodsByType(TypeDto typeDto) {
+        Pageable pageable = PageRequest.of(typeDto.getCurrentPage(), typeDto.getPageSize(), Sort.Direction.DESC, "goodsCreateTime");
+        if (fleaTypeRepository.getGoodsByTypeId(pageable, typeDto).size() == 0) {
             return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
         }
-        return ResponseResult.success(fleaTypeRepository.getGoodsByTypeId(pageable, typeId));
+        return ResponseResult.success(fleaTypeRepository.getGoodsByTypeId(pageable, typeDto));
     }
 }

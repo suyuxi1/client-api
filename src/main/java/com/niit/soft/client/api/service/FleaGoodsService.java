@@ -1,9 +1,7 @@
 package com.niit.soft.client.api.service;
 
 import com.niit.soft.client.api.common.ResponseResult;
-import com.niit.soft.client.api.domain.dto.FleaGoodsDto;
-import com.niit.soft.client.api.domain.dto.FleaSearchDto;
-import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.dto.*;
 import com.niit.soft.client.api.domain.model.FleaGoods;
 import org.springframework.data.domain.Page;
 
@@ -30,10 +28,10 @@ public interface FleaGoodsService {
     /**
      * 根据商品id查询指定商品信息；
      *
-     * @param id Long
+     * @param goodIdDto GoodIdDto
      * @return ResponseResult
      */
-    ResponseResult findGoodById(Long id);
+    ResponseResult findGoodById(GoodIdDto goodIdDto);
 
     /**
      * 修改商品
@@ -46,9 +44,16 @@ public interface FleaGoodsService {
     /**
      * 下架商品
      *
-     * @param goodId    Long
-     * @param isDeleted Boolean
+     * @param soldOutGoodDto SoldOutGoodDto
      * @return ResponseResult
      */
-    ResponseResult soldOutGood(Boolean isDeleted, Long goodId);
+    ResponseResult soldOutGood(SoldOutGoodDto soldOutGoodDto);
+
+    /**
+     * 添加商品
+     *
+     * @param saveGoodDto SaveGoodDto
+     * @return ResponseResult
+     */
+    ResponseResult saveGoods(SaveGoodDto saveGoodDto);
 }
