@@ -8,6 +8,7 @@ import com.niit.soft.client.api.domain.model.FleaReward;
 import com.niit.soft.client.api.service.FleaGoodsService;
 import com.niit.soft.client.api.service.FleaRewardService;
 import com.niit.soft.client.api.service.FleaTypeService;
+import com.niit.soft.client.api.service.FleaUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,8 @@ public class FleaController {
     private FleaRewardService fleaRewardService;
     @Resource
     private FleaTypeService fleaTypeService;
+    @Resource
+    private FleaUserService fleaUserService;
 
     /**
      * 根据搜索框的输入模糊查询  商品名，标签，或 悬赏
@@ -163,5 +166,35 @@ public class FleaController {
         log.info("访问goods/increased接口");
         log.info("-----goods/increased-----请求参数：" + saveGoodDto + "**1**");
         return fleaGoodsService.saveGoods(saveGoodDto);
+    }
+
+    /**
+     * 用户数据添加
+     *
+     * @param fleaUserDto FleaUserDto
+     * @return ResponseResult
+     */
+    @ControllerWebLog(name = "saveFleaUser", isSaved = true)
+    @ApiOperation(value = "添加用户数据", notes = "请求参数为用户Dto----fleaUserDto  ")
+    @PostMapping(value = "users/saving")
+    public ResponseResult saveFleaUser(@RequestBody FleaUserDto fleaUserDto) {
+        log.info("访问users/saving接口");
+        log.info("-----users/saving-----请求参数：" + fleaUserDto + "**1**");
+        return fleaUserService.saveFleaUser(fleaUserDto);
+    }
+
+    /**
+     * 修改用户数据
+     *
+     * @param updateFleaUserDto UpdateFleaUserDto
+     * @return ResponseResult
+     */
+    @ControllerWebLog(name = "updateFleaUser", isSaved = true)
+    @ApiOperation(value = "修改用户数据", notes = "请求参数为修改用户Dto----updateFleaUserDto  ")
+    @PostMapping(value = "users/flushing")
+    public ResponseResult updateFleaUser(@RequestBody UpdateFleaUserDto updateFleaUserDto) {
+        log.info("访问users/flushing接口");
+        log.info("-----users/flushing-----请求参数：" + updateFleaUserDto + "**1**");
+        return fleaUserService.updateFleaUser(updateFleaUserDto);
     }
 }
