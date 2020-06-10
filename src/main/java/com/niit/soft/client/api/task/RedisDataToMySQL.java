@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.task;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.niit.soft.client.api.domain.model.Dynamic;
 import com.niit.soft.client.api.domain.model.Thumb;
 import com.niit.soft.client.api.repository.DynamicRepository;
@@ -35,23 +36,16 @@ public class RedisDataToMySQL {
     @Resource
     private ThumbService thumbService;
 
-    @Scheduled(cron = "*/7 * * * * ?")
+    @Scheduled(cron = "0 */10 * * * ?")
     public void redisDataToMySQL() {
         log.info("定时同步数据库 时间：{}", LocalDateTime.now());
 
         List<Thumb> thumbList = new ArrayList<>();
+        List<Thumb> thumbListDel = new ArrayList<>();
         for (Dynamic dynamic : dynamicRepository.findAll()) {
             log.info("" + dynamic.toString());
             Map<Object, Object> hmget = redisUtil.hmget(String.valueOf(dynamic.getPkDynamicId()));
 
-            List<Long> id = new ArrayList<>();
-            for (Thumb thumb : thumbService.list()) {
-                id.add(thumb.getPkThumbId());
-            }
-
-            log.info("mysql的点赞记录{}", id);
-
-            List<Thumb> thumbListDel = new ArrayList<>();
 
             for (Map.Entry<Object, Object> entry : hmget.entrySet()) {
                 thumbList.add(Thumb.builder().pkThumbId(Long.valueOf((String) entry.getKey()))
@@ -64,18 +58,36 @@ public class RedisDataToMySQL {
             log.info("redis的点赞记录:{}", thumbList);
             thumbService.saveOrUpdateBatch(thumbList);
 
-            for (Map.Entry<Object, Object> entry : hmget.entrySet()) {
-                if (id.contains(Long.valueOf((String) entry.getKey()))) {
-                    thumbList.add(Thumb.builder().pkThumbId(Long.valueOf((String) entry.getKey()))
-                            .userId(Long.valueOf((String) entry.getValue()))
-                            .dynamicId(dynamic.getPkDynamicId())
-                            .gmtCreate(Timestamp.valueOf(LocalDateTime.now()))
-                            .gmtModified(Timestamp.valueOf(LocalDateTime.now()))
-                            .isDeleted(true).build());
+            List<Long> id = new ArrayList<>();
+
+            for (Thumb thumb : thumbService.list(new QueryWrapper<Thumb>().eq("dynamic_id", dynamic.getPkDynamicId()))) {
+                id.add(thumb.getPkThumbId());
+            }
+            List<Long> haveBe = id;
+
+            for (Object o : hmget.keySet()) {
+                if (id.contains(Long.parseLong((String) o))) {
+                    id.remove(Long.parseLong((String) o));
                 }
             }
+            List<Long> shouldDelete = id;
+
+            if (id.size() != 0) {
+                for (Thumb thumb : thumbService.listByIds(id)) {
+                    thumb.setIsDeleted(true);
+                    thumbListDel.add(thumb);
+                }
+            }
+
+            haveBe.removeAll(shouldDelete);
+            dynamic.setThumbs(haveBe.size());
+            dynamicRepository.saveAndFlush(dynamic);
+
+            log.info("redis的需要删除的点赞记录:{}", thumbListDel);
             thumbService.updateBatchById(thumbListDel);
+
         }
+
     }
 
 }
