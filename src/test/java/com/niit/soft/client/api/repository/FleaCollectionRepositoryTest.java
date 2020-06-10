@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.repository;
 
+import com.niit.soft.client.api.domain.dto.CancelCollectionDto;
 import com.niit.soft.client.api.domain.dto.CollectionDto;
 import com.niit.soft.client.api.domain.model.FleaCollection;
 import com.niit.soft.client.api.domain.model.FleaGoods;
@@ -46,5 +47,13 @@ class FleaCollectionRepositoryTest {
     @Test
     void getAll(){
         System.out.println(collectionRepository.getCollection());
+    }
+
+    @Test
+    void logicalDel() {
+        CancelCollectionDto collectionDto = new CancelCollectionDto();
+        collectionDto.setGoodsId(4l);
+        collectionDto.setUserId(3l);
+        System.out.println(collectionRepository.logicalDel(collectionDto));
     }
 }

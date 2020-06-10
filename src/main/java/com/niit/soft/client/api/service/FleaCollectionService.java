@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.service;
 
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.CancelCollectionDto;
 import com.niit.soft.client.api.domain.dto.CollectionDto;
 import org.jsoup.Connection;
 
@@ -24,5 +25,12 @@ public interface FleaCollectionService {
      * @return
      */
     ResponseResult getCollection();
+
+    /**
+     * 根据商品ID以及用户ID逻辑删除商品
+     * @param collectionDto
+     * @return
+     */
+    ResponseResult logicalDel(CancelCollectionDto collectionDto);
 }
 

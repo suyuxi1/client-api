@@ -1,6 +1,7 @@
 
 package com.niit.soft.client.api.repository;
 
+import com.niit.soft.client.api.domain.dto.CancelCollectionDto;
 import com.niit.soft.client.api.domain.dto.CollectionDto;
 import com.niit.soft.client.api.domain.model.FleaCollection;
 import com.niit.soft.client.api.domain.vo.CollectionVo;
@@ -25,4 +26,14 @@ public interface FleaCollectionRepository extends JpaRepository<FleaCollection, 
             "left join c.fleaGoods g " +
             "left join c.fleaUser u")
     List<CollectionVo> getCollection();
+
+    /**
+     * 根据用户ID以及商品ID逻辑删除某个收藏
+     * @param collectionDto
+     * @return
+     */
+    @Modifying
+    @Transactional
+    @Query(value = "update FleaCollection set isDeleted = true where fleaGoods.pkFleaGoodsId = :#{#collectionDto.getGoodsId()} and fleaUser.pkFleaUserId = :#{#collectionDto.getUserId()}")
+    int logicalDel(CancelCollectionDto collectionDto);
 }
