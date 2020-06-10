@@ -60,7 +60,16 @@ public enum ResultCode {
     SCHOOL_MATE_THUMBS_UP_REDIS(60009, "redis没有点赞信息"),
 
     /* 权限错误：70001-79999 */
-    PERMISSION_NO_ACCESS(70001, "无访问权限");
+    PERMISSION_NO_ACCESS(70001, "无访问权限"),
+
+
+
+
+
+    /*跑腿模块：80001-89999*/
+    ORDER_NOT_CANCLE(80001,"订单正在配送无法取消");
+
+
 
     private Integer code;
 
