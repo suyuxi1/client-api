@@ -27,6 +27,11 @@ public class AddressBookController {
     @Resource
     private AddressBookService addressBookService;
 
+    /**
+     * 根据id查询所有的通讯录好友
+     * @param pageDto
+     * @return
+     */
     @PostMapping(value = "/list/userId")
     @ControllerWebLog(name = "getAddressByUserId", isSaved = true)
     @ApiOperation(value = "根据id查询所有的通讯录好友", notes = "")
@@ -35,6 +40,12 @@ public class AddressBookController {
         log.info("进入/list/userId接口："+pageDto + "**1**");
         return addressBookService.getAddressBookByUserId(pageDto.getField().toString());
     }
+
+    /**
+     * 根据手机号查询所有的通讯录好友
+     * @param pageDto
+     * @return
+     */
     @PostMapping(value = "/list/phoneNumber")
     @ControllerWebLog(name = "getAddressByUserId", isSaved = true)
     @ApiOperation(value = "根据手机号查询所有的通讯录好友", notes = "")
@@ -43,6 +54,12 @@ public class AddressBookController {
         log.info("进入/list/phoneNumber接口："+pageDto + "**1**");
         return addressBookService.findAddressBookByPhoneNumber(pageDto.getField().toString());
     }
+
+    /**
+     * 根据remark模糊通讯录好友
+     * @param keywords
+     * @return
+     */
     @PostMapping(value = "/list/remark")
     @ControllerWebLog(name = "getAddressByUserId", isSaved = true)
     @ApiOperation(value = "根据remark模糊通讯录好友", notes = "")
@@ -52,6 +69,11 @@ public class AddressBookController {
         return addressBookService.findAddressBookByRemarkContaning(keywords);
     }
 
+    /**
+     * 新增通讯录好友
+     * @param addressBook
+     * @return
+     */
     @PostMapping
     @ControllerWebLog(name = "insertAddressBook", isSaved = true)
     @ApiOperation(value = "新增通讯录好友", notes = "")
@@ -62,6 +84,11 @@ public class AddressBookController {
         return ResponseResult.success();
     }
 
+    /**
+     * 修改通讯录好友信息
+     * @param addressBook
+     * @return
+     */
     @PutMapping(value = "/id")
     @ControllerWebLog(name = "updateAddressBook", isSaved = true)
     @ApiOperation(value = "修改通讯录好友信息", notes = "")
@@ -72,6 +99,11 @@ public class AddressBookController {
         return ResponseResult.success();
     }
 
+    /**
+     * 根据id删除通讯录好友信息
+     * @param id
+     * @return
+     */
     @DeleteMapping(value = "/id/{id}")
     @ControllerWebLog(name = "deleteAddressBookById", isSaved = true)
     @ApiOperation(value = "根据id删除通讯录好友信息", notes = "")
@@ -82,11 +114,11 @@ public class AddressBookController {
         return ResponseResult.success();
     }
     /**
-     * 查询所有好友
+     * 查询所有通讯好友
      * @param pageDto
      * @return
      */
-    @ApiOperation(value = "查询所有",notes = "请求参数为当前页和页面条数")
+    @ApiOperation(value = "查询所有通讯好友",notes = "请求参数为当前页和页面条数")
     @ControllerWebLog(name = "findAllByPage", isSaved = true)
     @PostMapping("/all")
     ResponseResult findAllByPage(@RequestBody PageDto pageDto){
