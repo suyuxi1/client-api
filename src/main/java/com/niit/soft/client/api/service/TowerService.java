@@ -1,17 +1,14 @@
 package com.niit.soft.client.api.service;
 
-import com.niit.soft.client.api.domain.dto.RoomDto;
-
-import javax.persistence.Tuple;
-import java.util.List;
+import com.niit.soft.client.api.common.ResponseResult;
 
 /**
- * @ClassName TowerService
- * @Description TODO
- * @Author 田震
- * @Date 2020/6/9
- **/
+ * @author Tao
+ */
 public interface TowerService {
-
-    List<RoomDto> createVo(List<Tuple> roomList);
+    /**
+     * 查询所有宿舍名
+     * @return
+     */
+    ResponseResult getAllDormByType();
 }
