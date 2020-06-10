@@ -33,7 +33,7 @@ class RoomRepositoryTest {
         List<Room> roomList=new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
           Room room=
-                  Room.builder().isDeleted(false).name("10"+i).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).electricityBalance(0.0).towerId((long) 1).build();
+                  Room.builder().isDeleted(false).name("51"+i).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).electricityBalance(0.0).unitId((long) 6).towerId((long) 4).build();
           roomList.add(room);
         }
         roomRepository.saveAll(roomList);

@@ -46,10 +46,10 @@ public class AddressBookController {
     @PostMapping(value = "/list/remark")
     @ControllerWebLog(name = "getAddressByUserId", isSaved = true)
     @ApiOperation(value = "根据remark模糊通讯录好友", notes = "")
-    public List<AddressBook> findAddressBookByRemark(@RequestBody PageDto pageDto) {
+    public List<AddressBook> findAddressBookByRemark(@RequestParam("keywords") String keywords) {
         log.info("访问/list/remark接口");
-        log.info("进入/list/remark接口："+pageDto + "**1**");
-        return addressBookService.findAddressBookByRemarkContaning(pageDto.getField().toString());
+        log.info("进入/list/remark接口："+keywords + "**1**");
+        return addressBookService.findAddressBookByRemarkContaning(keywords);
     }
 
     @PostMapping
