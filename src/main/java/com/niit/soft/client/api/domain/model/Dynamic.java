@@ -36,6 +36,11 @@ public class Dynamic {
     private Long pkDynamicId;
 
     /**
+     * 用户id
+     */
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+    /**
      * 标题
      */
     @Column(name = "title", nullable = false, length = 20)
