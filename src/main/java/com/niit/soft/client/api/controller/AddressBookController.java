@@ -3,6 +3,7 @@ package com.niit.soft.client.api.controller;
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.dto.SingleFieldDto;
 import com.niit.soft.client.api.domain.model.AddressBook;
 import com.niit.soft.client.api.service.AddressBookService;
 import io.swagger.annotations.ApiOperation;
@@ -35,7 +36,7 @@ public class AddressBookController {
     }
 
 
-    @PostMapping(value = "/id")
+    @PutMapping(value = "/id")
     @ControllerWebLog(name = "updateAddressBook", isSaved = true)
     @ApiOperation(value = "修改通讯录好友信息", notes = "")
     public ResponseResult updateAddressBook(@RequestBody AddressBook addressBook) {
@@ -43,11 +44,11 @@ public class AddressBookController {
         return ResponseResult.success();
     }
 
-    @PostMapping(value = "/id/{id}")
+    @DeleteMapping(value = "/deletion/id")
     @ControllerWebLog(name = "deleteAddressBookById", isSaved = true)
     @ApiOperation(value = "根据id删除通讯录好友信息", notes = "")
-    public ResponseResult deleteAddressBookById(@PathVariable int id) {
-        addressBookService.deleteAddressBookById(id);
+    public ResponseResult deleteAddressBookById(@RequestBody SingleFieldDto singleFieldDto) {
+        addressBookService.deleteAddressBookById(Integer.parseInt(String.valueOf(singleFieldDto.getField())));
         return ResponseResult.success();
     }
 }

@@ -40,7 +40,7 @@ public class CardController {
      */
     @ApiOperation(value = "查询校园卡余额",notes = "请求参数为学号")
     @PostMapping("/card/balance")
-    ResponseResult findcardBalanceByJobNumber(@RequestParam("job_number") String jobNumber){
+    ResponseResult findCardBalanceByJobNumber(@RequestParam("job_number") String jobNumber){
         return  service.selectCardBalance(jobNumber);
     }
 
