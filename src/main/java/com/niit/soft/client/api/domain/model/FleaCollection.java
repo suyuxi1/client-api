@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.ibatis.annotations.Many;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -37,7 +38,7 @@ public class FleaCollection {
     /**
      * 商品id
      */
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
     private FleaGoods fleaGoods;
 
     /**
