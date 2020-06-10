@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
@@ -26,7 +25,6 @@ import java.util.List;
  * @Version 1.0
  */
 @Service
-@Transactional(rollbackFor = Exception.class)
 public class AddressBookServiceImpl implements AddressBookService {
     @Resource
     private AddressBookRepository addressBookRepository;
@@ -63,11 +61,6 @@ public class AddressBookServiceImpl implements AddressBookService {
     @Override
     public void updateAddressBookById(AddressBook addressBook) {
         addressBookRepository.updateAddressBookById(addressBook);
-    }
-
-    @Override
-    public List<AddressBook> findAddressBookByRemarkContaning(String keywords) {
-        return addressBookRepository.findAddressBookByRemarkContaining(keywords);
     }
 
     @Override

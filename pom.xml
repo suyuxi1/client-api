@@ -31,12 +31,12 @@
             <artifactId>spring-boot-starter-validation</artifactId>
             <version>2.3.0.RELEASE</version>
         </dependency>
-        <!--        SpringBoot redis-->
+        <!--SpringBoot redis-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!--        给redis提供连接池支持-->
+        <!--给redis提供连接池支持-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
@@ -54,7 +54,7 @@
             <optional>true</optional>
         </dependency>
         <!--加入消息队列-->
-        <!--        RabbitMQ-->
+        <!-- RabbitMQ-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
@@ -76,7 +76,7 @@
             <version>5.3.5</version>
         </dependency>
 
-<!--        shiro-->
+        <!--shiro-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
@@ -89,7 +89,7 @@
             <version>1.4.0</version>
         </dependency>
 
-        <!--        SpringBoot Test-->
+        <!--SpringBoot Test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -130,6 +130,12 @@
             <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
             <version>2.3.2</version>
+        </dependency>
+        <!--mybatis-plus-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.3.1</version>
         </dependency>
         <!--        工具依赖-->
         <!--        Lombok-->
@@ -200,7 +206,6 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.3.1</version>
         </dependency>
-
 
     </dependencies>
 

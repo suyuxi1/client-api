@@ -2,6 +2,7 @@ package com.niit.soft.client.api.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.niit.soft.client.api.domain.model.Dynamic;
+import com.niit.soft.client.api.util.SnowFlake;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -26,5 +27,12 @@ class DynamicMapperTest {
         dynamicMapper.update(Dynamic.builder().pkDynamicId(1L)
                 .comments(1).thumbs(1).content("")
                 .gmtCreate(Timestamp.valueOf(LocalDateTime.now())).build(), wrapper);
+    }
+
+    @Test
+    void addone() {
+        dynamicMapper.insert(Dynamic.builder().pkDynamicId(new SnowFlake(1,3).nextId())
+                .title("今天也是美好一天").content("开开心心").comments(0).thumbs(0).type("心情")
+                .build());
     }
 }
