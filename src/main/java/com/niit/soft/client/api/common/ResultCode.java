@@ -30,7 +30,7 @@ public enum ResultCode {
     USER_NOT_FOUND(20009, "用户不存在"),
     USER_TOKEN_EXPIRES(20010, "token已失效"),
     USER_NO_AUTH(20019, "用户权限不足"),
-    USER_ACCOUNT_PASSWORD_ERROR(20020,"账号或者密码错误"),
+    USER_ACCOUNT_PASSWORD_ERROR(20020, "账号或者密码错误"),
 
     /* 业务错误：30001-39999 */
     SMS_ERROR(30001, "短信业务出现问题"),
@@ -41,11 +41,11 @@ public enum ResultCode {
     DATA_IS_WRONG(50002, "数据有误"),
     DATA_ALREADY_EXISTED(50003, "数据已存在"),
     DATABASE_ERROR(50004, "数据库操作异常"),
-    Phone_ERROR(50005,"手机号码错误"),
+    Phone_ERROR(50005, "手机号码错误"),
 
 
     /* 服务器或系统错误：50001-599999 */
-    SERVER_ERROR(50000,"服务器错误，请稍后重试"),
+    SERVER_ERROR(50000, "服务器错误，请稍后重试"),
     SYSTEM_ERROR(40001, "系统错误，请稍后重试"),
 
     /* 接口错误：60001-69999 */
@@ -55,6 +55,9 @@ public enum ResultCode {
     INTERFACE_ADDRESS_INVALID(60004, "接口地址无效"),
     INTERFACE_REQUEST_TIMEOUT(60005, "接口请求超时"),
     INTERFACE_EXCEED_LOAD(60006, "接口负载过高"),
+    SCHOOL_MATE_THUMBS_UP(60007, "点赞"),
+    SCHOOL_MATE_THUMBS_DOWN(60008, "取消点赞"),
+    SCHOOL_MATE_THUMBS_UP_REDIS(60009, "redis没有点赞信息"),
 
     /* 权限错误：70001-79999 */
     PERMISSION_NO_ACCESS(70001, "无访问权限"),
@@ -77,14 +80,6 @@ public enum ResultCode {
         this.message = message;
     }
 
-    public Integer code() {
-        return this.code;
-    }
-
-    public String message() {
-        return this.message;
-    }
-
     public static String getMessage(String name) {
         for (ResultCode item : ResultCode.values()) {
             if (item.name().equals(name)) {
@@ -101,6 +96,14 @@ public enum ResultCode {
             }
         }
         return null;
+    }
+
+    public Integer code() {
+        return this.code;
+    }
+
+    public String message() {
+        return this.message;
     }
 
     @Override

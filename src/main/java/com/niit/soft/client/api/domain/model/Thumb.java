@@ -1,6 +1,9 @@
 package com.niit.soft.client.api.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,14 +29,15 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Thumb {
+@Table(name = "thumb")
+@TableName("thumb")
+public class Thumb extends Model<Thumb> {
     /**
      * 主键，策略为自增
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId(value = "pk_thumb_id", type = IdType.INPUT)
     private Long pkThumbId;
-
 
     /**
      * 动态id

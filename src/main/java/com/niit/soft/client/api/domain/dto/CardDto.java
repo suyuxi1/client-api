@@ -6,18 +6,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * @ClassName CardDto
  * @Description TODO
- * @Author 涛涛
- * @Date 2020/5/30 8:59
- * @Version 1.0
+ * @Author 田震
+ * @Date 2020/6/10
  **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CardBalance {
-    //卡号
+public class CardDto {
+    private Long pkCardId;
+    private  Long id;
+    private  String jobNumber;
     private String cardNumber;
-    //充值余额
-    private double money;
+    private Double  money;
+    private Boolean Status;
+
+
 }

@@ -12,3 +12,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface FleaUserRepository extends JpaRepository<FleaUser,Long> {
 }
+

@@ -1,11 +1,14 @@
 package com.niit.soft.client.api.util;
+
+
 /**
- * @author zq
- * @SnowFlake
- * @Description 雪花算法，用法见最下面
- * @Date 2020/01/12
+ * @ClassName SnowFlake
+ * @Description 雪花算法生成id
+ * @Author xiaobinggan
+ * @Date 2020/6/9 8:32 上午
  * @Version 1.0
- */
+ **/
+
 public class SnowFlake {
 
     // ==============================Fields===========================================
@@ -163,7 +166,8 @@ public class SnowFlake {
 
     //==============================Test=============================================
 
-    public static Long  getSnowFlake() {
+    public Long getSnowFlake() {
+
         long start = System.currentTimeMillis();
         SnowFlake idWorker = new SnowFlake(1, 3);
         long id = idWorker.nextId();
@@ -179,7 +183,7 @@ public class SnowFlake {
         SnowFlake idWorker = new SnowFlake(1, 3);
         for (int i = 0; i < 50; i++) {
             long id = idWorker.nextId();
-//            System.out.println(Long.toBinaryString(id));
+
             System.out.println(id);
         }
         long end = System.currentTimeMillis();
