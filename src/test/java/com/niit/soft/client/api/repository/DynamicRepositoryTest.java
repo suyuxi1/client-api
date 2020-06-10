@@ -16,7 +16,7 @@ class DynamicRepositoryTest {
     @Test
     void save() {
         dynamicRepository.save(Dynamic.builder().pkDynamicId(new SnowFlake(1, 3).nextId())
-                .title("今天也是美好一天").content("开开心心").comments(0).thumbs(0).type("心情")
+                .title("今天也是美好一天").content("开开心心").comments(0).thumbs(0).type("心情").userId(2L)
                 .build());
     }
 
