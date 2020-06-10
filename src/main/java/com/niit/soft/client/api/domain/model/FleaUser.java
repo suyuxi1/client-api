@@ -55,8 +55,8 @@ public class FleaUser {
     /**
      * 性别
      */
-    @Column(nullable = false,length = 4)
-    private Boolean sex;
+    @Column(nullable = false)
+    private String sex;
 
     /**
      * 学号

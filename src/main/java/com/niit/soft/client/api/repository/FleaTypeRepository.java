@@ -1,5 +1,7 @@
 package com.niit.soft.client.api.repository;
 
+import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.dto.TypeDto;
 import com.niit.soft.client.api.domain.model.FleaType;
 import com.niit.soft.client.api.domain.vo.GoodsVo;
 import org.springframework.data.domain.Pageable;
@@ -19,12 +21,12 @@ public interface FleaTypeRepository extends JpaRepository<FleaType, Long> {
     /**
      * 根据分类ID查询商品
      *
-     * @param typeId
+     * @param typeDto
      * @return
      */
     @Query(value = "select new com.niit.soft.client.api.domain.vo.GoodsVo(g.goodsName,g.goodsPrice,g.goodsDescription,g.goodsMark,g.goodsImgUrl,g.goodsCreateTime,t.typeName,u.username)" +
             "from FleaGoods g " +
             "left join g.fleaType t " +
-            "left join g.fleaUser u where t.pkFleaTypeId = ?1")
-    List<GoodsVo> getGoodsByTypeId(Pageable pageable, Long typeId);
+            "left join g.fleaUser u where t.pkFleaTypeId =:#{#typeDto.getTypeId()}")
+    List<GoodsVo> getGoodsByTypeId(Pageable pageable, TypeDto typeDto);
 }

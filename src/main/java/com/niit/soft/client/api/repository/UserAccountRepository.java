@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author Tao
@@ -36,14 +37,14 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
     @Query(value = "select pk_user_account_id from user_account as u where u.job_number=?1 and u.password=?2 or u.user_account=?1 and u.password=?2 or u.phone_number=?1 and u.password=?2", nativeQuery = true)
     Long findIdByLoginDto(String userAccount, String password);
 
-//    /**
-//     * 根据手机号码或者学号或者帐号和密码进行登录 查询用户数据
-//     * @param userAccount
-//     * @param password
-//     * @return
-//     */
-//    @Query(value = "select * from user_account as ua where ua.job_number=?1 and ua.password=?2 or ua.user_account=?1 and ua.password=?2 or ua.phone_number=?1 and ua.password=?2",nativeQuery = true)
-//    UserAccount findUserAccountByLoginDto(String userAccount,String password);
+    /**
+     * 根据手机号码查询用户数据
+     *
+     * @param cardNumber String
+     * @return Optional<UserAccount>
+     */
+    @Query(value = "select * from user_account as ua where ua.card_number=?1 ", nativeQuery = true)
+    Optional<UserAccount> findByCardNumber(String cardNumber);
 
     /**
      * 根据部分用户信息查询用户
@@ -62,9 +63,10 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
 
     /**
      * 根据教工号查询教师真实姓名
+     *
      * @param jobNumber
      * @return
      */
-    @Query(value = "select user_name from first_smart_campus.user_account as u where u.job_number=?1",nativeQuery = true)
+    @Query(value = "select user_name from first_smart_campus.user_account as u where u.job_number=?1", nativeQuery = true)
     String findUserNameByUserJobNumber(String jobNumber);
 }

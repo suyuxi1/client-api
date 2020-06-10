@@ -7,18 +7,14 @@ import lombok.NoArgsConstructor;
 
 /**
  * @Author yhChen
- * @Description 修改商品信息Dto
- * @Date 2020/6/9
+ * @Description 添加商品Dto
+ * @Date 2020/6/10
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FleaGoodsDto {
-    /**
-     * 商品id
-     */
-    private Long pkFleaGoodsId;
+public class SaveGoodDto {
     /**
      * 商品名
      */
