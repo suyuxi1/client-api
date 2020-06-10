@@ -9,3 +9,4 @@ package com.niit.soft.client.api.service;
  */
 public interface FleaCollectionService {
 }
+

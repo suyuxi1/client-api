@@ -1,12 +1,12 @@
 package com.niit.soft.client.api.domain.vo;
 
 import com.niit.soft.client.api.domain.model.Comment;
-import com.niit.soft.client.api.domain.model.Dynamic;
 import com.niit.soft.client.api.domain.model.Thumb;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -20,15 +20,15 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class DynamicVo {
-    //    private Long pkDynamicId;
-//    private String title;
-//    private String content;
-//    private Integer thumbs;
-//    private Integer comments;
-//    private String type;
-//    private Timestamp gmtCreate;
-//    private Boolean isDeleted;
-    private Dynamic dynamic;
+    private Long pkDynamicId;
+    private String title;
+    private String content;
+    private Integer thumbs;
+    private Integer comments;
+    private String type;
+    private Timestamp gmtCreate;
+    private Boolean isDeleted;
+//    private Dynamic dynamic;
     private List<Comment> commentList;
     private List<Thumb> thumbList;
 }

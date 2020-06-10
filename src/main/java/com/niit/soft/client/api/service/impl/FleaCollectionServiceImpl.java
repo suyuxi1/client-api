@@ -1,8 +1,6 @@
 package com.niit.soft.client.api.service.impl;
 
-import com.niit.soft.client.api.domain.model.FleaCollection;
 import com.niit.soft.client.api.service.FleaCollectionService;
-import com.niit.soft.client.api.service.FleaRewardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

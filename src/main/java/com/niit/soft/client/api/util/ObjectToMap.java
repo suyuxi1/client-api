@@ -20,7 +20,7 @@ public class ObjectToMap {
 //    }
 
     public static Map<String, Object> objectToMap(Object obj) throws Exception {
-        if(obj == null){
+        if (obj == null) {
             return null;
         }
 

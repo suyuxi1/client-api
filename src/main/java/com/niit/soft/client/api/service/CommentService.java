@@ -13,6 +13,7 @@ import com.niit.soft.client.api.domain.dto.CommentDto;
 public interface CommentService {
     /**
      * 添加评论
+     *
      * @param commentDto
      * @return
      */
@@ -20,6 +21,7 @@ public interface CommentService {
 
     /**
      * 删除评论
+     *
      * @param commentId
      * @return
      */

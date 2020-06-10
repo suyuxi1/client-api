@@ -32,6 +32,13 @@ public class ResponseResult implements Serializable {
         return result;
     }
 
+    //给指定代码
+    public static ResponseResult success(ResultCode resultCode) {
+        ResponseResult result = new ResponseResult();
+        result.setResultCode(resultCode);
+        return result;
+    }
+
     public static ResponseResult success(Object data) {
         ResponseResult result = new ResponseResult();
         result.setResultCode(ResultCode.SUCCESS);
