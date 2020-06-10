@@ -6,18 +6,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author 倪涛涛
- * @version 1.0.0
- * @ClassName FleaSearchDto.java
+ * @ClassName DynamicDto
  * @Description TODO
- * @createTime 2020年06月09日 14:24:00
- */
+ * @Author xiaobinggan
+ * @Date 2020/6/9 8:54 上午
+ * @Version 1.0
+ **/
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FleaSearchDto {
+@Builder
+public class DynamicDto {
+    private String title;
     private String content;
-    private int currentPage;
-    private int pageSize;
+    private String type;
 }

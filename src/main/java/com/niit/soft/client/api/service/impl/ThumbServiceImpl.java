@@ -21,19 +21,20 @@ public class ThumbServiceImpl implements ThumbService {
 
     @Resource
     private ThumbRepository thumbRepository;
+
     @Override
     public ResponseResult insertThumb(ThumbDto thumbDto) {
         Thumb thumb = new Thumb();
         thumb.setIsDeleted(true);
-        thumb.setDynamicId(thumbDto.getDynamicId());
-        thumb.setUserId(thumbDto.getUserId());
+        thumb.setDynamicId(Long.valueOf(thumbDto.getDynamicId()));
+        thumb.setUserId(Long.valueOf(thumbDto.getUserId()));
         thumbRepository.save(thumb);
         return ResponseResult.success("添加成功");
     }
 
     @Override
-    public ResponseResult deleteThumb(ThumbDto thumbDto){
-        thumbRepository.deleteByDynamicIdAndDynamicId(thumbDto.getDynamicId(),thumbDto.getUserId());
+    public ResponseResult deleteThumb(ThumbDto thumbDto) {
+        thumbRepository.deleteByDynamicIdAndDynamicId(Long.valueOf(thumbDto.getDynamicId()), Long.valueOf(thumbDto.getUserId()));
         return ResponseResult.success("删除成功");
     }
 }
