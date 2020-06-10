@@ -1,10 +1,13 @@
 package com.niit.soft.client.api.util;
 
 import javax.xml.crypto.Data;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -136,5 +139,16 @@ public class DateTest {
         }
          return weekDays[w];
     }
+
+    /**
+     * string串边长localdatetime
+     * @param time
+     * @return
+     */
+    public static Timestamp getLocalDateTime(String time){
+        Timestamp ts = Timestamp.valueOf(time);
+
+    return ts;
+}
 
 }

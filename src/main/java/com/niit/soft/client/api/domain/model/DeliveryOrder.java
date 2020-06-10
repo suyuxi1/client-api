@@ -1,17 +1,22 @@
 package com.niit.soft.client.api.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bouncycastle.util.Times;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
@@ -28,6 +33,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "delivery_order")
+
 public class DeliveryOrder {
     @Id
     @Column(name = "id")
@@ -76,17 +82,17 @@ public class DeliveryOrder {
      * 订单创建时间
      */
     @Column(name = "oder_create_time", nullable = false)
-    private LocalDateTime oderCreateTime;
+    private Timestamp oderCreateTime;
     /**
      * 送出时间（立即送出 或者指定时间）
      */
     @Column(name = "delivery_time", nullable = false)
-    private LocalDateTime deliveryTime;
+    private Timestamp deliveryTime;
     /**
      * 0  1 是否取消
      */
-    @Column(name = "is_cancle", nullable = false)
-    private Integer isCancle;
+    @Column(name = "status", nullable = false)
+    private Integer status;
     /**
      * 订单金额（起步价格6）
      */
@@ -112,16 +118,16 @@ public class DeliveryOrder {
      */
     @JsonIgnore
     @Column(nullable = false)
-    @UpdateTimestamp
-    private LocalDateTime gmtCreate;
+    @CreatedDate
+    private Timestamp gmtCreate;
 
     /**
      * 修改时间
      */
     @JsonIgnore
-    @UpdateTimestamp
+    @LastModifiedDate
     @Column(nullable = false)
-    private LocalDateTime gmtModified;
+    private Timestamp gmtModified;
 
     /**
      * 删除标志（0 逻辑删除， 1 未删除）

@@ -9,12 +9,15 @@ import com.niit.soft.client.api.mapper.DeliveryOrderMapper;
 import com.niit.soft.client.api.mapper.TransactionMapper;
 import com.niit.soft.client.api.repository.TransactionRepository;
 import com.niit.soft.client.api.service.TransactionService;
+import com.niit.soft.client.api.util.DateTest;
 import com.niit.soft.client.api.util.SnowFlake;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Queue;
 
 /**
  * @author wl
@@ -37,10 +40,16 @@ public class TransactionServiceImpl implements TransactionService {
     public ResponseResult insertTransaction(TransactionDto transactionDto) {
         SnowFlake snowFlake = new SnowFlake(1, 3);
         long transactionId = snowFlake.nextId();
-        Transaction transaction = Transaction.builder().transactionCreate(LocalDateTime.now())
-                .transactionEnd(LocalDateTime.now()).errandsId(transactionDto.getErrandsId()).status(0).orderId(transactionDto.getOrderId())
-                .id(transactionId).gmtCreate(LocalDateTime.now()).gmtModified(LocalDateTime.now()).isDeleted(true).build();
+        //创建订单表
+        Transaction transaction = Transaction.builder().transactionCreate(Timestamp.valueOf(LocalDateTime.now()))
+                .transactionEnd(Timestamp.valueOf(LocalDateTime.now())).errandsId(transactionDto.getErrandsId()).status(0).orderId(transactionDto.getOrderId())
+                .id(transactionId).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).gmtModified(Timestamp.valueOf(LocalDateTime.now())).isDeleted(false).build();
         Transaction save = transactionRepository.save(transaction);
+        //更改订单状态为进行中 2
+        QueryWrapper<DeliveryOrder>queryWrapper =new QueryWrapper<>();
+        queryWrapper.eq("id",transactionDto.getOrderId());
+        DeliveryOrder deliveryOrder =DeliveryOrder.builder().status(2).build();
+        deliveryOrderMapper.update(deliveryOrder,queryWrapper);
         return ResponseResult.success();
     }
 
@@ -53,9 +62,10 @@ public class TransactionServiceImpl implements TransactionService {
         queryWrapper.eq("order_id", orderId);
         Transaction transaction = Transaction.builder().status(1).build();
         transactionMapper.update(transaction, queryWrapper);
+        //更改订单状态为完成 3
         QueryWrapper<DeliveryOrder> deliveryOrderQueryWrapper = new QueryWrapper<>();
         deliveryOrderQueryWrapper.eq("id", orderId);
-        DeliveryOrder deliveryOrder = DeliveryOrder.builder().isCancle(2).build();
+        DeliveryOrder deliveryOrder = DeliveryOrder.builder().status(3).build();
         deliveryOrderMapper.update(deliveryOrder, deliveryOrderQueryWrapper);
         return ResponseResult.success();
     }
