@@ -3,16 +3,24 @@
 <mapper namespace="com.niit.soft.client.api.mapper.DynamicMapper">
 
     <resultMap id="dynamicVo" type="com.niit.soft.client.api.domain.vo.DynamicVo">
-        <association property="dynamic" javaType="com.niit.soft.client.api.domain.model.Dynamic">
-            <id property="pkDynamicId" column="pk_dynamic_id" javaType="java.lang.Long"/>
-            <result property="title" column="title"/>
-            <result property="content" column="content"/>
-            <result property="thumbs" column="thumbs"/>
-            <result property="comments" column="comments"/>
-            <result property="type" column="type"/>
-            <result property="isDeleted" column="is_deleted"/>
-            <result property="gmtCreate" column="gmt_create"/>
-        </association>
+        <!--        <association property="dynamic" javaType="com.niit.soft.client.api.domain.model.Dynamic">-->
+        <!--            <id property="pkDynamicId" column="pk_dynamic_id" javaType="java.lang.Long"/>-->
+        <!--            <result property="title" column="title"/>-->
+        <!--            <result property="content" column="content"/>-->
+        <!--            <result property="thumbs" column="thumbs"/>-->
+        <!--            <result property="comments" column="comments"/>-->
+        <!--            <result property="type" column="type"/>-->
+        <!--            <result property="isDeleted" column="is_deleted"/>-->
+        <!--            <result property="gmtCreate" column="gmt_create"/>-->
+        <!--        </association>-->
+        <id property="pkDynamicId" column="pk_dynamic_id" javaType="java.lang.Long"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="thumbs" column="thumbs"/>
+        <result property="comments" column="comments"/>
+        <result property="type" column="type"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="gmtCreate" column="gmt_create"/>
 
         <collection property="commentList" ofType="com.niit.soft.client.api.domain.model.Comment">
             <id property="pkCommentId" column="pk_comment_id" javaType="java.lang.Long"/>
@@ -34,9 +42,25 @@
     </resultMap>
 
     <select id="findDynamicVoById" resultMap="dynamicVo">
-        SELECT d.pk_dynamic_id, d.title, d.content, d.thumbs, d.comments, d.type, d.gmt_create, d.is_deleted,
-               t.pk_thumb_id, t.dynamic_id, t.gmt_create, t.is_deleted,
-               c.pk_comment_id, c.dynamic_id, c.content, c.gmt_create, c.is_deleted
+        SELECT d.pk_dynamic_id,
+               d.title,
+               d.content,
+               d.thumbs,
+               d.comments,
+               d.type,
+               d.gmt_create,
+               d.is_deleted,
+               t.pk_thumb_id,
+               t.dynamic_id,
+               t.user_id,
+               t.gmt_create,
+               t.is_deleted,
+               c.pk_comment_id,
+               c.dynamic_id,
+               c.user_id,
+               c.content,
+               c.gmt_create,
+               c.is_deleted
         FROM dynamic d
                  LEFT JOIN thumb t ON d.pk_dynamic_id = t.dynamic_id
                  LEFT JOIN comment c ON d.pk_dynamic_id = c.dynamic_id

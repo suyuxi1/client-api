@@ -11,13 +11,5 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-    /**
-     * 根据id修改 消息读取状态
-     * @param pkMessageId
-     * @return
-     */
-    @Modifying
-    @Transactional(rollbackFor = RuntimeException.class)
-    @Query(value = "update Message set isReaded = true where pkMessageId = ?1")
-    int updateIsReaded(Long pkMessageId);
+
 }

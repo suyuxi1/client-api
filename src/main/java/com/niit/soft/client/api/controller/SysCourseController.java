@@ -1,4 +1,3 @@
-
 package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.annotation.ControllerWebLog;
@@ -22,24 +21,24 @@ import javax.annotation.Resource;
 @Slf4j
 @RestController
 @RequestMapping("/course")
-@Api(value = "SysCourseController",tags = {"课程模块接口"})
+@Api(value = "SysCourseController", tags = {"课程模块接口"})
 public class SysCourseController {
     @Resource
     private SysCourseService sysCourseService;
 
-    @ApiOperation(value = "根据week、学期、周几数查询课程表接口",notes = "")
+    @ApiOperation(value = "根据week、学期、周几数查询课程表接口", notes = "")
     @PostMapping(value = "/schedule")
     @ControllerWebLog(name = "findWeekCourseTableByScheduleDto", isSaved = true)
-    public ResponseResult findWeekCourseTableByScheduleDto(@RequestBody ScheduleDto scheduleDto){
-        log.info("-----/schedule-----请求参数：" + scheduleDto+"**1**");
+    public ResponseResult findWeekCourseTableByScheduleDto(@RequestBody ScheduleDto scheduleDto) {
+        log.info("-----/schedule-----请求参数：" + scheduleDto + "**1**");
         return sysCourseService.findWeekCourseTableByScheduleDto(scheduleDto);
     }
 
-    @ApiOperation(value = "根据班级id获取今日课程数据",notes = "请求参数为班级id")
+    @ApiOperation(value = "根据班级id获取今日课程数据", notes = "请求参数为班级id")
     @PostMapping(value = "/today")
     @ControllerWebLog(name = "findTodayCourseTable", isSaved = true)
-    public ResponseResult findTodayCourseTable(@RequestParam("class_id")Long classId){
-        log.info("-----/today-----请求参数：" + classId+"**1**");
+    public ResponseResult findTodayCourseTable(@RequestParam("class_id") Long classId) {
+        log.info("-----/today-----请求参数：" + classId + "**1**");
         return sysCourseService.findTodayCourseTable(classId);
     }
 }

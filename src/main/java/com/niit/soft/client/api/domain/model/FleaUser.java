@@ -6,7 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+/**
+ * @author 倪涛涛
+ * @version 1.0.0
+ * @ClassName a.java
+ * @Description TODO
+ * @createTime 2020年06月09日 11:26:00
+ */
 @Entity
 @Data
 @Builder
@@ -60,7 +66,11 @@ public class FleaUser {
     private String jobNumber;
 
 
-
+    /**
+     * 删除标志
+     */
+    @Column(nullable = false,length = 4)
+    private Boolean isDeleted;
 
 
 

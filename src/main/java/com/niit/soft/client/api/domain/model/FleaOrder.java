@@ -7,7 +7,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-
+/**
+ * @author 倪涛涛
+ * @version 1.0.0
+ * @ClassName a.java
+ * @Description TODO
+ * @createTime 2020年06月09日 11:26:00
+ */
 @Entity
 @Data
 @Builder
@@ -44,5 +50,9 @@ public class FleaOrder {
     private Timestamp createTime;
 
 
-
+    /**
+     * 删除标志
+     */
+    @Column(nullable = false,length = 4)
+    private Boolean isDeleted;
 }

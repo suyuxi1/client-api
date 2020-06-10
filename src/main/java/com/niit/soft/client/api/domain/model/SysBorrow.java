@@ -70,6 +70,8 @@ public class SysBorrow {
     @Column(nullable = false)
     private Timestamp gmtCreate;
 
+
+
     /**
      * 更新时间
      */

@@ -18,7 +18,7 @@ public interface CommentMapper {
      * @param id
      * @return
      */
-    List<CommentVo> findCommentVoById(Long id);
+    CommentVo findCommentVoById(Long id);
 
 
 }

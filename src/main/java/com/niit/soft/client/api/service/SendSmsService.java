@@ -1,5 +1,7 @@
 package com.niit.soft.client.api.service;
 
+import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.SmsPhoneDto;
 import com.niit.soft.client.api.domain.dto.VerifyPhoneDto;
 
 import java.util.Map;
@@ -16,4 +18,11 @@ public interface SendSmsService {
 
     //校验验证码
     boolean verify(VerifyPhoneDto verifyPhone);
+
+    /**
+     * 发送验证码
+     * @param smsPhoneDto
+     * @return
+     */
+    ResponseResult code(SmsPhoneDto smsPhoneDto);
 }
