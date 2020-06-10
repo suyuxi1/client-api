@@ -20,4 +20,6 @@ public class DormVo {
     private String towerName;
     private String towerUnitName;
     private String roomName;
+    private Long roomId;
+
 }

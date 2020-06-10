@@ -6,19 +6,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @ClassName DynamicDto
+ * @ClassName RoomDto
  * @Description TODO
- * @Author xiaobinggan
- * @Date 2020/6/9 8:54 上午
- * @Version 1.0
+ * @Author 田震
+ * @Date 2020/6/9
  **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DynamicDto {
-    private String title;
-    private String content;
-    private String type;
-    private Long userId;
+public class RoomDto {
+    private  String towerName;
+    private  String towerUnitName;
+    private  String roomName;
+
+
 }

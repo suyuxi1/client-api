@@ -44,12 +44,12 @@ public interface CardService {
 
     /**
      * 电费充值
-     * @param name
+     * @param id
      * @param money
      * @return
      */
 
-    ResponseResult insertelectricityBalance(String name,Double money);
+    ResponseResult insertelectricityBalance(Long id,Double money);
     /**
      * 网费充值
      * @param jobNumber
