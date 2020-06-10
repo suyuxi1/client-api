@@ -26,7 +26,7 @@
             <id property="pkCommentId" column="pk_comment_id" javaType="java.lang.Long"/>
             <result property="dynamicId" column="dynamic_id"/>
             <result property="userId" column="user_id"/>
-            <result property="content" column="content"/>
+            <result property="content" column="con"/>
             <result property="isDeleted" column="is_deleted"/>
             <result property="gmtCreate" column="gmt_create"/>
         </collection>
@@ -58,7 +58,7 @@
                c.pk_comment_id,
                c.dynamic_id,
                c.user_id,
-               c.content,
+               c.content AS con,
                c.gmt_create,
                c.is_deleted
         FROM dynamic d

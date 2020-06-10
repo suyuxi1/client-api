@@ -39,6 +39,12 @@ public class Dynamic {
     @Id
     private Long pkDynamicId;
 
+
+    /**
+     * 用户id
+     */
+    private Long userId;
+
     /**
      * 标题
      */

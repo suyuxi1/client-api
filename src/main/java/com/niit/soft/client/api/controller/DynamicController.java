@@ -71,13 +71,7 @@ public class DynamicController {
         return ResponseResult.success(dynamicService.findCommentVoById((long) id));
     }
 
-    /**
-     * 添加校友圈动态评论
-     *
-     * @param commentDto
-     * @return
-     */
-    @ApiOperation(value = "添加校友评论", notes = "")
+    @ApiOperation(value = "添加校友评论", notes = "传递参数为内容，动态id，用户id")
     @PostMapping(value = "/comment/insert")
     public ResponseResult insertComment(@RequestBody CommentDto commentDto) {
         return commentService.insertComment(commentDto);
@@ -89,7 +83,7 @@ public class DynamicController {
      * @param id
      * @return
      */
-    @ApiOperation(value = "删除校友评论", notes = "")
+    @ApiOperation(value = "删除校友评论", notes = "传递参数为comment的id")
     @PostMapping(value = "/comment/deletion/{id}")
     public ResponseResult deleteComment(@PathVariable Long id) {
         return commentService.deleteComment(id);
@@ -101,7 +95,7 @@ public class DynamicController {
      * @param replyCommentDto
      * @return
      */
-    @ApiOperation(value = "添加校友评论的评论", notes = "")
+    @ApiOperation(value = "添加校友评论的评论", notes = "传递参数为内容，评论id，用户id")
     @PostMapping(value = "/replyComment/insert")
     public ResponseResult insertReplyComment(@RequestBody ReplyCommentDto replyCommentDto) {
         return replyCommentService.insertReplyComment(replyCommentDto);
@@ -113,7 +107,7 @@ public class DynamicController {
      * @param id
      * @return
      */
-    @ApiOperation(value = "删除校友评论的评论", notes = "")
+    @ApiOperation(value = "删除校友评论的评论", notes = "传递参数为reply_comment的id")
     @PostMapping(value = "/replyComment/deletion/{id}")
     public ResponseResult deleteReplyComment(@PathVariable Long id) {
         return replyCommentService.deleteReplyComment(id);
