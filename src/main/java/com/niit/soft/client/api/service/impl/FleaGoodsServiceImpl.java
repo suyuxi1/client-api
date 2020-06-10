@@ -2,9 +2,7 @@ package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
-import com.niit.soft.client.api.domain.dto.FleaGoodsDto;
-import com.niit.soft.client.api.domain.dto.FleaSearchDto;
-import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.dto.*;
 import com.niit.soft.client.api.domain.model.FleaGoods;
 import com.niit.soft.client.api.domain.model.FleaType;
 import com.niit.soft.client.api.domain.model.FleaUser;
@@ -17,6 +15,8 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,37 +59,39 @@ public class FleaGoodsServiceImpl implements FleaGoodsService {
     }
 
     @Override
-    public ResponseResult findGoodById(Long id) {
-        return ResponseResult.success(fleaGoodsRepository.selectGoodsById(id));
+    public ResponseResult findGoodById(GoodIdDto goodIdDto) {
+        return ResponseResult.success(fleaGoodsRepository.selectGoodsById(goodIdDto.getPkFleaGoodsId()));
     }
 
     @Override
     public ResponseResult updateGood(FleaGoodsDto fleaGoodsDto) {
-        Optional<FleaGoods> fleaGoodsList = fleaGoodsRepository.findById(fleaGoodsDto.getPkFleaGoodsId());
-        Optional<FleaUser> fleaUserList = fleaUserRepository.findById(fleaGoodsDto.getPkFleaUserId());
-        Optional<FleaType> fleaTypeList = fleaTypeRepository.findById(fleaGoodsDto.getPkFleaTypeId());
-        FleaUser fleaUser = FleaUser.builder()
-                .pkFleaUserId(fleaUserList.get().getPkFleaUserId())
-                .avatar(fleaUserList.get().getAvatar()).jobNumber(fleaUserList.get().getJobNumber())
-                .nickname(fleaUserList.get().getNickname()).phoneNumber(fleaUserList.get().getPhoneNumber())
-                .sex(fleaUserList.get().getSex()).username(fleaUserList.get().getUsername())
-                .build();
-        FleaType fleaType = FleaType.builder()
-                .parentId(fleaTypeList.get().getParentId()).pkFleaTypeId(fleaTypeList.get().getPkFleaTypeId())
-                .typeCoverUrl(fleaTypeList.get().getTypeCoverUrl()).typeName(fleaTypeList.get().getTypeName())
-                .typeUrl(fleaTypeList.get().getTypeUrl())
-                .build();
+        Optional<FleaGoods> fleaGoodsOptional = fleaGoodsRepository.findById(fleaGoodsDto.getPkFleaGoodsId());
         FleaGoods fleaGoods1 = FleaGoods.builder()
                 .pkFleaGoodsId(fleaGoodsDto.getPkFleaGoodsId()).goodsName(fleaGoodsDto.getGoodsName())
                 .goodsDescription(fleaGoodsDto.getGoodsDescription()).goodsImgUrl(fleaGoodsDto.getGoodsImgUrl())
-                .goodsPrice(fleaGoodsDto.getGoodsPrice()).goodsCreateTime(fleaGoodsList.get().getGoodsCreateTime())
-                .fleaType(fleaType).fleaUser(fleaUser).goodsMark(fleaGoodsDto.getGoodsMark())
+                .goodsPrice(fleaGoodsDto.getGoodsPrice()).goodsCreateTime(fleaGoodsOptional.get().getGoodsCreateTime())
+                .fleaType(fleaTypeRepository.findById(fleaGoodsDto.getPkFleaTypeId()).get())
+                .fleaUser(fleaUserRepository.findById(fleaGoodsDto.getPkFleaUserId()).get())
+                .goodsMark(fleaGoodsDto.getGoodsMark()).isDeleted(fleaGoodsOptional.get().getIsDeleted())
                 .build();
         return ResponseResult.success(fleaGoodsRepository.saveAndFlush(fleaGoods1));
     }
 
     @Override
-    public ResponseResult soldOutGood(Boolean isDeleted, Long goodId) {
-        return ResponseResult.success(fleaGoodsRepository.soldOutGood(isDeleted, goodId));
+    public ResponseResult soldOutGood(SoldOutGoodDto soldOutGoodDto) {
+        return ResponseResult.success(fleaGoodsRepository.soldOutGood(soldOutGoodDto.getIsDeleted(), soldOutGoodDto.getPkFleaGoodsId()));
+    }
+
+    @Override
+    public ResponseResult saveGoods(SaveGoodDto saveGoodDto) {
+        FleaGoods fleaGoods = FleaGoods.builder()
+                .fleaType(fleaTypeRepository.findById(saveGoodDto.getPkFleaTypeId()).get())
+                .fleaUser(fleaUserRepository.findById(saveGoodDto.getPkFleaUserId()).get())
+                .goodsName(saveGoodDto.getGoodsName()).goodsDescription(saveGoodDto.getGoodsDescription())
+                .goodsImgUrl(saveGoodDto.getGoodsImgUrl()).goodsPrice(saveGoodDto.getGoodsPrice())
+                .goodsMark(saveGoodDto.getGoodsMark()).goodsCreateTime(Timestamp.valueOf(LocalDateTime.now()))
+                .isDeleted(false)
+                .build();
+        return ResponseResult.success(fleaGoodsRepository.save(fleaGoods));
     }
 }
