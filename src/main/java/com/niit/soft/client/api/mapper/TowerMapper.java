@@ -15,7 +15,7 @@ public interface TowerMapper {
      * @return
      * @throws SQLException
      */
-    @Select("SELECT t1.name as towerName,t2.name as roomName,t3.name as towerUnitName " +
+    @Select("SELECT  t1.name as towerName,t2.id as roomId,t2.name as roomName,t3.name as towerUnitName " +
             "FROM tower t1 " +
             "LEFT JOIN room t2 " +
             "ON t1.pk_tower_id = t2.tower_id " +
