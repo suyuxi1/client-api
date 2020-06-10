@@ -71,7 +71,7 @@ public class FleaGoods {
     /**
      * 商品类型id
      */
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false,fetch = FetchType.EAGER)
     private FleaType fleaType;
 
     /**

@@ -2,11 +2,13 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.CollectionDto;
 import com.niit.soft.client.api.domain.dto.FleaGoodsDto;
 import com.niit.soft.client.api.domain.dto.FleaSearchDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.FleaGoods;
 import com.niit.soft.client.api.domain.model.FleaReward;
+import com.niit.soft.client.api.service.FleaCollectionService;
 import com.niit.soft.client.api.service.FleaGoodsService;
 import com.niit.soft.client.api.service.FleaRewardService;
 import com.niit.soft.client.api.service.FleaTypeService;
@@ -39,6 +41,8 @@ public class FleaController {
     @Resource
     private FleaTypeService fleaTypeService;
 
+    @Resource
+    private FleaCollectionService fleaCollectionService;
     /**
      * 根据搜索框的输入模糊查询  商品名，标签，或 悬赏
      */
@@ -133,5 +137,21 @@ public class FleaController {
         log.info("-----goods/delete-----请求参数：" + isDeleted + "-----" + goodId + "**1**");
         return fleaGoodsService.soldOutGood(isDeleted, goodId);
 
+    }
+
+    @ControllerWebLog(name = "addCollection",isSaved = true)
+    @ApiOperation(value = "新增收藏",notes = "请求参数为商品ID以及收藏用户ID")
+    @PostMapping("/collection/increased")
+    public ResponseResult addCollection(@RequestBody CollectionDto collectionDto){
+        log.info("访问收藏新增接口,请求参数为：",collectionDto);
+        return fleaCollectionService.addCollection(collectionDto);
+    }
+
+    @ControllerWebLog(name = "getAll",isSaved = true)
+    @ApiOperation(value = "查询所有收藏",notes = "没有请求参数，直接post提交")
+    @PostMapping("/collection/all")
+    public ResponseResult getAll(){
+        log.info("进入获取所有收藏接口");
+        return fleaCollectionService.getCollection();
     }
 }
