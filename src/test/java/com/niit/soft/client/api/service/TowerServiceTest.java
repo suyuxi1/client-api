@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TowerServiceTest {
 
     @Resource
-    private TowerService towerService;
+private TowerService towerService;
 
     @Test
     void getAllDormByType() {

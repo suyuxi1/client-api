@@ -2,6 +2,7 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.dto.SecondFieldDto;
 import com.niit.soft.client.api.service.ReportLossService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -33,15 +34,15 @@ public class ReportLossController {
     ResponseResult findAllByPage(@RequestBody PageDto pageDto){
         return reportLossService.findAllByPage(pageDto);
     }
+
     /**
      * 申请挂失
-     * @param pkReportLossId
-     * @param lossStatus
+     * @param secondFieldDto
      * @return
      */
     @PostMapping("/loss/statuschange")
-    ResponseResult updateLossStatus(@RequestParam("pk_report_loss_id")Long pkReportLossId,
-                                    @RequestParam("loss_status") Boolean lossStatus){
-        return  reportLossService.updateLossStatus(pkReportLossId, lossStatus);
+    ResponseResult updateLossStatus(@RequestBody SecondFieldDto secondFieldDto){
+        boolean lossStatus = Boolean.parseBoolean(secondFieldDto.getField2().toString());
+        return  reportLossService.updateLossStatus(Long.parseLong(String.valueOf(secondFieldDto.getField1())), lossStatus);
     }
 }

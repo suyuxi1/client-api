@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.controller;
 
+import com.alipay.api.domain.SignField;
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.PageDto;
@@ -57,17 +58,17 @@ public class AddressBookController {
     }
 
     /**
-     * 根据remark模糊通讯录好友
-     * @param keywords
+     * 根据remark模糊通讯录好友(400)
+     * @param singleFieldDto
      * @return
      */
     @PostMapping(value = "/list/remark")
     @ControllerWebLog(name = "getAddressByUserId", isSaved = true)
     @ApiOperation(value = "根据remark模糊通讯录好友", notes = "")
-    public List<AddressBook> findAddressBookByRemark(@RequestParam("keywords") String keywords) {
+    public List<AddressBook> findAddressBookByRemark(@RequestBody SingleFieldDto singleFieldDto) {
         log.info("访问/list/remark接口");
-        log.info("进入/list/remark接口："+keywords + "**1**");
-        return addressBookService.findAddressBookByRemarkContaning(keywords);
+        log.info("进入/list/remark接口："+singleFieldDto + "**1**");
+        return addressBookService.findAddressBookByRemarkContaning(String.valueOf(singleFieldDto.getField()));
     }
 
     /**
@@ -91,7 +92,7 @@ public class AddressBookController {
      * @param addressBook
      * @return
      */
-    @PutMapping(value = "/id")
+    @PostMapping(value = "/id")
     @ControllerWebLog(name = "updateAddressBook", isSaved = true)
     @ApiOperation(value = "修改通讯录好友信息", notes = "")
     public ResponseResult updateAddressBook(@RequestBody AddressBook addressBook) {
@@ -107,11 +108,11 @@ public class AddressBookController {
      * @param singleFieldDto
      * @return
      */
-    @DeleteMapping(value = "/deletion/id")
+    @PostMapping(value = "/deletion/id")
     @ControllerWebLog(name = "deleteAddressBookById", isSaved = true)
     @ApiOperation(value = "根据id删除通讯录好友信息", notes = "")
-        public ResponseResult deleteAddressBookById(@RequestBody SingleFieldDto singleFieldDto) {
-            addressBookService.deleteAddressBookById(Integer.parseInt(String.valueOf(singleFieldDto.getField())));
+    public ResponseResult deleteAddressBookById(@RequestBody SingleFieldDto singleFieldDto) {
+        addressBookService.deleteAddressBookById(Integer.parseInt(String.valueOf(singleFieldDto.getField())));
         return ResponseResult.success();
     }
     /**
