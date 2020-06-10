@@ -39,12 +39,11 @@ public class AddressBook {
     /**
      * 性别
      */
-    @Column(nullable = false,length = 32)
+    @Column(length = 32)
     private String gender;
     /**
      * 真实名字
      */
-    @Column(nullable = false)
     private  String realName;
 
     /**
