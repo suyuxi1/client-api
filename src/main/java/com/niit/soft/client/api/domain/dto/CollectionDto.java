@@ -5,19 +5,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
- * @Author yhChen
- * @Description 下架商品Dto
- * @Date 2020/6/10
+ * 描述:
+ *添加收藏传参类
+ * @author：Guorc
+ * @create 2020-06-10 8:13
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SoldOutGoodDto {
+public class CollectionDto {
+    private Long goodsId;
+    private Long userId;
 
-    /**
-     * 商品id
-     */
-    private Long pkFleaGoodsId;
 }

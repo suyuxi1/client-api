@@ -6,18 +6,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @Author yhChen
- * @Description 下架商品Dto
- * @Date 2020/6/10
+ * 描述:
+ *
+ * @author：Guorc
+ * @create 2020-06-10 14:26
  */
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SoldOutGoodDto {
-
+@Builder
+public class TypeDto {
     /**
-     * 商品id
+     * 根据分类ID查询数据参数
      */
-    private Long pkFleaGoodsId;
+    private Long typeId;
+    private Integer currentPage;
+    private Integer pageSize;
 }

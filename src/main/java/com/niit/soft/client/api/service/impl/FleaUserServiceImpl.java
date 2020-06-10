@@ -39,7 +39,8 @@ public class FleaUserServiceImpl implements FleaUserService {
                 .jobNumber(userAccountOptional.get().getJobNumber()).avatar(userAccountOptional.get().getAvatar())
                 .isDeleted(false)
                 .build();
-        return ResponseResult.success(fleaUserRepository.save(fleaUser));
+        fleaUserRepository.save(fleaUser);
+        return ResponseResult.success("用户数据添加成功");
     }
 
     @Override
@@ -51,6 +52,7 @@ public class FleaUserServiceImpl implements FleaUserService {
                 .username(fleaUserOptional.get().getUsername()).nickname(updateFleaUserDto.getNickname())
                 .sex(updateFleaUserDto.getSex()).pkFleaUserId(updateFleaUserDto.getPkFleaUserId())
                 .build();
-        return ResponseResult.success(fleaUserRepository.saveAndFlush(fleaUser));
+        fleaUserRepository.saveAndFlush(fleaUser);
+        return ResponseResult.success("用户数据修改成功");
     }
 }

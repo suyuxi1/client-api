@@ -74,12 +74,14 @@ public class FleaGoodsServiceImpl implements FleaGoodsService {
                 .fleaUser(fleaUserRepository.findById(fleaGoodsDto.getPkFleaUserId()).get())
                 .goodsMark(fleaGoodsDto.getGoodsMark()).isDeleted(fleaGoodsOptional.get().getIsDeleted())
                 .build();
-        return ResponseResult.success(fleaGoodsRepository.saveAndFlush(fleaGoods1));
+        fleaGoodsRepository.saveAndFlush(fleaGoods1);
+        return ResponseResult.success("商品信息修改成功");
     }
 
     @Override
     public ResponseResult soldOutGood(SoldOutGoodDto soldOutGoodDto) {
-        return ResponseResult.success(fleaGoodsRepository.soldOutGood(soldOutGoodDto.getIsDeleted(), soldOutGoodDto.getPkFleaGoodsId()));
+        fleaGoodsRepository.soldOutGood(soldOutGoodDto.getPkFleaGoodsId());
+        return ResponseResult.success("商品下架成功");
     }
 
     @Override
@@ -92,6 +94,7 @@ public class FleaGoodsServiceImpl implements FleaGoodsService {
                 .goodsMark(saveGoodDto.getGoodsMark()).goodsCreateTime(Timestamp.valueOf(LocalDateTime.now()))
                 .isDeleted(false)
                 .build();
-        return ResponseResult.success(fleaGoodsRepository.save(fleaGoods));
+        fleaGoodsRepository.save(fleaGoods);
+        return ResponseResult.success("商品添加成功");
     }
 }

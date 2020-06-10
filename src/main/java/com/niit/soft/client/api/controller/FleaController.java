@@ -5,6 +5,7 @@ import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.*;
 import com.niit.soft.client.api.domain.model.FleaGoods;
 import com.niit.soft.client.api.domain.model.FleaReward;
+import com.niit.soft.client.api.service.FleaCollectionService;
 import com.niit.soft.client.api.service.FleaGoodsService;
 import com.niit.soft.client.api.service.FleaRewardService;
 import com.niit.soft.client.api.service.FleaTypeService;
@@ -40,6 +41,8 @@ public class FleaController {
     @Resource
     private FleaUserService fleaUserService;
 
+    @Resource
+    private FleaCollectionService fleaCollectionService;
     /**
      * 根据搜索框的输入模糊查询  商品名，标签，或 悬赏
      */
@@ -103,24 +106,18 @@ public class FleaController {
     @ControllerWebLog(name = "getGoodsByType", isSaved = true)
     @ApiOperation(value = "根据类别ID查询商品信息", notes = "pageDto分页参数和typeId类别ID，参数从0页开始")
     @PostMapping("/goods/type")
-    public ResponseResult getGoodsByType(@RequestBody PageDto pageDto, @RequestParam("typeId") Long typeId) {
-        log.info("进入根据类型查询商品接口，传来的参数为：pageDtp,typeId", pageDto, typeId + "**1**");
-        return fleaTypeService.getGoodsByType(pageDto, typeId);
+    public ResponseResult getGoodsByType(@RequestBody TypeDto typeDto) {
+        log.info("进入根据类型查询商品接口，传来的参数为：pageDtp,typeId", typeDto);
+        return fleaTypeService.getGoodsByType(typeDto);
     }
 
-    /**
-     * 根据商品id查询指定商品的详细信息
-     *
-     * @param goodIdDto GoodIdDto
-     * @return ResponseResult
-     */
     @ControllerWebLog(name = "findGoodById", isSaved = true)
-    @ApiOperation(value = "根据商品id查询指定商品的详细信息", notes = "请求参数为商品idDto----goodIdDto   ")
+    @ApiOperation(value = "根据商品id查询指定商品的详细信息", notes = "请求参数为商品id----goodId   ")
     @PostMapping(value = "goods/id")
-    public ResponseResult findGoodById(@RequestBody GoodIdDto goodIdDto) {
+    public ResponseResult findGoodById(@RequestBody GoodIdDto goodId) {
         log.info("访问goods/id接口");
-        log.info("-----goods/id-----请求参数：" + goodIdDto + "**1**");
-        return fleaGoodsService.findGoodById(goodIdDto);
+        log.info("-----goods/id-----请求参数：" + goodId + "**1**");
+        return fleaGoodsService.findGoodById(goodId);
     }
 
     /**
@@ -131,7 +128,7 @@ public class FleaController {
      */
     @ControllerWebLog(name = "updateGoodMessage", isSaved = true)
     @ApiOperation(value = "修改商品信息", notes = "请求参数为商品类、发布人id、类型id----fleaGoods、userId、typeId  ")
-    @PutMapping(value = "goods/set")
+    @PostMapping(value = "goods/set")
     public ResponseResult updateGoodMessage(@RequestBody FleaGoodsDto fleaGoodsDto) {
         log.info("访问goods/set接口");
         log.info("-----goods/set-----请求参数：" + fleaGoodsDto + "**1**");
@@ -145,11 +142,11 @@ public class FleaController {
      * @return ResponseResult
      */
     @ControllerWebLog(name = "soldOutGood", isSaved = true)
-    @ApiOperation(value = "下架商品", notes = "请求参数为下架商品Dto----soldOutGoodDto  ")
-    @PutMapping(value = "goods/delete")
+    @ApiOperation(value = "下架商品", notes = "请求参数为删除标志、商品id----isDeleted、goodId  ")
+    @PostMapping(value = "goods/delete")
     public ResponseResult soldOutGood(@RequestBody SoldOutGoodDto soldOutGoodDto) {
         log.info("访问goods/delete接口");
-        log.info("-----goods/delete-----请求参数：" + soldOutGoodDto + "**1**");
+        log.info("-----goods/delete-----请求参数："  + "**1**");
         return fleaGoodsService.soldOutGood(soldOutGoodDto);
     }
 
@@ -196,5 +193,29 @@ public class FleaController {
         log.info("访问users/flushing接口");
         log.info("-----users/flushing-----请求参数：" + updateFleaUserDto + "**1**");
         return fleaUserService.updateFleaUser(updateFleaUserDto);
+    }
+
+    @ControllerWebLog(name = "addCollection",isSaved = true)
+    @ApiOperation(value = "新增收藏",notes = "请求参数为商品ID以及收藏用户ID")
+    @PostMapping("/collection/increased")
+    public ResponseResult addCollection(@RequestBody CollectionDto collectionDto){
+        log.info("访问收藏新增接口,请求参数为：",collectionDto);
+        return fleaCollectionService.addCollection(collectionDto);
+    }
+
+    @ControllerWebLog(name = "getAll",isSaved = true)
+    @ApiOperation(value = "查询所有收藏",notes = "没有请求参数，直接post提交")
+    @PostMapping("/collection/all")
+    public ResponseResult getAll(){
+        log.info("进入获取所有收藏接口");
+        return fleaCollectionService.getCollection();
+    }
+
+    @ControllerWebLog(name = "logicalDel", isSaved = true)
+    @ApiOperation(value = "逻辑删除收藏", notes = "请求参数为商品ID与用户ID----collectionDto  ")
+    @PostMapping("/collection/deleted")
+    public ResponseResult logicalDel(@RequestBody CancelCollectionDto collectionDto){
+        log.info("进入逻辑删除收藏部分，传来的参数为：",collectionDto);
+        return fleaCollectionService.logicalDel(collectionDto);
     }
 }

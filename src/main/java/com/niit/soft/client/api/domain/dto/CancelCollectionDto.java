@@ -6,18 +6,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @Author yhChen
- * @Description 下架商品Dto
- * @Date 2020/6/10
+ * 描述:
+ *
+ * @author：Guorc
+ * @create 2020-06-10 11:27
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SoldOutGoodDto {
-
+public class CancelCollectionDto {
     /**
-     * 商品id
+     * 用户ID
      */
-    private Long pkFleaGoodsId;
+    private Long userId;
+    /**
+     * 商品ID
+     */
+    private Long goodsId;
 }
