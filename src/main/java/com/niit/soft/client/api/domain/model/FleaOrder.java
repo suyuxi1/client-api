@@ -24,8 +24,7 @@ public class FleaOrder {
      * id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pkFleaOrderId;
+    private String pkFleaOrderId;
 
     /**
      * 商品id

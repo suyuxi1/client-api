@@ -5,11 +5,7 @@ import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.*;
 import com.niit.soft.client.api.domain.model.FleaGoods;
 import com.niit.soft.client.api.domain.model.FleaReward;
-import com.niit.soft.client.api.service.FleaCollectionService;
-import com.niit.soft.client.api.service.FleaGoodsService;
-import com.niit.soft.client.api.service.FleaRewardService;
-import com.niit.soft.client.api.service.FleaTypeService;
-import com.niit.soft.client.api.service.FleaUserService;
+import com.niit.soft.client.api.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +36,8 @@ public class FleaController {
     private FleaTypeService fleaTypeService;
     @Resource
     private FleaUserService fleaUserService;
-
+    @Resource
+    private FleaOrderService fleaOrderService;
     @Resource
     private FleaCollectionService fleaCollectionService;
 
@@ -229,11 +226,11 @@ public class FleaController {
         return fleaRewardService.save(fleaRewardDto);
     }
 
-    @ControllerWebLog(name = "rewardSet", isSaved = true)
+    @ControllerWebLog(name = "rewardUpdated", isSaved = true)
     @ApiOperation(value = "修改悬赏", notes = "帖子id.图片地址,标题，悬赏人id")
-    @PostMapping("reward/set")
-    public ResponseResult rewardSet(@RequestBody FleaRewardDto fleaRewardDto) {
-        log.info("-----reward/set-----请求参数：" + fleaRewardDto + "**1**");
+    @PostMapping("reward/updated")
+    public ResponseResult rewardUpdated(@RequestBody FleaRewardDto fleaRewardDto) {
+        log.info("-----reward/updated-----请求参数：" + fleaRewardDto + "**1**");
         return fleaRewardService.update(fleaRewardDto);
     }
 
@@ -244,4 +241,14 @@ public class FleaController {
         log.info("-----reward/deleted-----请求参数：" + rewardDto + "**1**");
         return fleaRewardService.delete(rewardDto.getRewardId());
     }
+
+    @ControllerWebLog(name = "orderIncreased", isSaved = true)
+    @ApiOperation(value = "添加订单", notes = "订单编号，商品id，商家id，用户id")
+    @PostMapping("order/increased")
+    public ResponseResult orderIncreased(@RequestBody FleaOrderDto fleaOrderDto) {
+        log.info("-----order/increased----请求参数：" + fleaOrderDto + "**1**");
+        return fleaOrderService.orderIncreased(fleaOrderDto);
+    }
+
+
 }
