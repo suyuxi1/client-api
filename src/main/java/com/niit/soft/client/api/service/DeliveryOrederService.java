@@ -3,10 +3,8 @@ package com.niit.soft.client.api.service;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.DeliveryOrderDto;
 import com.niit.soft.client.api.domain.dto.FinshOrderDto;
-import com.niit.soft.client.api.domain.model.DeliveryOrder;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,5 +35,10 @@ public interface DeliveryOrederService {
     /**
      * 查询个人发布已经完成订单 或者取消订单
      */
-    Map<String,Object> selectFinshOrder(FinshOrderDto finshOrderDto);
+    Map<String, Object> selectFinshOrder(FinshOrderDto finshOrderDto);
+
+    /**
+     * 逻辑删除订单
+     */
+    ResponseResult deleteOrder(Long id);
 }
