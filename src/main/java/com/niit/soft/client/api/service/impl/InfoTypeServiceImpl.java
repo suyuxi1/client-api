@@ -1,10 +1,8 @@
 package com.niit.soft.client.api.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.InfoManage;
-import com.niit.soft.client.api.domain.model.InfoMangeType;
 import com.niit.soft.client.api.domain.model.InfoType;
 import com.niit.soft.client.api.repository.InfoManageRepository;
 import com.niit.soft.client.api.repository.InfoMangeTypeRepository;
@@ -17,10 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Yujie_Zhao
@@ -49,7 +44,7 @@ public class InfoTypeServiceImpl implements InfoTypeService {
 
     @Override
     public ResponseResult findInfoByTypeId(PageDto pageDto) {
-        System.out.println(pageDto.getField());
+//        System.out.println(pageDto.getField());
         Pageable pageable = PageRequest.of(
                 pageDto.getCurrentPage(),
                 pageDto.getPageSize(),

@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -28,8 +26,6 @@ import java.sql.Timestamp;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@DynamicInsert
-@DynamicUpdate
 @EntityListeners(AuditingEntityListener.class)
 public class Dynamic {
 
@@ -45,11 +41,7 @@ public class Dynamic {
      */
     private Long userId;
 
-    /**
-     * 用户id
-     */
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+
     /**
      * 标题
      */
