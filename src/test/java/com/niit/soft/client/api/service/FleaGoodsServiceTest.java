@@ -2,11 +2,14 @@ package com.niit.soft.client.api.service;
 
 import com.niit.soft.client.api.domain.dto.FleaGoodsDto;
 import com.niit.soft.client.api.domain.dto.SaveGoodDto;
+import com.niit.soft.client.api.domain.vo.MarkVo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,5 +31,10 @@ class FleaGoodsServiceTest {
                 .goodsMark("艺术").goodsPrice(2.00)
                 .build();
         log.info(String.valueOf(fleaGoodsService.saveGoods(saveGoodDto)));
+    }
+
+    @Test
+    void findTopFiveMark() {
+        System.out.println(fleaGoodsService.findTopFiveMark());
     }
 }

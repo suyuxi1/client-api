@@ -43,6 +43,7 @@ public class FleaController {
 
     @Resource
     private FleaCollectionService fleaCollectionService;
+
     /**
      * 根据搜索框的输入模糊查询  商品名，标签，或 悬赏
      */
@@ -146,7 +147,7 @@ public class FleaController {
     @PostMapping(value = "goods/delete")
     public ResponseResult soldOutGood(@RequestBody SoldOutGoodDto soldOutGoodDto) {
         log.info("访问goods/delete接口");
-        log.info("-----goods/delete-----请求参数："  + "**1**");
+        log.info("-----goods/delete-----请求参数：" + "**1**");
         return fleaGoodsService.soldOutGood(soldOutGoodDto);
     }
 
@@ -163,6 +164,20 @@ public class FleaController {
         log.info("访问goods/increased接口");
         log.info("-----goods/increased-----请求参数：" + saveGoodDto + "**1**");
         return fleaGoodsService.saveGoods(saveGoodDto);
+    }
+
+    /**
+     * findTopFiveMark
+     *
+     * @return ResponseResult
+     */
+    @ControllerWebLog(name = "findTopFiveMark", isSaved = true)
+    @ApiOperation(value = "查询top前五的标签", notes = "没有请求参数")
+    @PostMapping(value = "mark/top")
+    public ResponseResult findTopFiveMark() {
+        log.info("访问mark/top接口");
+        log.info("-----mark/top-----请求参数：无请求参数");
+        return fleaGoodsService.findTopFiveMark();
     }
 
     /**
@@ -195,18 +210,48 @@ public class FleaController {
         return fleaUserService.updateFleaUser(updateFleaUserDto);
     }
 
-    @ControllerWebLog(name = "addCollection",isSaved = true)
-    @ApiOperation(value = "新增收藏",notes = "请求参数为商品ID以及收藏用户ID")
+    /**
+     * 根据用户id查询该用户发布的商品
+     *
+     * @param fleaUserIdDto FleaUserIdDto
+     * @return ResponseResult
+     */
+    @ControllerWebLog(name = "findGoodsByUserId", isSaved = true)
+    @ApiOperation(value = "根据用户id查询该用户发布的商品", notes = "请求参数为查询用户发布Dto----fleaUserIdDto  ")
+    @PostMapping(value = "users/release")
+    public ResponseResult findGoodsByUserId(@RequestBody FleaUserIdDto fleaUserIdDto) {
+        log.info("访问users/release接口");
+        log.info("-----users/release-----请求参数：" + fleaUserIdDto + "**1**");
+        return fleaUserService.findGoodsByUserId(fleaUserIdDto);
+    }
+
+    /**
+     * 根据用户id查询该用户的商品订单
+     *
+     * @param fleaUserIdDto FleaUserIdDto
+     * @return ResponseResult
+     */
+    @ControllerWebLog(name = "findOrderByUserId", isSaved = true)
+    @ApiOperation(value = "根据用户id查询该用户的商品订单", notes = "请求参数为查询用户发布Dto----fleaUserIdDto  ")
+    @PostMapping(value = "users/orders")
+    public ResponseResult findOrderByUserId(@RequestBody FleaUserIdDto fleaUserIdDto) {
+        log.info("访问users/orders接口");
+        log.info("-----users/orders-----请求参数：" + fleaUserIdDto + "**1**");
+        return fleaUserService.findOrderByUserId(fleaUserIdDto);
+    }
+
+    @ControllerWebLog(name = "addCollection", isSaved = true)
+    @ApiOperation(value = "新增收藏", notes = "请求参数为商品ID以及收藏用户ID")
     @PostMapping("/collection/increased")
-    public ResponseResult addCollection(@RequestBody CollectionDto collectionDto){
-        log.info("访问收藏新增接口,请求参数为：",collectionDto);
+    public ResponseResult addCollection(@RequestBody CollectionDto collectionDto) {
+        log.info("访问收藏新增接口,请求参数为：", collectionDto);
         return fleaCollectionService.addCollection(collectionDto);
     }
 
-    @ControllerWebLog(name = "getAll",isSaved = true)
-    @ApiOperation(value = "查询所有收藏",notes = "没有请求参数，直接post提交")
+    @ControllerWebLog(name = "getAll", isSaved = true)
+    @ApiOperation(value = "查询所有收藏", notes = "没有请求参数，直接post提交")
     @PostMapping("/collection/all")
-    public ResponseResult getAll(){
+    public ResponseResult getAll() {
         log.info("进入获取所有收藏接口");
         return fleaCollectionService.getCollection();
     }
@@ -214,8 +259,8 @@ public class FleaController {
     @ControllerWebLog(name = "logicalDel", isSaved = true)
     @ApiOperation(value = "逻辑删除收藏", notes = "请求参数为商品ID与用户ID----collectionDto  ")
     @PostMapping("/collection/deleted")
-    public ResponseResult logicalDel(@RequestBody CancelCollectionDto collectionDto){
-        log.info("进入逻辑删除收藏部分，传来的参数为：",collectionDto);
+    public ResponseResult logicalDel(@RequestBody CancelCollectionDto collectionDto) {
+        log.info("进入逻辑删除收藏部分，传来的参数为：", collectionDto);
         return fleaCollectionService.logicalDel(collectionDto);
     }
 }

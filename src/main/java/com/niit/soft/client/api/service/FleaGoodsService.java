@@ -56,4 +56,11 @@ public interface FleaGoodsService {
      * @return ResponseResult
      */
     ResponseResult saveGoods(SaveGoodDto saveGoodDto);
+
+    /**
+     * 查询top前五的标签
+     *
+     * @return ResponseResult
+     */
+    ResponseResult findTopFiveMark();
 }
