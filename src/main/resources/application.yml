@@ -42,11 +42,17 @@ spring:
         max-idle: 10
         min-idle: 0
     timeout: 1000
+  # rabbitmq 配置
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 # mybatis-Plus配置
 mybatis-plus:
   configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     jdbc-type-for-null: 'null'
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.team2.smartcampus.entity
@@ -58,3 +64,6 @@ mybatis-plus:
       field-strategy: not_empty
       #开启驼峰是命名
       table-underline: true
+
+
+
