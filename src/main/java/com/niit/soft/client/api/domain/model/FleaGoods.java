@@ -21,6 +21,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FleaGoods {
+
     /**
      * 商品id
      */

@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -25,6 +27,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "transaction")
+@EntityListeners(AuditingEntityListener.class)
 public class Transaction {
     @Id
     @Column(name = "id")
@@ -39,38 +42,38 @@ public class Transaction {
      *交易创建时间+
      */
     @Column(name = "transaction_create", nullable = false)
-    private LocalDateTime transactionCreate;
+    private Timestamp transactionCreate;
     /**
      *跑腿人
      *
      */
     @Column(name = "errands_id", nullable = false)
     private Long errandsId;
-    /**完成时间  根据完成后更改
-     *
+    /**
+     * 完成时间  根据完成后更改
      */
     @Column(name = "transaction_end", nullable = false)
-    private LocalDateTime transactionEnd;
+    private Timestamp transactionEnd;
     /**
-     *状态
+     * 状态 0是正在配送  1是已完成
      */
     @Column(name = "status", nullable = false)
-    private  Integer status;
+    private Integer status;
     /**
      * 创建时间
      */
     //@JsonIgnore
     @Column(nullable = false)
-    @UpdateTimestamp
-    private LocalDateTime gmtCreate;
+   @CreatedDate
+    private Timestamp gmtCreate;
 
     /**
      * 修改时间
      */
     @JsonIgnore
-    @UpdateTimestamp
+    @LastModifiedDate
     @Column(nullable = false)
-    private LocalDateTime gmtModified;
+    private Timestamp gmtModified;
 
     /**
      * 删除标志（0 逻辑删除， 1 未删除）

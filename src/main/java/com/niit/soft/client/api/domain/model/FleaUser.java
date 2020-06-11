@@ -55,7 +55,7 @@ public class FleaUser {
     /**
      * 性别
      */
-    @Column(nullable = false)
+    @Column(nullable = false,length = 4)
     private String sex;
 
     /**
@@ -71,9 +71,6 @@ public class FleaUser {
      */
     @Column(nullable = false,length = 4)
     private Boolean isDeleted;
-
-
-
 
 
 }
