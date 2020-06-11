@@ -37,7 +37,7 @@ public class FleaCollection {
     /**
      * 商品id
      */
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
     private FleaGoods fleaGoods;
 
     /**

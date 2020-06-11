@@ -20,6 +20,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FleaGoods {
+
     /**
      * 商品id
      */
@@ -71,7 +72,7 @@ public class FleaGoods {
     /**
      * 商品类型id
      */
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
     private FleaType fleaType;
 
     /**
