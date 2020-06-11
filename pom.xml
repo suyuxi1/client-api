@@ -12,6 +12,7 @@
     <artifactId>client-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>client-api</name>
+
     <description>Demo project for Spring Boot</description>
 
     <properties>
