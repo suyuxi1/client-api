@@ -92,7 +92,7 @@ public class FleaController {
     @PostMapping("/reward/top")
     public ResponseResult getTopTwoReward() {
         log.info("进入查询悬赏数据接口");
-        return fleaRewardService.getRewardTopTwo();
+        return fleaRewardService.getRewardTopThree();
     }
 
     @ControllerWebLog(name = "getGoodsByTime", isSaved = true)
