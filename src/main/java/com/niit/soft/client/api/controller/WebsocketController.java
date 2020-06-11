@@ -22,24 +22,27 @@ public class WebsocketController {
     @Autowired
     private SimpMessagingTemplate template;
 
+    // return的msg返回到/sendToAll主题
     @MessageMapping("/sendToAll")
     public String sendToAll(String msg) {
         return msg;
     }
 
+    //收到/send消息
     @MessageMapping("/send")
+    //分发到订阅过/topic的客户端上
     @SendTo("/topic")
     public String say(String msg) {
         return msg;
     }
 
     @MessageMapping("/sendToUser")
-    public void sendToUserByTemplate(Map<String,String> params) {
+    public void sendToUserByTemplate(Map<String, String> params) {
         String fromUserId = params.get("fromUserId");
         String toUserId = params.get("toUserId");
         String msg = "来自" + fromUserId + "消息:" + params.get("msg");
 
-        template.convertAndSendToUser(toUserId,"/topic", msg);
+        template.convertAndSendToUser(toUserId, "/topic", msg);
     }
 
     @GetMapping("/sendToAllByTemplate")
@@ -48,9 +51,12 @@ public class WebsocketController {
         template.convertAndSend("/topic", msg);
     }
 
+    // 发送到相应主题上，需要前端订阅该主题 推荐使用
     @GetMapping("/send")
     public String msgReply(@RequestParam String msg) {
         template.convertAndSend("/topic", msg);
+
+        //可以不用返回值
         return msg;
     }
 }

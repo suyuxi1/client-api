@@ -21,8 +21,8 @@ public class MonitorController {
     @ResponseBody
     @GetMapping("/sendMessage")
     public static String sendMessage(@RequestParam Map<String, Object> params) {
-        String msg = params.get("msg").toString();
-        SessionPool.sendMessage(msg);
+//        String msg = params.get("msg").toString();
+        SessionPool.sendMessage(params);
         return "发送成功";
     }
 
