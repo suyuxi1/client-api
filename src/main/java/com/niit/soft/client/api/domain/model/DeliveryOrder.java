@@ -89,7 +89,7 @@ public class DeliveryOrder {
     @Column(name = "delivery_time", nullable = false)
     private Timestamp deliveryTime;
     /**
-     * 0  1 是否取消
+     * 0 发布 1是取消 2是正在进行   3是完成
      */
     @Column(name = "status", nullable = false)
     private Integer status;
