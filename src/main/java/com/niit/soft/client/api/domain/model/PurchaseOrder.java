@@ -5,12 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 /**
  * @author wl
@@ -59,9 +59,9 @@ public class PurchaseOrder {
      * 购买时间
      */
     @Column(name = "purchase_time", nullable = false)
-    private LocalDateTime purchaseTime;
+    private Timestamp purchaseTime;
     /**
-     *是否取消
+     * 是否取消
      */
     @Column(name = "is_cancle", nullable = false)
     private Integer isCancle;
@@ -70,16 +70,16 @@ public class PurchaseOrder {
      */
     //@JsonIgnore
     @Column(nullable = false)
-    @UpdateTimestamp
-    private LocalDateTime gmtCreate;
+    @CreatedDate
+    private Timestamp gmtCreate;
 
     /**
      * 修改时间
      */
     @JsonIgnore
-    @UpdateTimestamp
+    @LastModifiedDate
     @Column(nullable = false)
-    private LocalDateTime gmtModified;
+    private Timestamp gmtModified;
 
     /**
      * 删除标志（0 逻辑删除， 1 未删除）
