@@ -36,6 +36,9 @@ public class RedisDataToMySQL {
     @Resource
     private ThumbService thumbService;
 
+    // 每小时
+//    @Scheduled(cron = "0 0 * * * ？")
+    // 每十分钟
     @Scheduled(cron = "0 */10 * * * ?")
     // 每五秒执行
 //    @Scheduled(cron = "*/5 * * * * ?")
