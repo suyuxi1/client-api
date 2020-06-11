@@ -65,12 +65,12 @@ public class Comment {
      * 修改时间
      */
     @LastModifiedDate
-    @Column(name = "gmt_modified",nullable = false)
+    @Column(name = "gmt_modified", nullable = false)
     private Timestamp gmtModified;
 
     /**
      * 删除标志（0 未删除， 1 逻辑删除）
      */
-    @Column(name = "is_deleted",nullable = false, length = 4)
+    @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted;
 }

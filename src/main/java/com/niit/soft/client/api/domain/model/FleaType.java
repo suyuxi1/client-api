@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
 /**
  * @author 倪涛涛
  * @version 1.0.0
@@ -35,7 +36,7 @@ public class FleaType {
     /**
      * 分类名称
      */
-    @Column(nullable = false, length = 32,unique = true)
+    @Column(nullable = false, length = 32, unique = true)
     private String typeName;
 
 
@@ -54,7 +55,7 @@ public class FleaType {
     /**
      * 删除标志
      */
-    @Column(nullable = false,length = 4)
+    @Column(nullable = false, length = 4)
     private Boolean isDeleted;
 
 }

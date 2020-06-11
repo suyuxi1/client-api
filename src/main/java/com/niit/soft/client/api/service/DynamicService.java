@@ -1,6 +1,9 @@
 package com.niit.soft.client.api.service;
 
+import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.DynamicDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.dto.ThumbDto;
 import com.niit.soft.client.api.domain.model.Dynamic;
 import com.niit.soft.client.api.domain.vo.CommentVo;
 import com.niit.soft.client.api.domain.vo.DynamicVo;
@@ -21,7 +24,7 @@ public interface DynamicService {
      * @param id
      * @return
      */
-    List<DynamicVo> findDynamicVoById(Long id);
+    DynamicVo findDynamicVoById(int id);
 
 
     /**
@@ -47,12 +50,20 @@ public interface DynamicService {
      * @param id
      * @return
      */
-    List<CommentVo> findCommentVoById(Long id);
+    CommentVo findCommentVoById(Long id);
 
     /**
      * 添加新的动态
      *
-     * @param dynamic
+     * @param dynamicDto
      */
-    int addOne(Dynamic dynamic);
+    Dynamic addOne(DynamicDto dynamicDto);
+
+    /**
+     * 点赞
+     *
+     * @param thumbDto
+     */
+    ResponseResult thumbsUp(ThumbDto thumbDto);
+
 }

@@ -46,7 +46,7 @@ public class UserAccountController {
     }
 
     /**
-     * 修改个人资料
+     * 修改手机号码
      * @param userAccount
      * @return
      */

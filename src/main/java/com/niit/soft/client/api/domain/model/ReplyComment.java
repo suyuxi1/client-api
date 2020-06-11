@@ -25,6 +25,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "reply_comment")
 public class ReplyComment {
     /**
      * 主键，策略为自增
@@ -64,13 +65,13 @@ public class ReplyComment {
      */
     @JsonIgnore
     @LastModifiedDate
-    @Column(name = "gmt_modified",nullable = false)
+    @Column(name = "gmt_modified", nullable = false)
     private Timestamp gmtModified;
 
     /**
      * 删除标志（0 逻辑删除， 1 未删除）
      */
     //@JsonIgnore
-    @Column(name = "is_deleted",nullable = false, length = 4)
+    @Column(name = "is_deleted", nullable = false, length = 4)
     private Boolean isDeleted;
 }

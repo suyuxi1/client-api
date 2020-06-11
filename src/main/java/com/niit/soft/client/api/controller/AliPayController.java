@@ -29,7 +29,7 @@ public class AliPayController {
      * @throws AlipayApiException
      */
     @ApiOperation("支付接口")
-    @RequestMapping(value = "alipay/toPay", method = RequestMethod.POST)
+    @PostMapping(value = "alipay/toPay")
     @ControllerWebLog(name = "AliPay", isSaved = true)
     public String AliPay(@RequestBody AlipayDto alipayDto) throws AlipayApiException {
         return aliPayService.AliPay(alipayDto);

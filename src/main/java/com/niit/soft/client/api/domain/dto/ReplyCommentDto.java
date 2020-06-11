@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 @Builder
 public class ReplyCommentDto {
-    private Long commentId ;
+    private Long commentId;
     private Long userId;
     private String content;
 }

@@ -27,3 +27,4 @@ public interface SysSemesterRepository extends JpaRepository<SysSemester, Long> 
     SysSemester findSysSemesterByName(String name);
 
 }
+
