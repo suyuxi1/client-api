@@ -35,11 +35,11 @@ public class DeliveryOrderDto {
     /**
      * 出发地纬度
      */
-    private String oLongitude;
+    private String olongitude;
     /**
      * 出发地经度
      */
-    private String oDimension;
+    private String odimension;
     /**
      * 目的地
      */
@@ -47,16 +47,16 @@ public class DeliveryOrderDto {
     /**
      * 目的地经度
      */
-    private String dLongitude;
+    private String dlongitude;
     /**
      * 目的地维度
      */
-    private String dDimension;
+    private String ddimension;
 
     /**
      * 送出时间（立即送出 或者指定时间）
      */
-    private LocalDateTime deliveryTime;
+    private String deliveryTime;
     /**
      * 订单金额（起步价格6）
      */
