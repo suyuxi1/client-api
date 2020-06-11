@@ -1,7 +1,7 @@
 package com.niit.soft.client.api.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.niit.soft.client.api.domain.dto.CollectionDto;
+import com.niit.soft.client.api.domain.dto.DynamicCollectionDto;
 import com.niit.soft.client.api.domain.model.Collections;
 import org.apache.ibatis.annotations.Select;
 
@@ -42,6 +42,6 @@ public interface CollectionsMapper extends BaseMapper<Collections> {
             "LEFT JOIN sys_user u " +
             "ON d.user_id = u.pk_user_id " +
             "WHERE d.pk_dynamic_id = #{id}")
-    CollectionDto findCollectionsByDynamicId(Long id);
+    DynamicCollectionDto findCollectionsByDynamicId(Long id);
 
 }

@@ -28,7 +28,9 @@ public class DynamicVo {
     private String type;
     private Timestamp gmtCreate;
     private Boolean isDeleted;
-//    private Dynamic dynamic;
+    //    private Dynamic dynamic;
     private List<Comment> commentList;
     private List<Thumb> thumbList;
+
+    private List<CommentVo> commentVoList;
 }

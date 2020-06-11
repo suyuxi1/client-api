@@ -69,18 +69,22 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public ResponseResult insertelectricityBalance(String name, Double money) {
-       String jobNumber= roomRepository.findLeaderNumberByName(name);
-        int a=cardRepository.insertelectricityBalance(name,money);
+    public ResponseResult insertelectricityBalance(Long id, Double money) {
+        String jobNumber=roomRepository.findRoomLearderNumberById(id);
+        int a=cardRepository.insertelectricityBalance(id,money);
         SysOrder sysOrder=
-                SysOrder.builder().description(name+"电费充值").jobNumber(jobNumber).orderMoney(money).orderNumber("10"+RandomUtil.randomInt(80000,1000000)).isDeleted(false).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).orderType("充值").payMethod("持卡人消费").status(true).build();
+                SysOrder.builder().description("电费充值").jobNumber(jobNumber).orderMoney(money).orderNumber("10"+RandomUtil.randomInt(80000,1000000)).isDeleted(false).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).orderType("充值").payMethod("持卡人消费").status(true).build();
         orderRepository.save(sysOrder);
         return ResponseResult.success(a);
     }
 
     @Override
     public ResponseResult insertBalance(String jobNumber, Double money) {
-        return null;
+        int a=cardRepository.insertBalance(jobNumber,money);
+        SysOrder sysOrder=
+                SysOrder.builder().description("网费充值").jobNumber(jobNumber).orderMoney(money).orderNumber("10"+RandomUtil.randomInt(80000,1000000)).isDeleted(false).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).orderType("充值").payMethod("持卡人消费").status(true).build();
+        orderRepository.save(sysOrder);
+        return ResponseResult.success(a);
     }
 
     @Override

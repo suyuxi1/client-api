@@ -5,43 +5,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
-import java.util.List;
+import java.util.Date;
 
 /**
- * @author Yujie_Zhao
- * @ClassName CollectionDto
- * @Description 收藏
- * @Date 2020/6/11  9:54
- * @Version 1.0
- **/
+ * 描述:
+ *添加收藏传参类
+ * @author：Guorc
+ * @create 2020-06-10 8:13
+ */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CollectionDto {
-    /**
-     * 动态内容
-     */
-    private String content;
+    private Long goodsId;
+    private Long userId;
 
-    /**
-     * 动态配图
-     */
-    private List<String> picture;
-
-    /**
-     * 用户头像
-     */
-    private String userAvatar;
-
-    /**
-     * 用户昵称
-     */
-    private String userName;
-
-    /**
-     * 动态创建时间
-     */
-    private Timestamp gmtCreate;
 }

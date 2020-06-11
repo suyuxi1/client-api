@@ -19,16 +19,6 @@ import java.util.List;
  */
 public interface AddressBookRepository extends JpaRepository<AddressBook, Long> {
 
-//    /**
-//     * 根据手机号添加好友
-//     * @param phoneNumber
-//     */
-//    @Transactional(rollbackFor = RuntimeException.class)
-//    @Modifying
-////    @Query(value = "insert into address_book (,,) value (:, :, :) while " +
-////            "phoneNumber=1?", nativeQuery = true)
-//    void  insertAdressBook(String phoneNumber);
-
     /**
      * 根据userId查询通讯录
      * @param userId

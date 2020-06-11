@@ -1,10 +1,11 @@
 spring:
   profiles:
     active: dev
-
+#时间戳统一转换
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: GMT+8
+  time-zone: GMT+8
+
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
@@ -42,11 +43,17 @@ spring:
         max-idle: 10
         min-idle: 0
     timeout: 1000
+  # rabbitmq 配置
+  rabbitmq:
+    host: 120.26.179.70
+    port: 5672
+    username: wl
+    password: 123...
 
 # mybatis-Plus配置
 mybatis-plus:
   configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     jdbc-type-for-null: 'null'
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.team2.smartcampus.entity
@@ -58,3 +65,6 @@ mybatis-plus:
       field-strategy: not_empty
       #开启驼峰是命名
       table-underline: true
+
+
+

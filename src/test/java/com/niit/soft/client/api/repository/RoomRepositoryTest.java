@@ -24,16 +24,15 @@ class RoomRepositoryTest {
 
     @Test
     void findLeaderNumberByName() {
-        String jobNumber=roomRepository.findLeaderNumberByName("雪松苑-A4-113");
-        System.out.println(jobNumber);
+
     }
 
     @Test
     void  saveall(){
         List<Room> roomList=new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 9; i++) {
           Room room=
-                  Room.builder().isDeleted(false).name("51"+i).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).electricityBalance(0.0).unitId((long) 6).towerId((long) 4).build();
+                  Room.builder().isDeleted(false).name("31"+i).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).electricityBalance(12.0).unitId((long) 3).towerId((long) 1).build();
           roomList.add(room);
         }
         roomRepository.saveAll(roomList);

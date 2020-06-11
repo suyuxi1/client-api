@@ -24,8 +24,7 @@ public class FleaOrder {
      * id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pkFleaOrderId;
+    private String pkFleaOrderId;
 
     /**
      * 商品id
@@ -48,7 +47,6 @@ public class FleaOrder {
      */
     @Column(nullable = false)
     private Timestamp createTime;
-
 
     /**
      * 删除标志

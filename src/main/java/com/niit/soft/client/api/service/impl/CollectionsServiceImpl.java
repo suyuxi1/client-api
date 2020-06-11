@@ -1,7 +1,7 @@
 package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.common.ResponseResult;
-import com.niit.soft.client.api.domain.dto.CollectionDto;
+import com.niit.soft.client.api.domain.dto.DynamicCollectionDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.Collections;
 import com.niit.soft.client.api.mapper.CollectionsMapper;
@@ -43,7 +43,7 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public ResponseResult getCollectionsByUserId(PageDto pageDto) {
-        List<CollectionDto> collectionDtoArrayList = new ArrayList<>();
+        List<DynamicCollectionDto> collectionDtoArrayList = new ArrayList<>();
 
         Pageable pageable = PageRequest.of(
                 pageDto.getCurrentPage(),
@@ -53,13 +53,13 @@ public class CollectionsServiceImpl implements CollectionsService {
         Page<Collections> collectionsPage =
                 collectionsRepository.getCollectionsByUserId(Long.parseLong((String) pageDto.getField()),pageable);
         collectionsPage.forEach(collections -> {
-            CollectionDto collectionDto = collectionsMapper.findCollectionsByDynamicId(collections.getDynamicId());
+            DynamicCollectionDto dynamicCollectionDto = collectionsMapper.findCollectionsByDynamicId(collections.getDynamicId());
             //得到一个资讯的所有配图
             List<String> dynamicPhotoList = dynamicPhotoRepository.findDistinctByDynamicId(collections.getDynamicId());
             if (dynamicPhotoList != null){
-                collectionDto.setPicture(dynamicPhotoList);
+                dynamicCollectionDto.setPicture(dynamicPhotoList);
             }
-            collectionDtoArrayList.add(collectionDto);
+            collectionDtoArrayList.add(dynamicCollectionDto);
         });
         return ResponseResult.success(collectionDtoArrayList);
     }

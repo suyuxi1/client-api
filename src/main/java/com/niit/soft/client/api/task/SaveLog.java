@@ -1,6 +1,5 @@
 package com.niit.soft.client.api.task;
 
-
 import com.niit.soft.client.api.domain.model.Loginfo;
 import com.niit.soft.client.api.repository.LogInfoRepository;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -81,3 +80,4 @@ public class SaveLog {
         logInfoRepository.save(log);
     }
 }
+
