@@ -1,3 +1,4 @@
+
 package com.niit.soft.client.api.repository;
 
 import com.niit.soft.client.api.domain.model.FleaGoods;
@@ -54,12 +55,11 @@ public interface FleaGoodsRepository extends JpaRepository<FleaGoods, Long> {
     /**
      * 下架商品
      *
-     * @param isDeleted Boolean
      * @param goodId    Long
      * @return int
      */
     @Transactional(rollbackFor = RuntimeException.class)
     @Modifying
-    @Query(value = "update FleaGoods set isDeleted = ?1 where pkFleaGoodsId = ?2 ")
-    int soldOutGood(Boolean isDeleted, Long goodId);
+    @Query(value = "update FleaGoods set isDeleted = 1 where pkFleaGoodsId = ?1 ")
+    int soldOutGood(Long goodId);
 }

@@ -1,26 +1,25 @@
 package com.niit.soft.client.api.domain.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * @author Yujie_Zhao
  * @ClassName ThumbDto
  * @Description TODO
- * @Date 2020/6/8  14:47
+ * @Author xiaobinggan
+ * @Date 2020/6/9 11:06 上午
  * @Version 1.0
  **/
-
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ThumbDto {
-    /**
-     * 被点在id
-     */
-    private Long dynamicId;
+    private String pkThumbId;
 
-    /**
-     * 用户id
-     */
-    private Long userId;
+    private String userId;
+    private String dynamicId;
 }
+

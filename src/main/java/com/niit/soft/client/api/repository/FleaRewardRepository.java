@@ -1,5 +1,8 @@
+
 package com.niit.soft.client.api.repository;
 
+import com.niit.soft.client.api.common.ResultCode;
+import com.niit.soft.client.api.domain.dto.SingleFieldDto;
 import com.niit.soft.client.api.domain.model.FleaReward;
 import com.niit.soft.client.api.domain.vo.RewardVo;
 import org.springframework.data.domain.Pageable;
@@ -26,4 +29,6 @@ public interface FleaRewardRepository extends JpaRepository<FleaReward, Long> {
             "from FleaReward f " +
             "left join f.fleaUser u")
     List<RewardVo> getTopReward(Pageable pageable);
+
+    FleaReward findFleaRewardByPkRewardIdEquals(Long pkRewardId);
 }

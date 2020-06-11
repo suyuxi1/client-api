@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.niit.soft.client.api.domain.model.Dynamic;
 import com.niit.soft.client.api.domain.vo.DynamicVo;
 
-import java.util.List;
-
 /**
  * @ClassName DynamicMapper
  * @Description 好友圈动态资讯
@@ -20,8 +18,6 @@ public interface DynamicMapper extends BaseMapper<Dynamic> {
      * @param id
      * @return
      */
-    List<DynamicVo> findDynamicVoById(Long id);
-
-
+    DynamicVo findDynamicVoById(Long id);
 
 }

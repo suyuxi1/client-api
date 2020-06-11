@@ -69,7 +69,7 @@ public class LoginController {
 
     @ControllerWebLog(name = "changePassword", isSaved = true)
     @ApiOperation(value = "修改密码", notes = "参数  手机号/学号/账号+新密码")
-    @PutMapping("password")
+    @PostMapping("password")
     public ResponseResult changePassword(@RequestBody LoginDto loginDto) {
         log.info("访问user/password接口");
         //如果查到数据，返回用户数据

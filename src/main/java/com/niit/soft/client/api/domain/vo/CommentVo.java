@@ -1,11 +1,11 @@
 package com.niit.soft.client.api.domain.vo;
 
-import com.niit.soft.client.api.domain.model.Comment;
 import com.niit.soft.client.api.domain.model.ReplyComment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -19,12 +19,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentVo {
-    //    private Long pkCommentId;
-//    private Long dynamicId;
-//    private Long userId;
-//    private String content;
-//    private Timestamp gmtCreate;
-//    private Boolean isDeleted;
-    private Comment comment;
+    private Long pkCommentId;
+    private Long dynamicId;
+    private Long userId;
+    private String content;
+    private Timestamp gmtCreate;
+    private Boolean isDeleted;
+    //    private Comment comment;
     private List<ReplyComment> replyComments;
 }

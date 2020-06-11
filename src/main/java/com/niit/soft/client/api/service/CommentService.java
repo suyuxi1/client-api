@@ -1,7 +1,7 @@
 package com.niit.soft.client.api.service;
 
 import com.niit.soft.client.api.common.ResponseResult;
-import com.niit.soft.client.api.domain.model.Comment;
+import com.niit.soft.client.api.domain.dto.CommentDto;
 
 /**
  * @author Yujie_Zhao
@@ -13,13 +13,15 @@ import com.niit.soft.client.api.domain.model.Comment;
 public interface CommentService {
     /**
      * 添加评论
-     * @param comment
+     *
+     * @param commentDto
      * @return
      */
-    ResponseResult insertComment(Comment comment);
+    ResponseResult insertComment(CommentDto commentDto);
 
     /**
      * 删除评论
+     *
      * @param commentId
      * @return
      */

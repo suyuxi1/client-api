@@ -10,9 +10,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Date 2020/6/9  9:08
  * @Version 1.0
  **/
-public interface DynamicRepository extends JpaRepository<Dynamic,Long> {
+public interface DynamicRepository extends JpaRepository<Dynamic, Long> {
     /**
      * 根据id查找
+     *
      * @param id
      * @return Dynamic
      */
