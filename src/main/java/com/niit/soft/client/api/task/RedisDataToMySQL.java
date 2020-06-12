@@ -48,7 +48,7 @@ public class RedisDataToMySQL {
         List<Thumb> thumbList = new ArrayList<>();
         List<Thumb> thumbListDel = new ArrayList<>();
         for (Dynamic dynamic : dynamicRepository.findAll()) {
-            log.info("" + dynamic.toString());
+//            log.info("" + dynamic.toString());
             Map<Object, Object> hmget = redisUtil.hmget(String.valueOf(dynamic.getPkDynamicId()));
 
 
@@ -60,7 +60,7 @@ public class RedisDataToMySQL {
                         .gmtModified(Timestamp.valueOf(LocalDateTime.now()))
                         .isDeleted(false).build());
             }
-            log.info("redis的点赞记录:{}", thumbList);
+//            log.info("redis的点赞记录:{}", thumbList);
             thumbService.saveOrUpdateBatch(thumbList);
 
             List<Long> id = new ArrayList<>();
@@ -88,7 +88,7 @@ public class RedisDataToMySQL {
             dynamic.setThumbs(haveBe.size());
             dynamicRepository.saveAndFlush(dynamic);
 
-            log.info("redis的需要删除的点赞记录:{}", thumbListDel);
+//            log.info("redis的需要删除的点赞记录:{}", thumbListDel);
             thumbService.updateBatchById(thumbListDel);
 
         }

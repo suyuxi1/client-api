@@ -15,19 +15,19 @@ import java.util.Map;
  * @Date 2020/6/11 8:26 上午
  * @Version 1.0
  **/
-@Controller
-public class MonitorController {
-
-    @ResponseBody
-    @GetMapping("/sendMessage")
-    public static String sendMessage(@RequestParam Map<String, Object> params) {
-//        String msg = params.get("msg").toString();
-        SessionPool.sendMessage(params);
-        return "发送成功";
-    }
-
-    @GetMapping("/show")
-    public String show() {
-        return "/show.html";
-    }
-}
+//@Controller
+//public class MonitorController {
+//
+//    @ResponseBody
+//    @GetMapping("/sendMessage")
+//    public static String sendMessage(@RequestParam Map<String, Object> params) {
+////        String msg = params.get("msg").toString();
+//        SessionPool.sendMessage(params);
+//        return "发送成功";
+//    }
+//
+//    @GetMapping("/show")
+//    public String show() {
+//        return "/show.html";
+//    }
+//}
