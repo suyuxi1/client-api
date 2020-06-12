@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 @Slf4j
 @RestController
 @RequestMapping("/partJob")
-@Api(tags = "兼职")
+@Api(tags = "校园聘的接口")
 public class PartJobController {
 
     @Resource
@@ -31,7 +31,7 @@ public class PartJobController {
 
     @PostMapping("/byPay")
 //    @ControllerWebLog(name = "find")
-    @ApiOperation(value = "根据薪资查找兼职降序排列", notes = "请求参数为传递分页参数")
+    @ApiOperation(value = "根据给定条件查找兼职降序排列", notes = "请求参数为传递分页参数")
     ResponseResult findPartJob(@RequestBody PageDto pageDto){
         return ResponseResult.success(jobService.findAllByPage(pageDto));
     }

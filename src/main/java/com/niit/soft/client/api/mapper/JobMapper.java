@@ -1,7 +1,11 @@
 package com.niit.soft.client.api.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.Job;
+import com.niit.soft.client.api.domain.vo.JobVo;
+
+import java.util.List;
 
 /**
  * @author Su
@@ -11,4 +15,6 @@ import com.niit.soft.client.api.domain.model.Job;
  * @Version 1.0
  **/
 public interface JobMapper extends BaseMapper<Job> {
+
+    List<JobVo> findJob(String field);
 }
