@@ -48,10 +48,10 @@ public class LoginServiceImpl implements LoginService {
         Long id = this.findIdByLoginDto(loginDto.getUserAccount(), loginDto.getPassword());
         if (id != 0) {
             log.info("登录成功");
-            log.info(userAccountService.findUserAccountById(id).toString());
+            log.info(userAccountService.findUserAccountById(String.valueOf(id)).toString());
             //创建返回的数据
             Map map = new HashedMap();
-            map.put("UserAccount", userAccountService.findUserAccountById(id));
+            map.put("UserAccount", userAccountService.findUserAccountById(String.valueOf(id)));
             map.put("token", JwtUtil.sign(loginDto.getUserAccount(), loginDto.getPassword()));
             log.info("生成的token{}", map.get("token"));
             return ResponseResult.success(map);
