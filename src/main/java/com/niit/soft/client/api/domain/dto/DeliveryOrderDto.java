@@ -28,6 +28,16 @@ public class DeliveryOrderDto {
      * 订单发起人
      */
     private Long founderId;
+
+    /**
+     * 送件人姓名
+     */
+
+    private  String founderName;
+    /**
+     * 送件人手机号
+     */
+    private  String founderPhonenumer;
     /**
      * 初始位置
      */

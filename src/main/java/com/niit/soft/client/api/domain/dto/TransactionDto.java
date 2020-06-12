@@ -25,4 +25,10 @@ public class TransactionDto {
      * 订单id
      */
     private  Long orderId;
+//    /**
+//     * 交易表id
+//     */
+//    private  Long transactonId;
+
+
 }

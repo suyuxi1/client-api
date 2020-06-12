@@ -26,4 +26,11 @@ public interface TransactionService {
      * @return
      */
     ResponseResult finshOrder(Long orderId);
+
+    /**
+     * 取货
+     * @param transactionDto
+     * @return
+     */
+  ResponseResult getGoods(TransactionDto  transactionDto);
 }
