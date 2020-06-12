@@ -2,7 +2,10 @@ package com.niit.soft.client.api.domain.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -16,54 +19,43 @@ import java.sql.Timestamp;
  * @Date 2020/6/9
  * @Version 1.0
  **/
-@EqualsAndHashCode(callSuper = true)
-@Table(name = "part_job")
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PartJob extends Model<PartJob> {
-
-    private static final long serialVersionUID = 1L;
+public class Job extends Model<Job> {
 
     /**
      * 主键
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pkPartJobId;
+    private  Long pkJobId;
 
     @TableField("name")
-    private String name;
+    @Column(nullable = false,length = 60)
+    private  String name;
 
     @TableField("description")
     @Column(nullable = false)
     private  String description;
 
-    @TableField("boss_id")
+    @TableField("boss")
     @Column(nullable = false,length = 60)
-    private  Long bossId;
-
-    @TableField("boss_name")
-    @Column(nullable = false,length = 60)
-    private  String bossName;
+    private  String boss;
 
     @TableField("boss_phone")
     @Column(nullable = false,length = 60)
     private  String bossPhone;
 
-    @TableField("boss_avatar")
-    @Column(nullable = false)
-    private  String bossAvatar;
+    @TableField("company_id")
+    @Column(length = 20)
+    private  Long companyId;
 
     @TableField("workplace")
     @Column(nullable = false,length = 60)
     private  String workplace;
-
-    @TableField("working_date")
-    @Column(nullable = false,length = 60)
-    private  String workingDate;
 
     @TableField("working_time")
     @Column(nullable = false,length = 60)
@@ -73,26 +65,24 @@ public class PartJob extends Model<PartJob> {
     @Column(length = 10)
     private BigDecimal pay;
 
-    @TableField("pay_type")
-    @Column(length = 20)
-    private  String payType;
+    @TableField("min")
+    @Column(length = 10)
+    private  Integer min;
 
-    @TableField("job_type")
+    @TableField("max")
+    @Column(length = 10)
+    private  Integer max;
+
+    @TableField("job_type_id")
     @Column(length = 20)
-    private  String jobType;
+    private  String jobTypeId;
 
     @TableField("number")
-    @Column(length = 10)
+    @Column(length = 4)
     private  Integer number;
 
-    @TableField("have")
-    @Column(length = 10)
-    private  Integer have;
-
-    @TableField("need")
-    @Column(length = 10)
-    private  Boolean need;
-
+    @TableField("resumes")
+    private String resumes;
     /**
      * 删除标志
      */

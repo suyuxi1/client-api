@@ -6,98 +6,87 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
  * @author su
- * @className Job
+ * @className company
  * @Description TODO
- * @Date 2020/6/9
+ * @Date 2020/6/11
  * @Version 1.0
  **/
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "part_job")
-@Data
+@Table(name = "company")
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PartJob extends Model<PartJob> {
+public class Company extends Model<Company> {
 
-    private static final long serialVersionUID = 1L;
 
     /**
      * 主键
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pkPartJobId;
+    private  Long pkEnterpriseId;
 
     @TableField("name")
-    private String name;
+    @Column(nullable = false,length = 60)
+    private  String name;
 
-    @TableField("description")
+    @TableField("tag")
     @Column(nullable = false)
-    private  String description;
+    private  String tag;
 
-    @TableField("boss_id")
+    @TableField("logo")
     @Column(nullable = false,length = 60)
-    private  Long bossId;
+    private  String logo;
 
-    @TableField("boss_name")
+    @TableField("workers")
     @Column(nullable = false,length = 60)
-    private  String bossName;
+    private  Integer workers;
 
-    @TableField("boss_phone")
-    @Column(nullable = false,length = 60)
-    private  String bossPhone;
-
-    @TableField("boss_avatar")
-    @Column(nullable = false)
-    private  String bossAvatar;
-
-    @TableField("workplace")
-    @Column(nullable = false,length = 60)
-    private  String workplace;
-
-    @TableField("working_date")
-    @Column(nullable = false,length = 60)
-    private  String workingDate;
+    @TableField("type")
+    @Column(length = 60)
+    private  String type;
 
     @TableField("working_time")
     @Column(nullable = false,length = 60)
     private  String workingTime;
 
-    @TableField("pay")
+    @TableField("working_status")
+    @Column(nullable = false,length = 60)
+    private  String workingStatus;
+
+    @TableField("job_number")
     @Column(length = 10)
-    private BigDecimal pay;
+    private Integer jobNumber;
 
-    @TableField("pay_type")
-    @Column(length = 20)
-    private  String payType;
-
-    @TableField("job_type")
-    @Column(length = 20)
-    private  String jobType;
-
-    @TableField("number")
+    @TableField("vacation")
     @Column(length = 10)
-    private  Integer number;
+    private  String vacation;
 
-    @TableField("have")
+    @TableField("address")
     @Column(length = 10)
-    private  Integer have;
+    private  Integer address;
 
-    @TableField("need")
-    @Column(length = 10)
-    private  Boolean need;
+    @TableField("longitude")
+    @Column(length = 60)
+    private  String longitude;
 
+    @TableField("latitude")
+    @Column(length = 60)
+    private  String number;
+
+    @TableField("resumes")
+    private String latitude;
     /**
      * 删除标志
      */
     @TableField("is_deleted")
-    @Column(nullable = false,length = 4)
+    @Column(nullable = false,length = 2)
     private Boolean isDeleted;
     /**
      * 创建时间
