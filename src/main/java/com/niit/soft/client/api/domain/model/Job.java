@@ -49,6 +49,10 @@ public class Job extends Model<Job> {
     @Column(nullable = false,length = 60)
     private  String bossPhone;
 
+    @TableField("boss_avatar")
+    @Column(nullable = false,length = 60)
+    private  String bossAvatar;
+
     @TableField("company_id")
     @Column(length = 20)
     private  Long companyId;
@@ -72,6 +76,14 @@ public class Job extends Model<Job> {
     @TableField("max")
     @Column(length = 10)
     private  Integer max;
+
+    @TableField("experience")
+    @Column(length = 20)
+    private  String experience;
+
+    @TableField("diploma")
+    @Column(length = 20)
+    private  String diploma;
 
     @TableField("job_type_id")
     @Column(length = 20)

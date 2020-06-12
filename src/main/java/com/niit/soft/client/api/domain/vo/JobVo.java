@@ -41,6 +41,8 @@ public class JobVo {
     private BigDecimal pay;
     private  Integer min;
     private  Integer max;
+    private String experience;
+    private String diploma;
     private JobType jobType;
     private  Integer number;
     private Timestamp gmtCreate;

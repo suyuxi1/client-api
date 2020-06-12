@@ -1,12 +1,7 @@
 package com.niit.soft.client.api.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.niit.soft.client.api.domain.model.PartJob;
-import com.niit.soft.client.api.domain.vo.PartJobVo;
-import org.springframework.data.repository.query.Param;
-
-import java.util.List;
 
 /**
  * @author Su
@@ -18,5 +13,5 @@ import java.util.List;
 public interface PartJobMapper extends BaseMapper<PartJob> {
 
 
-    List<PartJobVo> findPartJob(Page<PartJobVo> partJobVoPage, Object field);
+//    List<PartJobVo> findPartJob(Page<PartJobVo> partJobVoPage, Object field);
 }

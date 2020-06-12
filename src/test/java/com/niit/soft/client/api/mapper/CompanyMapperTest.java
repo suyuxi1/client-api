@@ -1,4 +1,4 @@
-package com.niit.soft.client.api.service;
+package com.niit.soft.client.api.mapper;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,14 +8,13 @@ import javax.annotation.Resource;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class JobServiceTest {
+class CompanyMapperTest {
 
     @Resource
-    private JobService jobService;
+    private CompanyMapper companyMapper;
 
     @Test
-    void find() {
-        System.out.println(jobService.findById(1L));
-
+    void findDetails() {
+        System.out.println(companyMapper.findDetails(1L));
     }
 }
