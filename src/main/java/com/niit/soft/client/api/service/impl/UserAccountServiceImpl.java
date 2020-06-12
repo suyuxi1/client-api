@@ -20,7 +20,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     @Resource
     private UserAccountRepository userAccountRepository;
     @Override
-    public UserAccount findUserAccountById(Long id) {
+    public UserAccount findUserAccountById(String id) {
         return userAccountRepository.findUserAccountByInfo(id.toString());
     }
 
