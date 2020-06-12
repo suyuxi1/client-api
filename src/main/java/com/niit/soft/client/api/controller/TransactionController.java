@@ -39,7 +39,7 @@ public class TransactionController {
 
     @ApiOperation(value = "完成订单",notes = "请求参数是订单id")
     @PostMapping("/finshOrder")
-    public ResponseResult finshOrder(@Param("id") Long orderId){
-        return  transactionService.finshOrder(orderId);
+    public ResponseResult finshOrder(@RequestBody TransactionDto transactionDto){
+        return  transactionService.finshOrder(transactionDto.getOrderId());
     }
 }

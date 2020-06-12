@@ -22,11 +22,11 @@ public class FinshOrderDto {
      */
     private Long founderId;
     /**
-     * 订单状态 2 是完成 1是取消
+     * 订单状态 3 是完成 1是取消 2是进行中 0是正常
      */
-    private Integer isCancle;
-    /*
-    第几页
+    private Integer status;
+    /**
+     * 第几页
      */
     private Integer num;
     /**

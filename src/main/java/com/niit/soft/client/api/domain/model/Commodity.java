@@ -5,11 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 /**
  * @author wl
@@ -24,6 +25,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@EntityListeners(AuditingEntityListener.class)
 public class Commodity {
     /**
      * 主键自增
@@ -47,16 +49,16 @@ public class Commodity {
      */
     //@JsonIgnore
     @Column(nullable = false)
-    @UpdateTimestamp
-    private LocalDateTime gmtCreate;
+    @CreatedDate
+    private Timestamp gmtCreate;
 
     /**
      * 修改时间
      */
     @JsonIgnore
-    @UpdateTimestamp
+    @LastModifiedDate
     @Column(nullable = false)
-    private LocalDateTime gmtModified;
+    private Timestamp gmtModified;
 
     /**
      * 删除标志（0 逻辑删除， 1 未删除）

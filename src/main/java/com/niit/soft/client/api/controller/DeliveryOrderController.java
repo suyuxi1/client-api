@@ -3,6 +3,7 @@ package com.niit.soft.client.api.controller;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.DeliveryOrderDto;
 import com.niit.soft.client.api.domain.dto.FinshOrderDto;
+import com.niit.soft.client.api.domain.dto.TransactionDto;
 import com.niit.soft.client.api.service.DeliveryOrederService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,15 +35,16 @@ public class DeliveryOrderController {
     @ApiOperation(value = "客户新增跑腿订单 ", notes = "请求参数为订单dto")
     @PostMapping("/order")
     public ResponseResult insertDeliveryOrder(@RequestBody DeliveryOrderDto deliveryOrderDto) {
+        log.info(String.valueOf(deliveryOrderDto));
         return deliveryOrederService.insertOrder(deliveryOrderDto);
     }
 
 
     @ApiOperation(value = "取消订单 、", notes = "请求参数为订单id")
     @PostMapping("/cancle/order")
-    public ResponseResult cancleOrder(@Param("id") Long id) {
+    public ResponseResult cancleOrder(@RequestBody TransactionDto transactionDto) {
 
-        return deliveryOrederService.cancleOrder(id);
+        return deliveryOrederService.cancleOrder(transactionDto.getOrderId());
     }
 
 
@@ -50,5 +52,11 @@ public class DeliveryOrderController {
     @PostMapping("/differentOrder")
     public Map<String, Object> findDifferentOrder(@RequestBody FinshOrderDto finshOrderDto) {
         return deliveryOrederService.selectFinshOrder(finshOrderDto);
+    }
+
+    @ApiOperation(value = "删除非请求订单", notes = "请求参数为Dto 参数为 订单id  ")
+    @PostMapping("/delete/order")
+    public  ResponseResult deleteOrder(@RequestBody TransactionDto transactionDto ){
+        return deliveryOrederService.cancleOrder(transactionDto.getOrderId());
     }
 }

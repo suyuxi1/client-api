@@ -1,11 +1,9 @@
 package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.common.ResponseResult;
-import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.CancelCollectionDto;
 import com.niit.soft.client.api.domain.dto.CollectionDto;
 import com.niit.soft.client.api.domain.model.FleaCollection;
-import com.niit.soft.client.api.domain.model.FleaGoods;
 import com.niit.soft.client.api.repository.FleaCollectionRepository;
 import com.niit.soft.client.api.repository.FleaGoodsRepository;
 import com.niit.soft.client.api.repository.FleaUserRepository;
