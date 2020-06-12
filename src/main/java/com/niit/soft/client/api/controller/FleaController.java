@@ -40,7 +40,8 @@ public class FleaController {
     private FleaOrderService fleaOrderService;
     @Resource
     private FleaCollectionService fleaCollectionService;
-
+    @Resource
+    private FleaCommentService fleaCommentService;
     /**
      * 根据搜索框的输入模糊查询  商品名，标签，或 悬赏
      */
@@ -90,7 +91,7 @@ public class FleaController {
     @PostMapping("reward/top")
     public ResponseResult getTopTwoReward() {
         log.info("进入查询悬赏数据接口");
-        return fleaRewardService.getRewardTopTwo();
+        return fleaRewardService.getRewardTopThree();
     }
 
     @ControllerWebLog(name = "getGoodsByTime", isSaved = true)
@@ -164,6 +165,20 @@ public class FleaController {
     }
 
     /**
+     * findTopFiveMark
+     *
+     * @return ResponseResult
+     */
+    @ControllerWebLog(name = "findTopFiveMark", isSaved = true)
+    @ApiOperation(value = "查询top前五的标签", notes = "没有请求参数")
+    @PostMapping(value = "mark/top")
+    public ResponseResult findTopFiveMark() {
+        log.info("访问mark/top接口");
+        log.info("-----mark/top-----请求参数：无请求参数");
+        return fleaGoodsService.findTopFiveMark();
+    }
+
+    /**
      * 用户数据添加
      *
      * @param fleaUserDto FleaUserDto
@@ -193,6 +208,36 @@ public class FleaController {
         return fleaUserService.updateFleaUser(updateFleaUserDto);
     }
 
+    /**
+     * 根据用户id查询该用户发布的商品
+     *
+     * @param fleaUserIdDto FleaUserIdDto
+     * @return ResponseResult
+     */
+    @ControllerWebLog(name = "findGoodsByUserId", isSaved = true)
+    @ApiOperation(value = "根据用户id查询该用户发布的商品", notes = "请求参数为查询用户发布Dto----fleaUserIdDto  ")
+    @PostMapping(value = "users/release")
+    public ResponseResult findGoodsByUserId(@RequestBody FleaUserIdDto fleaUserIdDto) {
+        log.info("访问users/release接口");
+        log.info("-----users/release-----请求参数：" + fleaUserIdDto + "**1**");
+        return fleaUserService.findGoodsByUserId(fleaUserIdDto);
+    }
+
+    /**
+     * 根据用户id查询该用户的商品订单
+     *
+     * @param fleaUserIdDto FleaUserIdDto
+     * @return ResponseResult
+     */
+    @ControllerWebLog(name = "findOrderByUserId", isSaved = true)
+    @ApiOperation(value = "根据用户id查询该用户的商品订单", notes = "请求参数为查询用户发布Dto----fleaUserIdDto  ")
+    @PostMapping(value = "users/orders")
+    public ResponseResult findOrderByUserId(@RequestBody FleaUserIdDto fleaUserIdDto) {
+        log.info("访问users/orders接口");
+        log.info("-----users/orders-----请求参数：" + fleaUserIdDto + "**1**");
+        return fleaUserService.findOrderByUserId(fleaUserIdDto);
+    }
+
     @ControllerWebLog(name = "addCollection", isSaved = true)
     @ApiOperation(value = "新增收藏", notes = "请求参数为商品ID以及收藏用户ID")
     @PostMapping("/collection/increased")
@@ -203,7 +248,7 @@ public class FleaController {
 
     @ControllerWebLog(name = "getAll", isSaved = true)
     @ApiOperation(value = "查询所有收藏", notes = "没有请求参数，直接post提交")
-    @PostMapping("collection/all")
+    @PostMapping("/collection/all")
     public ResponseResult getAll() {
         log.info("进入获取所有收藏接口");
         return fleaCollectionService.getCollection();
@@ -211,9 +256,9 @@ public class FleaController {
 
     @ControllerWebLog(name = "logicalDel", isSaved = true)
     @ApiOperation(value = "逻辑删除收藏", notes = "请求参数为商品ID与用户ID----collectionDto  ")
-    @PostMapping("collection/deleted")
+    @PostMapping("/collection/deleted")
     public ResponseResult logicalDel(@RequestBody CancelCollectionDto collectionDto) {
-        log.info("进入逻辑删除收藏部分，传来的参数为：,{}**1**", collectionDto);
+        log.info("进入逻辑删除收藏部分，传来的参数为：", collectionDto);
         return fleaCollectionService.logicalDel(collectionDto);
     }
 
@@ -250,5 +295,20 @@ public class FleaController {
         return fleaOrderService.orderIncreased(fleaOrderDto);
     }
 
+    @ControllerWebLog(name = "orderDel", isSaved = true)
+    @ApiOperation(value = "逻辑删除商品", notes = "商品ID以及买家ID")
+    @PostMapping("order/deleted")
+    public ResponseResult orderDel(@RequestBody FleaOrderDto fleaOrderDto) {
+        log.info("-----order/deleted----请求参数：" + fleaOrderDto + "**1**");
+        return fleaOrderService.logicalDel(fleaOrderDto);
+    }
+
+    @ControllerWebLog(name = "addComment", isSaved = true)
+    @ApiOperation(value = "添加评论", notes = "商品ID以及买家ID")
+    @PostMapping("/comment/increased")
+    public ResponseResult addComment(@RequestBody FleaCommentDto fleaCommentDto) {
+        log.info("-----order/deleted----请求参数：" + fleaCommentDto + "**1**");
+        return fleaCommentService.addComment(fleaCommentDto);
+    }
 
 }

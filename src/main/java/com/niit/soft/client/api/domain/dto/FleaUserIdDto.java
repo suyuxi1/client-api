@@ -5,20 +5,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-
 /**
  * @Author yhChen
- * @Description 添加用户数据Dto
- * @Date 2020/6/10
+ * @Description 查询用户发布Dto
+ * @Date 2020/6/11
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FleaUserDto {
+public class FleaUserIdDto {
     /**
-     * 学号
+     * 用户id
      */
-    private String jobNumber;
+    private Long pkFleaUserId;
+    private Integer currentPage;
+    private Integer pageSize;
 }

@@ -43,4 +43,9 @@ public class FleaOrderServiceImpl implements FleaOrderService {
         fleaOrderRepository.save(fleaOrder);
         return ResponseResult.success("OK");
     }
+
+    @Override
+    public ResponseResult logicalDel(FleaOrderDto fleaOrderDto) {
+        return ResponseResult.success(fleaOrderRepository.logicalDel(fleaOrderDto));
+    }
 }

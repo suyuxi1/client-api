@@ -54,8 +54,8 @@ public class FleaRewardServiceImpl implements FleaRewardService {
     }
 
     @Override
-    public ResponseResult getRewardTopTwo() {
-        Pageable pageable = PageRequest.of(0, 2, Sort.Direction.DESC, "createTime");
+    public ResponseResult getRewardTopThree() {
+        Pageable pageable = PageRequest.of(0, 3, Sort.Direction.DESC, "createTime");
         List<RewardVo> rewardVoList = fleaRewardRepository.getTopReward(pageable);
         if (rewardVoList.size() == 0) {
             return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
