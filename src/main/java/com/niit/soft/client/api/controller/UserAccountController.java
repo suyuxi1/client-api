@@ -2,6 +2,7 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.SingleFieldDto;
 import com.niit.soft.client.api.domain.model.SysFeedback;
 import com.niit.soft.client.api.domain.model.UserAccount;
 import com.niit.soft.client.api.service.SysFeedbackService;
@@ -9,6 +10,7 @@ import com.niit.soft.client.api.service.UserAccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -67,5 +69,12 @@ public class UserAccountController {
         return sysFeedbackService.insertSysFeedback(sysFeedback);
     }
 
+    @ApiOperation(value = "根据用户id查询用户信息", notes = "请求参数为用户id(必填)")
+    @PostMapping(value = "/single/id")
+    @ControllerWebLog(name = "getUserAccountInfoById", isSaved = true)
+    public UserAccount getUserAccountInfoById(@RequestBody SingleFieldDto singleFieldDto) {
+        log.info("-----/single/id-----请求参数：" + singleFieldDto.getField().toString() +"**1**");
+        return userAccountService.findUserAccountById(singleFieldDto.getField().toString());
+    }
 
 }

@@ -28,7 +28,7 @@ public interface UserAccountService {
      * @param id
      * @return
      */
-    UserAccount findUserAccountById(Long id);
+    UserAccount findUserAccountById(String id);
 
     /**
      * 根据用户唯一信息获取用户对象
