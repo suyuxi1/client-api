@@ -68,4 +68,8 @@ public class FleaGoodsVo {
      * 商品发布人名字
      */
     private String username;
+    /**
+     * 商品发布人头像
+     */
+    private String userAvatar;
 }
