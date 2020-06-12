@@ -23,10 +23,10 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
 
-    @Bean
-    public ServerEndpointExporter serverEndpointExporter() {
-        return new ServerEndpointExporter();
-    }
+//    @Bean
+//    public ServerEndpointExporter serverEndpointExporter() {
+//        return new ServerEndpointExporter();
+//    }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
@@ -38,11 +38,24 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .withSockJS();
     }
 
+//    @Override
+//    public void configureMessageBroker(MessageBrokerRegistry registry) {
+//        // 前缀为/topic为群聊，为/queue为私聊
+//        registry.enableSimpleBroker("/topic/", "/queue/");
+//
+//        registry.setUserDestinationPrefix("/queue/");
+//        // 过滤统一前缀
+//        registry.setApplicationDestinationPrefixes("/app");
+//    }
+
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        // 前缀为/topic为私聊，为/queue为群聊
-        registry.enableSimpleBroker("/topic/", "/queue/");
-        registry.setUserDestinationPrefix("/queue/");
+        registry.enableStompBrokerRelay("/topic/", "/queue/", "/exchange/")
+                .setRelayHost("localhost")
+                .setRelayPort(61613)
+                .setClientLogin("guest")
+                .setClientPasscode("guest")
+                .setVirtualHost("/");
         registry.setApplicationDestinationPrefixes("/app");
     }
 

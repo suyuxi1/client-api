@@ -2,25 +2,52 @@
 var stompClient = null;
 var wsCreateHandler = null;
 var userId = null;
+var ipAndPort = null;
+
 
 function connect() {
     var host = window.location.host; // 带有端口号
-    var socket = new SockJS("http://" + host + "/websocket");
+    var socket = new SockJS("http://" + ipAndPort + "/websocket");
     userId = GetQueryString("userId");
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
             writeToScreen("connected: " + frame);
             //订阅到/topic主题
-            stompClient.subscribe('/topic', function (response) {
+            // stompClient.subscribe('/topic', function (response) {
+            //     writeToScreen(response.body);
+            // });
+            //
+            // // 和配置类相互对应
+            // stompClient.subscribe("/queue/" + userId + '/topic', function (response) {
+            //     writeToScreen(response.body);
+            // });
+            //
+            // stompClient.subscribe('/sendToAll', function (response) {
+            //     writeToScreen("sendToAll" + response.body);
+            // });
+
+            // exchange交换机
+            // stompClient.subscribe('/exchange/sendToUser/user' + userId, function (response) {
+            //     writeToScreen(response.body);
+            // });
+
+            // queue
+            // stompClient.subscribe('/queue/user' + userId, function (response) {
+            //     writeToScreen(response.body);
+            // });
+
+            // topic
+            stompClient.subscribe('/topic/user' + userId, function (response) {
+                writeToScreen(response.body);
+            });
+            // 发送全部
+            stompClient.subscribe('/topic/chat', function (response) {
                 writeToScreen(response.body);
             });
 
-            stompClient.subscribe("/user/" + userId + '/topic', function (response) {
-                writeToScreen(response.body);
-            });
 
-            stompClient.subscribe('/sendToAll', function (response) {
-                writeToScreen("sendToAll" + response.body);
+            stompClient.subscribe('/queue/chat', function (response) {
+                writeToScreen(response.body);
             });
 
         }, function (error) {

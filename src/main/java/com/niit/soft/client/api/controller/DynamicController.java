@@ -38,7 +38,7 @@ public class DynamicController {
     @PostMapping("/{id}")
     @ControllerWebLog(name = "findDynamicVoById", isSaved = true)
     @ApiOperation(value = "好友圈根据id查找动态资讯", notes = "请求参数为动态id")
-    ResponseResult findDynamicVoById(@PathVariable int id) {
+    ResponseResult findDynamicVoById(@PathVariable String id) {
         return ResponseResult.success(dynamicService.findDynamicVoById(id));
     }
 
@@ -71,7 +71,7 @@ public class DynamicController {
         return ResponseResult.success(dynamicService.findCommentVoById((long) id));
     }
 
-    @ApiOperation(value = "添加校友评论", notes = "传递参数为内容，动态id，用户id")
+    @ApiOperation(value = "添加评论", notes = "传递参数为内容，动态id，用户id")
     @PostMapping(value = "/comment/insert")
     public ResponseResult insertComment(@RequestBody CommentDto commentDto) {
         return commentService.insertComment(commentDto);

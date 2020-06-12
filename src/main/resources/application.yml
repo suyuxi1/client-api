@@ -1,6 +1,11 @@
 spring:
   profiles:
     active: dev
+  data:
+    # 关闭spring data 的redis仓库
+    redis:
+      repositories:
+        enabled: false
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

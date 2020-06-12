@@ -55,25 +55,37 @@ public class DynamicServiceImpl implements DynamicService {
     private RedisUtil redisUtil;
 
     @Override
-    public DynamicVo findDynamicVoById(int id) {
-        DynamicVo dynamicVo = dynamicMapper.findDynamicVoById((long) id);
+    public DynamicVo findDynamicVoById(String id) {
+        //
+        DynamicVo dynamicVo = dynamicMapper.findDynamicVoById(Long.valueOf(id));
 
+        List<Comment> commentList = dynamicVo.getCommentList();
         List<CommentVo> commentVoList = new ArrayList<>();
-        for (Comment comment : dynamicVo.getCommentList()) {
-            commentVoList.add(commentMapper.findCommentVoById(comment.getPkCommentId()));
+        if (commentList.get(0).getPkCommentId() != null) {
+            for (Comment comment : commentList) {
+                commentVoList.add(commentMapper.findCommentVoById(comment.getPkCommentId()));
+            }
+            dynamicVo.setCommentVoList(commentVoList);
+        } else {
+            dynamicVo.setCommentList(null);
         }
-        dynamicVo.setCommentVoList(commentVoList);
+
 
         Map<String, Object> thumbMap = new HashMap<>(10);
-        for (Thumb thumb : dynamicVo.getThumbList()) {
-            thumbMap.put(thumb.getPkThumbId().toString(), thumb.getUserId().toString());
+        List<Thumb> thumbList = dynamicVo.getThumbList();
+        if (thumbList.get(0).getPkThumbId() != null) {
+            for (Thumb thumb : thumbList) {
+                thumbMap.put(thumb.getPkThumbId().toString(), thumb.getUserId().toString());
+            }
+            // 将动态资讯的id存为键，将点赞id和用户id存为map
+            boolean hmset = redisUtil.hmset(id, thumbMap);
+            if (hmset) {
+                log.info("成功存入redis");
+            }
+        } else {
+            dynamicVo.setThumbList(null);
         }
 
-        // 将动态资讯的id存为键，将点赞id和用户id存为map
-        boolean hmset = redisUtil.hmset(String.valueOf(id), thumbMap);
-        if (hmset) {
-            log.info("成功存入redis");
-        }
         return dynamicVo;
     }
 
