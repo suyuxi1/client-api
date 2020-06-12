@@ -30,7 +30,7 @@ public class Company extends Model<Company> {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long pkEnterpriseId;
+    private  Long pkCompanyId;
 
     @TableField("name")
     @Column(nullable = false,length = 60)
@@ -52,6 +52,9 @@ public class Company extends Model<Company> {
     @Column(length = 60)
     private  String type;
 
+    @TableField("description")
+    private  String description;
+
     @TableField("working_time")
     @Column(nullable = false,length = 60)
     private  String workingTime;
@@ -60,17 +63,16 @@ public class Company extends Model<Company> {
     @Column(nullable = false,length = 60)
     private  String workingStatus;
 
-    @TableField("job_number")
+    @TableField("job_numbers")
     @Column(length = 10)
-    private Integer jobNumber;
+    private Integer jobNumbers;
 
     @TableField("vacation")
     @Column(length = 10)
     private  String vacation;
 
     @TableField("address")
-    @Column(length = 10)
-    private  Integer address;
+    private  String address;
 
     @TableField("longitude")
     @Column(length = 60)
@@ -78,10 +80,8 @@ public class Company extends Model<Company> {
 
     @TableField("latitude")
     @Column(length = 60)
-    private  String number;
+    private  String latitude;
 
-    @TableField("resumes")
-    private String latitude;
     /**
      * 删除标志
      */
