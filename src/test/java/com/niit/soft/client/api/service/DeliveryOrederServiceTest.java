@@ -23,12 +23,12 @@ class DeliveryOrederServiceTest {
      */
     @Test
     void insertOrder() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             DeliveryOrderDto deliveryOrderDto = DeliveryOrderDto.builder()
                     .deliveryTime("2020-06-01 10:12:05")
                     .amount(BigDecimal.valueOf(25)).ddimension("33.3").destination("南工院北门").dlongitude("78.2")
                     .founderId(5L).odimension("99.6").olongitude("66.5").originAddress("南工院西门")
-                    .priceRang("1-200").receiverName("王妃").receiverPhoneNumber("18094247965").remark("").type("食物")
+                    .priceRang("1-200").receiverName("王妃").receiverPhoneNumber("18094247965").founderName("王林").founderPhonenumer("18094247968").remark("").type("食物")
                     .build();
 
             ResponseResult responseResult = deliveryOrederService.insertOrder(deliveryOrderDto);

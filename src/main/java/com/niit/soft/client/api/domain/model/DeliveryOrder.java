@@ -43,6 +43,18 @@ public class DeliveryOrder {
      */
     @Column(name = "founder_id", nullable = false)
     private Long founderId;
+
+    /**
+     * 送件人姓名
+     */
+    @Column(name = "founder_name", nullable = false)
+    private  String founderName;
+    /**
+     * 送件人手机号
+     */
+    @Column(name = "founder_phonenumber", nullable = false)
+    private  String founderPhonenumber;
+
     /**
      * 初始位置
      */
@@ -89,7 +101,7 @@ public class DeliveryOrder {
     @Column(name = "delivery_time", nullable = false)
     private Timestamp deliveryTime;
     /**
-     * 0 发布 1是取消 2是正在进行   3是完成
+     * 0 发布 1是取消 2是正在进行   3是完成 4是已被抢单
      */
     @Column(name = "status", nullable = false)
     private Integer status;

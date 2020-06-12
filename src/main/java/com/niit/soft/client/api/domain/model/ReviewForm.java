@@ -7,16 +7,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
  * @author wl
- * @ClassNametransaction
- * @Description TODO
- * @Date 2020/6/9
+ * @ClassNameReviewForm
+ * @Description 申请表
+ * @Date 2020/6/12
  * @Version 1.0
  */
 @Data
@@ -24,45 +23,56 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "transaction")
-@EntityListeners(AuditingEntityListener.class)
-public class Transaction {
+@Table(name = "review_form")
+public class ReviewForm {
+    /**
+     * 主键
+     */
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     /**
-     *订单id
+     * 申请人id
      */
-    @Column(name = "order_id", nullable = false)
-    private  Long orderId;
+    @Column(name = "requester_id")
+    private Long requesterId;
     /**
-     *交易创建时间+
+     * 申请人正面身份证
      */
-    @Column(name = "transaction_create", nullable = false)
-    private Timestamp transactionCreate;
+    @Column(name = "id_card_front")
+    private String idCardFront;
     /**
-     *跑腿人
-     *
+     * 申请人背面身份证
      */
-    @Column(name = "errands_id", nullable = false)
-    private Long errandsId;
+    @Column(name = "id_card_back")
+    private String idCardBack;
     /**
-     * 完成时间  根据完成后更改
+     * 申请人手机号
      */
-    @Column(name = "transaction_end", nullable = false)
-    private Timestamp transactionEnd;
+    @Column(name = "requester_phonenumber")
+    private String requesterPhonenumber;
     /**
-     * 状态 0是抢单  1是取货并且送货  3是完成
+     * 申请人手机号
      */
-    @Column(name = "status", nullable = false)
-    private Integer status;
+    @Column(name = "requester_name")
+    private String requesterName;
+    /**
+     * 状态 0是发布  1是通过 2是未通过
+     */
+    @Column(name = "status")
+    private Long status;
+    /**
+     * 申请原因
+     */
+    @Column(name = "remark")
+    private String remark;
+
     /**
      * 创建时间
      */
-    //@JsonIgnore
+    @JsonIgnore
     @Column(nullable = false)
-   @CreatedDate
+    @CreatedDate
     private Timestamp gmtCreate;
 
     /**
@@ -79,4 +89,5 @@ public class Transaction {
 //    @JsonIgnore
     @Column(nullable = false, length = 4)
     private Boolean isDeleted;
+
 }
