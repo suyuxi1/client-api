@@ -4,6 +4,7 @@ package com.niit.soft.client.api.repository;
 import com.niit.soft.client.api.domain.model.FleaGoods;
 import com.niit.soft.client.api.domain.vo.FleaGoodsVo;
 import com.niit.soft.client.api.domain.vo.GoodsVo;
+import com.niit.soft.client.api.domain.vo.MarkVo;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 倪涛涛
@@ -55,11 +57,19 @@ public interface FleaGoodsRepository extends JpaRepository<FleaGoods, Long> {
     /**
      * 下架商品
      *
-     * @param goodId    Long
+     * @param goodId Long
      * @return int
      */
     @Transactional(rollbackFor = RuntimeException.class)
     @Modifying
     @Query(value = "update FleaGoods set isDeleted = 1 where pkFleaGoodsId = ?1 ")
     int soldOutGood(Long goodId);
+
+    /**
+     * 查询top前五的标签
+     *
+     * @return List<MarkVo>
+     */
+    @Query(value = "select t.goodsMark from (select goods_mark as goodsMark,count(*) as count from flea_goods GROUP BY goodsMark) t order by count desc limit 5", nativeQuery = true)
+    List<String> selectTopFiveMark();
 }

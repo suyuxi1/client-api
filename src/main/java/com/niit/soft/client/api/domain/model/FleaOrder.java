@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+
 /**
  * @author 倪涛涛
  * @version 1.0.0
@@ -24,6 +25,7 @@ public class FleaOrder {
      * id
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String pkFleaOrderId;
 
     /**
@@ -51,6 +53,6 @@ public class FleaOrder {
     /**
      * 删除标志
      */
-    @Column(nullable = false,length = 4)
+    @Column(nullable = false, length = 4)
     private Boolean isDeleted;
 }
