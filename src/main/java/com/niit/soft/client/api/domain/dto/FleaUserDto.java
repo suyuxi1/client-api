@@ -18,7 +18,7 @@ import javax.persistence.Column;
 @NoArgsConstructor
 public class FleaUserDto {
     /**
-     * 手机号
+     * 学号
      */
     private String jobNumber;
 }

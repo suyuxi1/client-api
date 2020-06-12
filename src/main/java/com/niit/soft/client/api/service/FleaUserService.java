@@ -2,6 +2,7 @@ package com.niit.soft.client.api.service;
 
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.FleaUserDto;
+import com.niit.soft.client.api.domain.dto.FleaUserIdDto;
 import com.niit.soft.client.api.domain.dto.UpdateFleaUserDto;
 
 /**
@@ -15,6 +16,7 @@ public interface FleaUserService {
 
     /**
      * 添加用户数据
+     *
      * @param fleaUserDto FleaUserDto
      * @return ResponseResult
      */
@@ -22,8 +24,25 @@ public interface FleaUserService {
 
     /**
      * 用户数据修改
+     *
      * @param updateFleaUserDto UpdateFleaUserDto
      * @return ResponseResult
      */
     ResponseResult updateFleaUser(UpdateFleaUserDto updateFleaUserDto);
+
+    /**
+     * 根据用户id查询该用户发布的商品
+     *
+     * @param fleaUserIdDto FleaUserIdDto
+     * @return ResponseResult
+     */
+    ResponseResult findGoodsByUserId(FleaUserIdDto fleaUserIdDto);
+
+    /**
+     * 根据用户id查询该用户的商品订单
+     *
+     * @param fleaUserIdDto FleaUserIdDto
+     * @return ResponseResult
+     */
+    ResponseResult findOrderByUserId(FleaUserIdDto fleaUserIdDto);
 }

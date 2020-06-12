@@ -25,7 +25,8 @@ public interface FleaRewardService {
      *
      * @return
      */
-    ResponseResult getRewardTopTwo();
+    ResponseResult getRewardTopThree();
+
 
     /**
      * 添加悬赏

@@ -45,11 +45,9 @@ public class AddressBookServiceImpl implements AddressBookService {
     public void insertAddressBook(AddressBook addressBook) {
         UserAccount user = userAccountRepository.findSysUserAccountByPkUserAccountId(addressBook.getUserId());
         System.out.println(user);
-        addressBook.setAvatar(user.getAvatar());
         addressBook.setGmtCreate(Timestamp.valueOf(LocalDateTime.now()));
         addressBook.setGmtModified(Timestamp.valueOf(LocalDateTime.now()));
         addressBook.setIsDeleted(false);
-        addressBook.setRemark(user.getNickname());
         addressBookRepository.save(addressBook);
     }
 
