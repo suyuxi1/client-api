@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @Author yhChen
- * @Description
+ * @Description 修改商品信息Dto
  * @Date 2020/6/9
  */
 @Data

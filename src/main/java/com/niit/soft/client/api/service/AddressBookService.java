@@ -46,12 +46,6 @@ public interface AddressBookService {
      */
     void updateAddressBookById(AddressBook addressBook);
 
-    /**
-     * 根据备注关键字查询
-     * @param keywords
-     * @return
-     */
-    List<AddressBook> findAddressBookByRemarkContaning(String keywords);
 
     /**
      * 分页查询通讯里所有好友

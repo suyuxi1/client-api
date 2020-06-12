@@ -66,4 +66,5 @@ public interface CardService {
      */
     ResponseResult updateStatus(Long pkCardId,Boolean Status);
 
+
 }

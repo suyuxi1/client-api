@@ -3,6 +3,7 @@ package com.niit.soft.client.api.controller;
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.*;
+import com.niit.soft.client.api.service.CollectionsService;
 import com.niit.soft.client.api.service.CommentService;
 import com.niit.soft.client.api.service.DynamicService;
 import com.niit.soft.client.api.service.ReplyCommentService;
@@ -34,6 +35,9 @@ public class DynamicController {
 
     @Resource
     private ReplyCommentService replyCommentService;
+
+    @Resource
+    private CollectionsService collectionsService;
 
     @PostMapping("/{id}")
     @ControllerWebLog(name = "findDynamicVoById", isSaved = true)
@@ -95,6 +99,7 @@ public class DynamicController {
      * @param replyCommentDto
      * @return
      */
+    @ControllerWebLog(name = "insertReplyComment", isSaved = true)
     @ApiOperation(value = "添加校友评论的评论", notes = "传递参数为内容，评论id，用户id")
     @PostMapping(value = "/replyComment/insert")
     public ResponseResult insertReplyComment(@RequestBody ReplyCommentDto replyCommentDto) {
@@ -107,9 +112,24 @@ public class DynamicController {
      * @param id
      * @return
      */
+    @ControllerWebLog(name = "deleteReplyComment", isSaved = true)
     @ApiOperation(value = "删除校友评论的评论", notes = "传递参数为reply_comment的id")
     @PostMapping(value = "/replyComment/deletion/{id}")
     public ResponseResult deleteReplyComment(@PathVariable Long id) {
         return replyCommentService.deleteReplyComment(id);
     }
+
+    /**
+     * 查询用户以收藏的动态资讯
+     *
+     * @param pageDto
+     * @return
+     */
+    @ControllerWebLog(name = "getCollectionsByUserId", isSaved = true)
+    @ApiOperation(value = "查询用户以收藏的动态资讯", notes = "field参数需要填写一个数字字符串，代表用户id")
+    @PostMapping(value = "/Collection")
+    public ResponseResult getCollectionsByUserId(@RequestBody PageDto pageDto) {
+        return collectionsService.getCollectionsByUserId(pageDto);
+    }
+
 }

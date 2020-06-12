@@ -8,6 +8,7 @@ import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.DynamicDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.dto.ThumbDto;
+import com.niit.soft.client.api.domain.model.Comment;
 import com.niit.soft.client.api.domain.model.Dynamic;
 import com.niit.soft.client.api.domain.model.Thumb;
 import com.niit.soft.client.api.domain.vo.CommentVo;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +57,13 @@ public class DynamicServiceImpl implements DynamicService {
     @Override
     public DynamicVo findDynamicVoById(int id) {
         DynamicVo dynamicVo = dynamicMapper.findDynamicVoById((long) id);
+
+        List<CommentVo> commentVoList = new ArrayList<>();
+        for (Comment comment : dynamicVo.getCommentList()) {
+            commentVoList.add(commentMapper.findCommentVoById(comment.getPkCommentId()));
+        }
+        dynamicVo.setCommentVoList(commentVoList);
+
         Map<String, Object> thumbMap = new HashMap<>(10);
         for (Thumb thumb : dynamicVo.getThumbList()) {
             thumbMap.put(thumb.getPkThumbId().toString(), thumb.getUserId().toString());

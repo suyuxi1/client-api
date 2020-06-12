@@ -1,7 +1,13 @@
 package com.niit.soft.client.api.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.UpdateTimestamp;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -14,7 +20,11 @@ import java.sql.Timestamp;
  * @Version 1.0
  **/
 @Entity
-@Table(name = "collection")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Collections {
     /**
      * 主键，策略为自增
@@ -38,7 +48,7 @@ public class Collections {
     /**
      * 创建时间
      */
-    //@JsonIgnore
+    @CreatedDate
     @Column(nullable = false)
     private Timestamp gmtCreate;
 
@@ -46,7 +56,7 @@ public class Collections {
      * 修改时间
      */
     @JsonIgnore
-    @UpdateTimestamp
+    @LastModifiedDate
     @Column(nullable = false)
     private Timestamp gmtModified;
 

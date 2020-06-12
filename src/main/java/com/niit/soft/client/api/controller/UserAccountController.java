@@ -40,7 +40,7 @@ public class UserAccountController {
      * @return
      */
     @ApiOperation(value = "修改个人信息数据", notes = "请求参数为头像、昵称、性别")
-    @PutMapping("/update/info")
+    @PostMapping("/update/info")
     @ControllerWebLog(name = "updateInfo", isSaved = true)
     ResponseResult updateInfo(@RequestBody UserAccount userAccount) {
         log.info("-----/update/info-----请求参数：" + userAccount+"**1**");
@@ -53,7 +53,7 @@ public class UserAccountController {
      * @return
      */
     @ApiOperation(value = "修改手机号码",notes = "请求参数为手机号码")
-    @PutMapping("/update/phone")
+    @PostMapping("/update/phone")
     ResponseResult updatePhoneNumber(@RequestBody UserAccount userAccount){
         return userAccountService.updateUserPhoneNumber(userAccount);
     }

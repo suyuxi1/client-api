@@ -4,6 +4,7 @@ package com.niit.soft.client.api.service;
 import java.util.Map;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.dto.TypeDto;
 import org.springframework.data.domain.Pageable;
 
 /**
@@ -22,8 +23,8 @@ public interface FleaTypeService {
 
 
     /** 根据分类id查询商品
-     * @param typeId
+     * @param pageDto
      * @return
      */
-    ResponseResult getGoodsByType(PageDto pageDto, Long typeId);
+    ResponseResult getGoodsByType(TypeDto typeDto);
 }

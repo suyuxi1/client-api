@@ -20,19 +20,15 @@ import java.util.List;
  * @Date 2020/6/2
  * @Version 1.0
  */
-@Slf4j
 @RestController
-@RequestMapping(value = "address_book")
-@Api(tags = "通讯录接口")
+@Slf4j
+@ResponseBody
+@RequestMapping("/addressBook")
+@Api(value = "AddressBookController",tags = {"通讯录模块接口"})
 public class AddressBookController {
     @Resource
     private AddressBookService addressBookService;
 
-    /**
-     * 根据id查询所有的通讯录好友
-     * @param pageDto
-     * @return
-     */
     @PostMapping(value = "/list/userId")
     @ControllerWebLog(name = "getAddressByUserId", isSaved = true)
     @ApiOperation(value = "根据id查询所有的通讯录好友", notes = "")
@@ -41,12 +37,6 @@ public class AddressBookController {
         log.info("进入/list/userId接口："+pageDto + "**1**");
         return addressBookService.getAddressBookByUserId(pageDto.getField().toString());
     }
-
-    /**
-     * 根据手机号查询所有的通讯录好友
-     * @param pageDto
-     * @return
-     */
     @PostMapping(value = "/list/phoneNumber")
     @ControllerWebLog(name = "getAddressByUserId", isSaved = true)
     @ApiOperation(value = "根据手机号查询所有的通讯录好友", notes = "")
@@ -54,20 +44,6 @@ public class AddressBookController {
         log.info("访问/list/phoneNumber接口");
         log.info("进入/list/phoneNumber接口："+pageDto + "**1**");
         return addressBookService.findAddressBookByPhoneNumber(pageDto.getField().toString());
-    }
-
-    /**
-     * 根据remark模糊通讯录好友
-     * @param keywords
-     * @return
-     */
-    @PostMapping(value = "/list/remark")
-    @ControllerWebLog(name = "getAddressByUserId", isSaved = true)
-    @ApiOperation(value = "根据remark模糊通讯录好友", notes = "")
-    public List<AddressBook> findAddressBookByRemark(@RequestParam("keywords") String keywords) {
-        log.info("访问/list/remark接口");
-        log.info("进入/list/remark接口："+keywords + "**1**");
-        return addressBookService.findAddressBookByRemarkContaning(keywords);
     }
 
     /**
@@ -91,7 +67,7 @@ public class AddressBookController {
      * @param addressBook
      * @return
      */
-    @PutMapping(value = "/id")
+    @PostMapping(value = "/id")
     @ControllerWebLog(name = "updateAddressBook", isSaved = true)
     @ApiOperation(value = "修改通讯录好友信息", notes = "")
     public ResponseResult updateAddressBook(@RequestBody AddressBook addressBook) {
@@ -107,11 +83,11 @@ public class AddressBookController {
      * @param singleFieldDto
      * @return
      */
-    @DeleteMapping(value = "/deletion/id")
+    @PostMapping(value = "/deletion/id")
     @ControllerWebLog(name = "deleteAddressBookById", isSaved = true)
     @ApiOperation(value = "根据id删除通讯录好友信息", notes = "")
-        public ResponseResult deleteAddressBookById(@RequestBody SingleFieldDto singleFieldDto) {
-            addressBookService.deleteAddressBookById(Integer.parseInt(String.valueOf(singleFieldDto.getField())));
+    public ResponseResult deleteAddressBookById(@RequestBody SingleFieldDto singleFieldDto) {
+        addressBookService.deleteAddressBookById(Integer.parseInt(String.valueOf(singleFieldDto.getField())));
         return ResponseResult.success();
     }
     /**
