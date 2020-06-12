@@ -1,16 +1,12 @@
 package com.niit.soft.client.api.config;
 
-import com.niit.soft.client.api.handler.MyHandshakeHandler;
-import com.niit.soft.client.api.interceptor.AuthHandshakeInterceptor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 /**
@@ -26,12 +22,6 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 @Slf4j
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
-
-    @Autowired
-    private AuthHandshakeInterceptor authHandshakeInterceptor;
-
-    @Autowired
-    private MyHandshakeHandler myHandshakeHandler;
 
     @Bean
     public ServerEndpointExporter serverEndpointExporter() {
@@ -50,10 +40,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
+        // 前缀为/topic为私聊，为/queue为群聊
         registry.enableSimpleBroker("/topic/", "/queue/");
         registry.setUserDestinationPrefix("/queue/");
         registry.setApplicationDestinationPrefixes("/app");
     }
+
 //    @Override
 //    public void configureMessageBroker(MessageBrokerRegistry registry) {
 //
@@ -106,20 +98,20 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 //                .keepAliveSeconds(60);
 //    }
 
-    /**
-     * 消息传输参数配置
-     *
-     * @param registration
-     */
-    @Override
-    public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
-        // 超时时间
-        registration.setSendTimeLimit(15 * 1000)
-                // 缓存空间
-                .setSendBufferSizeLimit(512 * 1024)
-                // 消息大小
-                .setMessageSizeLimit(128 * 1024);
-    }
+//    /**
+//     * 消息传输参数配置
+//     *
+//     * @param registration
+//     */
+//    @Override
+//    public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
+//        // 超时时间
+//        registration.setSendTimeLimit(15 * 1000)
+//                // 缓存空间
+//                .setSendBufferSizeLimit(512 * 1024)
+//                // 消息大小
+//                .setMessageSizeLimit(128 * 1024);
+//    }
 
 
 }
