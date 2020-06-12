@@ -28,8 +28,11 @@
         FROM user_account u
         INNER JOIN part_job j
         ON u.pk_user_account_id = j.boss_id
-        ORDER BY #{field} DESC
+        ORDER BY ${field} DESC
     </select>
+
+
+
 
 
 </mapper>

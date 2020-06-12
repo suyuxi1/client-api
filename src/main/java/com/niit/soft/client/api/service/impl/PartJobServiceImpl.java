@@ -30,11 +30,10 @@ public class PartJobServiceImpl extends ServiceImpl<PartJobMapper, PartJob> impl
 
 
     @Override
-    public List<PartJob> findAllByPage(PageDto pageDto) {
-        //分页查询
+    public List<PartJob> findByPage(PageDto pageDto) {
         QueryWrapper<PartJob> wrapper = new QueryWrapper<>();
         IPage<PartJob> page = new Page<>(pageDto.getCurrentPage(), pageDto.getPageSize());
-        wrapper.select("pk_part_job_id","name","description","boss_id","boss_name","boss_phone","boss_avatar","workplace","working_date","working_time","pay","pay_type","job_type","number","have","need","is_deleted","gmt_create").eq("is_deleted", 0);
+        wrapper.select("pk_part_job_id","name","boss_name","boss_phone","boss_avatar","workplace","working_date","working_time","pay","job_type","number","have","need","gmt_create").eq("is_deleted", 0);
         if ("pay".equals(pageDto.getField())){
             wrapper.orderByDesc(pageDto.getField().toString());
         }else if ("gmt_create".equals(pageDto.getField())){
@@ -42,9 +41,15 @@ public class PartJobServiceImpl extends ServiceImpl<PartJobMapper, PartJob> impl
         }else {
             wrapper.eq("job_type", pageDto.getField());
         }
-//        Page<PartJobVo> page = new Page<>(pageDto.getCurrentPage(), pageDto.getPageSize());
-//        System.out.println(pageDto.getField());
         return partJobMapper.selectPage(page, wrapper).getRecords();
+    }
+
+    @Override
+    public PartJob findById(Long id) {
+        //分页查询
+        QueryWrapper<PartJob> wrapper = new QueryWrapper<>();
+        wrapper.select("pk_part_job_id","name","description","boss_id","boss_name","boss_phone","boss_avatar","workplace","working_date","working_time","pay","pay_type","job_type","number","have","need","gmt_create").eq("pk_part_job_id",id);
+        return partJobMapper.selectOne(wrapper);
 
     }
 

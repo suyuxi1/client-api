@@ -10,15 +10,25 @@ import javax.annotation.Resource;
 class PartJobServiceTest {
 
     @Resource
-    private PartJobService jobService;
+    private PartJobService partJobService;
 
     @Test
     void findAllByPage() {
+//        PageDto pageDto = PageDto.builder()
+//                .field("pay")
+//                .currentPage(1)
+//                .pageSize(10)
+//                .build();
+//        System.out.println(partJobService.findAllByPage(pageDto));
+    }
+
+    @Test
+    void findByPage() {
         PageDto pageDto = PageDto.builder()
                 .field("pay")
                 .currentPage(1)
                 .pageSize(10)
                 .build();
-        System.out.println(jobService.findAllByPage(pageDto));
+        System.out.println(partJobService.findByPage(pageDto));
     }
 }

@@ -41,11 +41,10 @@ public class Company extends Model<Company> {
     private  String tag;
 
     @TableField("logo")
-    @Column(nullable = false,length = 60)
     private  String logo;
 
     @TableField("workers")
-    @Column(nullable = false,length = 60)
+    @Column(nullable = false,length = 20)
     private  Integer workers;
 
     @TableField("type")

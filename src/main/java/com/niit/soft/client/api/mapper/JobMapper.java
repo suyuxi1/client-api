@@ -16,5 +16,8 @@ import java.util.List;
  **/
 public interface JobMapper extends BaseMapper<Job> {
 
-    List<JobVo> findJob(String field);
+    JobVo findJob(Long id);
+
+
+    List<JobVo> jobList(String field);
 }
