@@ -66,4 +66,6 @@ public interface DynamicService {
      */
     ResponseResult thumbsUp(ThumbDto thumbDto);
 
+    ResponseResult findPicture(Long id);
+
 }

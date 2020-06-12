@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.service;
 
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.DynamicCollectionInDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 
 /**
@@ -13,13 +14,6 @@ import com.niit.soft.client.api.domain.dto.PageDto;
 public interface CollectionsService {
 
     /**
-     * 根据用户id查找所有收藏动态
-     * @param id
-     * @return
-     */
-    ResponseResult findCollections(Long id);
-
-    /**
      *分页查询所有咨询
      * @param pageDto
      *
@@ -27,4 +21,12 @@ public interface CollectionsService {
      */
     ResponseResult getCollectionsByUserId(PageDto pageDto);
 
+    /**
+     * 添加收藏
+     * @param dynamicCollectionInDto
+     * @return
+     */
+    ResponseResult insertCollections(DynamicCollectionInDto dynamicCollectionInDto);
+
+    ResponseResult updateCollectionsIsDelete(Long id);
 }

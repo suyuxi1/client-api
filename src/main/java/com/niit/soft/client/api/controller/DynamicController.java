@@ -61,6 +61,7 @@ public class DynamicController {
         return ResponseResult.success(dynamicService.findDynamicByPage(pageDto));
     }
 
+
     @PostMapping("/new")
     @ControllerWebLog(name = "findDynamic", isSaved = true)
     @ApiOperation(value = "发表动态资讯", notes = "请求参数为具体动态内容")
@@ -92,6 +93,8 @@ public class DynamicController {
     public ResponseResult deleteComment(@PathVariable Long id) {
         return commentService.deleteComment(id);
     }
+
+
 
     /**
      * 添加校友圈动态评论
@@ -130,6 +133,40 @@ public class DynamicController {
     @PostMapping(value = "/Collection")
     public ResponseResult getCollectionsByUserId(@RequestBody PageDto pageDto) {
         return collectionsService.getCollectionsByUserId(pageDto);
+    }
+
+    /**
+     * 添加加收藏
+     *
+     * @param dynamicCollectionInDto
+     * @return
+     */
+    @ControllerWebLog(name = "insertCollections", isSaved = true)
+    @ApiOperation(value = "添加用户以收藏的动态资讯", notes = "参数为：用户id，动态id，不可重复添加同一个动态")
+    @PostMapping(value = "/Collection/insert")
+    public ResponseResult insertCollections(@RequestBody DynamicCollectionInDto dynamicCollectionInDto) {
+        return collectionsService.insertCollections(dynamicCollectionInDto);
+    }
+
+    /**
+     * 删除加收藏
+     *
+     * @param id
+     * @return
+     */
+    @ControllerWebLog(name = "updateCollectionsIsDelete", isSaved = true)
+    @ApiOperation(value = "删除用户以收藏的动态资讯", notes = "参数为：收藏id")
+    @PostMapping(value = "/Collection/deletion")
+    public ResponseResult updateCollectionsIsDelete(@RequestBody Long id) {
+        return collectionsService.updateCollectionsIsDelete(id);
+    }
+
+
+    @ControllerWebLog(name = "findPicture", isSaved = true)
+    @ApiOperation(value = "查找动态资讯图片", notes = "参数为动态资讯id")
+    @PostMapping(value = "/picture")
+    public ResponseResult findPicture(@RequestBody Long id) {
+        return ResponseResult.success(dynamicService.findPicture(id));
     }
 
 }

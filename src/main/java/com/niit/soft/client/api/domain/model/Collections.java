@@ -30,7 +30,7 @@ public class Collections {
      * 主键，策略为自增
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pkCollectionId;
 
     /**

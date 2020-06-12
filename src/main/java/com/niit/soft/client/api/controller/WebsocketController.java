@@ -6,7 +6,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
@@ -17,7 +16,7 @@ import java.util.Map;
  * @Date 2020/6/11 11:10 上午
  * @Version 1.0
  **/
-@RestController
+//@RestController
 public class WebsocketController {
     @Autowired
     private SimpMessagingTemplate template;

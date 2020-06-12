@@ -16,6 +16,7 @@ import com.niit.soft.client.api.domain.vo.DynamicVo;
 import com.niit.soft.client.api.mapper.CommentMapper;
 import com.niit.soft.client.api.mapper.DynamicMapper;
 import com.niit.soft.client.api.mapper.ThumbMapper;
+import com.niit.soft.client.api.repository.DynamicPhotoRepository;
 import com.niit.soft.client.api.repository.DynamicRepository;
 import com.niit.soft.client.api.service.DynamicService;
 import com.niit.soft.client.api.util.RedisUtil;
@@ -52,6 +53,8 @@ public class DynamicServiceImpl implements DynamicService {
     private DynamicRepository dynamicRepository;
 
     @Resource
+    private DynamicPhotoRepository dynamicPhotoRepository;
+    @Resource
     private RedisUtil redisUtil;
 
     @Override
@@ -77,6 +80,12 @@ public class DynamicServiceImpl implements DynamicService {
         return dynamicVo;
     }
 
+
+    /**
+     * 点赞
+     * @param thumbDto
+     * @return
+     */
     @Override
     public ResponseResult thumbsUp(ThumbDto thumbDto) {
         Map<Object, Object> map = redisUtil.hmget(thumbDto.getDynamicId());
@@ -103,6 +112,17 @@ public class DynamicServiceImpl implements DynamicService {
             return ResponseResult.success(ResultCode.SCHOOL_MATE_THUMBS_UP_REDIS);
         }
         return ResponseResult.success(ResultCode.SCHOOL_MATE_THUMBS_UP);
+    }
+
+    /**
+     * 根据动态id查找图片
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseResult findPicture(Long id) {
+        List<String> dynamicPhotoList = dynamicPhotoRepository.findDistinctByDynamicId(id);
+        return ResponseResult.success(dynamicPhotoList);
     }
 
 
