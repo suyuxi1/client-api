@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.domain.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +31,7 @@ public class Collections {
      * 主键，策略为自增
      */
     @Id
+    @TableId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pkCollectionId;
 

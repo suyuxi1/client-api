@@ -15,9 +15,9 @@ import com.niit.soft.client.api.domain.vo.CommentVo;
 import com.niit.soft.client.api.domain.vo.DynamicVo;
 import com.niit.soft.client.api.mapper.CommentMapper;
 import com.niit.soft.client.api.mapper.DynamicMapper;
-import com.niit.soft.client.api.mapper.ThumbMapper;
 import com.niit.soft.client.api.repository.DynamicRepository;
 import com.niit.soft.client.api.service.DynamicService;
+import com.niit.soft.client.api.task.RedisDataToMySQL;
 import com.niit.soft.client.api.util.RedisUtil;
 import com.niit.soft.client.api.util.SnowFlake;
 import lombok.extern.slf4j.Slf4j;
@@ -46,10 +46,12 @@ public class DynamicServiceImpl implements DynamicService {
     private DynamicMapper dynamicMapper;
     @Resource
     private CommentMapper commentMapper;
-    @Resource
-    private ThumbMapper thumbMapper;
+
     @Resource
     private DynamicRepository dynamicRepository;
+
+    @Resource
+    private RedisDataToMySQL redisDataToMySQL;
 
     @Resource
     private RedisUtil redisUtil;
@@ -61,19 +63,16 @@ public class DynamicServiceImpl implements DynamicService {
 
         List<Comment> commentList = dynamicVo.getCommentList();
         List<CommentVo> commentVoList = new ArrayList<>();
-        if (commentList.get(0).getPkCommentId() != null) {
+        if (commentList.size() != 0) {
             for (Comment comment : commentList) {
                 commentVoList.add(commentMapper.findCommentVoById(comment.getPkCommentId()));
             }
             dynamicVo.setCommentVoList(commentVoList);
-        } else {
-            dynamicVo.setCommentList(null);
         }
-
 
         Map<String, Object> thumbMap = new HashMap<>(10);
         List<Thumb> thumbList = dynamicVo.getThumbList();
-        if (thumbList.get(0).getPkThumbId() != null) {
+        if (thumbList.size() != 0 && thumbList.get(0).getPkThumbId() != null) {
             for (Thumb thumb : thumbList) {
                 thumbMap.put(thumb.getPkThumbId().toString(), thumb.getUserId().toString());
             }
@@ -92,27 +91,35 @@ public class DynamicServiceImpl implements DynamicService {
     @Override
     public ResponseResult thumbsUp(ThumbDto thumbDto) {
         Map<Object, Object> map = redisUtil.hmget(thumbDto.getDynamicId());
-        Boolean flag = false;
-        if (redisUtil.hasKey(thumbDto.getDynamicId())) {
-            for (Entry<Object, Object> entry : map.entrySet()) {
-                System.out.println("foreachEntry : key :" + entry.getKey() + "---> value :" + entry.getValue());
-                if (entry.getKey().equals(thumbDto.getPkThumbId()) || entry.getValue().equals(thumbDto.getUserId())) {
-                    flag = false;
-                    log.info("从redis删除");
-                    redisUtil.hdel(thumbDto.getDynamicId(), thumbDto.getPkThumbId(), thumbDto.getUserId());
-                    return ResponseResult.failure(ResultCode.SCHOOL_MATE_THUMBS_DOWN);
-                }
-                flag = true;
-            }
-            if (flag) {
-                log.info("存redis");
-                Map<String, Object> thumbMap = new HashMap<>(10);
-                thumbMap.put(String.valueOf(new SnowFlake(1, 3).nextId()), thumbDto.getUserId());
-                redisUtil.hmset(thumbDto.getDynamicId(), thumbMap);
-            }
-
+        if (dynamicMapper.findDynamicVoById(Long.valueOf(thumbDto.getDynamicId()))
+                .getThumbList().size() == 0) {
+            log.info("键存redis");
+            Map<String, Object> thumbMap = new HashMap<>(10);
+            thumbMap.put(String.valueOf(new SnowFlake(1, 3).nextId()), thumbDto.getUserId());
+            redisUtil.hmset(thumbDto.getDynamicId(), thumbMap);
+            redisDataToMySQL.redisDataToMySQL();
         } else {
-            return ResponseResult.success(ResultCode.SCHOOL_MATE_THUMBS_UP_REDIS);
+            Boolean flag = false;
+            if (redisUtil.hasKey(thumbDto.getDynamicId())) {
+                for (Entry<Object, Object> entry : map.entrySet()) {
+                    log.info("foreachEntry : key :" + entry.getKey() + "---> value :" + entry.getValue());
+                    if (entry.getKey().equals(thumbDto.getPkThumbId()) || entry.getValue().equals(thumbDto.getUserId())) {
+                        flag = false;
+                        log.info("从redis删除");
+                        redisUtil.hdel(thumbDto.getDynamicId(), thumbDto.getPkThumbId(), thumbDto.getUserId());
+                        return ResponseResult.success(ResultCode.SCHOOL_MATE_THUMBS_DOWN);
+                    }
+                    flag = true;
+                }
+                if (flag) {
+                    log.info("值存redis");
+                    Map<String, Object> thumbMap = new HashMap<>(10);
+                    thumbMap.put(String.valueOf(new SnowFlake(1, 3).nextId()), thumbDto.getUserId());
+                    redisUtil.hmset(thumbDto.getDynamicId(), thumbMap);
+                }
+            } else {
+                return ResponseResult.success(ResultCode.SCHOOL_MATE_THUMBS_UP_REDIS);
+            }
         }
         return ResponseResult.success(ResultCode.SCHOOL_MATE_THUMBS_UP);
     }

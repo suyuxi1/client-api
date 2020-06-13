@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.domain.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,6 +32,7 @@ public class PartJob extends Model<PartJob> {
      * 主键
      */
     @Id
+    @TableId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pkPartJobId;
 

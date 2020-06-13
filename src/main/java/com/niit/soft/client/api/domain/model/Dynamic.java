@@ -84,7 +84,6 @@ public class Dynamic {
     /**
      * 修改时间
      */
-    @JsonIgnore
     @Column(nullable = false)
     @LastModifiedDate
     private Timestamp gmtModified;

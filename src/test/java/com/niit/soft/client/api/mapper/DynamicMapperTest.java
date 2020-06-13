@@ -15,6 +15,6 @@ class DynamicMapperTest {
 
     @Test
     void findDynamicVoById() {
-        System.out.println(dynamicMapper.findDynamicVoById(Long.valueOf("1271347661651709952")));
+        System.out.println(dynamicMapper.findDynamicVoById(Long.valueOf("1271346795213361152")));
     }
 }

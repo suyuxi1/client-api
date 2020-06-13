@@ -9,6 +9,7 @@ import com.niit.soft.client.api.repository.CommentRepository;
 import com.niit.soft.client.api.repository.DynamicRepository;
 import com.niit.soft.client.api.repository.ReplyCommentRepository;
 import com.niit.soft.client.api.service.CommentService;
+import com.niit.soft.client.api.util.SnowFlake;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,13 +37,14 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public ResponseResult insertComment(CommentDto commentDto) {
         Comment comment = new Comment();
+        comment.setPkCommentId(new SnowFlake(1, 3).nextId());
         comment.setIsDeleted(false);
         comment.setContent(commentDto.getContent());
         comment.setDynamicId(commentDto.getDynamicId());
         comment.setUserId(commentDto.getUserId());
         commentRepository.save(comment);
         //获取获取一动态的评论数量
-        List<Comment> commentList = commentRepository.findCommentByIsDeletedAndDynamicId(false,commentDto.getDynamicId());
+        List<Comment> commentList = commentRepository.findCommentByIsDeletedAndDynamicId(false, commentDto.getDynamicId());
         Dynamic dynamic = dynamicRepository.findDynamicByPkDynamicId(comment.getDynamicId());
         dynamic.setComments(commentList.size());
         //修改动态评论数量
@@ -62,7 +64,7 @@ public class CommentServiceImpl implements CommentService {
             replyCommentRepository.saveAndFlush(replyComment1);
         });
         //获取获取一动态的评论数量
-        List<Comment> commentList = commentRepository.findCommentByIsDeletedAndDynamicId(false,comment.getDynamicId());
+        List<Comment> commentList = commentRepository.findCommentByIsDeletedAndDynamicId(false, comment.getDynamicId());
         Dynamic dynamic = dynamicRepository.findDynamicByPkDynamicId(comment.getDynamicId());
         dynamic.setComments(commentList.size());
         //修改动态评论数量

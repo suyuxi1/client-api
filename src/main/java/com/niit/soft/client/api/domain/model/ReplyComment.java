@@ -31,7 +31,7 @@ public class ReplyComment {
      * 主键，策略为自增
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long pkReplyCommentId;
 
 
@@ -57,13 +57,14 @@ public class ReplyComment {
      * 创建时间
      */
     @CreatedDate
+    @JsonIgnore
+
     @Column(nullable = false)
     private Timestamp gmtCreate;
 
     /**
      * 修改时间
      */
-    @JsonIgnore
     @LastModifiedDate
     @Column(name = "gmt_modified", nullable = false)
     private Timestamp gmtModified;
@@ -71,7 +72,6 @@ public class ReplyComment {
     /**
      * 删除标志（0 逻辑删除， 1 未删除）
      */
-    //@JsonIgnore
     @Column(name = "is_deleted", nullable = false, length = 4)
     private Boolean isDeleted;
 }

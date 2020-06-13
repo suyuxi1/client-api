@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.domain.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +31,7 @@ public class Job extends Model<Job> {
      * 主键
      */
     @Id
+    @TableId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long pkJobId;
 

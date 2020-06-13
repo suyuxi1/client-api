@@ -32,7 +32,6 @@ public class RedisDataToMySQL {
     @Resource
     private DynamicRepository dynamicRepository;
 
-
     @Resource
     private ThumbService thumbService;
 

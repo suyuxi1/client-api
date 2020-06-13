@@ -100,7 +100,7 @@ public class DynamicController {
      * @return
      */
     @ControllerWebLog(name = "insertReplyComment", isSaved = true)
-    @ApiOperation(value = "添加校友评论的评论", notes = "传递参数为内容，评论id，用户id")
+    @ApiOperation(value = "添加评论的回复", notes = "传递参数为内容，评论id，用户id")
     @PostMapping(value = "/replyComment/insert")
     public ResponseResult insertReplyComment(@RequestBody ReplyCommentDto replyCommentDto) {
         return replyCommentService.insertReplyComment(replyCommentDto);
@@ -113,7 +113,7 @@ public class DynamicController {
      * @return
      */
     @ControllerWebLog(name = "deleteReplyComment", isSaved = true)
-    @ApiOperation(value = "删除校友评论的评论", notes = "传递参数为reply_comment的id")
+    @ApiOperation(value = "删除评论的回复", notes = "传递参数为reply_comment的id")
     @PostMapping(value = "/replyComment/deletion/{id}")
     public ResponseResult deleteReplyComment(@PathVariable Long id) {
         return replyCommentService.deleteReplyComment(id);
