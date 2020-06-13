@@ -15,9 +15,9 @@ import com.niit.soft.client.api.domain.vo.CommentVo;
 import com.niit.soft.client.api.domain.vo.DynamicVo;
 import com.niit.soft.client.api.mapper.CommentMapper;
 import com.niit.soft.client.api.mapper.DynamicMapper;
+import com.niit.soft.client.api.mapper.ThumbMapper;
 import com.niit.soft.client.api.repository.DynamicRepository;
 import com.niit.soft.client.api.service.DynamicService;
-import com.niit.soft.client.api.task.RedisDataToMySQL;
 import com.niit.soft.client.api.util.RedisUtil;
 import com.niit.soft.client.api.util.SnowFlake;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +25,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,10 +50,9 @@ public class DynamicServiceImpl implements DynamicService {
     private CommentMapper commentMapper;
 
     @Resource
-    private DynamicRepository dynamicRepository;
-
+    private ThumbMapper thumbMapper;
     @Resource
-    private RedisDataToMySQL redisDataToMySQL;
+    private DynamicRepository dynamicRepository;
 
     @Resource
     private RedisUtil redisUtil;
@@ -91,13 +92,19 @@ public class DynamicServiceImpl implements DynamicService {
     @Override
     public ResponseResult thumbsUp(ThumbDto thumbDto) {
         Map<Object, Object> map = redisUtil.hmget(thumbDto.getDynamicId());
-        if (dynamicMapper.findDynamicVoById(Long.valueOf(thumbDto.getDynamicId()))
-                .getThumbList().size() == 0) {
+        List<Thumb> thumbList = dynamicMapper.findDynamicVoById(Long.valueOf(thumbDto.getDynamicId())).getThumbList();
+        if (thumbList.size() == 0 || thumbList.get(0).getPkThumbId() == null) {
             log.info("键存redis");
             Map<String, Object> thumbMap = new HashMap<>(10);
-            thumbMap.put(String.valueOf(new SnowFlake(1, 3).nextId()), thumbDto.getUserId());
+            Long id = new SnowFlake(1, 3).nextId();
+            thumbMap.put(String.valueOf(id), thumbDto.getUserId());
             redisUtil.hmset(thumbDto.getDynamicId(), thumbMap);
-            redisDataToMySQL.redisDataToMySQL();
+            thumbMapper.insert(Thumb.builder().pkThumbId(id).userId(Long.valueOf(thumbDto.getUserId()))
+                    .gmtCreate(Timestamp.valueOf(LocalDateTime.now()))
+                    .gmtModified(Timestamp.valueOf(LocalDateTime.now()))
+                    .isDeleted(false)
+                    .dynamicId(Long.valueOf(thumbDto.getDynamicId()))
+                    .build());
         } else {
             Boolean flag = false;
             if (redisUtil.hasKey(thumbDto.getDynamicId())) {
