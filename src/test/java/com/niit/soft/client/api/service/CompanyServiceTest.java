@@ -6,29 +6,27 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
-class PartJobServiceTest {
+class CompanyServiceTest {
 
     @Resource
-    private PartJobService partJobService;
+    private CompanyService companyService;
 
     @Test
     void findByPage() {
         PageDto pageDto = PageDto.builder()
-                .field("pay")
+                .field("workers")
                 .currentPage(1)
                 .pageSize(10)
                 .build();
-        System.out.println(partJobService.findByPage(pageDto));
-    }
-
-    @Test
-    void insertJob() {
+        companyService.findByPage(pageDto).forEach(System.out::println);
 
     }
 
     @Test
     void findById() {
-        System.out.println(partJobService.findById(1L));
+        System.out.println(companyService.findById(1L));
     }
 }

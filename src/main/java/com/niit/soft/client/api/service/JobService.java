@@ -21,4 +21,7 @@ public interface JobService extends IService<Job> {
 
 
     JobVo findById(Long id);
+
+
+    List<JobVo> findByType(Long typeId);
 }

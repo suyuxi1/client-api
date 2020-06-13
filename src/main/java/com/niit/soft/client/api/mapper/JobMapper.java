@@ -20,4 +20,6 @@ public interface JobMapper extends BaseMapper<Job> {
 
 
     List<JobVo> jobList(String field);
+
+    List<JobVo> jobListByType(Long typeId);
 }
