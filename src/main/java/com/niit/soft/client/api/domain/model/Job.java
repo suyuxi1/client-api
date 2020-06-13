@@ -87,7 +87,7 @@ public class Job extends Model<Job> {
 
     @TableField("job_type_id")
     @Column(length = 20)
-    private  String jobTypeId;
+    private  Long jobTypeId;
 
     @TableField("number")
     @Column(length = 4)

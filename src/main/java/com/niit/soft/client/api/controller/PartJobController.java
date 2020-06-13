@@ -27,15 +27,15 @@ public class PartJobController {
     @Resource
     private PartJobService jobService;
 
-    @PostMapping("/byPay")
+    @PostMapping("/list")
 //    @ControllerWebLog(name = "find")
-    @ApiOperation(value = "职位列表", notes = "请求参数为传递分页参数")
+    @ApiOperation(value = "兼职列表", notes = "请求参数为PageDto，field参数为pay,gmt_create或者兼职类型")
     public ResponseResult findPartJob(@RequestBody PageDto pageDto){
         return ResponseResult.success(jobService.findByPage(pageDto));
     }
 
     @PostMapping("/byId")
-    @ApiOperation(value = "根据兼职id查看详情",  notes = "请求参数为动态JobDto")
+    @ApiOperation(value = "查看兼职详情",  notes = "请求参数为兼职的id")
     public ResponseResult findJob(@RequestBody JobDto jobDto){
         return ResponseResult.success(jobService.findById(jobDto.getId()));
     }
