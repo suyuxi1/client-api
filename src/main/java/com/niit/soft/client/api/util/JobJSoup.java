@@ -2,6 +2,8 @@ package com.niit.soft.client.api.util;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.niit.soft.client.api.domain.model.Job;
 import com.niit.soft.client.api.domain.model.JobType;
 import com.niit.soft.client.api.mapper.JobTypeMapper;
 import org.apache.http.HttpEntity;
@@ -33,15 +35,17 @@ import java.util.Set;
  * @Version 1.0
  **/
 @Component
-public class JobTypeJSoup {
+public class JobJSoup {
 
     @Resource
     private JobTypeMapper jobTypeMapper;
 
     private  Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 
-    public List<JobType> getData(){
 
+
+
+    public List<JobType> getData(){
         Set<String> set = new HashSet<>();
         List<JobType> list = new ArrayList<>();
         for (int i = 1; i < 2; i++) {
@@ -105,5 +109,67 @@ public class JobTypeJSoup {
         }
         return list;
     }
+
+    /**
+     * 获取数据列表
+     * @return
+     */
+    public JSONArray getList(){
+//        JSONArray list = null;
+//        for (int i = 1; i < 2; i++) {
+//            //获取地址
+//            String url = "http://zp.58.com/hao123neiye/joblist?cateid=9224&size=30&localid=172";
+//            System.out.println(url);
+//            //创建CloseableHttpClient对象
+//            CloseableHttpClient closeableHttpClient = HttpClients.createDefault();
+//            //创建get对象
+//            HttpGet get = new HttpGet(url);
+//            //创建context对象
+//            HttpClientContext clientContext = HttpClientContext.create();
+//            //创建response对象
+//            CloseableHttpResponse response = null;
+//            try {
+//                //得到响应体
+//                response = closeableHttpClient.execute(get, clientContext);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            //如果请求成功，则获取网页源码
+//            Integer SUCCESS = 200;
+//            if (response.getStatusLine().getStatusCode() == SUCCESS) {
+//                //获取响应对象实体，转化成UTF-8的字符串
+//                HttpEntity entity = response.getEntity();
+//                String res = null;
+//                try {
+//                    res = EntityUtils.toString(entity, "UTF-8");
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                //把res装换成JSONObject类型
+//                JSONObject jsonObject = JSONObject.parseObject(res);
+//                //获取date数据
+//                list = jsonObject.getJSONArray("dataList");
+//                System.out.println(list.size());
+////                list1.forEach(System.out::println);
+//            } else {
+//                System.out.println("请求失败");
+//            }
+//
+//        }
+//        return list;
+        return null;
+    }
+
+
+
+    public Long getTypeId(String name){
+        QueryWrapper<JobType> wrapper = new QueryWrapper<>();
+        wrapper.select("pk_job_type_id").eq("name", name);
+        return jobTypeMapper.selectOne(wrapper).getPkJobTypeId();
+    }
+
+
+
+
 
 }

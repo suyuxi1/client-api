@@ -27,7 +27,7 @@ public class JobTypeController {
     @Resource
     private JobTypeService jobTypeService;
 
-    @PostMapping("/type")
+    @PostMapping("/list")
     @ApiOperation(value = "Job类型列表")
     public ResponseResult findType(){
         return ResponseResult.success(jobTypeService.findType());

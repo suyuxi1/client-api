@@ -16,12 +16,21 @@ import java.util.List;
  **/
 public interface PartJobService extends IService<PartJob> {
 
+
     /**
      * 分页查询兼职信息,按照传递的参数排列
      * @param pageDto
      * @return
      */
-    List<PartJob> findAllByPage(PageDto pageDto);
+    List<PartJob> findByPage(PageDto pageDto);
+
+
+    /**
+     * 通过id查找兼职详情
+     * @param id
+     * @return
+     */
+    PartJob findById(Long id);
 
     /**
      * 添加兼职

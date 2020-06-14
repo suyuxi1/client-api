@@ -26,7 +26,17 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
     private JobMapper jobMapper;
 
     @Override
-    public List<JobVo> find(String field) {
-        return jobMapper.findJob(field);
+    public List<JobVo> find(PageDto pageDto) {
+        return jobMapper.jobList(pageDto.getField().toString());
+    }
+
+    @Override
+    public JobVo findById(Long id) {
+        return jobMapper.findJob(id);
+    }
+
+    @Override
+    public List<JobVo> findByType(Long typeId) {
+        return jobMapper.jobListByType(typeId);
     }
 }

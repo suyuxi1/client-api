@@ -13,7 +13,8 @@
         <result property="pay" column="pay"/>
         <result property="min" column="min"/>
         <result property="max" column="max"/>
-        <result property="number" column="number"/>
+        <result property="experience" column="experience"/>
+        <result property="diploma" column="diploma"/>
         <!--            <result property="resumes" column="resumes"/>-->
         <result property="gmtCreate" column="gmt_create"/>
         <association javaType="com.niit.soft.client.api.domain.model.Company" property="company">
@@ -45,6 +46,8 @@
                j.pay,
                j.min,
                j.max,
+               j.experience,
+               j.diploma,
                j.number,
                j.gmt_create,
                c.pk_company_id,
@@ -61,8 +64,52 @@
         FROM job j
                  LEFT JOIN company c ON j.company_id = c.pk_company_id
                  LEFT JOIN job_type t ON j.job_type_id = t.pk_job_type_id
-        ORDER BY #{field} DESC
+        WHERE j.pk_job_id = #{id}
     </select>
 
+    <select id="jobList" resultMap="JobVo">
+        SELECT j.pk_job_id,
+               j.name AS job_name,
+               j.boss,
+               j.boss_avatar,
+               j.workplace,
+               j.number,
+               j.min,
+               j.max,
+               j.experience,
+               j.diploma,
+               j.gmt_create,
+               c.name AS company_name,
+               t.name AS type_name
+        FROM job j
+                 LEFT JOIN company c
+                           ON j.company_id = c.pk_company_id
+                 LEFT JOIN job_type t
+                           ON j.job_type_id = t.pk_job_type_id
+        ORDER BY ${field} DESC
+    </select>
+
+    <select id="jobListByType" resultMap="JobVo">
+        SELECT j.pk_job_id,
+               j.name AS job_name,
+               j.boss,
+               j.boss_avatar,
+               j.workplace,
+               j.number,
+               j.min,
+               j.max,
+               j.experience,
+               j.diploma,
+               j.gmt_create,
+               c.name AS company_name,
+               t.name AS type_name
+        FROM job j
+                 LEFT JOIN company c
+                           ON j.company_id = c.pk_company_id
+                 LEFT JOIN job_type t
+                           ON j.job_type_id = t.pk_job_type_id
+        WHERE job_type_id = #{typeId}
+        ORDER BY max DESC
+    </select>
 
 </mapper>

@@ -9,7 +9,6 @@ import com.niit.soft.client.api.mapper.DeliveryOrderMapper;
 import com.niit.soft.client.api.mapper.TransactionMapper;
 import com.niit.soft.client.api.repository.TransactionRepository;
 import com.niit.soft.client.api.service.TransactionService;
-import com.niit.soft.client.api.util.DateTest;
 import com.niit.soft.client.api.util.SnowFlake;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Queue;
 
 /**
  * @author wl
@@ -45,13 +43,14 @@ public class TransactionServiceImpl implements TransactionService {
                 .transactionEnd(Timestamp.valueOf(LocalDateTime.now())).errandsId(transactionDto.getErrandsId()).status(0).orderId(transactionDto.getOrderId())
                 .id(transactionId).gmtCreate(Timestamp.valueOf(LocalDateTime.now())).gmtModified(Timestamp.valueOf(LocalDateTime.now())).isDeleted(false).build();
         Transaction save = transactionRepository.save(transaction);
-        //更改订单状态为进行中 2
+        //更改订单状态为被抢单
         QueryWrapper<DeliveryOrder>queryWrapper =new QueryWrapper<>();
         queryWrapper.eq("id",transactionDto.getOrderId());
-        DeliveryOrder deliveryOrder =DeliveryOrder.builder().status(2).build();
+        DeliveryOrder deliveryOrder = DeliveryOrder.builder().status(4).build();
         deliveryOrderMapper.update(deliveryOrder,queryWrapper);
         return ResponseResult.success();
     }
+
 
     @Override
     public ResponseResult finshOrder(Long orderId) {
@@ -60,7 +59,7 @@ public class TransactionServiceImpl implements TransactionService {
          */
         QueryWrapper<Transaction> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("order_id", orderId);
-        Transaction transaction = Transaction.builder().status(1).build();
+        Transaction transaction = Transaction.builder().status(3).build();
         transactionMapper.update(transaction, queryWrapper);
         //更改订单状态为完成 3
         QueryWrapper<DeliveryOrder> deliveryOrderQueryWrapper = new QueryWrapper<>();
@@ -68,6 +67,24 @@ public class TransactionServiceImpl implements TransactionService {
         DeliveryOrder deliveryOrder = DeliveryOrder.builder().status(3).build();
         deliveryOrderMapper.update(deliveryOrder, deliveryOrderQueryWrapper);
         return ResponseResult.success();
+    }
+
+    @Override
+    public ResponseResult getGoods(TransactionDto transactionDto) {
+        /**
+         * 更新交易表状态 为1 取货并且送货
+         */
+        QueryWrapper<Transaction> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("order_id", transactionDto.getOrderId());
+        Transaction transaction = Transaction.builder().status(1).build();
+        transactionMapper.update(transaction, queryWrapper);
+        //更改订单状态为正在运送
+        QueryWrapper<DeliveryOrder> deliveryOrderQueryWrapper = new QueryWrapper<>();
+        deliveryOrderQueryWrapper.eq("id", transactionDto.getOrderId());
+        DeliveryOrder deliveryOrder = DeliveryOrder.builder().status(2).build();
+        deliveryOrderMapper.update(deliveryOrder, deliveryOrderQueryWrapper);
+        return ResponseResult.success();
+
     }
 
 
