@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.niit.soft.client.api.mapper.DynamicMapper">
+<mapper namespace="com.niit.soft.client.api.mapper.schoolmate.DynamicMapper">
 
-    <resultMap id="dynamicVo" type="com.niit.soft.client.api.domain.vo.DynamicVo">
-        <!--        <association property="dynamic" javaType="com.niit.soft.client.api.domain.model.Dynamic">-->
+    <resultMap id="dynamicVo" type="com.niit.soft.client.api.domain.vo.schoolmate.DynamicVo">
+        <!--        <association property="dynamic" javaType="com.niit.soft.client.api.domain.model.schoolmate.Dynamic">-->
         <!--            <id property="pkDynamicId" column="pk_dynamic_id" javaType="java.lang.Long"/>-->
         <!--            <result property="title" column="title"/>-->
         <!--            <result property="content" column="content"/>-->
@@ -13,16 +13,17 @@
         <!--            <result property="isDeleted" column="is_deleted"/>-->
         <!--            <result property="gmtCreate" column="gmt_create"/>-->
         <!--        </association>-->
-        <id property="pkDynamicId" column="pk_dynamic_id" javaType="java.lang.Long"/>
+        <id property="pkDynamicId" column="pk_dynamic_id"/>
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="thumbs" column="thumbs"/>
         <result property="comments" column="comments"/>
         <result property="type" column="type"/>
+        <result property="userId" column="user_id"/>
         <result property="isDeleted" column="is_deleted"/>
         <result property="gmtCreate" column="gmt_create"/>
 
-        <collection property="commentList" ofType="com.niit.soft.client.api.domain.model.Comment">
+        <collection property="commentList" ofType="com.niit.soft.client.api.domain.model.schoolmate.Comment">
             <id property="pkCommentId" column="pk_comment_id"/>
             <result property="dynamicId" column="cdynamic_id"/>
             <result property="userId" column="cuser_id"/>
@@ -31,7 +32,7 @@
             <result property="gmtCreate" column="cgmt_create"/>
         </collection>
 
-        <collection property="thumbList" ofType="com.niit.soft.client.api.domain.model.Thumb">
+        <collection property="thumbList" ofType="com.niit.soft.client.api.domain.model.schoolmate.Thumb">
             <id property="pkThumbId" column="pk_thumb_id"/>
             <result property="dynamicId" column="cdynamic_id"/>
             <result property="userId" column="tuser_id"/>
@@ -48,6 +49,7 @@
                d.thumbs,
                d.comments,
                d.type,
+               d.user_id,
                d.gmt_create,
                d.is_deleted,
                t.pk_thumb_id,

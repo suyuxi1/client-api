@@ -1,10 +1,10 @@
 package com.niit.soft.client.api.task;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.niit.soft.client.api.domain.model.Dynamic;
-import com.niit.soft.client.api.domain.model.Thumb;
-import com.niit.soft.client.api.repository.DynamicRepository;
-import com.niit.soft.client.api.service.ThumbService;
+import com.niit.soft.client.api.domain.model.schoolmate.Dynamic;
+import com.niit.soft.client.api.domain.model.schoolmate.Thumb;
+import com.niit.soft.client.api.repository.schoolmate.DynamicRepository;
+import com.niit.soft.client.api.service.schoolmate.ThumbService;
 import com.niit.soft.client.api.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -53,8 +53,8 @@ public class RedisDataToMySQL {
 
             // 从redis取出所有点赞信息
             for (Map.Entry<Object, Object> entry : hmget.entrySet()) {
-                thumbList.add(Thumb.builder().pkThumbId(Long.valueOf((String) entry.getKey()))
-                        .userId(Long.valueOf((String) entry.getValue()))
+                thumbList.add(Thumb.builder().pkThumbId((String) entry.getKey())
+                        .userId((String) entry.getValue())
                         .dynamicId(dynamic.getPkDynamicId())
                         .gmtCreate(Timestamp.valueOf(LocalDateTime.now()))
                         .gmtModified(Timestamp.valueOf(LocalDateTime.now()))
@@ -65,13 +65,13 @@ public class RedisDataToMySQL {
             thumbService.saveOrUpdateBatch(thumbList);
 
 
-            List<Long> id = new ArrayList<>();
+            List<String> id = new ArrayList<>();
 
             // 取出mysql中点赞信息
             for (Thumb thumb : thumbService.list(new QueryWrapper<Thumb>().eq("dynamic_id", dynamic.getPkDynamicId()))) {
                 id.add(thumb.getPkThumbId());
             }
-            List<Long> haveBe = id;
+            List<String> haveBe = id;
             int size = 0;
 
             // 取出redis中点赞信息
@@ -84,7 +84,7 @@ public class RedisDataToMySQL {
                     size++;
                 }
             }
-            List<Long> shouldDelete = id;
+            List<String> shouldDelete = id;
 
             // 逻辑删除redis的数据不在mysql中的数据
             if (id.size() != 0) {
