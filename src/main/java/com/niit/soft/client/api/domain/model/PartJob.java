@@ -96,7 +96,7 @@ public class PartJob extends Model<PartJob> {
     /**
      * 删除标志
      */
-    @TableField("is_delete")
+    @TableField("is_deleted")
     @Column(nullable = false,length = 4)
     private Boolean isDeleted;
     /**

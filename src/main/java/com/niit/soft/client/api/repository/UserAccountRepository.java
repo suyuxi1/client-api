@@ -47,6 +47,15 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
     Optional<UserAccount> findByCardNumber(String cardNumber);
 
     /**
+     * 根据学号（工号）查询
+     *
+     * @param jobNumber String
+     * @return UserAccount
+     */
+    @Query(value = "select * from user_account as ua where ua.job_number = ?1 ", nativeQuery = true)
+    UserAccount findUserByJobNumber(String jobNumber);
+
+    /**
      * 根据部分用户信息查询用户
      *
      * @param info

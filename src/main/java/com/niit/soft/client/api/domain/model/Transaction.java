@@ -5,14 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 /**
  * @author wl
@@ -55,7 +53,7 @@ public class Transaction {
     @Column(name = "transaction_end", nullable = false)
     private Timestamp transactionEnd;
     /**
-     * 状态 0是正在配送  1是已完成
+     * 状态 0是抢单  1是取货并且送货  3是完成
      */
     @Column(name = "status", nullable = false)
     private Integer status;

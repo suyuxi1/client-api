@@ -37,11 +37,11 @@ public class FleaUserServiceImpl implements FleaUserService {
     public ResponseResult saveFleaUser(FleaUserDto fleaUserDto) {
         FleaUser fleaUserVos = fleaUserRepository.findAllByJobNumber(fleaUserDto.getJobNumber());
         if (fleaUserVos == null) {
-            Optional<UserAccount> userAccountOptional = userAccountRepository.findByCardNumber(fleaUserDto.getJobNumber());
+            UserAccount userAccount = userAccountRepository.findUserByJobNumber(fleaUserDto.getJobNumber());
             FleaUser fleaUser = FleaUser.builder()
-                    .nickname(userAccountOptional.get().getNickname()).username(userAccountOptional.get().getUserName())
-                    .sex(userAccountOptional.get().getGender()).phoneNumber(userAccountOptional.get().getPhoneNumber())
-                    .jobNumber(userAccountOptional.get().getJobNumber()).avatar(userAccountOptional.get().getAvatar())
+                    .nickname(userAccount.getNickname()).username(userAccount.getUserName())
+                    .sex(userAccount.getGender()).phoneNumber(userAccount.getPhoneNumber())
+                    .jobNumber(userAccount.getJobNumber()).avatar(userAccount.getAvatar())
                     .isDeleted(false)
                     .build();
             fleaUserRepository.save(fleaUser);

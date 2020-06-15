@@ -82,6 +82,7 @@ public class DeliveryOrederServiceImpl extends ServiceImpl<DeliveryOrderMapper, 
                     .destination(deliveryOrderDto.getDestination())
                     .dLongitude(deliveryOrderDto.getDlongitude())
                     .founderId(deliveryOrderDto.getFounderId())
+                    .founderName(deliveryOrderDto.getFounderName()).founderPhonenumber(deliveryOrderDto.getFounderPhonenumer())
                     .status(0)
                     .oderCreateTime(Timestamp.valueOf(LocalDateTime.now())).oDimension(deliveryOrderDto.getOdimension())
                     .oLongitude(deliveryOrderDto.getOlongitude())
@@ -132,6 +133,7 @@ public class DeliveryOrederServiceImpl extends ServiceImpl<DeliveryOrderMapper, 
             QueryWrapper<DeliveryOrder> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("founder_id", finshOrderDto.getFounderId()).eq("status", finshOrderDto.getStatus()).orderByDesc("oder_create_time").eq("is_deleted", false);
             pages = deliveryOrderMapper.selectPage(page, queryWrapper);
+            log.info(String.valueOf(pages.getRecords()));
         } else {
             QueryWrapper<DeliveryOrder> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("founder_id", finshOrderDto.getFounderId())

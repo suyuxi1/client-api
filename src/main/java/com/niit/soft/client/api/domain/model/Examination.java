@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.domain.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class Examination {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableId
     private Long pkExaminationId;
 
     /**

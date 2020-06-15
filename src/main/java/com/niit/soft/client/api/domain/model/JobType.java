@@ -44,8 +44,8 @@ public class JobType extends Model<JobType> {
     /**
      * 删除标志
      */
-    @TableField("is_delete")
-    @Column(nullable = false,length = 4)
+    @TableField("is_deleted")
+    @Column(nullable = false,length = 1)
     private Boolean isDeleted;
     /**
      * 创建时间

@@ -24,7 +24,7 @@ public interface DynamicService {
      * @param id
      * @return
      */
-    DynamicVo findDynamicVoById(int id);
+    DynamicVo findDynamicVoById(String id);
 
 
     /**

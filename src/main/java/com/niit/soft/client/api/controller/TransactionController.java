@@ -10,10 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -37,9 +34,17 @@ public class TransactionController {
         return transactionService.insertTransaction(transactionDto);
     }
 
+
+    @ApiOperation(value = "取货",notes = "请求参数是订单dto")
+    @PostMapping("/getgoods")
+   public  ResponseResult getGoods(@RequestBody TransactionDto transactionDto){
+        return  transactionService.getGoods(transactionDto);
+    }
+
     @ApiOperation(value = "完成订单",notes = "请求参数是订单id")
     @PostMapping("/finshOrder")
     public ResponseResult finshOrder(@RequestBody TransactionDto transactionDto){
         return  transactionService.finshOrder(transactionDto.getOrderId());
     }
+
 }
