@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.domain.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,6 +32,7 @@ public class JobType extends Model<JobType> {
      * 主键
      */
     @Id
+    @TableId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pkJobTypeId;
 
@@ -44,8 +46,8 @@ public class JobType extends Model<JobType> {
     /**
      * 删除标志
      */
-    @TableField("is_delete")
-    @Column(nullable = false,length = 4)
+    @TableField("is_deleted")
+    @Column(nullable = false,length = 1)
     private Boolean isDeleted;
     /**
      * 创建时间

@@ -11,5 +11,17 @@ import com.niit.soft.client.api.domain.dto.FleaOrderDto;
  * @createTime 2020年06月09日 13:58:00
  */
 public interface FleaOrderService {
+    /**
+     * 新增订单
+     * @param fleaOrderDto
+     * @return
+     */
     ResponseResult orderIncreased(FleaOrderDto fleaOrderDto);
+
+    /**
+     * 逻辑删除订单
+     * @param fleaOrderDto
+     * @return
+     */
+    ResponseResult logicalDel(FleaOrderDto fleaOrderDto);
 }

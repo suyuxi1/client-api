@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.domain.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,6 +30,7 @@ public class SysSubject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_subject_id",nullable = false)
+    @TableId
     private Long pkSubjectId;
 
     /**

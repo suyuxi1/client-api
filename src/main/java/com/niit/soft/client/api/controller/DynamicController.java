@@ -2,11 +2,13 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
-import com.niit.soft.client.api.domain.dto.*;
-import com.niit.soft.client.api.service.CollectionsService;
-import com.niit.soft.client.api.service.CommentService;
-import com.niit.soft.client.api.service.DynamicService;
-import com.niit.soft.client.api.service.ReplyCommentService;
+import com.niit.soft.client.api.domain.dto.DynamicCollectionInDto;
+import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.dto.schoolmate.*;
+import com.niit.soft.client.api.service.schoolmate.CollectionsService;
+import com.niit.soft.client.api.service.schoolmate.CommentService;
+import com.niit.soft.client.api.service.schoolmate.DynamicService;
+import com.niit.soft.client.api.service.schoolmate.ReplyCommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -41,10 +43,18 @@ public class DynamicController {
 
     @PostMapping("/{id}")
     @ControllerWebLog(name = "findDynamicVoById", isSaved = true)
-    @ApiOperation(value = "好友圈根据id查找动态资讯", notes = "请求参数为动态id")
-    ResponseResult findDynamicVoById(@PathVariable int id) {
+    @ApiOperation(value = "根据id查找动态资讯", notes = "请求参数为动态id")
+    ResponseResult findDynamicVoById(@PathVariable String id) {
         return ResponseResult.success(dynamicService.findDynamicVoById(id));
     }
+
+    @PostMapping("/photo/{id}")
+    @ControllerWebLog(name = "findDynamicPhotoVoById", isSaved = true)
+    @ApiOperation(value = "根据id查找动态资讯的图片", notes = "请求参数为动态id")
+    ResponseResult findDynamicPhotoVoById(@PathVariable String id) {
+        return ResponseResult.success(dynamicService.findDynamicPhotoById(id));
+    }
+
 
     @PostMapping("/thumbsup")
     @ControllerWebLog(name = "thumbsUp", isSaved = true)
@@ -57,10 +67,9 @@ public class DynamicController {
     @PostMapping
     @ControllerWebLog(name = "findDynamic", isSaved = true)
     @ApiOperation(value = "查找所有动态资讯", notes = "请求参数为传递分页参数")
-    ResponseResult findDynamic(@RequestBody PageDto pageDto) {
-        return ResponseResult.success(dynamicService.findDynamicByPage(pageDto));
+    ResponseResult findDynamic(@RequestBody SchoolmatePageDto schoolmatePageDto) {
+        return ResponseResult.success(dynamicService.findDynamicByPage(schoolmatePageDto));
     }
-
 
     @PostMapping("/new")
     @ControllerWebLog(name = "findDynamic", isSaved = true)
@@ -72,11 +81,11 @@ public class DynamicController {
     @PostMapping("/comment/{id}")
     @ControllerWebLog(name = "findCommentVoById", isSaved = true)
     @ApiOperation(value = "好友圈根据评论id查找多级评论", notes = "请求参数为评论id")
-    ResponseResult findCommentVoById(@PathVariable int id) {
-        return ResponseResult.success(dynamicService.findCommentVoById((long) id));
+    ResponseResult findCommentVoById(@PathVariable String id) {
+        return ResponseResult.success(dynamicService.findCommentVoById(id));
     }
 
-    @ApiOperation(value = "添加校友评论", notes = "传递参数为内容，动态id，用户id")
+    @ApiOperation(value = "添加评论", notes = "传递参数为内容，动态id，用户id")
     @PostMapping(value = "/comment/insert")
     public ResponseResult insertComment(@RequestBody CommentDto commentDto) {
         return commentService.insertComment(commentDto);
@@ -90,11 +99,9 @@ public class DynamicController {
      */
     @ApiOperation(value = "删除校友评论", notes = "传递参数为comment的id")
     @PostMapping(value = "/comment/deletion/{id}")
-    public ResponseResult deleteComment(@PathVariable Long id) {
+    public ResponseResult deleteComment(@PathVariable String id) {
         return commentService.deleteComment(id);
     }
-
-
 
     /**
      * 添加校友圈动态评论
@@ -103,7 +110,7 @@ public class DynamicController {
      * @return
      */
     @ControllerWebLog(name = "insertReplyComment", isSaved = true)
-    @ApiOperation(value = "添加校友评论的评论", notes = "传递参数为内容，评论id，用户id")
+    @ApiOperation(value = "添加评论的回复", notes = "传递参数为内容，评论id，用户id")
     @PostMapping(value = "/replyComment/insert")
     public ResponseResult insertReplyComment(@RequestBody ReplyCommentDto replyCommentDto) {
         return replyCommentService.insertReplyComment(replyCommentDto);
@@ -116,9 +123,9 @@ public class DynamicController {
      * @return
      */
     @ControllerWebLog(name = "deleteReplyComment", isSaved = true)
-    @ApiOperation(value = "删除校友评论的评论", notes = "传递参数为reply_comment的id")
+    @ApiOperation(value = "删除评论的回复", notes = "传递参数为reply_comment的id")
     @PostMapping(value = "/replyComment/deletion/{id}")
-    public ResponseResult deleteReplyComment(@PathVariable Long id) {
+    public ResponseResult deleteReplyComment(@PathVariable String id) {
         return replyCommentService.deleteReplyComment(id);
     }
 
@@ -142,7 +149,7 @@ public class DynamicController {
      * @return
      */
     @ControllerWebLog(name = "insertCollections", isSaved = true)
-    @ApiOperation(value = "添加用户以收藏的动态资讯", notes = "参数为：用户id，动态id，不可重复添加同一个动态")
+    @ApiOperation(value = "添加用户以收藏的动态资讯", notes = "参数为：用户id，动态id，一个用户不可重复添加同一个动态")
     @PostMapping(value = "/Collection/insert")
     public ResponseResult insertCollections(@RequestBody DynamicCollectionInDto dynamicCollectionInDto) {
         return collectionsService.insertCollections(dynamicCollectionInDto);
@@ -157,16 +164,8 @@ public class DynamicController {
     @ControllerWebLog(name = "updateCollectionsIsDelete", isSaved = true)
     @ApiOperation(value = "删除用户以收藏的动态资讯", notes = "参数为：收藏id")
     @PostMapping(value = "/Collection/deletion")
-    public ResponseResult updateCollectionsIsDelete(@RequestBody Long id) {
+    public ResponseResult updateCollectionsIsDelete(@RequestBody String  id) {
         return collectionsService.updateCollectionsIsDelete(id);
-    }
-
-
-    @ControllerWebLog(name = "findPicture", isSaved = true)
-    @ApiOperation(value = "查找动态资讯图片", notes = "参数为动态资讯id")
-    @PostMapping(value = "/picture")
-    public ResponseResult findPicture(@RequestBody Long id) {
-        return ResponseResult.success(dynamicService.findPicture(id));
     }
 
 }

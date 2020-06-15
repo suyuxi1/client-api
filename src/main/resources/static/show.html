@@ -13,29 +13,30 @@
         var DEBUG_FLAG = true;
         $(function () {
             //启动websocket
+            ipAndPort = "127.0.0.1:8080";
             connect();
         });
 
         function send() {
             var msg = $("#msg").val();
             //第一部分为后端处理的地址，第二部分head头（认证的消息），第三部分为内容
-            stompClient.send("/send", {}, msg);
+            stompClient.send("/app/send", {}, msg);
         }
 
         function sendToAll() {
             var msg = $("#msg").val();
             //第一部分为后端处理的地址，第二部分head头（认证的消息），第三部分为内容
-            stompClient.send("/sendToAll", {}, msg);
+            stompClient.send("/app/sendToAll", {}, msg);
         }
 
         function sendToUser() {
             var msg = $("#msg").val();
             var toUserId = $("#userId").val();
             //第一部分为后端处理的地址，第二部分head头（认证的消息），第三部分为内容
-            var data = {"fromUserId": userId, "toUserId": toUserId, "msg": msg}
-            stompClient.send("/sendToUser", {}, JSON.stringify(data));
+            var data = {"fromUserId": userId, "toUserId": toUserId, "msg": msg};
+            // 统一前缀配置
+            stompClient.send("/app/sendToUser", {}, JSON.stringify(data));
         }
-
 
         // --------websocket
         // var DEBUG_FLAG = true;
@@ -84,7 +85,7 @@
 <!--<div>用户：<input type="text" id="userId"></input></div>-->
 <!--<div><input type="button" value="发送消息" onclick="sendToUser()"></input></div>-->
 
-<div><input type="button" value="发送消息" onclick="send()"></input></div>
+<!--<div><input type="button" value="发送消息" onclick="send()"></input></div>-->
 <div><input type="button" value="群发消息" onclick="sendToAll()"></input></div>
 <div><input type="button" value="单独给用户发信息" onclick="sendToUser()"></input></div>
 </body>

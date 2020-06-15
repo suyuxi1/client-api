@@ -6,6 +6,7 @@ import com.niit.soft.client.api.domain.dto.*;
 import com.niit.soft.client.api.domain.model.FleaGoods;
 import com.niit.soft.client.api.domain.model.FleaType;
 import com.niit.soft.client.api.domain.model.FleaUser;
+import com.niit.soft.client.api.domain.vo.MarkVo;
 import com.niit.soft.client.api.repository.FleaGoodsRepository;
 import com.niit.soft.client.api.repository.FleaTypeRepository;
 import com.niit.soft.client.api.repository.FleaUserRepository;
@@ -96,5 +97,10 @@ public class FleaGoodsServiceImpl implements FleaGoodsService {
                 .build();
         fleaGoodsRepository.save(fleaGoods);
         return ResponseResult.success("商品添加成功");
+    }
+
+    @Override
+    public ResponseResult findTopFiveMark() {
+        return ResponseResult.success(fleaGoodsRepository.selectTopFiveMark());
     }
 }

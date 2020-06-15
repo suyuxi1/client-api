@@ -17,6 +17,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DynamicCollectionInDto {
-    private Long dynamicId;
-    private Long userId;
+    private String dynamicId;
+    private String userId;
 }
