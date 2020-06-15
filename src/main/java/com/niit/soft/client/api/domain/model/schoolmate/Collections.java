@@ -31,8 +31,8 @@ public class Collections {
      * 主键，策略为自增
      */
     @Id
-    @TableId
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @TableId
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String pkCollectionId;
 
     /**
