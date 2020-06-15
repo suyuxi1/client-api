@@ -1,7 +1,6 @@
 package com.niit.soft.client.api.domain.model.schoolmate;
 
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +20,7 @@ import java.sql.Timestamp;
  * @Date 2020/6/8  13:56
  * @Version 1.0
  **/
-@Table(name = "dynamic", indexes = {@Index(name = "titleIndex", columnList = "title")})
+@Table(name = "dynamic", indexes = {@Index(name = "contentIndex", columnList = "content")})
 @Entity
 @Data
 @Builder
