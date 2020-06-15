@@ -32,13 +32,13 @@ public class CompanyController {
     private CompanyService companyService;
 
     @PostMapping("/list")
-    @ApiOperation(value = "公司列表")
+    @ApiOperation(value = "公司列表", notes = "请求参数为PageDto,field参数为workers")
     public ResponseResult findCompany(@RequestBody PageDto pageDto){
         return ResponseResult.success(companyService.findByPage(pageDto));
     }
 
     @PostMapping("/detail")
-    @ApiOperation(value = "公司详情")
+    @ApiOperation(value = "公司详情", notes = "请求参数为公司id")
     public ResponseResult companyDetail(@RequestBody JobDto jobDto){
         return ResponseResult.success(companyService.findById(jobDto.getId()));
     }

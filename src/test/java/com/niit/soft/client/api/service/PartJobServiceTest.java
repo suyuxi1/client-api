@@ -13,16 +13,6 @@ class PartJobServiceTest {
     private PartJobService partJobService;
 
     @Test
-    void findAllByPage() {
-//        PageDto pageDto = PageDto.builder()
-//                .field("pay")
-//                .currentPage(1)
-//                .pageSize(10)
-//                .build();
-//        System.out.println(partJobService.findAllByPage(pageDto));
-    }
-
-    @Test
     void findByPage() {
         PageDto pageDto = PageDto.builder()
                 .field("pay")
@@ -30,5 +20,15 @@ class PartJobServiceTest {
                 .pageSize(10)
                 .build();
         System.out.println(partJobService.findByPage(pageDto));
+    }
+
+    @Test
+    void insertJob() {
+
+    }
+
+    @Test
+    void findById() {
+        System.out.println(partJobService.findById(1L));
     }
 }

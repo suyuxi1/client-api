@@ -34,4 +34,9 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
     public JobVo findById(Long id) {
         return jobMapper.findJob(id);
     }
+
+    @Override
+    public List<JobVo> findByType(Long typeId) {
+        return jobMapper.jobListByType(typeId);
+    }
 }

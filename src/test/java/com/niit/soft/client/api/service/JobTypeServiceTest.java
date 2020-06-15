@@ -1,6 +1,6 @@
 package com.niit.soft.client.api.service;
 
-import com.niit.soft.client.api.util.JobTypeJSoup;
+import com.niit.soft.client.api.util.JobJSoup;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -14,7 +14,7 @@ class JobTypeServiceTest {
     private JobTypeService jobTypeService;
 
     @Resource
-    private JobTypeJSoup jobTypeJSoup;
+    private JobJSoup jobTypeJSoup;
 
 
 

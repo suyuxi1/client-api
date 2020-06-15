@@ -22,4 +22,10 @@ class JobMapperTest {
     void jobList() {
         jobMapper.jobList("max").forEach(System.out::println);
     }
+
+
+    @Test
+    void jobListByType() {
+        jobMapper.jobListByType(3L).forEach(System.out::println);
+    }
 }
