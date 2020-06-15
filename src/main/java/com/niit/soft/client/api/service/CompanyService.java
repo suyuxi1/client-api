@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.niit.soft.client.api.domain.dto.JobPageDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.Company;
 import com.niit.soft.client.api.domain.vo.CompanyVo;
@@ -16,7 +17,7 @@ import java.util.List;
  **/
 public interface CompanyService extends IService<Company> {
 
-    List<Company> findByPage(PageDto pageDto);
+    List<Company> findByPage(JobPageDto jobPageDto);
 
     CompanyVo findById(Long id);
 }

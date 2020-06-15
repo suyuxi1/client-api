@@ -32,61 +32,46 @@ public class RedisDataToMySQL {
     @Resource
     private DynamicRepository dynamicRepository;
 
+
     @Resource
     private ThumbService thumbService;
 
-    // 每小时
-//    @Scheduled(cron = "0 0 * * * ？")
-    // 每十分钟
     @Scheduled(cron = "0 */10 * * * ?")
-    // 每五秒执行
-//    @Scheduled(cron = "*/5 * * * * ?")
     public void redisDataToMySQL() {
         log.info("定时同步数据库 时间：{}", LocalDateTime.now());
 
         List<Thumb> thumbList = new ArrayList<>();
         List<Thumb> thumbListDel = new ArrayList<>();
-        // 获取所有资讯的id
         for (Dynamic dynamic : dynamicRepository.findAll()) {
-//            log.info("" + dynamic.toString());
+            log.info("" + dynamic.toString());
             Map<Object, Object> hmget = redisUtil.hmget(String.valueOf(dynamic.getPkDynamicId()));
 
-            // 从redis取出所有点赞信息
+
             for (Map.Entry<Object, Object> entry : hmget.entrySet()) {
-                thumbList.add(Thumb.builder().pkThumbId((String) entry.getKey())
-                        .userId((String) entry.getValue())
+                thumbList.add(Thumb.builder().pkThumbId(String.valueOf(entry.getKey()))
+                        .userId(String.valueOf(entry.getValue()))
                         .dynamicId(dynamic.getPkDynamicId())
                         .gmtCreate(Timestamp.valueOf(LocalDateTime.now()))
                         .gmtModified(Timestamp.valueOf(LocalDateTime.now()))
                         .isDeleted(false).build());
             }
-//            log.info("redis的点赞记录:{}", thumbList);
-            // 保存更新
+            log.info("redis的点赞记录:{}", thumbList);
             thumbService.saveOrUpdateBatch(thumbList);
 
+            List<Long> id = new ArrayList<>();
 
-            List<String> id = new ArrayList<>();
-
-            // 取出mysql中点赞信息
             for (Thumb thumb : thumbService.list(new QueryWrapper<Thumb>().eq("dynamic_id", dynamic.getPkDynamicId()))) {
-                id.add(thumb.getPkThumbId());
+                id.add(Long.valueOf(thumb.getPkThumbId()));
             }
-            List<String> haveBe = id;
-            int size = 0;
+            List<Long> haveBe = id;
 
-            // 取出redis中点赞信息
             for (Object o : hmget.keySet()) {
-                // 如果mysql中信息包含redis信息
                 if (id.contains(Long.parseLong((String) o))) {
-                    // 则移除
                     id.remove(Long.parseLong((String) o));
-//                    记录redis有多少条点赞记录
-                    size++;
                 }
             }
-            List<String> shouldDelete = id;
+            List<Long> shouldDelete = id;
 
-            // 逻辑删除redis的数据不在mysql中的数据
             if (id.size() != 0) {
                 for (Thumb thumb : thumbService.listByIds(id)) {
                     thumb.setIsDeleted(true);
@@ -94,12 +79,11 @@ public class RedisDataToMySQL {
                 }
             }
 
-            dynamic.setThumbs(size);
             haveBe.removeAll(shouldDelete);
-
+            dynamic.setThumbs(haveBe.size());
             dynamicRepository.saveAndFlush(dynamic);
 
-//            log.info("redis的需要删除的点赞记录:{}", thumbListDel);
+            log.info("redis的需要删除的点赞记录:{}", thumbListDel);
             thumbService.updateBatchById(thumbListDel);
 
         }

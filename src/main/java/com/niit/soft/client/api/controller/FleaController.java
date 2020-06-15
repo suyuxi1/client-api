@@ -223,6 +223,13 @@ public class FleaController {
         return fleaUserService.findGoodsByUserId(fleaUserIdDto);
     }
 
+    @ControllerWebLog(name = "findById",isSaved = true)
+    @ApiOperation(value = "根据用户ID查询用户信息",notes = "请求参数为userDto中的用户ID")
+    @PostMapping("/user/userMain")
+    public ResponseResult findById(@RequestBody FleaUserIdDto userIdDto){
+        return fleaUserService.findById(userIdDto);
+    }
+
     /**
      * 根据用户id查询该用户的商品订单
      *
