@@ -1,4 +1,4 @@
-package com.soft1851.threadstudy.Alioss;
+package com.niit.soft.client.api.util.Alioss;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
