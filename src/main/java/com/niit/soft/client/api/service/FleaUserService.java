@@ -45,4 +45,11 @@ public interface FleaUserService {
      * @return ResponseResult
      */
     ResponseResult findOrderByUserId(FleaUserIdDto fleaUserIdDto);
+
+    /**
+     * 根据用户ID获取用户信息
+     * @param userIdDto
+     * @return
+     */
+    ResponseResult findById(FleaUserIdDto userIdDto);
 }
