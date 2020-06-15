@@ -7,6 +7,10 @@ spring:
     redis:
       repositories:
         enabled: false
+  ssl:
+    key-store: classpath:21427867.pfx
+    key-store-password: 21427867
+    key-store-type: PKCS12
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

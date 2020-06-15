@@ -12,7 +12,10 @@ import com.niit.soft.client.api.service.schoolmate.ReplyCommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
@@ -44,15 +47,15 @@ public class DynamicController {
     @PostMapping("/")
     @ControllerWebLog(name = "findDynamicVoById", isSaved = true)
     @ApiOperation(value = "根据id查找动态资讯", notes = "请求参数为动态id")
-    ResponseResult findDynamicVoById(@RequestParam String id) {
-        return ResponseResult.success(dynamicService.findDynamicVoById(id));
+    ResponseResult findDynamicVoById(@RequestBody IdDto id) {
+        return ResponseResult.success(dynamicService.findDynamicVoById(id.getId()));
     }
 
     @PostMapping("/photo")
     @ControllerWebLog(name = "findDynamicPhotoVoById", isSaved = true)
     @ApiOperation(value = "根据id查找动态资讯的图片", notes = "请求参数为动态id")
-    ResponseResult findDynamicPhotoVoById(@RequestParam String id) {
-        return ResponseResult.success(dynamicService.findDynamicPhotoById(id));
+    ResponseResult findDynamicPhotoVoById(@RequestBody IdDto id) {
+        return ResponseResult.success(dynamicService.findDynamicPhotoById(id.getId()));
     }
 
 
@@ -81,8 +84,8 @@ public class DynamicController {
     @PostMapping("/comment")
     @ControllerWebLog(name = "findCommentVoById", isSaved = true)
     @ApiOperation(value = "好友圈根据评论id查找多级评论", notes = "请求参数为评论id")
-    ResponseResult findCommentVoById(@RequestParam String id) {
-        return ResponseResult.success(dynamicService.findCommentVoById(id));
+    ResponseResult findCommentVoById(@RequestBody IdDto id) {
+        return ResponseResult.success(dynamicService.findCommentVoById(id.getId()));
     }
 
     @ApiOperation(value = "添加评论", notes = "传递参数为内容，动态id，用户id")
@@ -99,8 +102,8 @@ public class DynamicController {
      */
     @ApiOperation(value = "删除校友评论", notes = "传递参数为comment的id")
     @PostMapping(value = "/comment/deletion")
-    public ResponseResult deleteComment(@RequestParam String id) {
-        return commentService.deleteComment(id);
+    public ResponseResult deleteComment(@RequestBody IdDto id) {
+        return commentService.deleteComment(id.getId());
     }
 
     /**
@@ -124,9 +127,9 @@ public class DynamicController {
      */
     @ControllerWebLog(name = "deleteReplyComment", isSaved = true)
     @ApiOperation(value = "删除评论的回复", notes = "传递参数为reply_comment的id")
-    @PostMapping(value = "/replyComment/deletion/{id}")
-    public ResponseResult deleteReplyComment(@RequestParam String id) {
-        return replyCommentService.deleteReplyComment(id);
+    @PostMapping(value = "/replyComment/deletion")
+    public ResponseResult deleteReplyComment(@RequestBody IdDto id) {
+        return replyCommentService.deleteReplyComment(id.getId());
     }
 
     /**
@@ -164,8 +167,8 @@ public class DynamicController {
     @ControllerWebLog(name = "updateCollectionsIsDelete", isSaved = true)
     @ApiOperation(value = "删除用户以收藏的动态资讯", notes = "参数为：收藏id")
     @PostMapping(value = "/Collection/deletion")
-    public ResponseResult updateCollectionsIsDelete(@RequestBody String  id) {
-        return collectionsService.updateCollectionsIsDelete(id);
+    public ResponseResult updateCollectionsIsDelete(@RequestBody IdDto id) {
+        return collectionsService.updateCollectionsIsDelete(id.getId());
     }
 
 }
