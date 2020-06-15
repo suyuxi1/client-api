@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.niit.soft.client.api.domain.dto.JobPageDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.PartJob;
 import com.niit.soft.client.api.domain.vo.PartJobVo;
@@ -19,10 +20,10 @@ public interface PartJobService extends IService<PartJob> {
 
     /**
      * 分页查询兼职信息,按照传递的参数排列
-     * @param pageDto
+     * @param jobPageDto
      * @return
      */
-    List<PartJob> findByPage(PageDto pageDto);
+    List<PartJob> findByPage(JobPageDto jobPageDto);
 
 
     /**

@@ -2,6 +2,7 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.JobDto;
+import com.niit.soft.client.api.domain.dto.JobPageDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.service.PartJobService;
 import io.swagger.annotations.Api;
@@ -30,8 +31,8 @@ public class PartJobController {
     @PostMapping("/list")
 //    @ControllerWebLog(name = "find")
     @ApiOperation(value = "兼职列表", notes = "请求参数为PageDto，field参数为pay,gmt_create或者兼职类型")
-    public ResponseResult findPartJob(@RequestBody PageDto pageDto){
-        return ResponseResult.success(jobService.findByPage(pageDto));
+    public ResponseResult findPartJob(@RequestBody JobPageDto jobPageDto){
+        return ResponseResult.success(jobService.findByPage(jobPageDto));
     }
 
     @PostMapping("/byId")

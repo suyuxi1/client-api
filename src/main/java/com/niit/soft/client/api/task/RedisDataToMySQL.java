@@ -36,7 +36,7 @@ public class RedisDataToMySQL {
     @Resource
     private ThumbService thumbService;
 
-    @Scheduled(cron = "0 */10 * * * ?")
+//    @Scheduled(cron = "0 */10 * * * ?")
     public void redisDataToMySQL() {
         log.info("定时同步数据库 时间：{}", LocalDateTime.now());
 
