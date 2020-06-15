@@ -26,6 +26,8 @@ public interface InfoManageRepository extends JpaRepository<InfoManage, Long> {
     @Query(value = "select * from first_smart_campus.info_manage where is_top = 0",nativeQuery = true)
     Page<InfoManage> getAllManage(Pageable pageable);
 
+//
+
     /**
      *  更具id差资讯
      * @param id

@@ -2,7 +2,9 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.JobDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.dto.SingleFieldDto;
 import com.niit.soft.client.api.service.InfoManageService;
 import com.niit.soft.client.api.service.InfoTypeService;
 import io.swagger.annotations.Api;
@@ -73,5 +75,11 @@ public class InfoManageController {
     public ResponseResult findInfoByTypeId(@RequestBody PageDto pageDto){
         log.info("-----/typeId-----请求参数：" + pageDto+"**1**");
         return infoTypeService.findInfoByTypeId(pageDto);
+    }
+
+    @ApiOperation(value = "根据咨询id查询详情数据",notes = "")
+    @PostMapping(value = "/single")
+    public ResponseResult findInfoManageById(@RequestBody JobDto jobDto){
+        return infoManageService.findInfoManageById(jobDto.getId());
     }
 }

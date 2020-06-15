@@ -1,13 +1,19 @@
 package com.niit.soft.client.api.service.impl;
 
+import com.alipay.api.domain.AddressDTO;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
+import com.niit.soft.client.api.domain.dto.QueryDto;
+import com.niit.soft.client.api.domain.vo.AddressBookVo;
+import com.niit.soft.client.api.mapper.UserAccountMapper;
 import com.niit.soft.client.api.repository.UserAccountRepository;
 import com.niit.soft.client.api.domain.model.UserAccount;
 import com.niit.soft.client.api.service.UserAccountService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @Description TODO
@@ -19,6 +25,8 @@ import javax.annotation.Resource;
 public class UserAccountServiceImpl implements UserAccountService {
     @Resource
     private UserAccountRepository userAccountRepository;
+    @Resource
+    private UserAccountMapper userAccountMapper;
     @Override
     public UserAccount findUserAccountById(String id) {
         return userAccountRepository.findUserAccountByInfo(id.toString());
@@ -32,6 +40,18 @@ public class UserAccountServiceImpl implements UserAccountService {
     @Override
     public int updatePasswordByUserAccount(String userAccount, String password) {
         return userAccountRepository.updatePasswordByUserAccount(userAccount, password);
+    }
+
+    @Override
+    public ResponseResult findUserAccountLike(String keyword) {
+        List<AddressBookVo> addressBookVos = null;
+        try {
+            addressBookVos = userAccountMapper.findUserAccountLike(keyword);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ResponseResult.success(addressBookVos);
     }
 
     @Override

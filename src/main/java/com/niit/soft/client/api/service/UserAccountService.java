@@ -2,7 +2,9 @@
 package com.niit.soft.client.api.service;
 
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.QueryDto;
 import com.niit.soft.client.api.domain.model.UserAccount;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * @author Tao
@@ -45,5 +47,14 @@ public interface UserAccountService {
      * @return
      */
     int updatePasswordByUserAccount(String userAccount, String password);
+
+
+    /**
+     * 根据手机号或者用户名模糊查询
+     * @param keyword
+     * @return
+     */
+    ResponseResult findUserAccountLike(String keyword);
+
 
 }

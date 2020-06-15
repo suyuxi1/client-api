@@ -2,6 +2,7 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.QueryDto;
 import com.niit.soft.client.api.domain.dto.SingleFieldDto;
 import com.niit.soft.client.api.domain.model.SysFeedback;
 import com.niit.soft.client.api.domain.model.UserAccount;
@@ -75,6 +76,12 @@ public class UserAccountController {
     public UserAccount getUserAccountInfoById(@RequestBody SingleFieldDto singleFieldDto) {
         log.info("-----/single/id-----请求参数：" + singleFieldDto.getField().toString() +"**1**");
         return userAccountService.findUserAccountById(singleFieldDto.getField().toString());
+    }
+
+    @ApiOperation(value = "模糊查询用户接口", notes = "请求参数为keywords关键字")
+    @PostMapping("/fuzzyQuery")
+    ResponseResult findUserAccountLike(@RequestBody QueryDto queryDto){
+        return userAccountService.findUserAccountLike(queryDto.getKeywords());
     }
 
 }

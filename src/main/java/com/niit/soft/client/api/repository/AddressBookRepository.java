@@ -69,4 +69,6 @@ public interface AddressBookRepository extends JpaRepository<AddressBook, Long> 
     @Query("select u from AddressBook u")
     Page<AddressBook> getAll(Pageable pageable);
 
+
+
 }
