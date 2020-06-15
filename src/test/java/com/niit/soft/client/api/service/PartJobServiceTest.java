@@ -1,6 +1,7 @@
+
 package com.niit.soft.client.api.service;
 
-import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.dto.JobPageDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -14,12 +15,12 @@ class PartJobServiceTest {
 
     @Test
     void findByPage() {
-        PageDto pageDto = PageDto.builder()
+        JobPageDto jobPageDto = JobPageDto.builder()
                 .field("pay")
                 .currentPage(1)
                 .pageSize(10)
                 .build();
-        System.out.println(partJobService.findByPage(pageDto));
+        System.out.println(partJobService.findByPage(jobPageDto));
     }
 
     @Test
@@ -31,4 +32,5 @@ class PartJobServiceTest {
     void findById() {
         System.out.println(partJobService.findById(1L));
     }
+
 }

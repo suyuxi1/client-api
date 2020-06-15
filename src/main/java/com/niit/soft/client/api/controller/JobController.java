@@ -2,6 +2,7 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.JobDto;
+import com.niit.soft.client.api.domain.dto.JobPageDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.Job;
 import com.niit.soft.client.api.service.JobService;
@@ -39,8 +40,8 @@ public class JobController {
 
     @PostMapping("/list")
     @ApiOperation(value = "校招职位列表", notes = "请求参数为max或gmt_create")
-    public ResponseResult findJob(@RequestBody PageDto pageDto){
-        return ResponseResult.success(jobService.find(pageDto));
+    public ResponseResult findJob(@RequestBody JobPageDto jobPageDto){
+        return ResponseResult.success(jobService.find(jobPageDto));
     }
 
     @PostMapping("/listByType")
