@@ -41,17 +41,17 @@ public class DynamicController {
     @Resource
     private CollectionsService collectionsService;
 
-    @PostMapping("/{id}")
+    @PostMapping("/")
     @ControllerWebLog(name = "findDynamicVoById", isSaved = true)
     @ApiOperation(value = "根据id查找动态资讯", notes = "请求参数为动态id")
-    ResponseResult findDynamicVoById(@PathVariable String id) {
+    ResponseResult findDynamicVoById(@RequestParam String id) {
         return ResponseResult.success(dynamicService.findDynamicVoById(id));
     }
 
-    @PostMapping("/photo/{id}")
+    @PostMapping("/photo")
     @ControllerWebLog(name = "findDynamicPhotoVoById", isSaved = true)
     @ApiOperation(value = "根据id查找动态资讯的图片", notes = "请求参数为动态id")
-    ResponseResult findDynamicPhotoVoById(@PathVariable String id) {
+    ResponseResult findDynamicPhotoVoById(@RequestParam String id) {
         return ResponseResult.success(dynamicService.findDynamicPhotoById(id));
     }
 
@@ -78,10 +78,10 @@ public class DynamicController {
         return ResponseResult.success(dynamicService.addOne(dynamicDto));
     }
 
-    @PostMapping("/comment/{id}")
+    @PostMapping("/comment")
     @ControllerWebLog(name = "findCommentVoById", isSaved = true)
     @ApiOperation(value = "好友圈根据评论id查找多级评论", notes = "请求参数为评论id")
-    ResponseResult findCommentVoById(@PathVariable String id) {
+    ResponseResult findCommentVoById(@RequestParam String id) {
         return ResponseResult.success(dynamicService.findCommentVoById(id));
     }
 
@@ -98,8 +98,8 @@ public class DynamicController {
      * @return
      */
     @ApiOperation(value = "删除校友评论", notes = "传递参数为comment的id")
-    @PostMapping(value = "/comment/deletion/{id}")
-    public ResponseResult deleteComment(@PathVariable String id) {
+    @PostMapping(value = "/comment/deletion")
+    public ResponseResult deleteComment(@RequestParam String id) {
         return commentService.deleteComment(id);
     }
 
@@ -125,7 +125,7 @@ public class DynamicController {
     @ControllerWebLog(name = "deleteReplyComment", isSaved = true)
     @ApiOperation(value = "删除评论的回复", notes = "传递参数为reply_comment的id")
     @PostMapping(value = "/replyComment/deletion/{id}")
-    public ResponseResult deleteReplyComment(@PathVariable String id) {
+    public ResponseResult deleteReplyComment(@RequestParam String id) {
         return replyCommentService.deleteReplyComment(id);
     }
 
