@@ -75,4 +75,9 @@ public class FleaUserServiceImpl implements FleaUserService {
         Pageable pageable = PageRequest.of(fleaUserIdDto.getCurrentPage() - 1, fleaUserIdDto.getPageSize());
         return ResponseResult.success(fleaUserRepository.selectOrOrdersByUserId(fleaUserIdDto.getPkFleaUserId(), pageable));
     }
+
+    @Override
+    public ResponseResult findById(FleaUserIdDto userIdDto) {
+        return ResponseResult.success(fleaUserRepository.findById(userIdDto.getPkFleaUserId()));
+    }
 }

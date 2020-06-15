@@ -29,7 +29,7 @@ public class MyCallable implements Callable<List<String>> {
     public List<String> call() throws Exception {
         tempFiles = new ArrayList<>();
         for (File file : fileList) {
-            String url = com.soft1851.threadstudy.Alioss.AliossUtil.upload(file);
+            String url = com.niit.soft.client.api.util.Alioss.AliossUtil.upload(file);
             tempFiles.add(url);
 
 
