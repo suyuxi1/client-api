@@ -2,6 +2,7 @@ package com.niit.soft.client.api.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.niit.soft.client.api.domain.dto.JobPageDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.Job;
 import com.niit.soft.client.api.domain.vo.JobVo;
@@ -26,8 +27,8 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
     private JobMapper jobMapper;
 
     @Override
-    public List<JobVo> find(PageDto pageDto) {
-        return jobMapper.jobList(pageDto.getField().toString());
+    public List<JobVo> find(JobPageDto jobPageDto) {
+        return jobMapper.jobList(jobPageDto.getField().toString());
     }
 
     @Override

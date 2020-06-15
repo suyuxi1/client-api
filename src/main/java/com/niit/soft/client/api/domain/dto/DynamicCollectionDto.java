@@ -20,6 +20,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DynamicCollectionDto {
+
+    /**
+     * 收藏id
+     */
+    private Long pkCollectionId;
     /**
      * 动态内容
      */

@@ -62,6 +62,12 @@ public class WebsocketController {
         template.convertAndSend(destination, msg);
     }
 
+    @MessageMapping("/sendToAll")
+    public void sendToAll(String msg) {
+        String destination = "/topic/chat";
+        template.convertAndSend(destination, msg);
+    }
+
 //    @MessageMapping("/sendToAll")
 //    public void sendToAll(String msg) {
 //        String destination = "/topic/chat";
@@ -78,11 +84,6 @@ public class WebsocketController {
 //        String destination = "/queue/chat";
 //        template.convertAndSend(destination, msg);
 //    }
-    @MessageMapping("/sendToAll")
-    public void sendToAll(String msg) {
-        String destination = "/topic/chat";
-        template.convertAndSend(destination, msg);
-    }
 
 
 //    // return的msg返回到/sendToAll主题

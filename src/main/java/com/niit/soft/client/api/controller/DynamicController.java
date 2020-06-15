@@ -2,6 +2,7 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.DynamicCollectionInDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.dto.schoolmate.*;
 import com.niit.soft.client.api.service.schoolmate.CollectionsService;
@@ -139,6 +140,32 @@ public class DynamicController {
     @PostMapping(value = "/Collection")
     public ResponseResult getCollectionsByUserId(@RequestBody PageDto pageDto) {
         return collectionsService.getCollectionsByUserId(pageDto);
+    }
+
+    /**
+     * 添加加收藏
+     *
+     * @param dynamicCollectionInDto
+     * @return
+     */
+    @ControllerWebLog(name = "insertCollections", isSaved = true)
+    @ApiOperation(value = "添加用户以收藏的动态资讯", notes = "参数为：用户id，动态id，一个用户不可重复添加同一个动态")
+    @PostMapping(value = "/Collection/insert")
+    public ResponseResult insertCollections(@RequestBody DynamicCollectionInDto dynamicCollectionInDto) {
+        return collectionsService.insertCollections(dynamicCollectionInDto);
+    }
+
+    /**
+     * 删除加收藏
+     *
+     * @param id
+     * @return
+     */
+    @ControllerWebLog(name = "updateCollectionsIsDelete", isSaved = true)
+    @ApiOperation(value = "删除用户以收藏的动态资讯", notes = "参数为：收藏id")
+    @PostMapping(value = "/Collection/deletion")
+    public ResponseResult updateCollectionsIsDelete(@RequestBody String  id) {
+        return collectionsService.updateCollectionsIsDelete(id);
     }
 
 }

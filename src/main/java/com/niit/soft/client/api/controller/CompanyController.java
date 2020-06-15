@@ -2,7 +2,7 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.JobDto;
-import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.dto.JobPageDto;
 import com.niit.soft.client.api.service.CompanyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,9 +32,10 @@ public class CompanyController {
     private CompanyService companyService;
 
     @PostMapping("/list")
-    @ApiOperation(value = "公司列表", notes = "请求参数为PageDto,field参数为workers")
-    public ResponseResult findCompany(@RequestBody PageDto pageDto){
-        return ResponseResult.success(companyService.findByPage(pageDto));
+    @ApiOperation(value = "公司列表", notes = "JobPageDto,field参数为workers")
+    public ResponseResult findCompany(@RequestBody JobPageDto jobPageDto){
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+jobPageDto);
+        return ResponseResult.success(companyService.findByPage(jobPageDto));
     }
 
     @PostMapping("/detail")

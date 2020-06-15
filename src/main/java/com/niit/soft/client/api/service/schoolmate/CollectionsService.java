@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.service.schoolmate;
 
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.DynamicCollectionInDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 
 /**
@@ -27,4 +28,18 @@ public interface CollectionsService {
      */
     ResponseResult getCollectionsByUserId(PageDto pageDto);
 
+    /**
+     * 添加加收藏
+     * @param dynamicCollectionInDto
+     * @return
+     */
+    ResponseResult insertCollections(DynamicCollectionInDto dynamicCollectionInDto);
+
+
+    /**
+     * 删除用户以收藏的动态资讯
+     * @param id
+     * @return
+     */
+    ResponseResult updateCollectionsIsDelete(String  id);
 }
