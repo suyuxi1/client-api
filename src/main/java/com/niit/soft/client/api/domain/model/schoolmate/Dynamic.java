@@ -20,7 +20,7 @@ import java.sql.Timestamp;
  * @Date 2020/6/8  13:56
  * @Version 1.0
  **/
-@Table(name = "dynamic", indexes = {@Index(name = "contentIndex", columnList = "content")})
+@Table(name = "dynamic")
 @Entity
 @Data
 @Builder
