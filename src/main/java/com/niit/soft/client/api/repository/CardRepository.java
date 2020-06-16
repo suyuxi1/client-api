@@ -70,16 +70,22 @@ public interface CardRepository extends JpaRepository<SysCard, Long> {
     /**
      * 状态激活
      * @param pkCardId
-     * @param Status
+     * @param status
      * @return
      */
     @Modifying
     @LastModifiedBy
     @Transactional(rollbackFor = RuntimeException.class)
     @Query(value = "update sys_card set status = ?2 where pk_card_id = ?1",nativeQuery = true)
-    int updateStatus(Long pkCardId,Boolean Status);
+    int updateStatus(Long pkCardId,Boolean status);
 
-
+    /**
+     * 通过卡号和卡密查找一卡通数据
+     * @param cardNumber
+     * @param cardPassword
+     * @return
+     */
+    SysCard findSysCardByCardNumberAndCardPassword(String cardNumber,String cardPassword);
 
 
 }

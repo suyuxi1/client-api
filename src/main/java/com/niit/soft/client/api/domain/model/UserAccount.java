@@ -97,7 +97,7 @@ public class UserAccount implements Serializable {
      * 校园卡号
      */
     @Column(nullable = false, unique = true,length = 32)
-    private Integer cardNumber;
+    private String cardNumber;
 
     /**
      * 创建时间
