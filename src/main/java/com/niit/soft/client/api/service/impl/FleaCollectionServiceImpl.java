@@ -3,6 +3,7 @@ package com.niit.soft.client.api.service.impl;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.CancelCollectionDto;
 import com.niit.soft.client.api.domain.dto.CollectionDto;
+import com.niit.soft.client.api.domain.dto.FleaUserIdDto;
 import com.niit.soft.client.api.domain.model.FleaCollection;
 import com.niit.soft.client.api.repository.FleaCollectionRepository;
 import com.niit.soft.client.api.repository.FleaGoodsRepository;
@@ -49,8 +50,8 @@ public class FleaCollectionServiceImpl implements FleaCollectionService {
     }
 
     @Override
-    public ResponseResult getCollection() {
-        return ResponseResult.success(collectionRepository.getCollection());
+    public ResponseResult getCollection(FleaUserIdDto userIdDto) {
+        return ResponseResult.success(collectionRepository.getCollection(userIdDto));
     }
 
     @Override

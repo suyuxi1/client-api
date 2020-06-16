@@ -87,6 +87,7 @@
                  LEFT JOIN job_type t
                            ON j.job_type_id = t.pk_job_type_id
         ORDER BY ${field} DESC
+        LIMIT #{currentPage}, #{pageSize}
     </select>
 
     <select id="jobListByType" resultMap="JobVo">
@@ -108,8 +109,33 @@
                            ON j.company_id = c.pk_company_id
                  LEFT JOIN job_type t
                            ON j.job_type_id = t.pk_job_type_id
-        WHERE job_type_id = #{typeId}
+        WHERE job_type_id = #{field}
         ORDER BY max DESC
+        LIMIT #{currentPage}, #{pageSize}
+    </select>
+
+    <select id="jobListByKeyword" resultMap="JobVo">
+        SELECT j.pk_job_id,
+               j.name AS job_name,
+               j.boss,
+               j.boss_avatar,
+               j.workplace,
+               j.number,
+               j.min,
+               j.max,
+               j.experience,
+               j.diploma,
+               j.gmt_create,
+               c.name AS company_name,
+               t.name AS type_name
+        FROM job j
+                 LEFT JOIN company c
+                           ON j.company_id = c.pk_company_id
+                 LEFT JOIN job_type t
+                           ON j.job_type_id = t.pk_job_type_id
+        WHERE j.name LIKE CONCAT('%', #{field}, '%')
+        ORDER BY max DESC
+        LIMIT #{currentPage}, #{pageSize}
     </select>
 
 </mapper>

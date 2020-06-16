@@ -256,9 +256,9 @@ public class FleaController {
     @ControllerWebLog(name = "getAll", isSaved = true)
     @ApiOperation(value = "查询所有收藏", notes = "没有请求参数，直接post提交")
     @PostMapping("/collection/all")
-    public ResponseResult getAll() {
+    public ResponseResult getAll(@RequestBody FleaUserIdDto userIdDto) {
         log.info("进入获取所有收藏接口");
-        return fleaCollectionService.getCollection();
+        return fleaCollectionService.getCollection(userIdDto);
     }
 
     @ControllerWebLog(name = "logicalDel", isSaved = true)

@@ -39,15 +39,22 @@ public class JobController {
     }
 
     @PostMapping("/list")
-    @ApiOperation(value = "校招职位列表", notes = "请求参数为max或gmt_create")
+    @ApiOperation(value = "校招职位列表", notes = "请求参数为JobPageDto,field参数为max或gmt_create")
     public ResponseResult findJob(@RequestBody JobPageDto jobPageDto){
         return ResponseResult.success(jobService.find(jobPageDto));
     }
 
     @PostMapping("/listByType")
-    @ApiOperation(value = "根据类型查看职位", notes = "请求参数为职位类型id")
-    public ResponseResult findJobByType(@RequestBody JobDto jobDto){
-        return ResponseResult.success(jobService.findByType(jobDto.getId()));
+    @ApiOperation(value = "根据类型查看职位", notes = "请求参数为JobPageDto,field参数职位类型id")
+    public ResponseResult findJobByType(@RequestBody JobPageDto jobPageDto){
+        return ResponseResult.success(jobService.findByType(jobPageDto));
+    }
+
+
+    @PostMapping("/keyword")
+    @ApiOperation(value = "校招模糊查询", notes = "请求参数为JobPageDto,field参数为关键字")
+    public ResponseResult findJobByKeyword(@RequestBody JobPageDto jobPageDto){
+        return ResponseResult.success(jobService.findByKeyword(jobPageDto));
     }
 
 

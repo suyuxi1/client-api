@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
-import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.dto.schoolmate.DynamicDto;
 import com.niit.soft.client.api.domain.dto.schoolmate.SchoolmatePageDto;
 import com.niit.soft.client.api.domain.dto.schoolmate.ThumbDto;
@@ -141,6 +140,12 @@ public class DynamicServiceImpl implements DynamicService {
                 }
             } else {
                 return ResponseResult.success(ResultCode.SCHOOL_MATE_THUMBS_UP_REDIS);
+            }
+        }
+        Map<Object, Object> mapAfter = redisUtil.hmget(thumbDto.getDynamicId());
+        for (Entry<Object, Object> entry : mapAfter.entrySet()) {
+            if (entry.getValue().equals(String.valueOf(thumbDto.getUserId()))) {
+                return ResponseResult.success(String.valueOf(entry.getKey()));
             }
         }
         return ResponseResult.success(ResultCode.SCHOOL_MATE_THUMBS_UP);

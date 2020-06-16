@@ -20,5 +20,4 @@ import java.util.Date;
 public class CollectionDto {
     private Long goodsId;
     private Long userId;
-
 }
