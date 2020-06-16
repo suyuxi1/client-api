@@ -49,7 +49,7 @@ public class SysFeedbackServiceImpl implements SysFeedbackService {
                         .build();
                 // 新增
                 sysFeedbackRepository.save(sysFeedback1);
-                return ResponseResult.success();
+                return ResponseResult.success("新增反馈成功");
             } else {
                 // 返回手机号码有误信息
                 return ResponseResult.failure(ResultCode.Phone_ERROR);
@@ -68,7 +68,7 @@ public class SysFeedbackServiceImpl implements SysFeedbackService {
                     .build();
             // 新增
             sysFeedbackRepository.save(sysFeedback1);
-            return ResponseResult.success();
+            return ResponseResult.success("新增反馈成功");
         }
         //返回参数不足
         return ResponseResult.failure(ResultCode.PARAM_NOT_COMPLETE);

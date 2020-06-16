@@ -31,7 +31,12 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     @Override
     public List<Company> findByPage(JobPageDto jobPageDto) {
         QueryWrapper<Company> wrapper = new QueryWrapper<>();
-        wrapper.select("pk_company_id","name","tag","logo","workers","type","address").orderByDesc("workers",jobPageDto.getField().toString());
+
+        if ("workers".equals(jobPageDto.getField())){
+            wrapper.select("pk_company_id","name","tag","logo","workers","type","address").orderByDesc("workers");
+        }else {
+            wrapper.select("pk_company_id","name","tag","logo","workers","type","address").like("name",jobPageDto.getField().toString()).orderByDesc("workers");
+        }
         IPage<Company> page = new Page<>(jobPageDto.getCurrentPage(), jobPageDto.getPageSize());
         return companyMapper.selectPage(page, wrapper).getRecords();
     }
@@ -40,4 +45,5 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     public CompanyVo findById(Long id) {
         return companyMapper.findDetails(id);
     }
+
 }

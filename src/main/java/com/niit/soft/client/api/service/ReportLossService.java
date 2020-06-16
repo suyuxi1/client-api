@@ -2,6 +2,7 @@ package com.niit.soft.client.api.service;
 
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.PageDto;
+import com.niit.soft.client.api.domain.model.ReportLoss;
 
 /**
  * @ClassName ReportLossService
@@ -23,4 +24,19 @@ public interface ReportLossService {
      * @return
      */
     ResponseResult updateLossStatus(Long pkReportLossId,Boolean lossStatus);
+
+
+    /**
+     * 新增挂失
+     * @param reportLoss
+     * @return
+     */
+    ResponseResult insertReportLoss(ReportLoss reportLoss);
+
+    /**
+     * 取消挂失
+     * @param reportLoss
+     * @return
+     */
+    ResponseResult cancelReportLoss(ReportLoss reportLoss);
 }

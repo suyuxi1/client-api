@@ -17,7 +17,19 @@ import java.util.List;
  **/
 public interface CompanyService extends IService<Company> {
 
+    /**
+     * 公司列表
+     * @param jobPageDto
+     * @return
+     */
     List<Company> findByPage(JobPageDto jobPageDto);
 
+    /**
+     * 公司详情
+     * @param id
+     * @return
+     */
     CompanyVo findById(Long id);
+
+
 }
