@@ -18,6 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsVo {
+    private Long goodsId;
     private String goodsName;
     private Double goodsPrice;
     private String goodsDescription;
