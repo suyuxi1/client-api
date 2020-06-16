@@ -28,7 +28,7 @@ public interface FleaUserRepository extends JpaRepository<FleaUser, Long> {
      * @return List<GoodsVo>
      */
     @Query(value = "select new com.niit.soft.client.api.domain.vo.GoodsVo(g.pkFleaGoodsId,g.goodsName,g.goodsPrice,g.goodsDescription," +
-            "g.goodsMark,g.goodsImgUrl,g.goodsCreateTime,t.typeName,u.nickname) " +
+            "g.goodsMark,g.goodsImgUrl,g.goodsCreateTime,t.typeName,u.nickname,g.isDeleted) " +
             "from FleaGoods g " +
             "left join g.fleaUser u " +
             "left join g.fleaType t " +
@@ -48,7 +48,7 @@ public interface FleaUserRepository extends JpaRepository<FleaUser, Long> {
             "left join o.fleaGoods g " +
             "left join o.fleaUserBuyer b " +
             "left join o.fleaUserSeller s " +
-            "where b.pkFleaUserId = ?1 ")
+            "where b.pkFleaUserId = ?1 and o.isDeleted = false ")
     Page<FleaOrderVo> selectOrOrdersByUserId(Long userId, Pageable pageable);
 
     /**

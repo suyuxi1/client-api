@@ -27,4 +27,5 @@ public class GoodsVo {
     private Date goodsCreateTime;
     private String goodsType;
     private String goodsUserName;
+    private Boolean isDeleted;
 }

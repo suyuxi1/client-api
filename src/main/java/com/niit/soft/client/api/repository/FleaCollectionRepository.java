@@ -27,7 +27,7 @@ public interface FleaCollectionRepository extends JpaRepository<FleaCollection, 
     @Query(value = "select new com.niit.soft.client.api.domain.vo.CollectionVo(g.pkFleaGoodsId,u.pkFleaUserId,g.goodsName,g.goodsDescription,g.goodsPrice,g.goodsImgUrl,g.goodsMark,u.username,u.phoneNumber,c.createTime)" +
             "from FleaCollection c " +
             "left join c.fleaGoods g " +
-            "left join c.fleaUser u where u.pkFleaUserId =:#{#userDto.pkFleaUserId}")
+            "left join c.fleaUser u where u.pkFleaUserId =:#{#userDto.pkFleaUserId} and c.isDeleted = false ")
     List<CollectionVo> getCollection(FleaUserIdDto userDto);
 
     /**

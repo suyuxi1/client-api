@@ -25,10 +25,10 @@ public interface FleaTypeRepository extends JpaRepository<FleaType, Long> {
      * @param typeDto
      * @return
      */
-    @Query(value =  "select new com.niit.soft.client.api.domain.vo.FleaGoodsVo(g.pkFleaGoodsId,g.goodsName,g.goodsDescription,g.goodsImgUrl,g.goodsPrice,g.goodsMark," +
+    @Query(value = "select new com.niit.soft.client.api.domain.vo.FleaGoodsVo(g.pkFleaGoodsId,g.goodsName,g.goodsDescription,g.goodsImgUrl,g.goodsPrice,g.goodsMark," +
             "g.goodsCreateTime,t.pkFleaTypeId,t.typeName,u.pkFleaUserId,u.nickname,u.username,u.avatar) " +
             "from FleaGoods g " +
             "left join g.fleaType t " +
-            "left join g.fleaUser u  where t.pkFleaTypeId =:#{#typeDto.getTypeId()}")
+            "left join g.fleaUser u  where t.pkFleaTypeId =:#{#typeDto.getTypeId()} and g.isDeleted = false ")
     List<FleaGoodsVo> getGoodsByTypeId(Pageable pageable, TypeDto typeDto);
 }
