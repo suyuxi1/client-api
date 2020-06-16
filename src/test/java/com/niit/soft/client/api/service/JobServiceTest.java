@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.service;
 
+import com.niit.soft.client.api.domain.dto.JobPageDto;
 import com.niit.soft.client.api.domain.model.Job;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -65,6 +66,11 @@ class JobServiceTest {
 
     @Test
     void findByType() {
-        jobService.findByType(2L).forEach(System.out::println);
+        JobPageDto jobPageDto = JobPageDto.builder()
+                .field("3")
+                .currentPage(1)
+                .pageSize(2)
+                .build();
+        jobService.findByType(jobPageDto).forEach(System.out::println);
     }
 }

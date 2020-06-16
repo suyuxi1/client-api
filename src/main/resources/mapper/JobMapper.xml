@@ -109,8 +109,9 @@
                            ON j.company_id = c.pk_company_id
                  LEFT JOIN job_type t
                            ON j.job_type_id = t.pk_job_type_id
-        WHERE job_type_id = #{typeId}
+        WHERE job_type_id = #{field}
         ORDER BY max DESC
+        LIMIT #{currentPage}, #{pageSize}
     </select>
 
     <select id="jobListByKeyword" resultMap="JobVo">
