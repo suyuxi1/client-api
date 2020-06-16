@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.domain.model.schoolmate;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,10 +30,11 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@TableName(value = "dynamic_photo")
 public class DynamicPhoto {
 
     @Id
-    @TableId
+//    @TableId(value = "pk_dynamic_photo_id")
     private String pkDynamicPhotoId;
 
     /**

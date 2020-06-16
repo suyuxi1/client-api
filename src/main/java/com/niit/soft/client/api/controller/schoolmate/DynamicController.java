@@ -1,4 +1,4 @@
-package com.niit.soft.client.api.controller;
+package com.niit.soft.client.api.controller.schoolmate;
 
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -56,6 +57,13 @@ public class DynamicController {
     @ApiOperation(value = "根据id查找动态资讯的图片", notes = "请求参数为动态id")
     ResponseResult findDynamicPhotoVoById(@RequestBody IdDto id) {
         return ResponseResult.success(dynamicService.findDynamicPhotoById(id.getId()));
+    }
+
+    @PostMapping("/photo/new")
+    @ControllerWebLog(name = "findDynamicPhotoVoById", isSaved = true)
+    @ApiOperation(value = "加添图片", notes = "请求参数为动态id和图片地址")
+    ResponseResult addDynamicPhoto(@RequestBody List<DynamicPhotoDto> dynamicPhotoDtos) {
+        return ResponseResult.success(dynamicService.addPhoto(dynamicPhotoDtos));
     }
 
 
