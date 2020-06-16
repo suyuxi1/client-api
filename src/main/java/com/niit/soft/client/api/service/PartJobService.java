@@ -40,4 +40,12 @@ public interface PartJobService extends IService<PartJob> {
      */
     int insertJob(PartJob partJob);
 
+
+    /**
+     * 分页查询兼职信息,按照传递的参数排列
+     * @param jobPageDto
+     * @return
+     */
+    List<PartJob> findByKeyword(JobPageDto jobPageDto);
+
 }

@@ -37,10 +37,15 @@ public class PartJobController {
 
     @PostMapping("/byId")
     @ApiOperation(value = "查看兼职详情",  notes = "请求参数为兼职的id")
-    public ResponseResult findJob(@RequestBody JobDto jobDto){
+    public ResponseResult findDetail(@RequestBody JobDto jobDto){
         return ResponseResult.success(jobService.findById(jobDto.getId()));
     }
 
+    @PostMapping("/keyword")
+    @ApiOperation(value = "兼职模糊查询",  notes = "请求参数为JobPageDto,field参数为关键字")
+    public ResponseResult findByKeyword(@RequestBody JobPageDto jobPageDto){
+        return ResponseResult.success(jobService.findByKeyword(jobPageDto));
+    }
 
 
 }
