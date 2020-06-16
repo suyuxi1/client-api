@@ -28,7 +28,8 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
 
     @Override
     public List<JobVo> find(JobPageDto jobPageDto) {
-        return jobMapper.jobList(jobPageDto.getField().toString());
+        jobPageDto.setCurrentPage((jobPageDto.getCurrentPage()-1)*jobPageDto.getPageSize());
+        return jobMapper.jobList(jobPageDto);
     }
 
     @Override
@@ -39,5 +40,11 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
     @Override
     public List<JobVo> findByType(Long typeId) {
         return jobMapper.jobListByType(typeId);
+    }
+
+    @Override
+    public List<JobVo> findByKeyword(JobPageDto jobPageDto) {
+        jobPageDto.setCurrentPage((jobPageDto.getCurrentPage()-1)*jobPageDto.getPageSize());
+        return jobMapper.jobListByKeyword(jobPageDto);
     }
 }
