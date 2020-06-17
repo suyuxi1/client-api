@@ -72,4 +72,8 @@ public class FleaGoodsVo {
      * 商品发布人头像
      */
     private String userAvatar;
+    /**
+     * 删除标记
+     */
+    private Boolean isDeleted;
 }
