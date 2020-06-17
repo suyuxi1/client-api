@@ -2,6 +2,7 @@ package com.niit.soft.client.api.service.schoolmate;
 
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.schoolmate.DynamicDto;
+import com.niit.soft.client.api.domain.dto.schoolmate.DynamicPhotoDto;
 import com.niit.soft.client.api.domain.dto.schoolmate.SchoolmatePageDto;
 import com.niit.soft.client.api.domain.dto.schoolmate.ThumbDto;
 import com.niit.soft.client.api.domain.model.schoolmate.Dynamic;
@@ -67,6 +68,13 @@ public interface DynamicService {
      * @param dynamicDto
      */
     Dynamic addOne(DynamicDto dynamicDto);
+
+    /**
+     *
+     * @param dynamicPhotoDtos
+     * @return
+     */
+    ResponseResult addPhoto(List<DynamicPhotoDto> dynamicPhotoDtos);
 
     /**
      * 点赞

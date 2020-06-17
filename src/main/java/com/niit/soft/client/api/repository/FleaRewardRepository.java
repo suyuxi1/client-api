@@ -27,7 +27,8 @@ public interface FleaRewardRepository extends JpaRepository<FleaReward, Long> {
      */
     @Query(value = "select new com.niit.soft.client.api.domain.vo.RewardVo(f.title,f.description,f.imageUrl,f.createTime,u.username,u.phoneNumber) " +
             "from FleaReward f " +
-            "left join f.fleaUser u")
+            "left join f.fleaUser u " +
+            "where f.isDeleted = false ")
     List<RewardVo> getTopReward(Pageable pageable);
 
     FleaReward findFleaRewardByPkRewardIdEquals(Long pkRewardId);

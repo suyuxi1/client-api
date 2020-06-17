@@ -24,7 +24,7 @@ import java.util.List;
  */
 @RestController
 @Slf4j
-@Api(tags = "上跑腿接口")
+@Api(tags = "图片上传")
 @RequestMapping(value = "/api")
 public class AliOssController {
     @Resource

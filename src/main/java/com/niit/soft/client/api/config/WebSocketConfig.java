@@ -3,6 +3,7 @@ package com.niit.soft.client.api.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.scheduling.concurrent.DefaultManagedTaskScheduler;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
@@ -31,9 +32,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         //客户端连接端点
         registry.addEndpoint("/websocket")
                 //跨域处理
-                .setAllowedOrigins("*")
+                .setAllowedOrigins("*");
                 //降级 解决浏览器兼容问题
-                .withSockJS();
+//                .withSockJS();
     }
 
 //    @Override
@@ -54,7 +55,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .setClientLogin("guest")
                 .setClientPasscode("guest")
                 .setVirtualHost("/");
+
+        registry.enableSimpleBroker("/topic", "/user")
+                .setHeartbeatValue(new long[]{10000L, 10000L})
+                .setTaskScheduler(new DefaultManagedTaskScheduler());
+        // 这句话表示客户向服务器端发送时的主题上面需要加"/app"作为前缀。
         registry.setApplicationDestinationPrefixes("/app");
+        // 这句话表示给指定用户发送一对一的主题前缀是"/user"。
+        registry.setUserDestinationPrefix("/user");
     }
 
 //    @Override

@@ -38,7 +38,8 @@ public interface FleaGoodsRepository extends JpaRepository<FleaGoods, Long> {
             "g.goodsCreateTime,t.pkFleaTypeId,t.typeName,u.pkFleaUserId,u.nickname,u.username,u.avatar) " +
             "from FleaGoods g " +
             "left join g.fleaType t " +
-            "left join g.fleaUser u ")
+            "left join g.fleaUser u " +
+            "where g.isDeleted = false ")
     List<FleaGoodsVo> getAllGoodsByTime(Pageable pageable);
 
     /**
