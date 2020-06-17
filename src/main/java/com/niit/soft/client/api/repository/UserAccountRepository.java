@@ -1,10 +1,12 @@
 package com.niit.soft.client.api.repository;
 
 import com.jhlabs.math.VLNoise;
+import com.niit.soft.client.api.domain.dto.UpdateUserAccountDto;
 import com.niit.soft.client.api.domain.model.UserAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -81,8 +83,22 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, String
 
     /**
      * 根据卡号查找用户
+     *
      * @param cardNumber
      * @return
      */
     UserAccount findUserAccountByCardNumber(String cardNumber);
+
+
+    /**
+     * 修改个人资料
+     * @param updateUserAccountDto
+     */
+    @Modifying
+    @Transactional(rollbackFor = RuntimeException.class)
+    @Query(value = "UPDATE first_smart_campus.user_account SET avatar=:#{#updateUserAccountDto.avatar}," +
+            "nickname=:#{#updateUserAccountDto.nickname},gender=:#{#updateUserAccountDto.gender}," +
+            "address=:#{#updateUserAccountDto.address} WHERE " +
+            "pk_user_account_id=:#{#updateUserAccountDto.pkUserAccountId}", nativeQuery = true)
+    void updateUserAccount(@Param("updateUserAccountDto") UpdateUserAccountDto updateUserAccountDto);
 }
