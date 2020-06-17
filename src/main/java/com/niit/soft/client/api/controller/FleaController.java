@@ -303,7 +303,7 @@ public class FleaController {
     }
 
     @ControllerWebLog(name = "orderDel", isSaved = true)
-    @ApiOperation(value = "逻辑删除商品", notes = "商品ID以及买家ID")
+    @ApiOperation(value = "逻辑删除订单", notes = "商品ID以及买家ID")
     @PostMapping("order/deleted")
     public ResponseResult orderDel(@RequestBody FleaOrderDto fleaOrderDto) {
         log.info("-----order/deleted----请求参数：" + fleaOrderDto + "**1**");
