@@ -84,3 +84,8 @@ wechat:
   appid: wxedc274aca2fb67b1
   secret: 0be1b1ac7a0a72e5f00dec9b09422093
 
+
+qq:
+  # ntt
+  oauth:
+    http: http://www.ntt1914866205.xyz

@@ -3,6 +3,7 @@ package com.niit.soft.client.api.service;
 
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.QueryDto;
+import com.niit.soft.client.api.domain.dto.UpdateUserAccountDto;
 import com.niit.soft.client.api.domain.model.UserAccount;
 import org.springframework.data.jpa.repository.Query;
 
@@ -12,10 +13,12 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserAccountService {
     /**
      * 修改
-     * @param sysUserAccount
+     * @param updateUserAccountDto
      * @return
      */
-    ResponseResult updateUserInfo(UserAccount sysUserAccount);
+    ResponseResult updateUserInfo(UpdateUserAccountDto updateUserAccountDto);
+
+
 
     /**
      * 修改手机号码

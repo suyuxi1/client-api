@@ -24,7 +24,7 @@ public class DynamicCollectionDto {
     /**
      * 收藏id
      */
-    private Long pkCollectionId;
+    private String pkCollectionId;
     /**
      * 动态内容
      */
@@ -43,7 +43,7 @@ public class DynamicCollectionDto {
     /**
      * 用户昵称
      */
-    private String userName;
+    private String nickname;
 
     /**
      * 动态创建时间

@@ -4,6 +4,7 @@ import com.alipay.api.domain.AddressDTO;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.QueryDto;
+import com.niit.soft.client.api.domain.dto.UpdateUserAccountDto;
 import com.niit.soft.client.api.domain.vo.AddressBookVo;
 import com.niit.soft.client.api.mapper.UserAccountMapper;
 import com.niit.soft.client.api.repository.UserAccountRepository;
@@ -54,19 +55,17 @@ public class UserAccountServiceImpl implements UserAccountService {
         return ResponseResult.success(addressBookVos);
     }
 
+
     @Override
-    public ResponseResult updateUserInfo(UserAccount sysUserAccount) {
-        UserAccount updateSysUserAccount = userAccountRepository.findUserAccountByInfo(sysUserAccount.getPkUserAccountId().toString());
-        //判断帐号是否被禁用
-        if (updateSysUserAccount.getStatus()) {
-            updateSysUserAccount.setAvatar(sysUserAccount.getAvatar());
-            updateSysUserAccount.setNickname(sysUserAccount.getNickname());
-            updateSysUserAccount.setGender(sysUserAccount.getGender());
-            updateSysUserAccount.setAddress(sysUserAccount.getAddress());
-            userAccountRepository.saveAndFlush(updateSysUserAccount);
-            return ResponseResult.success(updateSysUserAccount);
+    public ResponseResult updateUserInfo(UpdateUserAccountDto updateUserAccountDto) {
+        UserAccount userAccount = userAccountRepository.findSysUserAccountByPkUserAccountId(updateUserAccountDto.getPkUserAccountId());
+        if (userAccount!=null){
+            userAccountRepository.updateUserAccount(updateUserAccountDto);
+            return ResponseResult.success("修改成功");
+        }else {
+            return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
         }
-        return ResponseResult.failure(ResultCode.USER_ACCOUNT_FORBIDDEN);
+
     }
 
     @Override
