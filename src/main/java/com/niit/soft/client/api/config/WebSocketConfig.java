@@ -33,8 +33,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/websocket")
                 //跨域处理
                 .setAllowedOrigins("*");
-                //降级 解决浏览器兼容问题
+        //降级 解决浏览器兼容问题
 //                .withSockJS();
+        registry.addEndpoint("/websocket")
+                //跨域处理
+                .setAllowedOrigins("*")
+                //降级 解决浏览器兼容问题
+                .withSockJS();
     }
 
 //    @Override
@@ -49,16 +54,18 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableStompBrokerRelay("/topic/", "/queue/", "/exchange/")
-                .setRelayHost("120.26.179.70")
-                .setRelayPort(61613)
-                .setClientLogin("guest")
-                .setClientPasscode("guest")
-                .setVirtualHost("/");
-
-        registry.enableSimpleBroker("/topic", "/user")
+        registry.enableSimpleBroker("/topic/", "/user/")
                 .setHeartbeatValue(new long[]{10000L, 10000L})
                 .setTaskScheduler(new DefaultManagedTaskScheduler());
+
+//        registry.enableStompBrokerRelay("/topic/", "/queue/", "/exchange/")
+//                .setRelayHost("120.26.179.70")
+//                .setRelayPort(61613)
+//                .setClientLogin("guest")
+//                .setClientPasscode("guest")
+//                .setVirtualHost("/");
+
+
         // 这句话表示客户向服务器端发送时的主题上面需要加"/app"作为前缀。
         registry.setApplicationDestinationPrefixes("/app");
         // 这句话表示给指定用户发送一对一的主题前缀是"/user"。

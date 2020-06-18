@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.domain.vo.schoolmate;
 
+import com.niit.soft.client.api.domain.model.UserAccount;
 import com.niit.soft.client.api.domain.model.schoolmate.Comment;
 import com.niit.soft.client.api.domain.model.schoolmate.DynamicPhoto;
 import com.niit.soft.client.api.domain.model.schoolmate.Thumb;
@@ -37,4 +38,6 @@ public class DynamicVo {
     private List<CommentVo> commentVoList;
 
     private List<DynamicPhoto> dynamicPhotoList;
+
+    private UserAccount userAccount;
 }

@@ -9,6 +9,7 @@ import com.niit.soft.client.api.domain.dto.schoolmate.DynamicDto;
 import com.niit.soft.client.api.domain.dto.schoolmate.DynamicPhotoDto;
 import com.niit.soft.client.api.domain.dto.schoolmate.SchoolmatePageDto;
 import com.niit.soft.client.api.domain.dto.schoolmate.ThumbDto;
+import com.niit.soft.client.api.domain.model.UserAccount;
 import com.niit.soft.client.api.domain.model.schoolmate.Comment;
 import com.niit.soft.client.api.domain.model.schoolmate.Dynamic;
 import com.niit.soft.client.api.domain.model.schoolmate.DynamicPhoto;
@@ -19,6 +20,7 @@ import com.niit.soft.client.api.mapper.schoolmate.CommentMapper;
 import com.niit.soft.client.api.mapper.schoolmate.DynamicMapper;
 import com.niit.soft.client.api.mapper.schoolmate.DynamicPhotoMapper;
 import com.niit.soft.client.api.mapper.schoolmate.ThumbMapper;
+import com.niit.soft.client.api.repository.UserAccountRepository;
 import com.niit.soft.client.api.repository.schoolmate.DynamicRepository;
 import com.niit.soft.client.api.service.schoolmate.DynamicPhotoService;
 import com.niit.soft.client.api.service.schoolmate.DynamicService;
@@ -67,6 +69,9 @@ public class DynamicServiceImpl implements DynamicService {
     private DynamicPhotoService dynamicPhotoService;
 
     @Resource
+    private UserAccountRepository userAccountRepository;
+
+    @Resource
     private RedisUtil redisUtil;
 
     @Override
@@ -75,6 +80,13 @@ public class DynamicServiceImpl implements DynamicService {
         DynamicVo dynamicVo = dynamicMapper.findDynamicVoById(id);
 
         dynamicVo.setDynamicPhotoList(dynamicPhotoMapper.selectList(new QueryWrapper<DynamicPhoto>().eq("dynamic_id", id)));
+
+        String userId = dynamicVo.getUserId();
+        if (userId != null) {
+            UserAccount userAccountByInfo = userAccountRepository.findUserAccountByInfo(userId);
+            dynamicVo.setUserAccount(userAccountByInfo);
+        }
+
 
         List<Comment> commentList = dynamicVo.getCommentList();
         List<CommentVo> commentVoList = new ArrayList<>();
