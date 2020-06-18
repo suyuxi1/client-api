@@ -268,15 +268,35 @@
             <version>0.8.11.RELEASE</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
         <!--阿里云图片上传-->
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
             <version>3.8.0</version>
         </dependency>
+        <!--httpclient-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.6</version>
+        </dependency>
+        <!--阿里 JSON-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
+        </dependency>
 
-
+        <!--QQ第三方的JavaSDK-->
+        <dependency>
+            <groupId>net.gplatform</groupId>
+            <artifactId>Sdk4J</artifactId>
+            <version>2.0</version>
+        </dependency>
     </dependencies>
 
     <build>

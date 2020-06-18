@@ -1,8 +1,10 @@
-package com.niit.soft.client.api.controller;
+package com.niit.soft.client.api.controller.schoolmate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -86,7 +88,7 @@ public class WebsocketController {
 //    }
 
 
-//    // return的msg返回到/sendToAll主题
+    //    // return的msg返回到/sendToAll主题
 //    @MessageMapping("/sendToAll")
 //    public String sendToAll(String msg) {
 //        return msg;
@@ -116,13 +118,13 @@ public class WebsocketController {
 //    }
 //
 //    // 发送到相应主题上，需要前端订阅该主题 推荐使用
-//    @GetMapping("/send")
-//    public String msgReply(@RequestParam String msg) {
-//        template.convertAndSend("/topic", msg);
-//
-//        //可以不用返回值
-//        return msg;
-//    }
+    @GetMapping("/send")
+    public String msgReply(@RequestParam String msg) {
+        template.convertAndSend("/topic", msg);
+
+        //可以不用返回值
+        return msg;
+    }
 
 
 }

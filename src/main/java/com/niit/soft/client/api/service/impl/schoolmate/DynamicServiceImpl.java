@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.schoolmate.DynamicDto;
+import com.niit.soft.client.api.domain.dto.schoolmate.DynamicPhotoDto;
 import com.niit.soft.client.api.domain.dto.schoolmate.SchoolmatePageDto;
 import com.niit.soft.client.api.domain.dto.schoolmate.ThumbDto;
 import com.niit.soft.client.api.domain.model.schoolmate.Comment;
@@ -19,6 +20,7 @@ import com.niit.soft.client.api.mapper.schoolmate.DynamicMapper;
 import com.niit.soft.client.api.mapper.schoolmate.DynamicPhotoMapper;
 import com.niit.soft.client.api.mapper.schoolmate.ThumbMapper;
 import com.niit.soft.client.api.repository.schoolmate.DynamicRepository;
+import com.niit.soft.client.api.service.schoolmate.DynamicPhotoService;
 import com.niit.soft.client.api.service.schoolmate.DynamicService;
 import com.niit.soft.client.api.util.RedisUtil;
 import com.niit.soft.client.api.util.SnowFlake;
@@ -60,6 +62,9 @@ public class DynamicServiceImpl implements DynamicService {
 
     @Resource
     private DynamicRepository dynamicRepository;
+
+    @Resource
+    private DynamicPhotoService dynamicPhotoService;
 
     @Resource
     private RedisUtil redisUtil;
@@ -169,6 +174,24 @@ public class DynamicServiceImpl implements DynamicService {
                 .thumbs(0)
                 .userId(dynamicDto.getUserId())
                 .isDeleted(false).build());
+    }
+
+    @Override
+    public ResponseResult addPhoto(List<DynamicPhotoDto> dynamicPhotoDtos) {
+        ArrayList<DynamicPhoto> dynamicPhotos = new ArrayList<>();
+        for (DynamicPhotoDto dynamicPhotoDto : dynamicPhotoDtos) {
+            dynamicPhotos.add(DynamicPhoto.builder().pkDynamicPhotoId(String.valueOf(new SnowFlake(1, 3).nextId()))
+                    .dynamicId(dynamicPhotoDto.getDynamicId())
+                    .picture(dynamicPhotoDto.getPicture())
+                    .gmtCreate(Timestamp.valueOf(LocalDateTime.now()))
+                    .gmtModified(Timestamp.valueOf(LocalDateTime.now()))
+                    .isDeleted(false)
+                    .build());
+        }
+        if (dynamicPhotoService.saveBatch(dynamicPhotos)) {
+            return ResponseResult.success("添加成功");
+        }
+        return ResponseResult.failure(ResultCode.SCHOOLMATE_ADD_PHOTO_FAILING);
     }
 
     @Override

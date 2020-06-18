@@ -7,11 +7,6 @@ spring:
     redis:
       repositories:
         enabled: false
-  ssl:
-    key-store: classpath:www.ntt1914866205.xyz.pfx
-    key-store-password: iloveyy0428.
-    key-store-type: PKCS12
-    key-alias: 1
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -81,5 +76,16 @@ mybatis-plus:
       #开启驼峰是命名
       table-underline: true
 
+wechat:
+  # yangyang
+  #  appid: wx83d0374272352af8
+  #  secret: d42cff0f412b215af58dec23e9634cc6
+  # chenrongqi
+  appid: wxedc274aca2fb67b1
+  secret: 0be1b1ac7a0a72e5f00dec9b09422093
 
 
+qq:
+  # ntt
+  oauth:
+    http: http://www.ntt1914866205.xyz

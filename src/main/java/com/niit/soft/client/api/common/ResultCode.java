@@ -59,6 +59,7 @@ public enum ResultCode {
     SCHOOL_MATE_THUMBS_UP(60007, "点赞成功"),
     SCHOOL_MATE_THUMBS_DOWN(60008, "取消点赞"),
     SCHOOL_MATE_THUMBS_UP_REDIS(60009, "redis没有点赞信息"),
+    SCHOOLMATE_ADD_PHOTO_FAILING(60010,"添加图片失败"),
 
     /* 权限错误：70001-79999 */
     PERMISSION_NO_ACCESS(70001, "无访问权限"),
@@ -69,6 +70,9 @@ public enum ResultCode {
 
     /*跑腿模块：80001-89999*/
     ORDER_NOT_CANCLE(80001,"订单正在配送无法取消");
+
+    /*校友圈模块：90001-99999*/
+
 
 
 
