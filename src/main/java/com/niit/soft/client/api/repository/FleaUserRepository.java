@@ -43,7 +43,7 @@ public interface FleaUserRepository extends JpaRepository<FleaUser, Long> {
      * @return List<FleaOrderVo>
      */
     @Query(value = "select new com.niit.soft.client.api.domain.vo.FleaOrderVo(o.pkFleaOrderId,g.goodsName,g.goodsPrice," +
-            "s.nickname,b.nickname,o.createTime,g.goodsDescription,g.goodsMark) " +
+            "s.nickname,b.nickname,o.createTime,g.goodsDescription,g.goodsMark,g.goodsImgUrl) " +
             "from FleaOrder o " +
             "left join o.fleaGoods g " +
             "left join o.fleaUserBuyer b " +
