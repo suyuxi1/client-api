@@ -1,6 +1,5 @@
 package com.niit.soft.client.api.repository;
 
-import com.jhlabs.math.VLNoise;
 import com.niit.soft.client.api.domain.dto.UpdateUserAccountDto;
 import com.niit.soft.client.api.domain.model.UserAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,8 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**

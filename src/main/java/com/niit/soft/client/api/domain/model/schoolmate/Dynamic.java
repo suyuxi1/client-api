@@ -11,8 +11,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-
-
 /**
  * @author Yujie_Zhao
  * @ClassName Dynamic
@@ -20,6 +18,7 @@ import java.sql.Timestamp;
  * @Date 2020/6/8  13:56
  * @Version 1.0
  **/
+
 @Table(name = "dynamic")
 @Entity
 @Data
@@ -36,12 +35,10 @@ public class Dynamic {
     @TableId
     private String pkDynamicId;
 
-
     /**
      * 用户id
      */
     private String userId;
-
 
     /**
      * 标题

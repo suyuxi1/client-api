@@ -2,7 +2,6 @@ package com.niit.soft.client.api.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.niit.soft.client.api.domain.dto.JobPageDto;
-import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.Job;
 import com.niit.soft.client.api.domain.vo.JobVo;
 

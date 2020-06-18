@@ -1,5 +1,4 @@
 package com.niit.soft.client.api.controller;
-
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.*;
@@ -332,6 +331,14 @@ public class FleaController {
     public ResponseResult addComment(@RequestBody FleaCommentDto fleaCommentDto) {
         log.info("-----order/deleted----请求参数：" + fleaCommentDto + "**1**");
         return fleaCommentService.addComment(fleaCommentDto);
+    }
+
+    @ControllerWebLog(name = "getComment", isSaved = true)
+    @ApiOperation(value = "根据悬赏id查询评论", notes = "悬赏ID")
+    @PostMapping("/comment/getByRewardId")
+    public ResponseResult getComment(@RequestBody FleaRewardDto fleaRewardDto) {
+        log.info("-----comment/getByRewardId----请求参数：" + fleaRewardDto + "**1**");
+        return fleaCommentService.getCommentByRewardId(fleaRewardDto);
     }
 
 }
