@@ -41,6 +41,7 @@ public class FleaController {
     private FleaCollectionService fleaCollectionService;
     @Resource
     private FleaCommentService fleaCommentService;
+
     /**
      * 根据搜索框的输入模糊查询  商品名，标签，或 悬赏
      */
@@ -222,10 +223,10 @@ public class FleaController {
         return fleaUserService.findGoodsByUserId(fleaUserIdDto);
     }
 
-    @ControllerWebLog(name = "findById",isSaved = true)
-    @ApiOperation(value = "根据用户ID查询用户信息",notes = "请求参数为userDto中的用户ID")
+    @ControllerWebLog(name = "findById", isSaved = true)
+    @ApiOperation(value = "根据用户ID查询用户信息", notes = "请求参数为userDto中的用户ID")
     @PostMapping("/user/userMain")
-    public ResponseResult findById(@RequestBody FleaUserIdDto userIdDto){
+    public ResponseResult findById(@RequestBody FleaUserIdDto userIdDto) {
         return fleaUserService.findById(userIdDto);
     }
 
@@ -242,6 +243,21 @@ public class FleaController {
         log.info("访问users/orders接口");
         log.info("-----users/orders-----请求参数：" + fleaUserIdDto + "**1**");
         return fleaUserService.findOrderByUserId(fleaUserIdDto);
+    }
+
+    /**
+     * 根据商品id和用户id判断该商品是否被该用户收藏
+     *
+     * @param judgeCollectionDto JudgeCollectionDto
+     * @return ResponseResult
+     */
+    @ControllerWebLog(name = "JudgeCollection", isSaved = true)
+    @ApiOperation(value = "根据商品id和用户id判断该商品是否被该用户收藏", notes = "请求参数为判断商品收藏Dto----judgeCollectionDto  ")
+    @PostMapping(value = "collection/judge")
+    public ResponseResult JudgeCollection(@RequestBody JudgeCollectionDto judgeCollectionDto) {
+        log.info("访问collection/judge接口");
+        log.info("-----collection/judge-----请求参数：" + judgeCollectionDto + "**1**");
+        return fleaCollectionService.judgeCollection(judgeCollectionDto);
     }
 
     @ControllerWebLog(name = "addCollection", isSaved = true)

@@ -1,10 +1,7 @@
 
 package com.niit.soft.client.api.repository;
 
-import com.niit.soft.client.api.domain.dto.CancelCollectionDto;
-import com.niit.soft.client.api.domain.dto.CollectionDto;
-import com.niit.soft.client.api.domain.dto.FleaUserDto;
-import com.niit.soft.client.api.domain.dto.FleaUserIdDto;
+import com.niit.soft.client.api.domain.dto.*;
 import com.niit.soft.client.api.domain.model.FleaCollection;
 import com.niit.soft.client.api.domain.model.FleaUser;
 import com.niit.soft.client.api.domain.vo.CollectionVo;
@@ -32,11 +29,24 @@ public interface FleaCollectionRepository extends JpaRepository<FleaCollection, 
 
     /**
      * 根据用户ID以及商品ID逻辑删除某个收藏
-     * @param collectionDto
-     * @return
+     *
+     * @param collectionDto CancelCollectionDto
+     * @return int
      */
     @Modifying
     @Transactional
     @Query(value = "delete from FleaCollection  where fleaGoods.pkFleaGoodsId = :#{#collectionDto.getGoodsId()} and fleaUser.pkFleaUserId = :#{#collectionDto.getUserId()}")
     int logicalDel(CancelCollectionDto collectionDto);
+
+    /**
+     * 判断商品是否被该用户收藏
+     *
+     * @param judgeCollectionDto JudgeCollectionDto
+     * @return List<CollectionVo>
+     */
+    @Query(value = "select new com.niit.soft.client.api.domain.vo.CollectionVo(g.pkFleaGoodsId,u.pkFleaUserId,g.goodsName,g.goodsDescription,g.goodsPrice,g.goodsImgUrl,g.goodsMark,u.username,u.phoneNumber,c.createTime)" +
+            "from FleaCollection c " +
+            "left join c.fleaGoods g " +
+            "left join c.fleaUser u where u.pkFleaUserId =:#{#judgeCollectionDto.userId} and g.pkFleaGoodsId =:#{#judgeCollectionDto.goodsId} ")
+    List<CollectionVo> judgeCollection(JudgeCollectionDto judgeCollectionDto);
 }
