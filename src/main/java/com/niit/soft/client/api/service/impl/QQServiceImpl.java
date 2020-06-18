@@ -1,7 +1,5 @@
 package com.niit.soft.client.api.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.model.LoginAccount;
 import com.niit.soft.client.api.domain.model.UserAccount;
@@ -9,26 +7,15 @@ import com.niit.soft.client.api.exception.CustomException;
 import com.niit.soft.client.api.repository.LoginAccountRepository;
 import com.niit.soft.client.api.repository.UserAccountRepository;
 import com.niit.soft.client.api.service.QQService;
-import com.niit.soft.client.api.util.JwtUtil;
 import com.niit.soft.client.api.util.QQHttpClient;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.List;
 import java.util.UUID;
 
 /**
