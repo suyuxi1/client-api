@@ -83,8 +83,8 @@ public class CollectionsServiceImpl implements CollectionsService {
             collectionsRepository.save(collections);
             return ResponseResult.success("添加成功");
         }
-        return ResponseResult.success(ResultCode.DATA_ALREADY_EXISTED);
-    }
+        return ResponseResult.success(ResultCode.DATA_ALREADY_EXISTED);    }
+
 
     @Override
     public ResponseResult updateCollectionsIsDelete(String id) {
