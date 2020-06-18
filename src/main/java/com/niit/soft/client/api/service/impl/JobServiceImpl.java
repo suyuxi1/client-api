@@ -2,6 +2,7 @@ package com.niit.soft.client.api.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.niit.soft.client.api.domain.dto.JobPageDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.Job;
 import com.niit.soft.client.api.domain.vo.JobVo;
@@ -26,8 +27,9 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
     private JobMapper jobMapper;
 
     @Override
-    public List<JobVo> find(PageDto pageDto) {
-        return jobMapper.jobList(pageDto.getField().toString());
+    public List<JobVo> find(JobPageDto jobPageDto) {
+        jobPageDto.setCurrentPage((jobPageDto.getCurrentPage()-1)*jobPageDto.getPageSize());
+        return jobMapper.jobList(jobPageDto);
     }
 
     @Override
@@ -36,7 +38,14 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
     }
 
     @Override
-    public List<JobVo> findByType(Long typeId) {
-        return jobMapper.jobListByType(typeId);
+    public List<JobVo> findByType(JobPageDto jobPageDto) {
+        jobPageDto.setCurrentPage((jobPageDto.getCurrentPage()-1)*jobPageDto.getPageSize());
+        return jobMapper.jobListByType(jobPageDto);
+    }
+
+    @Override
+    public List<JobVo> findByKeyword(JobPageDto jobPageDto) {
+        jobPageDto.setCurrentPage((jobPageDto.getCurrentPage()-1)*jobPageDto.getPageSize());
+        return jobMapper.jobListByKeyword(jobPageDto);
     }
 }

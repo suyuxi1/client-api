@@ -1,5 +1,4 @@
 package com.niit.soft.client.api.controller;
-
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.*;
@@ -256,9 +255,9 @@ public class FleaController {
     @ControllerWebLog(name = "getAll", isSaved = true)
     @ApiOperation(value = "查询所有收藏", notes = "没有请求参数，直接post提交")
     @PostMapping("/collection/all")
-    public ResponseResult getAll() {
+    public ResponseResult getAll(@RequestBody FleaUserIdDto userIdDto) {
         log.info("进入获取所有收藏接口");
-        return fleaCollectionService.getCollection();
+        return fleaCollectionService.getCollection(userIdDto);
     }
 
     @ControllerWebLog(name = "logicalDel", isSaved = true)
@@ -316,6 +315,14 @@ public class FleaController {
     public ResponseResult addComment(@RequestBody FleaCommentDto fleaCommentDto) {
         log.info("-----order/deleted----请求参数：" + fleaCommentDto + "**1**");
         return fleaCommentService.addComment(fleaCommentDto);
+    }
+
+    @ControllerWebLog(name = "getComment", isSaved = true)
+    @ApiOperation(value = "根据悬赏id查询评论", notes = "悬赏ID")
+    @PostMapping("/comment/getByRewardId")
+    public ResponseResult getComment(@RequestBody FleaRewardDto fleaRewardDto) {
+        log.info("-----comment/getByRewardId----请求参数：" + fleaRewardDto + "**1**");
+        return fleaCommentService.getCommentByRewardId(fleaRewardDto);
     }
 
 }

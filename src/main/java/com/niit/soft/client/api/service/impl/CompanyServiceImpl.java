@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.niit.soft.client.api.domain.dto.JobPageDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.Company;
 import com.niit.soft.client.api.domain.vo.CompanyVo;
@@ -28,10 +29,15 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     private CompanyMapper companyMapper;
 
     @Override
-    public List<Company> findByPage(PageDto pageDto) {
+    public List<Company> findByPage(JobPageDto jobPageDto) {
         QueryWrapper<Company> wrapper = new QueryWrapper<>();
-        wrapper.select("pk_company_id","name","tag","logo","workers","type","address").orderByDesc("workers",pageDto.getField().toString());
-        IPage<Company> page = new Page<>(pageDto.getCurrentPage(), pageDto.getPageSize());
+
+        if ("workers".equals(jobPageDto.getField())){
+            wrapper.select("pk_company_id","name","tag","logo","workers","type","address").orderByDesc("workers");
+        }else {
+            wrapper.select("pk_company_id","name","tag","logo","workers","type","address").like("name",jobPageDto.getField().toString()).orderByDesc("workers");
+        }
+        IPage<Company> page = new Page<>(jobPageDto.getCurrentPage(), jobPageDto.getPageSize());
         return companyMapper.selectPage(page, wrapper).getRecords();
     }
 
@@ -39,4 +45,5 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     public CompanyVo findById(Long id) {
         return companyMapper.findDetails(id);
     }
+
 }

@@ -35,12 +35,13 @@ public class RedisDataToMySQL {
     @Resource
     private ThumbService thumbService;
 
-    // 每小时
-//    @Scheduled(cron = "0 0 * * * ？")
+
     // 每十分钟
-    @Scheduled(cron = "0 */10 * * * ?")
+//    @Scheduled(cron = "0 */10 * * * ?")
     // 每五秒执行
 //    @Scheduled(cron = "*/5 * * * * ?")
+    // 每小时
+    @Scheduled(cron = "0 0 * * * ?")
     public void redisDataToMySQL() {
         log.info("定时同步数据库 时间：{}", LocalDateTime.now());
 
@@ -77,9 +78,9 @@ public class RedisDataToMySQL {
             // 取出redis中点赞信息
             for (Object o : hmget.keySet()) {
                 // 如果mysql中信息包含redis信息
-                if (id.contains(Long.parseLong((String) o))) {
+                if (id.contains((String) o)) {
                     // 则移除
-                    id.remove(Long.parseLong((String) o));
+                    id.remove((String) o);
 //                    记录redis有多少条点赞记录
                     size++;
                 }

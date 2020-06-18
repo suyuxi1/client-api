@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GeneratorType;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.cglib.proxy.Mixin;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -25,7 +29,8 @@ public class FleaOrder {
      * id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(generator = "myId")
+//    @GenericGenerator(name = "myId",strategy = "com.niit.soft.client.api.util.MyIdGenerator")
     private String pkFleaOrderId;
 
     /**

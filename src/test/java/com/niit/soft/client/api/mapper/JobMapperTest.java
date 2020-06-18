@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.mapper;
 
+import com.niit.soft.client.api.domain.dto.JobPageDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,12 +21,17 @@ class JobMapperTest {
 
     @Test
     void jobList() {
-        jobMapper.jobList("max").forEach(System.out::println);
+        JobPageDto jobPageDto = JobPageDto.builder()
+                .field("max")
+                .currentPage(1)
+                .pageSize(5)
+                .build();
+        jobMapper.jobList(jobPageDto).forEach(System.out::println);
     }
 
 
     @Test
     void jobListByType() {
-        jobMapper.jobListByType(3L).forEach(System.out::println);
+//        jobMapper.jobListByType(3L).forEach(System.out::println);
     }
 }

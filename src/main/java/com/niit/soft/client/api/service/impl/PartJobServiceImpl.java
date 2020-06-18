@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.niit.soft.client.api.domain.dto.JobPageDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.PartJob;
 import com.niit.soft.client.api.mapper.PartJobMapper;
@@ -30,25 +31,24 @@ public class PartJobServiceImpl extends ServiceImpl<PartJobMapper, PartJob> impl
 
 
     @Override
-    public List<PartJob> findByPage(PageDto pageDto) {
+    public List<PartJob> findByPage(JobPageDto jobPageDto) {
         QueryWrapper<PartJob> wrapper = new QueryWrapper<>();
-        IPage<PartJob> page = new Page<>(pageDto.getCurrentPage(), pageDto.getPageSize());
+        IPage<PartJob> page = new Page<>(jobPageDto.getCurrentPage(), jobPageDto.getPageSize());
         wrapper.select("pk_part_job_id","name","boss_name","boss_phone","boss_avatar","workplace","working_date","working_time","pay","job_type","number","have","need","gmt_create").eq("is_deleted", 0);
-        if ("pay".equals(pageDto.getField())){
-            wrapper.orderByDesc(pageDto.getField().toString());
-        }else if ("gmt_create".equals(pageDto.getField())){
-            wrapper.orderByDesc(pageDto.getField().toString());
+        if ("pay".equals(jobPageDto.getField())){
+            wrapper.orderByDesc(jobPageDto.getField().toString());
+        }else if ("gmt_create".equals(jobPageDto.getField())){
+            wrapper.orderByDesc(jobPageDto.getField().toString());
         }else {
-            wrapper.eq("job_type", pageDto.getField());
+            wrapper.eq("job_type", jobPageDto.getField()).orderByDesc("pay");
         }
         return partJobMapper.selectPage(page, wrapper).getRecords();
     }
 
     @Override
     public PartJob findById(Long id) {
-        //分页查询
         QueryWrapper<PartJob> wrapper = new QueryWrapper<>();
-        wrapper.select("pk_part_job_id","name","description","boss_id","boss_name","boss_phone","boss_avatar","workplace","working_date","working_time","pay","pay_type","job_type","number","have","need","gmt_create").eq("pk_part_job_id",id);
+        wrapper.select("pk_part_job_id","name","description","boss_id","boss_name","boss_phone","boss_avatar","workplace","working_date","working_time","pay","pay_type","job_type","number","have","need","gmt_create").eq("is_deleted", 0).eq("pk_part_job_id",id);
         return partJobMapper.selectOne(wrapper);
 
     }
@@ -59,6 +59,14 @@ public class PartJobServiceImpl extends ServiceImpl<PartJobMapper, PartJob> impl
         partJob.setGmtCreate(Timestamp.valueOf(LocalDateTime.now()));
         partJob.setGmtModified(Timestamp.valueOf(LocalDateTime.now()));
         return partJobMapper.insert(partJob);
+    }
+
+    @Override
+    public List<PartJob> findByKeyword(JobPageDto jobPageDto) {
+        QueryWrapper<PartJob> wrapper = new QueryWrapper<>();
+        IPage<PartJob> page = new Page<>(jobPageDto.getCurrentPage(), jobPageDto.getPageSize());
+        wrapper.select("pk_part_job_id","name","boss_name","boss_phone","boss_avatar","workplace","working_date","working_time","pay","job_type","number","have","need","gmt_create").eq("is_deleted", 0).like("name", jobPageDto.getField()).orderByDesc("pay");
+        return partJobMapper.selectPage(page,wrapper).getRecords();
     }
 
 

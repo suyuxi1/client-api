@@ -3,8 +3,10 @@ package com.niit.soft.client.api.controller;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.dto.SecondFieldDto;
+import com.niit.soft.client.api.domain.model.ReportLoss;
 import com.niit.soft.client.api.service.ReportLossService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,7 +38,7 @@ public class ReportLossController {
     }
 
     /**
-     * 申请挂失
+     *
      * @param secondFieldDto
      * @return
      */
@@ -45,4 +47,27 @@ public class ReportLossController {
         boolean lossStatus = Boolean.parseBoolean(secondFieldDto.getField2().toString());
         return  reportLossService.updateLossStatus(Long.parseLong(String.valueOf(secondFieldDto.getField1())), lossStatus);
     }
+
+    /**
+     * 申请挂失
+     * @param reportLoss
+     * @return
+     */
+    @ApiOperation(value = "申请挂失信息",notes = "")
+    @PostMapping(value = "/increase")
+    public ResponseResult increaseReportLoss(@RequestBody ReportLoss reportLoss){
+        return reportLossService.insertReportLoss(reportLoss);
+    }
+
+    /**
+     * 取消挂失
+     * @param reportLoss
+     * @return
+     */
+    @ApiOperation(value = "取消挂失信息",notes = "")
+    @PostMapping(value = "/deletion")
+    public ResponseResult deletionReportLoss(@RequestBody ReportLoss reportLoss){
+        return reportLossService.cancelReportLoss(reportLoss);
+    }
+
 }

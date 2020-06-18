@@ -58,6 +58,7 @@ public class CollectionsServiceImpl implements CollectionsService {
                 collectionsRepository.getCollectionsByUserId((String) pageDto.getField(), pageable);
         collectionsPage.forEach(collections -> {
             DynamicCollectionDto dynamicCollectionDto = collectionsMapper.findCollectionsByDynamicId(collections.getDynamicId());
+            dynamicCollectionDto.setPkCollectionId(collections.getPkCollectionId());
             //得到一个资讯的所有配图
             List<String> dynamicPhotoList = dynamicPhotoRepository.findDistinctByDynamicId(collections.getDynamicId());
             if (dynamicPhotoList != null) {

@@ -23,12 +23,12 @@ public interface CollectionsMapper extends BaseMapper<Collections> {
      * @param id
      * @return
      */
-    @Select("SELECT d.content as content,d.gmt_create as gmtCreate, u.sys_user_avatar as userAvatar,u.sys_user_name as userName " +
+    @Select("SELECT d.content as content,d.gmt_create as gmtCreate, u.avatar as userAvatar,u.nickname as nickname " +
             "FROM collections c " +
             "LEFT JOIN dynamic d " +
             "ON d.pk_dynamic_id = c.dynamic_id " +
-            "LEFT JOIN sys_user u " +
-            "ON d.user_id = u.pk_user_id " +
+            "LEFT JOIN user_account u " +
+            "ON d.user_id = u.pk_user_account_id " +
             "WHERE c.user_id = #{id}")
     List<Map<String, Object>> findCollectionsByUserId(String id);
 
@@ -39,10 +39,10 @@ public interface CollectionsMapper extends BaseMapper<Collections> {
      * @return
      */
     @Select("SELECT d.content as content,d.gmt_create as gmtCreate," +
-            "u.sys_user_avatar as userAvatar,u.sys_user_name as userName " +
+            "u.avatar as userAvatar,u.nickname as nickname " +
             "FROM dynamic d " +
-            "LEFT JOIN sys_user u " +
-            "ON d.user_id = u.pk_user_id " +
+            "LEFT JOIN user_account u " +
+            "ON d.user_id = u.pk_user_account_id " +
             "WHERE d.pk_dynamic_id = #{id}")
     DynamicCollectionDto findCollectionsByDynamicId(String id);
 

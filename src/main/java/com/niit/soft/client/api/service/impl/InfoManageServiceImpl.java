@@ -1,6 +1,7 @@
 package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.domain.model.InfoManage;
 import com.niit.soft.client.api.repository.InfoManageRepository;
@@ -56,6 +57,16 @@ public class InfoManageServiceImpl implements InfoManageService {
                 "pk_info_manage_id");
         Page<InfoManage> infoManagePage = infoManageRepository.getAllManage(pageable);
         return ResponseResult.success(infoManagePage.getContent());
+    }
+
+    @Override
+    public ResponseResult findInfoManageById(Long id) {
+        InfoManage infoManage = infoManageRepository.getInfoManageByPkInfoManageId(id);
+        if (infoManage!=null){
+            return ResponseResult.success(infoManage);
+        }else {
+            return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
+        }
     }
 
 }

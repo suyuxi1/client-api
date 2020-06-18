@@ -2,7 +2,9 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.common.ResponseResult;
+import com.niit.soft.client.api.domain.dto.QueryDto;
 import com.niit.soft.client.api.domain.dto.SingleFieldDto;
+import com.niit.soft.client.api.domain.dto.UpdateUserAccountDto;
 import com.niit.soft.client.api.domain.model.SysFeedback;
 import com.niit.soft.client.api.domain.model.UserAccount;
 import com.niit.soft.client.api.service.SysFeedbackService;
@@ -36,15 +38,15 @@ public class UserAccountController {
     /**
      * 修改个人资料
      *
-     * @param userAccount
+     * @param updateUserAccountDto
      * @return
      */
-    @ApiOperation(value = "修改个人信息数据", notes = "请求参数为头像、昵称、性别")
+    @ApiOperation(value = "修改个人信息数据", notes = "请求参数为用户id、头像、昵称、性别、地址")
     @PostMapping("/update/info")
     @ControllerWebLog(name = "updateInfo", isSaved = true)
-    ResponseResult updateInfo(@RequestBody UserAccount userAccount) {
-        log.info("-----/update/info-----请求参数：" + userAccount+"**1**");
-        return userAccountService.updateUserInfo(userAccount);
+    ResponseResult updateInfo(@RequestBody UpdateUserAccountDto updateUserAccountDto) {
+        log.info("-----/update/info-----请求参数：" + updateUserAccountDto+"**1**");
+        return userAccountService.updateUserInfo(updateUserAccountDto);
     }
 
     /**
@@ -75,6 +77,12 @@ public class UserAccountController {
     public UserAccount getUserAccountInfoById(@RequestBody SingleFieldDto singleFieldDto) {
         log.info("-----/single/id-----请求参数：" + singleFieldDto.getField().toString() +"**1**");
         return userAccountService.findUserAccountById(singleFieldDto.getField().toString());
+    }
+
+    @ApiOperation(value = "模糊查询用户接口", notes = "请求参数为keywords关键字")
+    @PostMapping("/fuzzyQuery")
+    ResponseResult findUserAccountLike(@RequestBody QueryDto queryDto){
+        return userAccountService.findUserAccountLike(queryDto.getKeywords());
     }
 
 }

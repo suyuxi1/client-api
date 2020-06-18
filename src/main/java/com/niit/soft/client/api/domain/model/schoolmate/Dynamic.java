@@ -19,7 +19,7 @@ import java.sql.Timestamp;
  * @Version 1.0
  **/
 
-@Table(name = "dynamic", indexes = {@Index(name = "titleIndex", columnList = "title")})
+@Table(name = "dynamic")
 @Entity
 @Data
 @Builder

@@ -1,13 +1,20 @@
 package com.niit.soft.client.api.service.impl;
 
+import com.alipay.api.domain.AddressDTO;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
+import com.niit.soft.client.api.domain.dto.QueryDto;
+import com.niit.soft.client.api.domain.dto.UpdateUserAccountDto;
+import com.niit.soft.client.api.domain.vo.AddressBookVo;
+import com.niit.soft.client.api.mapper.UserAccountMapper;
 import com.niit.soft.client.api.repository.UserAccountRepository;
 import com.niit.soft.client.api.domain.model.UserAccount;
 import com.niit.soft.client.api.service.UserAccountService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @Description TODO
@@ -19,6 +26,8 @@ import javax.annotation.Resource;
 public class UserAccountServiceImpl implements UserAccountService {
     @Resource
     private UserAccountRepository userAccountRepository;
+    @Resource
+    private UserAccountMapper userAccountMapper;
     @Override
     public UserAccount findUserAccountById(String id) {
         return userAccountRepository.findUserAccountByInfo(id.toString());
@@ -35,18 +44,28 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public ResponseResult updateUserInfo(UserAccount sysUserAccount) {
-        UserAccount updateSysUserAccount = userAccountRepository.findUserAccountByInfo(sysUserAccount.getPkUserAccountId().toString());
-        //判断帐号是否被禁用
-        if (updateSysUserAccount.getStatus()) {
-            updateSysUserAccount.setAvatar(sysUserAccount.getAvatar());
-            updateSysUserAccount.setNickname(sysUserAccount.getNickname());
-            updateSysUserAccount.setGender(sysUserAccount.getGender());
-            updateSysUserAccount.setAddress(sysUserAccount.getAddress());
-            userAccountRepository.saveAndFlush(updateSysUserAccount);
-            return ResponseResult.success(updateSysUserAccount);
+    public ResponseResult findUserAccountLike(String keyword) {
+        List<AddressBookVo> addressBookVos = null;
+        try {
+            addressBookVos = userAccountMapper.findUserAccountLike(keyword);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return ResponseResult.failure(ResultCode.USER_ACCOUNT_FORBIDDEN);
+
+        return ResponseResult.success(addressBookVos);
+    }
+
+
+    @Override
+    public ResponseResult updateUserInfo(UpdateUserAccountDto updateUserAccountDto) {
+        UserAccount userAccount = userAccountRepository.findSysUserAccountByPkUserAccountId(updateUserAccountDto.getPkUserAccountId());
+        if (userAccount!=null){
+            userAccountRepository.updateUserAccount(updateUserAccountDto);
+            return ResponseResult.success("修改成功");
+        }else {
+            return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE);
+        }
+
     }
 
     @Override

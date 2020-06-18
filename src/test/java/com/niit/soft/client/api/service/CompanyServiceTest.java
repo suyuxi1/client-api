@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.service;
 
+import com.niit.soft.client.api.domain.dto.JobPageDto;
 import com.niit.soft.client.api.domain.dto.PageDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,12 +17,12 @@ class CompanyServiceTest {
 
     @Test
     void findByPage() {
-        PageDto pageDto = PageDto.builder()
+        JobPageDto jobPageDto = JobPageDto.builder()
                 .field("workers")
                 .currentPage(1)
                 .pageSize(10)
                 .build();
-        companyService.findByPage(pageDto).forEach(System.out::println);
+        companyService.findByPage(jobPageDto).forEach(System.out::println);
 
     }
 

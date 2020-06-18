@@ -29,6 +29,11 @@ public interface InfoManageService {
     ResponseResult getIsTopInfo(PageDto pageDto);
 
 
-
+    /**
+     * 通过id查询咨询详情
+     * @param id
+     * @return
+     */
+    ResponseResult findInfoManageById(Long id);
 
 }

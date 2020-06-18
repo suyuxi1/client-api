@@ -35,10 +35,11 @@ public interface FleaGoodsRepository extends JpaRepository<FleaGoods, Long> {
     List<FleaGoods> findFleaGoodsByGoodsNameLikeOrGoodsDescriptionLike(String goodsName, String goodsDescription);
 
     @Query(value = "select new com.niit.soft.client.api.domain.vo.FleaGoodsVo(g.pkFleaGoodsId,g.goodsName,g.goodsDescription,g.goodsImgUrl,g.goodsPrice,g.goodsMark," +
-            "g.goodsCreateTime,t.pkFleaTypeId,t.typeName,u.pkFleaUserId,u.nickname,u.username,u.avatar) " +
+            "g.goodsCreateTime,t.pkFleaTypeId,t.typeName,u.pkFleaUserId,u.nickname,u.username,u.avatar,g.isDeleted) " +
             "from FleaGoods g " +
             "left join g.fleaType t " +
-            "left join g.fleaUser u ")
+            "left join g.fleaUser u " +
+            "where g.isDeleted = false ")
     List<FleaGoodsVo> getAllGoodsByTime(Pageable pageable);
 
     /**
@@ -48,7 +49,7 @@ public interface FleaGoodsRepository extends JpaRepository<FleaGoods, Long> {
      * @return List<FleaGoodsVo>
      */
     @Query(value = "select new com.niit.soft.client.api.domain.vo.FleaGoodsVo(g.pkFleaGoodsId,g.goodsName,g.goodsDescription,g.goodsImgUrl,g.goodsPrice,g.goodsMark," +
-            "g.goodsCreateTime,t.pkFleaTypeId,t.typeName,u.pkFleaUserId,u.nickname,u.username,u.avatar) " +
+            "g.goodsCreateTime,t.pkFleaTypeId,t.typeName,u.pkFleaUserId,u.nickname,u.username,u.avatar,g.isDeleted) " +
             "from FleaGoods g " +
             "left join g.fleaType t " +
             "left join g.fleaUser u " +

@@ -4,8 +4,10 @@ package com.niit.soft.client.api;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author Tao
@@ -21,5 +23,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class ClientApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(ClientApiApplication.class, args);
+    }
+
+    @Bean
+    RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }
