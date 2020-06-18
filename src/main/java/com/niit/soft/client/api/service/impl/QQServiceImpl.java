@@ -1,5 +1,6 @@
 package com.niit.soft.client.api.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.common.ResultCode;
 import com.niit.soft.client.api.domain.model.LoginAccount;
@@ -11,6 +12,12 @@ import com.niit.soft.client.api.service.QQService;
 import com.niit.soft.client.api.util.JwtUtil;
 import com.niit.soft.client.api.util.QQHttpClient;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -21,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -44,7 +52,7 @@ public class QQServiceImpl implements QQService {
 
 
     @Override
-    public String qqRedirect(HttpSession session) {
+    public String qqRedirect(HttpSession session)  {
         //QQ互联中的回调地址
         String backUrl = http + "/connect";
         //用于第三方应用防止CSRF攻击
@@ -65,7 +73,7 @@ public class QQServiceImpl implements QQService {
     }
 
     @Override
-    public ResponseResult connect(HttpServletRequest request) throws IOException {
+    public String connect(HttpServletRequest request) throws IOException {
 //    public String connect(HttpServletRequest request) throws IOException {
         //此处本想用8080端口，但因为备案时用的是域名备案，无端口号，所以回调地址只能是 http://www.ntt1914866205.xyz/connect
         HttpSession session = request.getSession();
@@ -96,31 +104,46 @@ public class QQServiceImpl implements QQService {
         url = "https://graph.qq.com/oauth2.0/me?access_token=" + access_token;
         log.info("获取回调后的 openid 值>>>>>>>>" + url);
         String openid = QQHttpClient.getOpenID(url);
+        log.info("openid 值>>>>>>>>" + openid);
 //        openid可以唯一标识一个用户
         //先在用户账号表里查，如果有，则返回数据
 
         LoginAccount loginAccount = loginAccountRepository.getLoginAccountByQqOpenIdEquals(openid);
+        log.info(">>>>>>>>>>>>>>>>>>>>"+loginAccount.toString());
         //如果有数据，则在用户表里查到该用户
         if (loginAccount != null) {
             UserAccount userAccount = userAccountRepository.findUserAccountByInfo(loginAccount.getJobNumber());
+        log.info(">>>>>>>>>>>>>>>>>>>>"+userAccount.toString());
 //            Map map = new HashedMap();
 //            map.put("UserAccount",userAccount);
 //            map.put("token", JwtUtil.sign(userAccount.getUserAccount(), userAccount.getPassword()));
 //            log.info("生成的token{}", map.get("token"));
-            String token = JwtUtil.sign(userAccount.getUserAccount(), userAccount.getPassword());
+            //不传token了，走账号密码登录
+//            String token = JwtUtil.sign(userAccount.getJobNumber(), userAccount.getPassword());
             //登录成功，重定向到首页，可以带上token，前端首页创建时，如果判断地址有token，带上token请求数据
             //重定向跳回客户端
-            ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-            assert sra != null;
-            HttpServletResponse response = sra.getResponse();
+//            ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//            assert sra != null;
+//            HttpServletResponse response = sra.getResponse();
 //            此处为首页地址 先报个错，明天从这里开始改
-            log.info("token{}", token);
-            response.sendRedirect(http+"?token=" + token);
+//            log.info("token{}", token);
+//            log.info("http://localhost:8088/#/layout?token=" + token);
+//            response.sendRedirect("http://localhost:8088/#/layout?token=" + token + "&phoneNumber=" + userAccount.getPhoneNumber());
+            String redirectUrl="http://localhost:8088/#/layout?jobNumber=" + userAccount.getJobNumber() + "&password=" + userAccount.getPassword();
+            log.info(redirectUrl);
+//            response.sendRedirect("http://localhost:8088/#/layout?jobNumber=" + userAccount.getJobNumber() + "&password=" + userAccount.getPassword());
+//            response.sendRedirect("http://localhost:8088/#/login");
+            return redirectUrl;
+
+
+//            response.sendRedirect("http://120.26.177.51:80?token=" + token);
             //既然已经重定向了，就不用返回什么数据了
-            return null;
+//            http://www.ntt1914866205.xyz
+//            return null;
         }
+            return "错误";
         //用户不存在，未绑定账号
-        return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE, "该账号未绑定");
+//        return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE, "该账号未绑定");
 
 //        //Step4：获取QQ用户信息
 //        url = "https://graph.qq.com/user/get_user_info?access_token=" + access_token +

@@ -76,8 +76,8 @@ public class QQController {
      * @return
      */
     @GetMapping("/connect")
-    public ResponseResult connect(HttpServletRequest request) throws Exception {
+    public String connect(HttpServletRequest request) throws Exception {
         log.info("------QQ的服务器又重定向回来-----");
-        return qqService.connect(request);
+        return  "redirect:" +qqService.connect(request);
     }
 }

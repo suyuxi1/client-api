@@ -26,6 +26,5 @@ public interface QQService {
      * @param request
      * @return
      */
-    ResponseResult connect(HttpServletRequest request) throws IOException;
-//    String connect(HttpServletRequest request) throws IOException;
+    String connect(HttpServletRequest request) throws IOException;
 }
