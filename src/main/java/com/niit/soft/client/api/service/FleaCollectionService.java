@@ -4,6 +4,7 @@ import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.CancelCollectionDto;
 import com.niit.soft.client.api.domain.dto.CollectionDto;
 import com.niit.soft.client.api.domain.dto.FleaUserIdDto;
+import com.niit.soft.client.api.domain.dto.JudgeCollectionDto;
 import org.jsoup.Connection;
 
 /**
@@ -16,6 +17,7 @@ import org.jsoup.Connection;
 public interface FleaCollectionService {
     /**
      * 插入收藏
+     *
      * @param collectionDto
      * @return
      */
@@ -23,15 +25,25 @@ public interface FleaCollectionService {
 
     /**
      * 获取所有收藏
+     *
      * @return
      */
     ResponseResult getCollection(FleaUserIdDto userIdDto);
 
     /**
      * 根据商品ID以及用户ID删除商品
+     *
      * @param collectionDto
      * @return
      */
     ResponseResult logicalDel(CancelCollectionDto collectionDto);
+
+    /**
+     * 判断该商品是否被该用户收藏
+     *
+     * @param judgeCollectionDto JudgeCollectionDto
+     * @return ResponseResult
+     */
+    ResponseResult judgeCollection(JudgeCollectionDto judgeCollectionDto);
 }
 

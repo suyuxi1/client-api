@@ -2,6 +2,7 @@ package com.niit.soft.client.api.service.impl;
 
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.FleaCommentDto;
+import com.niit.soft.client.api.domain.dto.FleaRewardDto;
 import com.niit.soft.client.api.domain.model.FleaComment;
 import com.niit.soft.client.api.repository.FleaCommentRepository;
 import com.niit.soft.client.api.repository.FleaRewardRepository;
@@ -43,5 +44,10 @@ public class FleaCommentServiceImpl implements FleaCommentService {
                 .build();
         commentRepository.save(fleaComment);
         return ResponseResult.success("成功");
+    }
+
+    @Override
+    public ResponseResult getCommentByRewardId(FleaRewardDto fleaRewardDto) {
+        return ResponseResult.success(commentRepository.selectByRewardId(fleaRewardDto));
     }
 }

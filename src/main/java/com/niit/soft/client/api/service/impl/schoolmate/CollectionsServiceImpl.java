@@ -58,6 +58,7 @@ public class CollectionsServiceImpl implements CollectionsService {
                 collectionsRepository.getCollectionsByUserId((String) pageDto.getField(), pageable);
         collectionsPage.forEach(collections -> {
             DynamicCollectionDto dynamicCollectionDto = collectionsMapper.findCollectionsByDynamicId(collections.getDynamicId());
+            dynamicCollectionDto.setPkCollectionId(collections.getPkCollectionId());
             //得到一个资讯的所有配图
             List<String> dynamicPhotoList = dynamicPhotoRepository.findDistinctByDynamicId(collections.getDynamicId());
             if (dynamicPhotoList != null) {
@@ -83,8 +84,8 @@ public class CollectionsServiceImpl implements CollectionsService {
             collectionsRepository.save(collections);
             return ResponseResult.success("添加成功");
         }
-        return ResponseResult.success(ResultCode.DATA_ALREADY_EXISTED);
-    }
+        return ResponseResult.success(ResultCode.DATA_ALREADY_EXISTED);    }
+
 
     @Override
     public ResponseResult updateCollectionsIsDelete(String id) {

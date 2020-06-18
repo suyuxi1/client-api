@@ -25,4 +25,5 @@ public class FleaOrderVo {
     private Date orderCreateTime;
     private String goodsDescription;
     private String goodsMark;
+    private String goodsImg;
 }
