@@ -1,8 +1,11 @@
 
 package com.niit.soft.client.api.repository;
 
+import com.niit.soft.client.api.domain.dto.FleaRewardDto;
 import com.niit.soft.client.api.domain.model.FleaCollection;
 import com.niit.soft.client.api.domain.model.FleaComment;
+import com.niit.soft.client.api.domain.vo.FleaCommentVo;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -20,6 +23,10 @@ public interface FleaCommentRepository extends JpaRepository<FleaComment,Long> {
      * 查询所有
      * @return List<FleaComment>
      */
-    @Query(value = "select e from FleaComment e")
-    List<FleaComment> selectAll();
+    @Query(value = "select new com.niit.soft.client.api.domain.vo.FleaCommentVo(c.pkFleaCommentId,r.nickname,b.nickname,c.comment,f.title,c.createTime)" +
+            "from FleaComment c " +
+            "left join c.reviewer r " +
+            "left join c.commentBy b " +
+            "left join c.fleaReward f")
+    List<FleaCommentVo> selectByRewardId(FleaRewardDto fleaRewardDto);
 }
