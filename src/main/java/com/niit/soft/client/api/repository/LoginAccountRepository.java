@@ -3,6 +3,8 @@ package com.niit.soft.client.api.repository;
 import com.niit.soft.client.api.domain.model.LoginAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.lang.management.GarbageCollectorMXBean;
+
 /**
  * @author 倪涛涛
  * @version 1.0.0
@@ -20,5 +22,9 @@ public interface LoginAccountRepository extends JpaRepository<LoginAccount, Long
 
 
     LoginAccount getLoginAccountByJobNumberEquals(String jobNumber);
+
+    boolean existsLoginAccountByJobNumberEquals(String jobNumber);
+
+    boolean existsLoginAccountByQqOpenIdEquals(String openid);
 
 }

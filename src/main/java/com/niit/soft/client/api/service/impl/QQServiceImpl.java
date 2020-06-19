@@ -11,6 +11,7 @@ import com.niit.soft.client.api.util.QQHttpClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -39,7 +40,7 @@ public class QQServiceImpl implements QQService {
 
 
     @Override
-    public String qqRedirect(HttpSession session)  {
+    public String qqRedirect(HttpSession session) {
         //QQ互联中的回调地址
         String backUrl = http + "/connect";
         //用于第三方应用防止CSRF攻击
@@ -95,10 +96,11 @@ public class QQServiceImpl implements QQService {
 //        openid可以唯一标识一个用户
         //先在用户账号表里查，如果有，则返回数据
 
-        LoginAccount loginAccount = loginAccountRepository.getLoginAccountByQqOpenIdEquals(openid);
-        log.info(">>>>>>>>>>>>>>>>>>>>"+loginAccount.toString());
+//        LoginAccount loginAccount = loginAccountRepository.getLoginAccountByQqOpenIdEquals(openid);
         //如果有数据，则在用户表里查到该用户
-        if (loginAccount!=null) {
+        boolean isExists = loginAccountRepository.existsLoginAccountByQqOpenIdEquals(openid);
+        if (isExists) {
+            LoginAccount loginAccount = loginAccountRepository.getLoginAccountByQqOpenIdEquals(openid);
             UserAccount userAccount = userAccountRepository.findUserAccountByInfo(loginAccount.getJobNumber());
             log.info(">>>>>>>>>>>>>>>>>>>>" + userAccount.toString());
 //            Map map = new HashedMap();
@@ -116,7 +118,7 @@ public class QQServiceImpl implements QQService {
 //            log.info("token{}", token);
 //            log.info("http://localhost:8088/#/layout?token=" + token);
 //            response.sendRedirect("http://localhost:8088/#/layout?token=" + token + "&phoneNumber=" + userAccount.getPhoneNumber());
-            String redirectUrl="http://localhost:8088/#/layout?jobNumber=" + userAccount.getJobNumber() + "&password=" + userAccount.getPassword();
+            String redirectUrl = "http://localhost:8088/#/layout?jobNumber=" + userAccount.getJobNumber() + "&password=" + userAccount.getPassword();
             log.info(redirectUrl);
 //            response.sendRedirect("http://localhost:8088/#/layout?jobNumber=" + userAccount.getJobNumber() + "&password=" + userAccount.getPassword());
 //            response.sendRedirect("http://localhost:8088/#/login");
@@ -128,9 +130,9 @@ public class QQServiceImpl implements QQService {
 //            http://www.ntt1914866205.xyz
 //            return null;
         }
-            String redirectUrl="http://localhost:8088/#/base?openid=" + openid;
-            log.info(redirectUrl);
-            return redirectUrl;
+        String redirectUrl = "http://localhost:8088/#/base?openid=" + openid;
+        log.info(redirectUrl);
+        return redirectUrl;
         //用户不存在，未绑定账号
 //        return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE, "该账号未绑定");
 

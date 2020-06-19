@@ -42,4 +42,11 @@ public class LoginAccountServiceImpl implements LoginAccountService {
             return ResponseResult.success("ok");
         }
     }
+
+    @Override
+    public ResponseResult deletedByJobNumber(String jobNumber) {
+        LoginAccount loginAccount = loginAccountRepository.getLoginAccountByJobNumberEquals(jobNumber);
+        loginAccountRepository.deleteById(loginAccount.getPkLoginAccountId());
+        return ResponseResult.success("ok");
+    }
 }

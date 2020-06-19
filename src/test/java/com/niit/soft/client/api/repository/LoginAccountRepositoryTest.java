@@ -22,6 +22,9 @@ class LoginAccountRepositoryTest {
     @Test
     void getLoginAccountByQqOpenIdEquals() {
 //        System.out.println(loginAccountRepository.getLoginAccountByQqOpenIdEquals("16586e11c8bc44b9a8787f4a5e5cb262"));
-        System.out.println(loginAccountRepository.getLoginAccountByJobNumberEquals("1802343127"));
+//        System.out.println(loginAccountRepository.getLoginAccountByJobNumberEquals("1802343127"));
+//          System.out.println(loginAccountRepository.deleteByJobNumberEquals("1802343210"));
+          System.out.println(loginAccountRepository.existsLoginAccountByJobNumberEquals("1802343210"));
+              System.out.println(loginAccountRepository.existsLoginAccountByJobNumberEquals("1802343127"));
     }
 }

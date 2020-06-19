@@ -37,4 +37,10 @@ public class LoginAccountController {
         log.info(singleFieldDto.toString());
         return loginAccountService.findByJobNumber(String.valueOf(singleFieldDto.getField()));
     }
+
+
+    @PostMapping("/LoginAccount/deleted")
+    ResponseResult  deletedLoginAccount(@RequestBody SingleFieldDto singleFieldDto) {
+        return loginAccountService.deletedByJobNumber(String.valueOf(singleFieldDto.getField()));
+    }
 }

@@ -15,4 +15,6 @@ public interface LoginAccountService {
     ResponseResult increasedLoginAccount(LoginAccountIncreased loginAccountIncreased);
 
     ResponseResult findByJobNumber(String jobNumber);
+
+    ResponseResult deletedByJobNumber(String jobNumber);
 }
