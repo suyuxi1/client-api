@@ -38,4 +38,6 @@ public class FleaCommentVo {
     private String  title;
 
     private Date createTime;
+
+    private String commentAvatar;
 }
