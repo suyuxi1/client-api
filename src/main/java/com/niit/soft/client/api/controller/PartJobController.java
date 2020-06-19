@@ -3,12 +3,14 @@ package com.niit.soft.client.api.controller;
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.JobDto;
 import com.niit.soft.client.api.domain.dto.JobPageDto;
-import com.niit.soft.client.api.domain.dto.PageDto;
 import com.niit.soft.client.api.service.PartJobService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
@@ -30,7 +32,8 @@ public class PartJobController {
 
     @PostMapping("/list")
 //    @ControllerWebLog(name = "find")
-    @ApiOperation(value = "兼职列表", notes = "请求参数为PageDto，field参数为pay,gmt_create或者兼职类型")
+
+    @ApiOperation(value = "兼职列表", notes = "请求参数为JobPageDto，field参数为pay,gmt_create或者兼职类型")
     public ResponseResult findPartJob(@RequestBody JobPageDto jobPageDto) {
         return ResponseResult.success(jobService.findByPage(jobPageDto));
     }

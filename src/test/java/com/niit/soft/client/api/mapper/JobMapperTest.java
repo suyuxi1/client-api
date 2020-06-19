@@ -33,6 +33,11 @@ class JobMapperTest {
 
     @Test
     void jobListByType() {
-//        jobMapper.jobListByType(3L).forEach(System.out::println);
+        JobPageDto jobPageDto = JobPageDto.builder()
+                .field("3")
+                .currentPage(1)
+                .pageSize(2)
+                .build();
+        jobMapper.jobListByType(jobPageDto).forEach(System.out::println);
     }
 }
