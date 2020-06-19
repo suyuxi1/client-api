@@ -18,6 +18,7 @@ public interface JobMapper extends BaseMapper<Job> {
 
     /**
      * 职位详情
+     *
      * @param id
      * @return
      */
@@ -26,6 +27,7 @@ public interface JobMapper extends BaseMapper<Job> {
 
     /**
      * 职位列表
+     *
      * @param jobPageDto
      * @return
      */
@@ -33,6 +35,7 @@ public interface JobMapper extends BaseMapper<Job> {
 
     /**
      * 根据类id得职位列表
+     *
      * @param jobPageDto
      * @return
      */
@@ -41,6 +44,7 @@ public interface JobMapper extends BaseMapper<Job> {
 
     /**
      * 根据关键字模糊查询
+     *
      * @param jobPageDto
      * @return
      */
