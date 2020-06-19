@@ -30,7 +30,7 @@ public class PartJobController {
 
     @PostMapping("/list")
 //    @ControllerWebLog(name = "find")
-    @ApiOperation(value = "兼职列表", notes = "请求参数为PageDto，field参数为pay,gmt_create或者兼职类型")
+    @ApiOperation(value = "兼职列表", notes = "请求参数为JobPageDto，field参数为pay,gmt_create或者兼职类型")
     public ResponseResult findPartJob(@RequestBody JobPageDto jobPageDto){
         return ResponseResult.success(jobService.findByPage(jobPageDto));
     }

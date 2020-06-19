@@ -45,7 +45,7 @@ public class JobController {
     }
 
     @PostMapping("/listByType")
-    @ApiOperation(value = "根据类型查看职位", notes = "请求参数为JobPageDto,field参数职位类型id")
+    @ApiOperation(value = "根据类型查看职位", notes = "请求参数为JobPageDto,field参数为职位类型id")
     public ResponseResult findJobByType(@RequestBody JobPageDto jobPageDto){
         return ResponseResult.success(jobService.findByType(jobPageDto));
     }

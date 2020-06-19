@@ -32,7 +32,7 @@ public interface JobMapper extends BaseMapper<Job> {
     List<JobVo> jobList(JobPageDto jobPageDto);
 
     /**
-     * 根据类id得职位列表
+     * 根据类型id得职位列表
      * @param jobPageDto
      * @return
      */
