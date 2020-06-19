@@ -1,22 +1,14 @@
 package com.niit.soft.client.api.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.niit.soft.client.api.common.ResponseResult;
-import com.niit.soft.client.api.common.ResultCode;
-import com.niit.soft.client.api.exception.CustomException;
 import com.niit.soft.client.api.service.QQService;
-import com.niit.soft.client.api.util.QQHttpClient;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.net.URLEncoder;
-import java.util.UUID;
 
 /**
  * @author 倪涛涛
@@ -60,6 +52,7 @@ import java.util.UUID;
 public class QQController {
     @Resource
     private QQService qqService;
+
     /**
      * @param session
      * @return
@@ -72,12 +65,14 @@ public class QQController {
 
     /**
      * QQ回调
+     *
      * @param request
      * @return
      */
     @GetMapping("/connect")
     public String connect(HttpServletRequest request) throws Exception {
         log.info("------QQ的服务器又重定向回来-----");
-        return  "redirect:" +qqService.connect(request);
+        //如果没有绑定QQ，则返回openid
+        return "redirect:" + qqService.connect(request);
     }
 }

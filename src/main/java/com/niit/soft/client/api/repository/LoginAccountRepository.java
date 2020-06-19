@@ -18,4 +18,7 @@ public interface LoginAccountRepository extends JpaRepository<LoginAccount, Long
      */
     LoginAccount getLoginAccountByQqOpenIdEquals(String qqOpenId);
 
+
+    LoginAccount getLoginAccountByJobNumberEquals(String jobNumber);
+
 }

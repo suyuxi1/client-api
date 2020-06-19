@@ -98,9 +98,9 @@ public class QQServiceImpl implements QQService {
         LoginAccount loginAccount = loginAccountRepository.getLoginAccountByQqOpenIdEquals(openid);
         log.info(">>>>>>>>>>>>>>>>>>>>"+loginAccount.toString());
         //如果有数据，则在用户表里查到该用户
-        if (loginAccount != null) {
+        if (loginAccount!=null) {
             UserAccount userAccount = userAccountRepository.findUserAccountByInfo(loginAccount.getJobNumber());
-        log.info(">>>>>>>>>>>>>>>>>>>>"+userAccount.toString());
+            log.info(">>>>>>>>>>>>>>>>>>>>" + userAccount.toString());
 //            Map map = new HashedMap();
 //            map.put("UserAccount",userAccount);
 //            map.put("token", JwtUtil.sign(userAccount.getUserAccount(), userAccount.getPassword()));
@@ -128,7 +128,9 @@ public class QQServiceImpl implements QQService {
 //            http://www.ntt1914866205.xyz
 //            return null;
         }
-            return "错误";
+            String redirectUrl="http://localhost:8088/#/base?openid=" + openid;
+            log.info(redirectUrl);
+            return redirectUrl;
         //用户不存在，未绑定账号
 //        return ResponseResult.failure(ResultCode.RESULT_CODE_DATA_NONE, "该账号未绑定");
 

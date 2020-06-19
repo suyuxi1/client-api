@@ -13,4 +13,6 @@ import com.niit.soft.client.api.domain.dto.LoginAccountIncreased;
 public interface LoginAccountService {
 
     ResponseResult increasedLoginAccount(LoginAccountIncreased loginAccountIncreased);
+
+    ResponseResult findByJobNumber(String jobNumber);
 }

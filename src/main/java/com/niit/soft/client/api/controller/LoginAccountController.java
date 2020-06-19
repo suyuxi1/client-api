@@ -2,6 +2,7 @@ package com.niit.soft.client.api.controller;
 
 import com.niit.soft.client.api.common.ResponseResult;
 import com.niit.soft.client.api.domain.dto.LoginAccountIncreased;
+import com.niit.soft.client.api.domain.dto.SingleFieldDto;
 import com.niit.soft.client.api.domain.model.LoginAccount;
 import com.niit.soft.client.api.service.LoginAccountService;
 import io.swagger.annotations.Api;
@@ -28,7 +29,12 @@ public class LoginAccountController {
     private LoginAccountService loginAccountService;
 
     @PostMapping("/LoginAccount/increased")
-    ResponseResult increasedLoginAccount(@RequestBody LoginAccountIncreased loginAccountIncreased) {
+    ResponseResult  increasedLoginAccount(@RequestBody LoginAccountIncreased loginAccountIncreased) {
         return loginAccountService.increasedLoginAccount(loginAccountIncreased);
+    }
+    @PostMapping("/LoginAccount/findByJobNumber")
+    ResponseResult  findByJobNumber(@RequestBody SingleFieldDto singleFieldDto) {
+        log.info(singleFieldDto.toString());
+        return loginAccountService.findByJobNumber(String.valueOf(singleFieldDto.getField()));
     }
 }
