@@ -15,6 +15,7 @@ import java.lang.management.GarbageCollectorMXBean;
 public interface LoginAccountRepository extends JpaRepository<LoginAccount, Long> {
     /**
      * 根据qqOpenId查询
+     *
      * @param qqOpenId
      * @return
      */

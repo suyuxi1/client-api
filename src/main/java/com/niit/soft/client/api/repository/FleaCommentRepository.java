@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+
 /**
  * @author 倪涛涛
  * @version 1.0.0
@@ -17,10 +18,11 @@ import java.util.List;
  * @Description TODO
  * @createTime 2020年06月09日 11:26:00
  */
-public interface FleaCommentRepository extends JpaRepository<FleaComment,Long> {
+public interface FleaCommentRepository extends JpaRepository<FleaComment, Long> {
 
     /**
      * 查询所有
+     *
      * @return List<FleaComment>
      */
     @Query(value = "select new com.niit.soft.client.api.domain.vo.FleaCommentVo(c.pkFleaCommentId,r.nickname,b.nickname,c.comment,f.title,c.createTime)" +

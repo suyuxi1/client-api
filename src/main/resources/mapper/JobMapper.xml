@@ -15,7 +15,7 @@
         <result property="max" column="max"/>
         <result property="experience" column="experience"/>
         <result property="diploma" column="diploma"/>
-        <!--            <result property="resumes" column="resumes"/>-->
+        <result property="number" column="number"/>
         <result property="gmtCreate" column="gmt_create"/>
         <association javaType="com.niit.soft.client.api.domain.model.Company" property="company">
             <id property="pkCompanyId" column="pk_company_id" javaType="java.lang.Long"/>
@@ -78,6 +78,7 @@
                j.max,
                j.experience,
                j.diploma,
+               j.number,
                j.gmt_create,
                c.name AS company_name,
                t.name AS type_name
