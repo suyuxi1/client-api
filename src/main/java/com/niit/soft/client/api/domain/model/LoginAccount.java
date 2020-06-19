@@ -32,7 +32,7 @@ public class LoginAccount {
      * 添加时两个参数
      * 删除时根据openid查找，然后删除
      */
-    @Column(nullable = false,length = 32)
+    @Column(nullable = false,unique = true,length = 32)
     private String jobNumber;
 
     //标准32位
