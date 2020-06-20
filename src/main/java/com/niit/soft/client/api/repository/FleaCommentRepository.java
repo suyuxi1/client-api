@@ -8,6 +8,7 @@ import com.niit.soft.client.api.domain.vo.FleaCommentVo;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -25,10 +26,10 @@ public interface FleaCommentRepository extends JpaRepository<FleaComment, Long> 
      *
      * @return List<FleaComment>
      */
-    @Query(value = "select new com.niit.soft.client.api.domain.vo.FleaCommentVo(c.pkFleaCommentId,r.nickname,b.nickname,c.comment,f.title,c.createTime)" +
+    @Query(value = "select new com.niit.soft.client.api.domain.vo.FleaCommentVo(c.pkFleaCommentId,r.nickname,b.nickname,c.comment,f.title,c.createTime,b.avatar)" +
             "from FleaComment c " +
             "left join c.reviewer r " +
             "left join c.commentBy b " +
-            "left join c.fleaReward f")
-    List<FleaCommentVo> selectByRewardId(FleaRewardDto fleaRewardDto);
+            "left join c.fleaReward f where f.pkRewardId =:#{#fleaRewardDto.pkRewardId}")
+    List<FleaCommentVo> selectByRewardId(@Param("fleaRewardDto") FleaRewardDto fleaRewardDto);
 }
