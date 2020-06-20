@@ -1,7 +1,9 @@
 package com.niit.soft.client.api.controller;
 
+import com.niit.soft.client.api.annotation.ControllerWebLog;
 import com.niit.soft.client.api.service.QQService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,8 +59,11 @@ public class QQController {
      * @param session
      * @return
      */
+    @ControllerWebLog(name = "qq", isSaved = true)
+    @ApiOperation(value = "跳转到第三方", notes = "请求第三方登录")
     @GetMapping("/qq/oauth")
     public String qq(HttpSession session) {
+        log.info("-----/qq/oauth被访问----**1**");
         return "redirect:" + qqService.qqRedirect(session);
     }
 
@@ -69,9 +74,12 @@ public class QQController {
      * @param request
      * @return
      */
+    @ControllerWebLog(name = "connect", isSaved = true)
+    @ApiOperation(value = "QQ互联回调用的", notes = "QQ互联回调")
     @GetMapping("/connect")
     public String connect(HttpServletRequest request) throws Exception {
         log.info("------QQ的服务器又重定向回来-----");
+        log.info("-----/connect被访问----**1**");
         //如果没有绑定QQ，则返回openid
         return "redirect:" + qqService.connect(request);
     }
